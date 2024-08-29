@@ -1,0 +1,130 @@
+:root {
+  --f-body: "LexendDeca";
+  --red: #DA1F26;
+  --white: #fff;
+  --black: #303030;
+}
+
+body {
+  font-family: var(--f-body);
+  font-weight: 400;
+  font-style: normal;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+img, video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+input,
+textarea,
+select {
+  outline: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+textarea::-webkit-outer-spin-button,
+textarea::-webkit-inner-spin-button,
+select::-webkit-outer-spin-button,
+select::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+figure {
+  margin: 0;
+}
+$m-18: 1840px;
+$m-16: 1640px;
+$m-14: 1480px;
+$m-13: 1380px;
+$m-12: 1280px;
+$m-11: 1199px;
+$m-10: 1060px;
+$m-9: 991px;
+$m-7: 767px;
+$m-6: 667px;
+$m-4: 480px;
+
+
+@mixin Responsive($screen) {
+  @if $screen ==m-18 {
+    @media only screen and (min-width: $m-16) and (max-width: $m-18) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-16 {
+    @media only screen and (max-width: $m-16) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-14 {
+    @media only screen and (max-width: $m-14) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-13 {
+    @media only screen and (max-width: $m-13) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-12 {
+    @media only screen and (max-width: $m-12) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-11 {
+    @media only screen and (max-width: $m-11) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-10 {
+    @media only screen and (max-width: $m-10) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-9 {
+    @media only screen and (max-width: $m-9) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-7 {
+    @media only screen and (max-width: $m-7) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-6 {
+    @media only screen and (max-width: $m-6) {
+      @content;
+    }
+  }
+
+  @else if $screen ==m-4 {
+    @media only screen and (max-width: $m-4) {
+      @content;
+    }
+  }
+  @else if $screen ==m-over {
+    @media only screen and (min-width: $m-18) {
+      @content;
+    }
+  }
+}

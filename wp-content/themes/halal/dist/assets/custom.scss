@@ -1,0 +1,140 @@
+@import url(./fonts/typography.css);
+@import url(_main.scss);
+@import url(_reset.scss);
+
+:root {
+    --f-body: "LexendDeca";
+    --red: #DA1F26;
+    --white: #fff;
+    --black: #303030;
+}
+
+$m-18: 1800px;
+$m-16: 1640px;
+$m-14: 1480px;
+$m-13: 1380px;
+$m-12: 1280px;
+$m-11: 1199px;
+$m-10: 1060px;
+$m-9: 991px;
+$m-7: 767px;
+$m-6: 667px;
+$m-4: 480px;
+
+
+@mixin Responsive($screen) {
+    @if $screen ==m-18 {
+        @media only screen and (min-width: $m-16) and (max-width: $m-18) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-16 {
+        @media only screen and (max-width: $m-16) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-14 {
+        @media only screen and (max-width: $m-14) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-13 {
+        @media only screen and (max-width: $m-13) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-12 {
+        @media only screen and (max-width: $m-12) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-11 {
+        @media only screen and (max-width: $m-11) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-10 {
+        @media only screen and (max-width: $m-10) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-9 {
+        @media only screen and (max-width: $m-9) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-7 {
+        @media only screen and (max-width: $m-7) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-6 {
+        @media only screen and (max-width: $m-6) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-4 {
+        @media only screen and (max-width: $m-4) {
+            @content;
+        }
+    }
+
+    @else if $screen ==m-over {
+        @media only screen and (min-width: $m-18) {
+            @content;
+        }
+    }
+}
+
+// Backdrop
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0.8;
+    background: #000;
+    z-index: 9990;
+    display: none;
+
+    &.show {
+        display: block;
+    }
+}
+.backdrop-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0.8;
+    background: #000;
+    z-index: 9990;
+    display: none;
+    &.show {
+        @include Responsive(m-9) {
+            display: block;
+        }
+    }
+}
+
+body {
+    box-sizing: border-box;
+}
+
+//  ------------------------------------------------Header------------------------------------------------
+header {
+
+}
+
