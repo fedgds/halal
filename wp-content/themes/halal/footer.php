@@ -90,7 +90,7 @@
 							</div>
 							<div class="right">
 								<p>Hotline</p>
-								<span>84 24 37561025</span>
+								<span>02437561025</span>
 							</div>
 						</li>
 						<li>
@@ -151,7 +151,7 @@
 			</div>
 		</div>
 		<div class="copyright">
-
+			<span>© 2000-2024 Halcert, All Rights Reserved</span>
 		</div>
 	</div>
 </footer>
