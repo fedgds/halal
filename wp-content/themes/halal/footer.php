@@ -9,8 +9,6 @@
 		<div class="top">
 			<div class="background">
 				<img src="<?= $url ?>/dist/images/background-footer-2.png" alt="">
-				
-<script src="<?= $url ?>/dist/js/custom.js"></script>
 			</div>
 			<div class="left">
 				<h3>Newsletter</h3>
@@ -155,4 +153,6 @@
 		</div>
 	</div>
 </footer>
+</body>
+</html>
 <script src="<?= $url ?>/dist/js/custom.js"></script>

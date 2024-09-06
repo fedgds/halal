@@ -49,6 +49,48 @@ body {
   font-family: var(--f-body);
 }
 
+.pagination {
+  display: flex;
+}
+.pagination ul {
+  display: flex;
+  gap: 0.6875rem;
+}
+.pagination li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.25rem;
+  color: #2A2B2E;
+  font-size: 0.875rem;
+  font-weight: 31.25rem;
+  line-height: 150%;
+  border: 1px solid var(--Primary-Color-50, #CDDEE8);
+  background: var(--HEADER, #FFF);
+}
+.pagination li a {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination li.active,
+.pagination li:not(.prev):not(.next):hover {
+  background: #3CA333;
+  color: var(--white);
+}
+.pagination li.active svg circle,
+.pagination li:not(.prev):not(.next):hover svg circle {
+  fill: var(--white);
+}
+.pagination .prev,
+.pagination .next {
+  border: none;
+}
+
 header .header-wrapper {
   position: fixed;
   top: 0;
@@ -380,22 +422,68 @@ header .menu-mobile .nav-menu ul {
   display: flex;
   flex-direction: column;
 }
-header .menu-mobile .nav-menu ul li {
+header .menu-mobile .nav-menu ul > li {
+  position: relative;
   padding: 0.625rem 0.5rem;
   color: var(--black);
   font-family: var(--f-body);
   font-size: 1.125rem;
   font-weight: 400;
-  line-height: 1.625rem;
+  line-height: 150%;
 }
-header .menu-mobile .nav-menu ul li .active {
+header .menu-mobile .nav-menu ul > li .active {
   color: var(--red);
   font-weight: 600;
+}
+header .menu-mobile .nav-menu ul > li .up,
+header .menu-mobile .nav-menu ul > li .down {
+  display: flex;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.75rem;
+  cursor: pointer;
+}
+header .menu-mobile .nav-menu ul > li .up {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s all ease-in-out;
+}
+header .menu-mobile .nav-menu ul > li .up.show {
+  visibility: visible;
+  opacity: 1;
+}
+header .menu-mobile .nav-menu ul > li .down {
+  visibility: visible;
+  opacity: 1;
+}
+header .menu-mobile .nav-menu ul > li .down.show {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s all ease-in-out;
+}
+header .menu-mobile .nav-menu ul > li .sub-menu {
+  overflow: hidden;
+  display: none;
+  transition: all 0.5s ease;
+  opacity: 0;
+  padding: 0.5rem 0 0 0.5rem;
+}
+header .menu-mobile .nav-menu ul > li .sub-menu.show {
+  opacity: 1;
+  display: block;
+  transform: translateY(0);
+}
+header .menu-mobile .nav-menu ul > li .sub-menu ul li {
+  font-size: 1rem;
+  padding: 0.375rem 0;
 }
 header .menu-mobile .nav-menu ul li:hover {
   color: var(--red);
 }
 
+main {
+  position: relative;
+}
 main .container {
   width: 80rem;
 }
@@ -2217,6 +2305,7 @@ main .section-8-home .container .bottom .list.active {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.25rem;
+  width: 100%;
 }
 @media only screen and (max-width: 767px) {
   main .section-8-home .container .bottom .list.active {
@@ -2342,6 +2431,7 @@ main .section-banner {
   align-items: center;
   justify-content: center;
   height: 38.75rem;
+  z-index: 10;
 }
 @media only screen and (max-width: 1280px) {
   main .section-banner {
@@ -2876,6 +2966,7 @@ main .section-halal .container .list-menu .list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.25rem;
+  width: 100%;
 }
 @media only screen and (max-width: 767px) {
   main .section-halal .container .list-menu .list {
@@ -3066,6 +3157,17 @@ main .section-detail-halal .container .left {
   flex-direction: column;
   gap: 1.875rem;
   margin-top: 3.25rem;
+  width: 52.875rem;
+}
+@media only screen and (max-width: 1480px) {
+  main .section-detail-halal .container .left {
+    width: 47rem;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  main .section-detail-halal .container .left {
+    width: 100%;
+  }
 }
 @media only screen and (max-width: 767px) {
   main .section-detail-halal .container .left {
@@ -3073,7 +3175,7 @@ main .section-detail-halal .container .left {
   }
 }
 main .section-detail-halal .container .left .thumbnail {
-  width: 52.875rem;
+  width: 100%;
   height: 28.75rem;
   border-radius: 0.625rem;
 }
@@ -3097,12 +3199,12 @@ main .section-detail-halal .container .left .thumbnail {
 }
 @media only screen and (max-width: 767px) {
   main .section-detail-halal .container .left .thumbnail {
-    height: 20rem;
+    height: 17rem;
   }
 }
 @media only screen and (max-width: 480px) {
   main .section-detail-halal .container .left .thumbnail {
-    height: 17rem;
+    height: 14rem;
   }
 }
 main .section-detail-halal .container .left .thumbnail img {
@@ -3138,10 +3240,25 @@ main .section-detail-halal .container .left h2.title {
     width: 100%;
   }
 }
+@media only screen and (max-width: 767px) {
+  main .section-detail-halal .container .left h2.title {
+    font-size: 1.5rem;
+  }
+}
 main .section-detail-halal .container .left .content {
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
+  font-size: 1rem;
+  line-height: 150%;
+}
+@media only screen and (max-width: 767px) {
+  main .section-detail-halal .container .left .content {
+    gap: 1.25rem;
+  }
+}
+main .section-detail-halal .container .left .content img {
+  border-radius: 0.625rem;
 }
 main .section-detail-halal .container .left .social-media {
   display: flex;
@@ -3200,6 +3317,7 @@ main .section-detail-halal .container .right .list .child {
   display: flex;
   gap: 1rem;
   border-radius: 1rem;
+  width: 100%;
 }
 @media only screen and (max-width: 1280px) {
   main .section-detail-halal .container .right .list .child {
@@ -3463,6 +3581,934 @@ main .section-detail-halal .relate .list .child .infor h3 {
 }
 main .section-detail-halal .relate .list .child .infor h3:hover {
   color: var(--green);
+}
+main .section-customer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .section-customer .container {
+  position: relative;
+  padding: 6.25rem 0;
+}
+main .section-customer .container h2.title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: var(--black);
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 160%;
+  margin-bottom: 1rem;
+}
+@media only screen and (max-width: 1280px) {
+  main .section-customer .container h2.title {
+    font-size: 2rem;
+  }
+}
+main .section-customer .container .description {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 0 17.25rem;
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 3.125rem;
+}
+main .section-customer .container .list-customer {
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+  -moz-column-gap: 1.25rem;
+       column-gap: 1.25rem;
+  row-gap: 1.875rem;
+  margin-bottom: 6.25rem;
+}
+main .section-customer .container .list-customer span {
+  width: 305px;
+  height: 11.125rem;
+  border-radius: 0.75rem;
+  background: rgba(61, 163, 51, 0.05);
+  box-sizing: border-box;
+  cursor: pointer;
+}
+main .section-customer .container .list-customer span img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  flex-shrink: 0;
+  -o-object-fit: contain;
+     object-fit: contain;
+  mix-blend-mode: multiply;
+}
+main .section-customer .container .list-customer span:hover {
+  border: 1.5px solid var(--green);
+}
+main .section-customer .container form {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+main .section-customer .container form input, main .section-customer .container form select {
+  box-sizing: border-box;
+  padding: 0.9375rem 0.9375rem 0.9375rem 2.8125rem;
+  border-radius: 0.4375rem;
+  border: 1px solid #D3D3D3;
+}
+main .section-customer .container form input {
+  width: 19.0625rem;
+}
+main .section-customer .container form select {
+  width: 16.375rem;
+}
+main .section-customer .container form input:focus, main .section-customer .container form select:focus {
+  border: 1px solid var(--black);
+}
+main .section-customer .container form input::-moz-placeholder {
+  color: #BFBFBF;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-customer .container form input::placeholder {
+  color: #BFBFBF;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-customer .container form select option {
+  color: #212121;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-customer .container form .search, main .section-customer .container form .filter {
+  position: relative;
+}
+main .section-customer .container form .search button {
+  position: absolute;
+  top: 1rem;
+  left: 0.9375rem;
+}
+main .section-customer .container form .filter label {
+  position: absolute;
+  top: 1rem;
+  left: 0.9375rem;
+}
+main .section-customer .container table {
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+main .section-customer .container table tr {
+  color: #2A2B2E;
+  font-size: 1rem;
+}
+main .section-customer .container table tr th {
+  text-align: start;
+  font-weight: 500;
+  line-height: 125%;
+  padding-bottom: 1.5625rem;
+}
+main .section-customer .container table tr td {
+  width: 13.75rem;
+  font-weight: 400;
+  line-height: 180%;
+  padding: 1.5625rem 0;
+  border-top: 1px solid #D3D3D3;
+}
+main .section-customer .container .pagination {
+  justify-content: end;
+}
+main .section-customer .list-modal-customer {
+  position: fixed;
+  z-index: 99;
+  box-sizing: border-box;
+  top: 20rem;
+  width: 80rem;
+}
+@media only screen and (max-width: 1480px) {
+  main .section-customer .list-modal-customer {
+    width: 72rem;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  main .section-customer .list-modal-customer {
+    width: 60rem;
+  }
+}
+@media only screen and (max-width: 1060px) {
+  main .section-customer .list-modal-customer {
+    width: 44rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  main .section-customer .list-modal-customer {
+    width: 28rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-customer .list-modal-customer {
+    width: 22rem;
+  }
+}
+main .section-customer .list-modal-customer .modal {
+  padding: 0 10rem;
+  border-radius: 1rem;
+}
+main .section-customer .list-modal-customer .modal > .child.active {
+  display: flex;
+}
+main .section-customer .list-modal-customer .modal > .child {
+  display: none;
+  overflow: hidden;
+  width: inherit;
+  box-sizing: border-box;
+  padding: 3.125rem 2.5rem;
+  border-radius: inherit;
+  background: var(--white);
+  gap: 2.5rem;
+}
+main .section-customer .list-modal-customer .modal > .child .image {
+  width: 19.125rem;
+  height: 12.625rem;
+  border-radius: 0.75rem;
+  background: rgba(61, 163, 51, 0.05);
+}
+main .section-customer .list-modal-customer .modal > .child .image img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  flex-shrink: 0;
+  -o-object-fit: contain;
+     object-fit: contain;
+  mix-blend-mode: multiply;
+}
+main .section-customer .list-modal-customer .modal > .child .infor {
+  width: 34.625rem;
+}
+main .section-customer .list-modal-customer .modal > .child .infor h3.name {
+  color: #2A2B2E;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 1.25rem;
+}
+main .section-customer .list-modal-customer .modal > .child .infor .bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+main .section-customer .list-modal-customer .modal > .child .infor .bottom .child {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  gap: 2.5rem;
+}
+main .section-customer .list-modal-customer .modal > .child .infor .bottom .child .left {
+  display: flex;
+  align-items: start;
+  gap: 0.375rem;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
+}
+main .section-customer .list-modal-customer .modal > .child .infor .bottom .child .left b {
+  width: 11rem;
+}
+main .section-customer .list-modal-customer .modal > .child .infor .bottom .child .right {
+  color: #2A2B2E;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+main .section-training {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .section-training .container {
+  padding: 6.25rem 0;
+}
+main .section-training .container form {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+main .section-training .container form input, main .section-training .container form select {
+  box-sizing: border-box;
+  padding: 0.9375rem 0.9375rem 0.9375rem 2.8125rem;
+  border-radius: 0.4375rem;
+  border: 1px solid #D3D3D3;
+}
+main .section-training .container form input {
+  width: 19.0625rem;
+}
+main .section-training .container form select {
+  width: 16.375rem;
+}
+main .section-training .container form input:focus, main .section-training .container form select:focus {
+  border: 1px solid var(--black);
+}
+main .section-training .container form input::-moz-placeholder {
+  color: #BFBFBF;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-training .container form input::placeholder {
+  color: #BFBFBF;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-training .container form select option {
+  color: #212121;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-training .container form .search, main .section-training .container form .filter {
+  position: relative;
+}
+main .section-training .container form .search button {
+  position: absolute;
+  top: 1rem;
+  left: 0.9375rem;
+}
+main .section-training .container form .filter label {
+  position: absolute;
+  top: 1rem;
+  left: 0.9375rem;
+}
+main .section-training .container table {
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+main .section-training .container table tr {
+  color: #2A2B2E;
+  font-size: 1rem;
+}
+main .section-training .container table tr th:nth-child(1), main .section-training .container table tr td:nth-child(1) {
+  width: 6.25rem;
+}
+main .section-training .container table tr th:nth-child(2), main .section-training .container table tr td:nth-child(2) {
+  width: 18rem;
+}
+main .section-training .container table tr th:nth-child(3), main .section-training .container table tr th:nth-child(4), main .section-training .container table tr td:nth-child(3), main .section-training .container table tr td:nth-child(4) {
+  width: 14rem;
+}
+main .section-training .container table tr th {
+  text-align: start;
+  font-weight: 500;
+  line-height: 125%;
+  padding-bottom: 1.5625rem;
+}
+main .section-training .container table tr td {
+  width: 13.75rem;
+  font-weight: 500;
+  line-height: 180%;
+  padding: 1.5625rem 0;
+  border-top: 1px solid #D3D3D3;
+}
+main .section-training .container table tr td:nth-child(2) {
+  font-weight: 600;
+  color: #3CA333;
+}
+main .section-training .container table tr td span {
+  color: #ABABAB;
+  font-size: 0.75rem;
+  line-height: 130%;
+}
+main .section-training .container .pagination {
+  justify-content: end;
+}
+main .section-halal-nqi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .section-halal-nqi .container {
+  padding: 6.25rem 0;
+  display: flex;
+  gap: 3.75rem;
+}
+main .section-halal-nqi .container .left {
+  width: 25.75rem;
+}
+main .section-halal-nqi .container .left nav {
+  width: inherit;
+}
+main .section-halal-nqi .container .left nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9375rem;
+  cursor: pointer;
+}
+main .section-halal-nqi .container .left nav ul li {
+  border-radius: 0.4375rem;
+  padding: 1rem 1.5rem;
+  background: #EDF9EC;
+  color: #515151;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-halal-nqi .container .left nav ul li.active, main .section-halal-nqi .container .left nav ul li:hover {
+  background: var(--green);
+  color: var(--white);
+}
+main .section-halal-nqi .container .right .child.active {
+  display: block;
+}
+main .section-halal-nqi .container .right .child {
+  display: none;
+}
+main .section-halal-nqi .container .right .child h3.title {
+  color: #515151;
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 100%;
+  margin-bottom: 1.5rem;
+}
+main .section-halal-nqi .container .right .child .content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+  color: #2A2B2E;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 180%;
+}
+main .section-halal-nqi .container .right .child ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}
+main .section-halal-nqi .container .right .child ul li {
+  background: #EDF9EC;
+  border-radius: 0.4375rem;
+  width: 30.125rem;
+  height: 3.5rem;
+  box-sizing: border-box;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+}
+main .section-halal-nqi .container .right .child ul li span {
+  color: #414141;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-cretify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .section-cretify .container {
+  padding: 6.25rem 0;
+  display: flex;
+  gap: 3.75rem;
+}
+main .section-cretify .container .left {
+  width: 25.75rem;
+}
+main .section-cretify .container .left nav {
+  width: inherit;
+}
+main .section-cretify .container .left nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9375rem;
+  cursor: pointer;
+}
+main .section-cretify .container .left nav ul li {
+  border-radius: 0.4375rem;
+  padding: 1rem 1.5rem;
+  background: #EDF9EC;
+  color: #515151;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-cretify .container .left nav ul li.active, main .section-cretify .container .left nav ul li:hover {
+  background: var(--green);
+  color: var(--white);
+}
+main .section-cretify .container .right .child.active {
+  display: block;
+}
+main .section-cretify .container .right .child {
+  display: none;
+  width: 36.875rem;
+}
+main .section-cretify .container .right .child ul {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+}
+main .section-cretify .container .right .child ul li {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+main .section-cretify .container .right .child ul li h4 {
+  color: #515151;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 125%;
+}
+main .section-cretify .container .right .child ul li span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #EDF9EC;
+  border-radius: 0.4375rem;
+  padding: 1rem 1.25rem;
+}
+main .section-register-cretify {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .section-register-cretify img.background {
+  width: 100%;
+  height: 87.875rem;
+  position: absolute;
+  top: -10rem;
+  left: 0;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+main .section-register-cretify .container {
+  z-index: 10;
+  padding: 6.25rem 0;
+}
+main .section-register-cretify .container h2.title {
+  color: var(--green);
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 115%;
+  margin-bottom: 0.375rem;
+  text-align: center;
+}
+main .section-register-cretify .container .description {
+  padding: 0 20rem;
+  text-align: center;
+  color: #373737;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%;
+  margin-bottom: 2.5rem;
+}
+main .section-register-cretify .container .form {
+  padding: 0 13.125rem;
+}
+main .section-register-cretify .container .form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main .section-register-cretify .container .form form > h3 {
+  align-self: flex-start;
+  color: #3CA333;
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 160%;
+  margin-bottom: 1.875rem;
+}
+main .section-register-cretify .container .form form .line {
+  margin-bottom: 1.875rem;
+  width: 100%;
+}
+main .section-register-cretify .container .form form .line .form-group {
+  position: relative;
+}
+main .section-register-cretify .container .form form .line .form-group label {
+  position: absolute;
+  top: -0.75rem;
+  left: 0.75rem;
+  padding: 0 0.5rem;
+  background: var(--white);
+}
+main .section-register-cretify .container .form form .line .form-group input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid #999;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 160%;
+}
+main .section-register-cretify .container .form form .line .form-group input::-moz-placeholder {
+  color: #BDBDBD;
+}
+main .section-register-cretify .container .form form .line .form-group input::placeholder {
+  color: #BDBDBD;
+}
+main .section-register-cretify .container .form form .line-1, main .section-register-cretify .container .form form .line-3, main .section-register-cretify .container .form form .line-5, main .section-register-cretify .container .form form .line-7, main .section-register-cretify .container .form form .line-9 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.375rem;
+}
+main .section-register-cretify .container .form form .form-register {
+  box-sizing: border-box;
+  background: #EDF9EC;
+  width: 17.875rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.4375rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+main .section-register-cretify .container .form form .form-register span {
+  color: #414141;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-register-cretify .container .form form .line-10 {
+  width: 100%;
+  height: 7.8125rem;
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+main .section-register-cretify .container .form form .line-10 label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px dashed var(--csk-3-da-333500, #3CA333);
+  background: var(--Base-Base-White, #FFF);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+main .section-register-cretify .container .form form .line-10 label span {
+  color: var(--green);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+main .section-register-cretify .container .form form .line-10 input {
+  display: none;
+}
+main .section-register-cretify .container .form form button {
+  padding: 1rem 3.75rem;
+  background: #FE3131;
+  border: 1px solid #FE3131;
+  border-radius: 0.625rem;
+  color: #FFF;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+main .section-register-cretify .container .form form button:hover {
+  background: var(--white);
+  color: #FE3131;
+}
+main .section-register-cretify .container .text-bottom {
+  margin-top: 0.625rem;
+  display: flex;
+  justify-content: center;
+}
+main .section-register-cretify .container .text-bottom span {
+  text-align: center;
+  width: 28.125rem;
+  color: #414141;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 170%;
+}
+main .section-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+main .section-contact .container {
+  padding: 6.25rem 0;
+}
+main .section-contact .container h2.title {
+  color: var(--black);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 150%;
+  margin-bottom: 1.5rem;
+}
+@media only screen and (max-width: 1060px) {
+  main .section-contact .container h2.title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container h2.title {
+    font-size: 1.75rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-contact .container h2.title {
+    font-size: 1.5rem;
+    padding-top: 2rem;
+  }
+}
+main .section-contact .container .form-and-infor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 6.25rem;
+}
+@media only screen and (max-width: 1060px) {
+  main .section-contact .container .form-and-infor {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+main .section-contact .container .form-and-infor form {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  padding-right: 3.75rem;
+  border-right: 1px solid #999;
+}
+@media only screen and (max-width: 1060px) {
+  main .section-contact .container .form-and-infor form {
+    padding-right: 0;
+    border: none;
+  }
+}
+main .section-contact .container .form-and-infor form h4.guide {
+  color: var(--black);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 2rem;
+  margin-bottom: 1.25rem;
+}
+main .section-contact .container .form-and-infor form > p {
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  margin-bottom: 1.875rem;
+}
+main .section-contact .container .form-and-infor form .line {
+  width: inherit;
+}
+main .section-contact .container .form-and-infor form .line input,
+main .section-contact .container .form-and-infor form .line select,
+main .section-contact .container .form-and-infor form .line textarea {
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--Primary-Color-600, #999);
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container .form-and-infor form .line input,
+  main .section-contact .container .form-and-infor form .line select,
+  main .section-contact .container .form-and-infor form .line textarea {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+}
+main .section-contact .container .form-and-infor form .line input:focus,
+main .section-contact .container .form-and-infor form .line select:focus,
+main .section-contact .container .form-and-infor form .line textarea:focus {
+  border: 1px solid var(--Primary-Color-600, #3CA333);
+}
+main .section-contact .container .form-and-infor form .line input::-moz-placeholder, main .section-contact .container .form-and-infor form .line select::-moz-placeholder, main .section-contact .container .form-and-infor form .line textarea::-moz-placeholder {
+  color: #999;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+main .section-contact .container .form-and-infor form .line input::placeholder,
+main .section-contact .container .form-and-infor form .line select::placeholder,
+main .section-contact .container .form-and-infor form .line textarea::placeholder {
+  color: #999;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container .form-and-infor form .line input::-moz-placeholder, main .section-contact .container .form-and-infor form .line select::-moz-placeholder, main .section-contact .container .form-and-infor form .line textarea::-moz-placeholder {
+    font-size: 0.875rem;
+  }
+  main .section-contact .container .form-and-infor form .line input::placeholder,
+  main .section-contact .container .form-and-infor form .line select::placeholder,
+  main .section-contact .container .form-and-infor form .line textarea::placeholder {
+    font-size: 0.875rem;
+  }
+}
+main .section-contact .container .form-and-infor form .line textarea {
+  resize: none;
+  height: 8.25rem;
+  width: 94.5%;
+}
+@media only screen and (max-width: 480px) {
+  main .section-contact .container .form-and-infor form .line textarea {
+    height: 6.25rem;
+  }
+}
+main .section-contact .container .form-and-infor form .line-1,
+main .section-contact .container .form-and-infor form .line-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.875rem;
+  margin-bottom: 1.5rem;
+}
+@media only screen and (max-width: 480px) {
+  main .section-contact .container .form-and-infor form .line-1,
+  main .section-contact .container .form-and-infor form .line-2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+main .section-contact .container .form-and-infor form .line-3 {
+  margin-bottom: 55px;
+}
+main .section-contact .container .form-and-infor form button {
+  border: 1px solid #FE3131;
+  background: #FE3131;
+  color: var(--white);
+  border-radius: 0.625rem;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+  align-self: end;
+}
+main .section-contact .container .form-and-infor form button:hover {
+  color: #FE3131;
+  background: var(--white);
+}
+main .section-contact .container .form-and-infor .infor {
+  margin-left: 3.75rem;
+}
+@media only screen and (max-width: 1060px) {
+  main .section-contact .container .form-and-infor .infor {
+    margin-left: 0;
+    padding: 2rem 3rem;
+    box-shadow: 0rem 0.25rem 1.25rem 0rem rgba(21, 21, 21, 0.1);
+  }
+}
+main .section-contact .container .form-and-infor .infor h3.title {
+  color: var(--Primary-Color-500, #3CA333);
+  font-size: 1.625rem;
+  font-weight: 700;
+  line-height: 150%;
+  text-transform: uppercase;
+  margin-bottom: 2.625rem;
+}
+@media only screen and (max-width: 1060px) {
+  main .section-contact .container .form-and-infor .infor h3.title {
+    font-size: 1.5rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container .form-and-infor .infor h3.title {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-contact .container .form-and-infor .infor h3.title {
+    font-size: 1rem;
+  }
+}
+main .section-contact .container .form-and-infor .infor .infor-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2.1875rem;
+}
+main .section-contact .container .form-and-infor .infor .infor-detail .phone-number,
+main .section-contact .container .form-and-infor .infor .infor-detail .address,
+main .section-contact .container .form-and-infor .infor .infor-detail .email,
+main .section-contact .container .form-and-infor .infor .infor-detail .social-media {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+main .section-contact .container .form-and-infor .infor .infor-detail .phone-number h4,
+main .section-contact .container .form-and-infor .infor .infor-detail .address h4,
+main .section-contact .container .form-and-infor .infor .infor-detail .email h4,
+main .section-contact .container .form-and-infor .infor .infor-detail .social-media h4 {
+  color: var(--black);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 150%;
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container .form-and-infor .infor .infor-detail .phone-number h4,
+  main .section-contact .container .form-and-infor .infor .infor-detail .address h4,
+  main .section-contact .container .form-and-infor .infor .infor-detail .email h4,
+  main .section-contact .container .form-and-infor .infor .infor-detail .social-media h4 {
+    font-size: 1rem;
+  }
+}
+main .section-contact .container .form-and-infor .infor .infor-detail .phone-number span,
+main .section-contact .container .form-and-infor .infor .infor-detail .address span,
+main .section-contact .container .form-and-infor .infor .infor-detail .email span {
+  display: flex;
+  gap: 0.75rem;
+}
+main .section-contact .container .form-and-infor .infor .infor-detail .phone-number span svg,
+main .section-contact .container .form-and-infor .infor .infor-detail .address span svg,
+main .section-contact .container .form-and-infor .infor .infor-detail .email span svg {
+  padding: 0.5rem;
+  border-radius: 50px;
+  background: var(--csk-3-da-333100, #DAF3D8);
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container .form-and-infor .infor .infor-detail .phone-number span svg,
+  main .section-contact .container .form-and-infor .infor .infor-detail .address span svg,
+  main .section-contact .container .form-and-infor .infor .infor-detail .email span svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+main .section-contact .container .form-and-infor .infor .infor-detail .phone-number span p,
+main .section-contact .container .form-and-infor .infor .infor-detail .address span p,
+main .section-contact .container .form-and-infor .infor .infor-detail .email span p {
+  display: flex;
+  align-items: center;
+  color: #3CA333;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 150%;
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container .form-and-infor .infor .infor-detail .phone-number span p,
+  main .section-contact .container .form-and-infor .infor .infor-detail .address span p,
+  main .section-contact .container .form-and-infor .infor .infor-detail .email span p {
+    font-size: 0.875rem;
+  }
+}
+main .section-contact .container .mapouter {
+  width: inherit;
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container .mapouter {
+    margin-bottom: 5rem;
+  }
+}
+main .section-contact .container .mapouter .gmap_canvas {
+  width: inherit;
+}
+main .section-contact .container .mapouter .gmap_canvas iframe {
+  width: inherit;
+  height: 31.625rem;
+}
+@media only screen and (max-width: 767px) {
+  main .section-contact .container .mapouter .gmap_canvas iframe {
+    height: 24rem;
+  }
 }
 
 footer {

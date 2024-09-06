@@ -1,6 +1,19 @@
 <?php 
 /* Template Name: Giới thiệu */
+$id = get_the_ID();
+$section_1 = get_field('section-1', $id);
+$section_2 = get_field('section-2', $id);
+$section_3 = get_field('section-3', $id);
 $url = get_template_directory_uri();
+
+
+$list_customers_query = new WP_Query(array(
+    'post_type' => 'khach-hang',
+    'post_status' => 'publish',
+    'orderby' => 'date',
+    'order'      => 'ASC',
+));
+
 get_header(); ?>
 <main>
     <?php include('section/section-banner.php') ?>
@@ -9,24 +22,23 @@ get_header(); ?>
             <img src="<?= $url ?>/dist/images/background-section-1.png" alt="">
         </div>
         <div class="container">
-            <h2>Chức năng & Nhiệm vụ</h2>
+            <h2><?= $section_1['title'] ?></h2>
             <div class="content">
                 <div class="left">
                     <div class="image-1">
-                        <img src="<?= $url ?>/dist/images/section-1-image-1.png" alt="">
+                        <img src="<?= $section_1['image-1'] ?>" alt="">
                     </div>
                     <div class="image-2">
-                        <img src="<?= $url ?>/dist/images/section-1-image-2.png" alt="">
+                        <img src="<?= $section_1['image-2'] ?>" alt="">
                     </div>
                 </div>
                 <div class="right">
+                    <span><?= $section_1['content-2'] ?></span>
                     <ul>
-                        <li>Tham mưu cho lãnh đạo về quản lý nhà nước về chứng nhận Halal.</li>
-                        <li>Nghiên cứu, phổ biến các hệ thống tiêu chuẩn Halal của Việt Nam và quốc tế.</li>
-                        <li>Chứng nhận sản phẩm, hàng hóa, dịch vụ theo tiêu chuẩn Halal</li>
-                        <li>Tổ chức và triển khai các hoạt động đào tạo, hội thảo liên quan đến Halal.</li>
+                        <?php foreach($section_1['content-1'] as $item): ?>
+                        <li><?= $item['text'] ?></li>
+                        <?php endforeach ?>
                     </ul>
-                    <span>Trung tâm HALCERT có nhiệm vụ tham mưu lãnh đạo về quản lý và tiêu chuẩn Halal, chứng nhận sản phẩm và dịch vụ theo tiêu chuẩn Halal, tổ chức đào tạo và hội thảo, hợp tác quốc tế, thực hiện các nghiên cứu khoa học liên quan đến Halal, và quản lý tài liệu, hồ sơ liên quan.</span>
                 </div>
             </div>
         </div>
@@ -34,48 +46,53 @@ get_header(); ?>
     <div class="section-2-about">
         <div class="container">
             <div class="top">
-                <h2 class="title">Nhân sự <span>HALCERT</span></h2>
+                <h2 class="title"><?= $section_2['title'] ?></h2>
                 <div class="description">
-                    Lorem Ipsum có ưu điểm hơn so với đoạn văn bản chỉ gồm nội dung kiểu "Nội dung, nội dung, nội dung" là nó khiến văn bản giống thật hơn, bình thường hơn.
+                    <?= $section_2['description'] ?>
                 </div>
             </div>
             <div class="bottom">
-                <div class="child">
-                    <div class="backdrop-child"></div>
-                    <p class="text">Lorem ipsum dolor sit amet consectetur. Egestas fames viverra sed facilisi integer maecenas egestas placerat. Ornare amet venenatis leo a at eu pharetra molestie nec. Vel a in augue donec tempor condimentum cras pretium. Fermentum mauris quam vitae fermentum feugiat urna quam velit. Leo amet egestas</p>
-                    <div class="content">
-                        <img src="<?= $url ?>/dist/images/section-6-right-1.png" alt="">
-                        <div class="infor">
-                            <h3>Lorem Ipsum</h3>
-                            <span>Phó phó chủ tịch HĐQT</span>
+                <?php foreach($section_2['list-member'] as $item): ?>
+                    <div class="child">
+                        <div class="backdrop-child"></div>
+                        <p class="text"><?= $item['description'] ?></p>
+                        <div class="content">
+                            <img src="<?= $item['image'] ?>" alt="">
+                            <div class="infor">
+                                <h3><?= $item['name'] ?></h3>
+                                <span><?= $item['position'] ?></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="child">
-                    <div class="backdrop-child"></div>
-                    <p class="text">Lorem ipsum dolor sit amet consectetur. Egestas fames viverra sed facilisi integer maecenas egestas placerat. Ornare amet venenatis leo a at eu pharetra molestie nec. Vel a in augue donec tempor condimentum cras pretium. Fermentum mauris quam vitae fermentum feugiat urna quam velit. Leo amet egestas</p>
-                    <div class="content">
-                        <img src="<?= $url ?>/dist/images/section-6-right-1.png" alt="">
-                        <div class="infor">
-                            <h3>Lorem Ipsum</h3>
-                            <span>Phó phó chủ tịch HĐQT</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="child">
-                    <div class="backdrop-child"></div>
-                    <p class="text">Lorem ipsum dolor sit amet consectetur. Egestas fames viverra sed facilisi integer maecenas egestas placerat. Ornare amet venenatis leo a at eu pharetra molestie nec. Vel a in augue donec tempor condimentum cras pretium. Fermentum mauris quam vitae fermentum feugiat urna quam velit. Leo amet egestas</p>
-                    <div class="content">
-                        <img src="<?= $url ?>/dist/images/section-6-right-1.png" alt="">
-                        <div class="infor">
-                            <h3>Lorem Ipsum</h3>
-                            <span>Phó phó chủ tịch HĐQT</span>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach ?>
             </div>
         </div>
     </div>
-    <?php include('section/section-5-home.php') ?>
+    <div class="section-5-home">
+        <div class="container">
+            <div class="top">
+                <h2 class="title"><?= $section_3['title'] ?></h2>
+                <div class="description">
+                    <?= $section_3['description'] ?>
+                </div>
+            </div>
+            <div class="bottom">
+                <?php if ($list_customers_query->have_posts()) : ?>
+                    <?php while ($list_customers_query->have_posts()) : $list_customers_query->the_post(); ?>
+                        <?php
+                            $customer_id = get_the_ID();
+                            $customer = get_field('customer', $customer_id);
+                            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                            $link = $customer['link'];
+                        ?>
+                        <a href="<?= $link ?>"><img src="<?= esc_url($thumbnail_url) ?>" alt=""></a>
+                    <?php endwhile; ?>
+                    <?php wp_reset_postdata(); ?>
+                    <?php else : ?>
+                        <p>Không có khách hàng.</p>
+                    <?php endif; ?>
+            </div>
+        </div>
+    </div>
 </main>
 <?php get_footer(); ?>
