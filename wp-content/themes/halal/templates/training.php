@@ -1,5 +1,11 @@
 <?php 
 /* Template Name: Đào tạo */
+$list_training_query = new WP_Query(array(
+    'post_type' => 'dao-tao',
+    'post_status' => 'publish',
+    'posts_per_page' => 5,
+    'orderby' => 'date',
+));
 get_header(); ?>
 <main>
     <?php include('section/section-training.php') ?>
@@ -26,50 +32,49 @@ get_header(); ?>
                     </select>
                 </div>
             </form>
-            <table>
-                <tr>
-                    <th>STT</th>
-                    <th>Tên khóa đào tạo</th>
-                    <th>Thời gian bắt đầu</th>
-                    <th>Thời gian kết thúc</th>
-                    <th>Địa điểm</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Khóa đào tạo chứng nhận Halal</td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td>Block 7, Lot 20, Dong Hung Thang Area, Bai Chay Ward, Ha Long...</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Khóa đào tạo chứng nhận Halal</td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td>Block 7, Lot 20, Dong Hung Thang Area, Bai Chay Ward, Ha Long...</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Khóa đào tạo chứng nhận Halal</td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td>Block 7, Lot 20, Dong Hung Thang Area, Bai Chay Ward, Ha Long...</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Khóa đào tạo chứng nhận Halal</td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td>Block 7, Lot 20, Dong Hung Thang Area, Bai Chay Ward, Ha Long...</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Khóa đào tạo chứng nhận Halal</td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td><p>05/02/2024</p><span>2:03:05 PM</span></td>
-                    <td>Block 7, Lot 20, Dong Hung Thang Area, Bai Chay Ward, Ha Long...</td>
-                </tr>
-            </table>
+            <div class="table-wrapper">
+                <table>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên khóa đào tạo</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
+                        <th>Địa điểm</th>
+                    </tr>
+                    <?php if ($list_training_query->have_posts()) : $count = 0;?>
+                        <?php while ($list_training_query->have_posts()) : $list_training_query->the_post(); ?>
+                            <?php
+                                $count++;
+                                $train_id = get_the_ID();
+                                $train = get_field('training', $train_id);
+                                $start_time = $train['start_time'];
+                                $end_time = $train['end_time'];
+                                $address = $train['address'];
+                            ?>
+                            <tr>
+                                <td><?= $count ?></td>
+                                <td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>
+                                <td>
+                                    <p><?= $start_time['date'] ?></p>
+                                    <?php if($start_time['date']): ?>
+                                        <span><?= date('h:i:s A', strtotime($start_time['time'])) ?></span>
+                                    <?php endif ?>
+                                </td>
+                                <td>
+                                    <p><?= $end_time['date'] ?></p>
+                                    <?php if($end_time['date']): ?>
+                                        <span><?= date('h:i:s A', strtotime($end_time['time'])) ?></span>
+                                    <?php endif ?>
+                                </td>
+                                <td><?= $address ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                        <?php wp_reset_postdata(); ?>
+                    <?php else : ?>
+                        <p>Không có khóa đào tạo nào.</p>
+                    <?php endif; ?>
+                </table>
+            </div>
             <nav class="pagination">
                 <ul>
                     <li class="prev">

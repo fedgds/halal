@@ -175,4 +175,11 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+function custom_date_format() {
+    $date = get_the_date('Y-m-d'); 
+    return date('d/m/Y', strtotime($date)); 
+}
+function custom_time_format() {
+    return get_the_time('H:i');
+}
 

@@ -107,6 +107,7 @@ $m-4: 480px;
     opacity: 0.8;
     background: #000;
     z-index: 9990;
+    cursor: pointer;
     display: none;
 
     &.show {
@@ -162,6 +163,12 @@ body {
         border: 1px solid var(--Primary-Color-50, #CDDEE8);
         background: var(--HEADER, #FFF);
 
+        @include Responsive(m-7) {
+            width: 1.75rem;
+            height: 1.75rem;
+            font-size: .75rem;
+        }
+
         a {
             width: inherit;
             height: inherit;
@@ -175,8 +182,9 @@ body {
     li:not(.prev):not(.next):hover {
         background: #3CA333;
         color: var(--white);
-        svg{
-            circle{
+
+        svg {
+            circle {
                 fill: var(--white);
             }
         }
@@ -545,6 +553,7 @@ header {
                         color: var(--red);
                         font-weight: 600;
                     }
+
                     .up,
                     .down {
                         display: flex;
@@ -575,19 +584,22 @@ header {
                             transition: 0.3s all ease-in-out;
                         }
                     }
-                    .sub-menu{
+
+                    .sub-menu {
                         overflow: hidden;
                         display: none;
                         transition: all 0.5s ease;
                         opacity: 0;
                         padding: .5rem 0 0 .5rem;
+
                         &.show {
                             opacity: 1;
                             display: block;
                             transform: translateY(0);
                         }
-                        ul{
-                            li{
+
+                        ul {
+                            li {
                                 font-size: 1rem;
                                 padding: .375rem 0;
                             }
@@ -606,6 +618,7 @@ header {
 // ----------- Main -----------
 main {
     position: relative;
+
     .container {
         width: 80rem;
 
@@ -657,86 +670,94 @@ main {
         @include Responsive(m-4) {
             height: 20rem;
         }
-        .list-slide{
-            .child{
+
+        .list-slide {
+            height: 100%;
+
+            .child {
                 display: none;
             }
-            .child.active{
+
+            .child.active {
                 display: block;
+                height: 100%;
+
                 .slider {
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 100%;
                     height: 100%;
-        
+
                     img {
                         width: 100%;
                         height: 100%;
                     }
                 }
-        
+
                 .container {
+                    height: 100%;
                     position: relative;
                     z-index: 10;
                     display: flex;
                     flex-direction: column;
+                    justify-content: center;
                     gap: 1.5rem;
-        
+
                     @include Responsive(m-7) {
                         gap: 1rem;
                     }
-        
+
                     .title {
                         width: 35.625rem;
                         font-size: 2.5rem;
                         font-weight: 700;
                         line-height: 150%;
                         color: var(--black);
-        
+
                         @include Responsive(m-12) {
                             font-size: 2rem;
                         }
-        
+
                         @include Responsive(m-10) {
                             font-size: 1.5rem;
                         }
-        
+
                         @include Responsive(m-7) {
                             font-size: 1.25rem;
                         }
-        
+
                         @include Responsive(m-4) {
                             font-size: 1rem;
                             margin-top: 2rem;
                         }
-        
+
                         .line-3 {
                             color: var(--green);
                         }
                     }
-        
+
                     .text {
                         width: 33.375rem;
                         font-size: 1rem;
                         font-weight: 400;
                         line-height: 160%;
                         letter-spacing: .01rem;
-        
+
                         @include Responsive(m-12) {
                             width: 30rem;
                             font-size: .875rem;
                         }
-        
+
                         @include Responsive(m-10) {
                             width: 25rem;
                             font-size: .75rem;
                         }
-        
+
                         @include Responsive(m-7) {
                             width: 18rem;
                         }
-        
+
                         @include Responsive(m-4) {
                             display: none;
                         }
@@ -744,7 +765,8 @@ main {
                 }
             }
         }
-        .list-dot{
+
+        .list-dot {
             position: absolute;
             top: 60%;
             right: -1.5%;
@@ -752,24 +774,29 @@ main {
             transform: rotate(90deg);
             align-items: center;
             gap: .5rem;
+
             @include Responsive(m-12) {
                 top: 50%;
                 right: -2.5%;
             }
+
             @include Responsive(m-7) {
                 transform: none;
                 bottom: -9rem;
                 right: 35%;
             }
+
             @include Responsive(m-4) {
                 bottom: -8rem;
             }
-            li{
+
+            li {
                 cursor: pointer;
                 width: .625rem;
                 height: .625rem;
                 padding: .375rem;
-                span{
+
+                span {
                     display: flex;
                     width: inherit;
                     height: inherit;
@@ -777,15 +804,18 @@ main {
                     background: var(--white);
                 }
             }
-            li:hover{
-                span{
+
+            li:hover {
+                span {
                     background-color: var(--green);
                 }
             }
-            li.active{
+
+            li.active {
                 border: 1px solid var(--green);
                 border-radius: 1.25rem;
-                span{
+
+                span {
                     background-color: var(--green);
                 }
             }
@@ -944,6 +974,7 @@ main {
                     font-weight: 600;
                     line-height: 160%;
                     margin-bottom: 1rem;
+
                     @include Responsive(m-12) {
                         font-size: 2rem;
                     }
@@ -1043,17 +1074,18 @@ main {
 
     .section-2-home {
         position: relative;
-        padding: 6.25rem 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        height: 31.375rem;
 
         @include Responsive(m-12) {
-            padding-top: 5rem;
+            height: 28rem;
         }
 
         @include Responsive(m-7) {
-            padding-top: 3rem;
+            height: 22rem;
         }
 
         .background {
@@ -1061,16 +1093,8 @@ main {
             top: 0;
             left: 0;
             width: 100%;
-            height: 32.625rem;
+            height: 100%;
             flex-shrink: 0;
-
-            @include Responsive(m-12) {
-                height: 28rem;
-            }
-
-            @include Responsive(m-7) {
-                height: 22rem;
-            }
 
             img {
                 width: 100%;
@@ -1080,366 +1104,89 @@ main {
 
         .container {
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
 
-            .top {
-                margin-bottom: 2.75rem;
-                text-align: center;
+            h2.title {
+                margin-bottom: 1rem;
+                font-size: 2.5rem;
+                font-weight: 600;
+                line-height: 160%;
+                color: var(--black);
+
+                @include Responsive(m-12) {
+                    font-size: 2rem;
+                }
 
                 @include Responsive(m-4) {
-                    margin-bottom: 1.75rem;
+                    margin-bottom: .75rem;
                 }
 
-                h2.title {
-                    margin-bottom: 1rem;
-                    font-size: 2.5rem;
-                    font-weight: 600;
-                    line-height: 160%;
-                    color: var(--black);
-
-                    @include Responsive(m-12) {
-                        font-size: 2rem;
-                    }
-
-                    @include Responsive(m-4) {
-                        margin-bottom: .75rem;
-                    }
-
-                    span {
-                        color: var(--green);
-                    }
-                }
-
-                .description {
-                    font-size: 1rem;
-                    font-weight: 400;
-                    line-height: 160%;
-                    letter-spacing: .01rem;
-                    color: var(--black);
-                    padding: 0 14.0625rem;
-
-                    @include Responsive(m-12) {
-                        font-size: .875rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        padding: 0 4rem;
-                    }
-
-                    @include Responsive(m-7) {
-                        font-size: .75rem;
-                        padding: 0;
-                    }
+                span {
+                    color: var(--green);
                 }
             }
 
-            .bottom {
-                padding: 0 6.75rem;
-                height: 25.875rem;
+            .description {
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 160%;
+                letter-spacing: .01rem;
+                color: var(--black);
+                padding: 0 14.0625rem;
+                margin-bottom: 3.125rem;
 
                 @include Responsive(m-12) {
-                    height: 22rem;
+                    font-size: .875rem;
                 }
 
                 @include Responsive(m-10) {
-                    height: 20rem;
+                    padding: 0 4rem;
+                }
+
+                @include Responsive(m-7) {
+                    font-size: .75rem;
                     padding: 0;
                 }
+            }
+
+            a {
+                padding: 1rem 2rem;
+                color: var(--white);
+                border-radius: .625rem;
+                background: var(--red);
+                border: 1px solid var(--red);
+                box-sizing: border-box;
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 150%;
+
+                @include Responsive(m-10) {
+                    padding: .875rem 1.5rem;
+                }
 
                 @include Responsive(m-7) {
-                    height: 15rem;
+                    padding: .5rem 1rem;
+                    font-size: .875rem;
                 }
+            }
 
-                img {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 1.5rem;
-                    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
-                }
+            a:hover {
+                background: var(--white);
+                color: var(--red);
             }
         }
     }
+
 
     .section-3-home {
-        margin-bottom: 7.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        @include Responsive(m-7) {
-            margin-bottom: 3rem;
-        }
+        padding: 6.25rem 0;
 
-        .container {
-            position: relative;
-
-            .prev,
-            .next {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                z-index: 20;
-                cursor: pointer;
-                @include Responsive(m-10) {
-                    display: none;
-                }
-
-                svg {
-                    @include Responsive(m-10) {
-                        width: 2.25rem;
-                        height: 2.25rem;
-                    }
-                }
-            }
-
-            .prev:hover,
-            .next:hover {
-                svg {
-                    path {
-                        fill: var(--red);
-                    }
-                }
-            }
-
-            .prev {
-                left: -4.25rem;
-
-                @include Responsive(m-10) {
-                    left: -2.5rem;
-                }
-            }
-
-            .next {
-                right: -4.25rem;
-
-                @include Responsive(m-10) {
-                    right: -2.5rem;
-                }
-            }
-
-            .top {
-                margin-bottom: 4rem;
-                text-align: center;
-
-                @include Responsive(m-12) {
-                    margin-bottom: 3rem;
-                }
-
-                @include Responsive(m-7) {
-                    margin-bottom: 2rem;
-                }
-
-                h2.title {
-                    margin-bottom: 1rem;
-                    font-size: 2.5rem;
-                    font-weight: 600;
-                    line-height: 160%;
-                    color: var(--black);
-
-                    @include Responsive(m-12) {
-                        font-size: 2rem;
-                    }
-
-                    span {
-                        color: var(--green);
-                    }
-                }
-
-                .description {
-                    font-size: 1rem;
-                    font-weight: 400;
-                    line-height: 160%;
-                    letter-spacing: .01rem;
-                    color: var(--black);
-                    padding: 0 14.0625rem;
-
-                    @include Responsive(m-12) {
-                        padding: 0 10rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        padding: 0 6rem;
-                    }
-
-                    @include Responsive(m-7) {
-                        padding: 0;
-                        font-size: .875rem;
-                    }
-                }
-            }
-
-            .bottom {
-                .list-training::-webkit-scrollbar {
-                    width: 0; /* Chiều rộng của thanh cuộn */
-                    background: transparent; /* Làm thanh cuộn trong suốt */
-                }
-                .list-training {
-                    display: flex;
-                    gap: 1.25rem;
-                    transition: transform 0.5s ease;
-                    width: 100%;
-                    overflow: hidden;
-                    box-sizing: border-box;
-                    overflow: scroll;
-                    @include Responsive(m-12) {
-                        padding-bottom: 1rem;
-                    }
-                    @include Responsive(m-10) {
-                        padding-bottom: 2rem;
-                    }
-                    .child:nth-child(n+6){
-                        display: none;
-                    }
-                    .child {
-                        flex: 0 0 32.28%;
-                        border-radius: .625rem;
-                        overflow: hidden;
-                        @include Responsive(m-14) {
-                            flex: 0 0 32.18%;
-                        }
-
-                        @include Responsive(m-12) {
-                            flex: 0 0 31.92%;
-                            box-shadow: 0px 4px 20px 0px rgba(21, 21, 21, 0.10);
-                        }
-                        @include Responsive(m-10) {
-                            width: 48.5%;
-                            flex: none;
-                        }
-                        @include Responsive(m-7) {
-                            width: 70%;
-                            gap: 1rem;
-                        }
-
-                        .image {
-                            width: 100%;
-                            height: 16.375rem;
-                            margin-bottom: 2rem;
-
-                            @include Responsive(m-7) {
-                                margin-bottom: 1rem;
-                                height: 12rem;
-                            }
-
-                            @include Responsive(m-4) {
-                                height: 10rem;
-                            }
-
-                            img {
-                                width: 100%;
-                                height: 100%;
-                                border-radius: .625rem;
-                            }
-                        }
-
-                        .infor {
-                            @include Responsive(m-12) {
-                                padding: 0 1rem 1rem 1rem;
-                            }
-
-                            h3.title {
-                                color: var(--black);
-                                font-size: 1.125rem;
-                                font-weight: 600;
-                                line-height: 150%;
-                                letter-spacing: .0112rem;
-                                margin-bottom: 1rem;
-                                display: -webkit-box;
-                                -webkit-box-orient: vertical;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                -webkit-line-clamp: 2;
-
-                                @include Responsive(m-7) {
-                                    font-size: 1rem;
-                                }
-
-                                @include Responsive(m-4) {
-                                    font-size: .875rem;
-                                    margin-bottom: .5rem;
-                                }
-                            }
-
-                            h3.title:hover {
-                                color: var(--green);
-                            }
-
-                            .date {
-                                display: flex;
-                                gap: .75rem;
-                                color: #3CA333;
-                                font-size: .875rem;
-                                font-weight: 300;
-                                line-height: 170%;
-                                margin-bottom: 1rem;
-
-                                @include Responsive(m-7) {
-                                    font-size: .625rem;
-                                    gap: .5rem;
-                                    margin-bottom: .5rem;
-
-                                    .icon {
-                                        svg {
-                                            width: 1rem;
-                                            height: 1rem;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        .description {
-                            font-size: 1rem;
-                            font-weight: 400;
-                            line-height: 150%;
-                            color: var(--black);
-                            letter-spacing: .01rem;
-                            margin-bottom: 1.5rem;
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-line-clamp: 2;
-
-                            @include Responsive(m-7) {
-                                margin-bottom: 1rem;
-                                font-size: .875rem;
-                            }
-
-                            @include Responsive(m-4) {
-                                font-size: .75rem;
-                                margin-bottom: .5rem;
-                            }
-                        }
-
-                        .view-more {
-                            display: flex;
-                            align-items: center;
-                            gap: .3125rem;
-                            color: var(--red);
-                            font-size: .875rem;
-                            font-weight: 400;
-                            letter-spacing: .0088rem;
-
-                            @include Responsive(m-4) {
-                                font-size: .75rem;
-                            }
-
-                            .icon {
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .section-4-home {
-        margin-bottom: 9.375rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         @include Responsive(m-7) {
             margin-bottom: 4rem;
         }
@@ -1497,6 +1244,7 @@ main {
 
                     ul {
                         display: flex;
+                        flex-flow: wrap;
                         gap: 1.25rem;
 
                         @include Responsive(m-10) {
@@ -1504,8 +1252,6 @@ main {
                         }
 
                         @include Responsive(m-7) {
-                            display: flex;
-                            flex-flow: wrap;
                             gap: .5rem;
                         }
 
@@ -1523,6 +1269,7 @@ main {
                             @include Responsive(m-10) {
                                 padding: .5rem .5rem;
                             }
+
                             @include Responsive(m-7) {
                                 padding: .125rem .375rem;
                             }
@@ -1540,29 +1287,30 @@ main {
             }
 
             .bottom {
-                .child{
+                .child {
                     display: none;
                 }
-                .child.active{
+
+                .child.active {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 5.5rem;
                     height: 36.875rem;
-    
+
                     @include Responsive(m-12) {
                         column-gap: 5rem;
                         height: 30rem;
                     }
-    
+
                     @include Responsive(m-10) {
                         column-gap: 3rem;
                         height: 28.25rem;
                     }
-    
+
                     @include Responsive(m-7) {
                         grid-template-columns: 1fr;
                     }
-    
+
                     .left {
                         h3 {
                             color: var(--black);
@@ -1571,68 +1319,103 @@ main {
                             line-height: normal;
                             margin-top: 3.75rem;
                             margin-bottom: 1rem;
-    
+
                             @include Responsive(m-12) {
                                 margin-top: 0;
                             }
                         }
-    
+
                         .sub-setion {
                             color: var(--black);
                             font-size: 1rem;
                             font-weight: 400;
                             line-height: 1.5rem;
                         }
-    
-                        .sub-setion-1 {
-                            margin-bottom: 2rem;
-    
-                            @include Responsive(m-12) {
-                                margin-bottom: 1rem;
-                            }
-    
-                            @include Responsive(m-10) {
-                                margin-bottom: .5rem;
-                            }
-                        }
-    
-                        .sub-setion-2 {
+                        .content{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2rem;
+                            color: var(--black);
+                            font-size: 1rem;
+                            font-weight: 400;
+                            line-height: 150%;
                             margin-bottom: 2.5rem;
-    
+                            // height: 13.5rem;              
+                            // overflow: scroll; 
                             @include Responsive(m-12) {
+                                gap: 1rem;
                                 margin-bottom: 1.25rem;
                             }
-    
+
                             @include Responsive(m-10) {
+                                gap: .5rem;
                                 margin-bottom: .75rem;
                             }
                         }
-    
-                        .images {
-                            display: flex;
-                            gap: 2rem;
-                            margin-bottom: 2.1875rem;
-    
-                            @include Responsive(m-12) {
+
+                        .download {
+                            margin-bottom: 2.5rem;
+
+                            @include Responsive(m-10) {
                                 margin-bottom: 2rem;
                             }
-    
-                            @include Responsive(m-10) {
-                                margin-bottom: .5rem;
+
+                            @include Responsive(m-7) {
+                                margin-bottom: 1rem;
                             }
-    
-                            img {
-                                width: 7.5rem;
-                                height: 7.5rem;
-                                border-radius: .5rem;
-    
-                                @include Responsive(m-10) {
-                                    width: 3.75rem;
-                                    height: 3.75rem;
+
+                            ul {
+                                display: flex;
+                                flex-direction: column;
+                                gap: 1rem;
+
+                                li {
+                                    background: #EDF9EC;
+                                    border-radius: .4375rem;
+                                    width: 30.125rem;
+                                    height: 3.5rem;
+                                    box-sizing: border-box;
+                                    padding: 1rem 1.25rem;
+                                    display: flex;
+                                    justify-content: space-between;
+
+                                    @include Responsive(m-10) {
+                                        width: 100%;
+                                        padding: .75rem 1rem;
+                                    }
+
+                                    @include Responsive(m-7) {
+                                        padding: 0 .75rem;
+                                    }
+
+                                    span {
+                                        display: flex;
+                                        align-items: center;
+                                        color: #414141;
+                                        font-size: 1rem;
+                                        font-weight: 500;
+                                        line-height: 150%;
+
+                                        @include Responsive(m-7) {
+                                            font-size: .75rem;
+                                        }
+                                    }
+
+                                    a {
+                                        display: flex;
+                                        align-items: center;
+
+                                        svg {
+                                            @include Responsive(m-7) {
+                                                width: 1rem;
+                                                height: 1rem;
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
-    
+
                         .view-more {
                             display: flex;
                             align-items: center;
@@ -1642,7 +1425,7 @@ main {
                             font-weight: 400;
                             line-height: 185%;
                             letter-spacing: .0088rem;
-    
+
                             .icon {
                                 display: flex;
                                 align-items: center;
@@ -1650,15 +1433,15 @@ main {
                             }
                         }
                     }
-    
+
                     .right {
                         position: relative;
                         height: inherit;
-    
+
                         @include Responsive(m-7) {
                             display: none;
                         }
-    
+
                         .image-1 {
                             position: absolute;
                             top: 0;
@@ -1666,30 +1449,30 @@ main {
                             width: 27rem;
                             height: 33.5rem;
                             border-radius: .75rem;
-    
+
                             @include Responsive(m-14) {
                                 width: 24rem;
                                 height: 32rem;
                             }
-    
+
                             @include Responsive(m-12) {
                                 width: 18rem;
                                 height: 26rem;
                             }
-    
+
                             @include Responsive(m-10) {
                                 border-radius: .5rem;
                                 width: 16rem;
                                 height: 23rem;
                             }
-    
+
                             img {
                                 width: inherit;
                                 height: inherit;
                                 border-radius: inherit;
                             }
                         }
-    
+
                         .image-2 {
                             position: absolute;
                             bottom: 0;
@@ -1700,12 +1483,12 @@ main {
                             padding-top: 1.125rem;
                             border-radius: 1.125rem;
                             background-color: var(--white);
-    
+
                             @include Responsive(m-14) {
                                 width: 20rem;
                                 height: 16rem;
                             }
-    
+
                             @include Responsive(m-12) {
                                 padding-right: 1rem;
                                 padding-top: 1rem;
@@ -1713,7 +1496,7 @@ main {
                                 width: 18rem;
                                 height: 12rem;
                             }
-    
+
                             @include Responsive(m-10) {
                                 padding-right: .5rem;
                                 padding-top: .5rem;
@@ -1721,7 +1504,7 @@ main {
                                 width: 13rem;
                                 height: 10rem;
                             }
-    
+
                             img {
                                 border-radius: 1rem;
                                 height: inherit;
@@ -1734,14 +1517,257 @@ main {
         }
     }
 
-    .section-5-home {
-        margin-bottom: 8.5rem;
+    .section-4-home {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        height: 41.875rem;
+
         @include Responsive(m-7) {
-            margin-bottom: 3.75rem;
+            height: 34rem;
+            margin-bottom: 3rem;
         }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .container {
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            h2.title {
+                color: var(--white);
+                font-size: 2.5rem;
+                font-weight: 500;
+                line-height: 160%;
+                text-align: center;
+                margin-bottom: 1rem;
+
+                @include Responsive(m-10) {
+                    font-size: 2rem;
+                }
+            }
+
+            >.description {
+                color: var(--white);
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 160%;
+                text-align: center;
+                letter-spacing: .01rem;
+                padding: 0 14.0625rem;
+                margin-bottom: 2.5rem;
+
+                @include Responsive(m-12) {
+                    padding: 0 10rem;
+                    margin-bottom: 2rem;
+                }
+
+                @include Responsive(m-10) {
+                    padding: 0 6rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                @include Responsive(m-7) {
+                    padding: 0;
+                    font-size: .875rem;
+                    margin-bottom: 1rem;
+                }
+            }
+
+            .list-training {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 1.25rem;
+                justify-content: space-between;
+
+                @include Responsive(m-10) {
+                    gap: 1rem;
+                }
+
+                @include Responsive(m-7) {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+                @include Responsive(m-4) {
+                    gap: .5rem;
+                }
+
+                .child {
+                    background: var(--white);
+                    padding: 1.875rem 1.5625rem;
+                    border-radius: .75rem;
+
+                    @include Responsive(m-10) {
+                        padding: 1.5rem 1rem;
+                    }
+
+                    @include Responsive(m-7) {
+                        &:nth-child(n+3) {
+                            display: none;
+                        }
+                    }
+
+                    @include Responsive(m-4) {
+                        padding: 1rem .625rem;
+                    }
+
+                    h4 {
+                        color: #3CA333;
+                        font-size: 1.25rem;
+                        font-weight: 500;
+                        line-height: 140%;
+                        margin-bottom: .9375rem;
+
+                        @include Responsive(m-10) {
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            -webkit-line-clamp: 2;
+                            font-size: 1.125rem;
+                            margin-bottom: .75rem;
+                        }
+
+                        @include Responsive(m-4) {
+                            font-size: 1rem;
+                        }
+                    }
+
+                    .description {
+                        color: var(--black);
+                        font-size: 1rem;
+                        font-weight: 400;
+                        line-height: 150%;
+                        margin-bottom: .9375rem;
+
+                        @include Responsive(m-10) {
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            -webkit-line-clamp: 3;
+                            font-size: .875rem;
+                            margin-bottom: .75rem;
+                        }
+
+                        @include Responsive(m-4) {
+                            font-size: .75rem;
+                            -webkit-line-clamp: 2;
+                        }
+                    }
+
+                    .time {
+                        display: flex;
+                        align-items: center;
+                        gap: .9375rem;
+                        margin-bottom: .625rem;
+
+                        @include Responsive(m-4) {
+                            gap: .5rem;
+                        }
+
+                        >div {
+                            display: flex;
+                            flex-direction: column;
+                            gap: .3125rem;
+
+                            p {
+                                color: var(--black);
+                                font-size: .875rem;
+                                font-weight: 500;
+                                line-height: 150%;
+
+                                @include Responsive(m-4) {
+                                    font-size: .75rem;
+                                }
+                            }
+
+                            span {
+                                color: #ABABAB;
+                                font-size: .75rem;
+                                font-weight: 500;
+                                line-height: 130%;
+
+                                @include Responsive(m-4) {
+                                    font-size: .625rem;
+                                }
+                            }
+                        }
+                    }
+
+                    .address {
+                        display: flex;
+                        align-items: center;
+                        gap: .9375rem;
+                        margin-bottom: 1.25rem;
+
+                        @include Responsive(m-4) {
+                            gap: .5rem;
+                        }
+
+                        @include Responsive(m-12) {
+                            font-size: .875rem;
+                        }
+
+                        @include Responsive(m-10) {
+                            margin-bottom: .875rem;
+
+                            span {
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                -webkit-line-clamp: 2;
+                            }
+                        }
+
+                        @include Responsive(m-4) {
+                            span {
+                                font-size: .75rem;
+                            }
+                        }
+                    }
+
+                    .view-more {
+                        color: var(--red);
+                        font-size: .875rem;
+                        font-size: 400;
+                        line-height: normal;
+                        display: flex;
+                        gap: .3125rem;
+                        align-items: center;
+
+                        .icon {
+                            display: flex;
+                            align-items: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section-5-home {
+        padding: 4.375rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #EDF9EC;
 
         .container {
             .top {
@@ -1792,34 +1818,36 @@ main {
             }
 
             .bottom {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+                display: flex;
+                justify-content: center;
+                flex-flow: wrap;
                 gap: 1.25rem;
 
-                @include Responsive(m-10) {
-                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                }
-
                 @include Responsive(m-7) {
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
                     gap: 1rem;
                 }
 
                 a {
-                    height: 7.25rem;
+                    width: 12.25rem;
+                    height: 7.1875rem;
                     border-radius: .5rem;
-                    background: rgba(61, 163, 51, 0.05);
+                    background: var(--white);
 
                     @include Responsive(m-12) {
                         height: 6rem;
                     }
+
                     @include Responsive(m-10) {
                         height: 5.5rem;
                     }
+
                     @include Responsive(m-7) {
+                        width: 10rem;
                         height: 4rem;
                     }
+
                     @include Responsive(m-4) {
+                        width: 8rem;
                         height: 3.5rem;
                     }
 
@@ -1847,6 +1875,7 @@ main {
         @include Responsive(m-12) {
             height: 40rem;
         }
+
         @include Responsive(m-7) {
             margin-bottom: 2.75rem;
         }
@@ -2123,78 +2152,85 @@ main {
                     flex-direction: column;
                     gap: 2rem;
                 }
+
                 .left {
                     .list-news::-webkit-scrollbar {
-                        width: 0; /* Chiều rộng của thanh cuộn */
-                        background: transparent; /* Làm thanh cuộn trong suốt */
+                        width: 0;
+                        /* Chiều rộng của thanh cuộn */
+                        background: transparent;
+                        /* Làm thanh cuộn trong suốt */
                     }
-                    .list-news{
+
+                    .list-news {
                         display: none;
                     }
-                    .list-news.active{
+
+                    .list-news.active {
                         display: flex;
                         gap: 1.25rem;
-    
+
                         @include Responsive(m-12) {
                             display: grid;
                             grid-template-columns: 1fr 1fr;
                         }
+
                         @include Responsive(m-7) {
                             overflow: scroll;
                             display: flex;
                             padding-bottom: .5rem;
                         }
-    
+
                         .child {
                             display: flex;
                             flex-direction: column;
                             gap: 2rem;
                             border-radius: .625rem;
                             overflow: hidden;
-    
+
                             @include Responsive(m-10) {
                                 box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
                             }
+
                             @include Responsive(m-7) {
                                 width: 60%;
                                 flex: none;
                                 gap: 1rem;
                             }
-    
+
                             >a {
                                 width: 25.75rem;
                                 height: 15.875rem;
                                 border-radius: inherit;
-    
+
                                 @include Responsive(m-12) {
                                     width: 100%;
                                     height: 17rem;
                                 }
-    
+
                                 @include Responsive(m-10) {
                                     height: 15rem;
                                 }
-    
+
                                 @include Responsive(m-7) {
                                     height: 10.5rem;
                                 }
-    
+
                                 img {
                                     width: 100%;
                                     height: 100%;
                                     border-radius: inherit;
                                 }
                             }
-    
+
                             .infor {
                                 display: flex;
                                 flex-direction: column;
                                 gap: 1rem;
-    
+
                                 @include Responsive(m-10) {
                                     padding: 0 1rem 1rem 1rem;
                                 }
-    
+
                                 h3 {
                                     color: var(--black);
                                     font-size: 1.125rem;
@@ -2205,38 +2241,38 @@ main {
                                     -webkit-box-orient: vertical;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
-                                    -webkit-line-clamp: 2;
-    
+                                    -webkit-line-clamp: 3;
+
                                     @include Responsive(m-7) {
                                         font-size: 1rem;
                                     }
                                 }
-    
+
                                 h3:hover {
                                     color: var(--green);
                                 }
-    
+
                                 .date-and-views {
                                     display: flex;
                                     align-items: center;
                                     gap: .625rem;
-    
+
                                     @include Responsive(m-7) {
                                         gap: 5px;
                                     }
-    
+
                                     .date {
                                         display: flex;
                                         align-items: center;
                                         gap: .75rem;
                                         color: #136451;
-    
+
                                         @include Responsive(m-7) {
                                             gap: .5rem;
                                             font-size: .75rem;
                                         }
                                     }
-    
+
                                     .minus,
                                     .views {
                                         color: var(--black);
@@ -2244,7 +2280,7 @@ main {
                                         font-weight: 300;
                                         line-height: 150%;
                                     }
-    
+
                                     .views {
                                         @include Responsive(m-7) {
                                             font-size: .75rem;
@@ -2263,7 +2299,12 @@ main {
 
                     .child {
                         padding-bottom: 2rem;
-                        border-bottom: 1px solid #D9D9D9;
+
+                        &:nth-child(1),
+                        &:nth-child(2) {
+                            border-bottom: 1px solid #D9D9D9;
+                        }
+
 
                         h3 {
                             color: var(--black);
@@ -2318,9 +2359,11 @@ main {
             .top {
                 margin-bottom: 3.125rem;
                 text-align: center;
+
                 @include Responsive(m-12) {
                     margin-bottom: 2.5rem;
                 }
+
                 @include Responsive(m-7) {
                     margin-bottom: 1rem;
                 }
@@ -2341,17 +2384,23 @@ main {
                         color: var(--green);
                     }
                 }
+
                 nav.tab {
                     @include Responsive(m-12) {
                         padding-right: .5rem;
                     }
+
                     ul::-webkit-scrollbar {
-                        width: 0; /* Chiều rộng của thanh cuộn */
-                        background: transparent; /* Làm thanh cuộn trong suốt */
+                        width: 0;
+                        /* Chiều rộng của thanh cuộn */
+                        background: transparent;
+                        /* Làm thanh cuộn trong suốt */
                     }
+
                     ul {
                         display: flex;
                         justify-content: space-between;
+
                         @include Responsive(m-12) {
                             gap: 2rem;
                             box-sizing: border-box;
@@ -2367,6 +2416,7 @@ main {
                             line-height: 150%;
                             padding-bottom: .3125rem;
                             cursor: pointer;
+
                             @include Responsive(m-12) {
                                 flex: none;
                             }
@@ -2412,9 +2462,10 @@ main {
                 align-items: center;
                 gap: 3.125rem;
 
-                .list{
+                .list {
                     display: none;
                 }
+
                 .list.active {
                     display: grid;
                     grid-template-columns: 1fr 1fr 1fr;
@@ -2425,6 +2476,7 @@ main {
                         grid-template-columns: 1fr;
                         padding: 0 3rem;
                     }
+
                     @include Responsive(m-4) {
                         padding: 0;
                     }
@@ -2455,6 +2507,7 @@ main {
                                 height: 10rem;
                                 border-radius: 1rem 1rem 0 0;
                             }
+
                             @include Responsive(m-7) {
                                 height: 13rem;
                             }
@@ -2529,6 +2582,7 @@ main {
                     line-height: 185%;
                     letter-spacing: .01rem;
                     border-radius: .625rem;
+
                     @include Responsive(m-7) {
                         width: 4.0625rem;
                         font-size: .75rem;
@@ -2551,15 +2605,19 @@ main {
         justify-content: center;
         height: 38.75rem;
         z-index: 10;
+
         @include Responsive(m-12) {
             height: 35rem;
         }
+
         @include Responsive(m-10) {
             height: 30rem;
         }
+
         @include Responsive(m-7) {
             height: 24rem;
         }
+
         @include Responsive(m-4) {
             height: 20rem;
         }
@@ -2593,9 +2651,11 @@ main {
             color: var(--white);
             width: 39.375rem;
             text-align: center;
+
             @include Responsive(m-7) {
                 padding-top: 2rem;
             }
+
             @include Responsive(m-4) {
                 padding-top: 3rem;
             }
@@ -2609,6 +2669,7 @@ main {
                 font-size: 1rem;
                 font-weight: 300;
                 line-height: 150%;
+
                 @include Responsive(m-7) {
                     font-size: .875rem;
                     margin-bottom: 1rem;
@@ -2635,12 +2696,14 @@ main {
                 font-weight: 500;
                 line-height: 160%;
                 margin-bottom: 1.875rem;
+
                 @include Responsive(m-10) {
                     font-size: 2.25rem;
                     margin-bottom: 1.5rem;
                 }
+
                 @include Responsive(m-7) {
-                    font-size: 2rem;
+                    font-size: 1.75rem;
                     margin-bottom: 1.25rem;
                 }
             }
@@ -2650,6 +2713,7 @@ main {
                 font-weight: 400;
                 line-height: 160%;
                 letter-spacing: .01rem;
+
                 @include Responsive(m-7) {
                     font-size: .875rem;
                 }
@@ -2665,6 +2729,11 @@ main {
         display: flex;
         align-items: center;
         justify-content: center;
+
+        @include Responsive(m-7) {
+            padding-top: 3rem;
+            margin-bottom: 3rem;
+        }
 
         .background {
             position: absolute;
@@ -2704,13 +2773,14 @@ main {
         }
 
         .container {
-            h2 {
+            h2.title {
                 color: var(--black);
                 text-align: center;
                 font-size: 2.5rem;
                 font-weight: 600;
                 line-height: 160%;
                 margin-bottom: 3.125rem;
+
                 @include Responsive(m-12) {
                     font-size: 2rem;
                 }
@@ -2730,23 +2800,24 @@ main {
                     column-gap: 5rem;
                     height: 30rem;
                 }
-    
+
                 @include Responsive(m-10) {
                     column-gap: 3rem;
                     height: 28.25rem;
                 }
-    
+
                 @include Responsive(m-7) {
                     grid-template-columns: 1fr;
                 }
+
                 .left {
                     position: relative;
                     height: inherit;
-    
+
                     @include Responsive(m-7) {
                         display: none;
                     }
-    
+
                     .image-1 {
                         position: absolute;
                         top: 0;
@@ -2754,30 +2825,30 @@ main {
                         width: 27rem;
                         height: 33.5rem;
                         border-radius: .75rem;
-    
+
                         @include Responsive(m-14) {
                             width: 24rem;
                             height: 32rem;
                         }
-    
+
                         @include Responsive(m-12) {
                             width: 18rem;
                             height: 26rem;
                         }
-    
+
                         @include Responsive(m-10) {
                             border-radius: .5rem;
                             width: 16rem;
                             height: 23rem;
                         }
-    
+
                         img {
                             width: inherit;
                             height: inherit;
                             border-radius: inherit;
                         }
                     }
-    
+
                     .image-2 {
                         position: absolute;
                         bottom: 0;
@@ -2788,12 +2859,12 @@ main {
                         padding-top: 1.125rem;
                         border-radius: 1.125rem;
                         background-color: var(--white);
-    
+
                         @include Responsive(m-14) {
                             width: 20rem;
                             height: 16rem;
                         }
-    
+
                         @include Responsive(m-12) {
                             padding-left: 1rem;
                             padding-top: 1rem;
@@ -2801,7 +2872,7 @@ main {
                             width: 18rem;
                             height: 12rem;
                         }
-    
+
                         @include Responsive(m-10) {
                             padding-left: .5rem;
                             padding-top: .5rem;
@@ -2809,11 +2880,11 @@ main {
                             width: 13rem;
                             height: 10rem;
                         }
-    
+
                         img {
                             border-radius: 1rem;
                             height: inherit;
-    
+
                             @include Responsive(m-10) {
                                 border-radius: .5rem;
                             }
@@ -2833,10 +2904,27 @@ main {
                     letter-spacing: .01rem;
 
                     ul {
-                        list-style: disc;
-                        padding-left: 1.5rem;
-                        li{
-                            box-sizing: border-box;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.875rem;
+                        justify-content: center;
+
+                        li {
+                            display: flex;
+                            align-items: center;
+                            gap: .75rem;
+
+                            img {
+                                width: 2rem;
+                                height: 2rem;
+                            }
+
+                            b {
+                                color: var(--black);
+                                font-size: 1rem;
+                                font-weight: 700;
+                                line-height: 160%;
+                            }
                         }
                     }
                 }
@@ -2850,10 +2938,15 @@ main {
         align-items: center;
         justify-content: center;
 
+        @include Responsive(m-7) {
+            margin-bottom: 3rem;
+        }
+
         .container {
             .top {
                 margin-bottom: 3.125rem;
                 text-align: center;
+
                 @include Responsive(m-12) {
                     margin-bottom: 2rem;
                 }
@@ -2864,6 +2957,7 @@ main {
                     font-weight: 600;
                     line-height: 160%;
                     color: var(--black);
+
                     @include Responsive(m-12) {
                         font-size: 2rem;
                     }
@@ -2880,6 +2974,7 @@ main {
                     letter-spacing: .01rem;
                     color: var(--black);
                     padding: 0 14.0625rem;
+
                     @include Responsive(m-12) {
                         font-size: .875rem;
                         padding: 0 10rem;
@@ -2896,130 +2991,255 @@ main {
                 }
             }
 
-            .bottom::-webkit-scrollbar {
-                width: 0; /* Chiều rộng của thanh cuộn */
-                background: transparent; /* Làm thanh cuộn trong suốt */
-            }
             .bottom {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    padding: 0 10.5rem;
+
+                    @include Responsive(m-12) {
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .section-3-about {
+        margin-bottom: 6.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include Responsive(m-7) {
+            margin-bottom: 3rem;
+        }
+
+        .container {
+            .top {
+                margin-bottom: 3.125rem;
+                text-align: center;
+
+                @include Responsive(m-12) {
+                    margin-bottom: 2rem;
+                }
+
+                h2.title {
+                    margin-bottom: 1rem;
+                    font-size: 2.5rem;
+                    font-weight: 600;
+                    line-height: 160%;
+                    color: var(--black);
+
+                    @include Responsive(m-12) {
+                        font-size: 2rem;
+                    }
+
+                    span {
+                        color: var(--green);
+                    }
+                }
+
+                .description {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 160%;
+                    letter-spacing: .01rem;
+                    color: var(--black);
+                    padding: 0 14.0625rem;
+
+                    @include Responsive(m-12) {
+                        font-size: .875rem;
+                        padding: 0 10rem;
+                    }
+
+                    @include Responsive(m-10) {
+                        padding: 0 2rem;
+                    }
+
+                    @include Responsive(m-7) {
+                        font-size: .75rem;
+                        padding: 0;
+                    }
+                }
+            }
+
+            .bottom {
+                display: flex;
+                justify-content: space-between;
+
+                @include Responsive(m-10) {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    column-gap: 5rem;
+                    row-gap: 1rem;
+                }
+
+                @include Responsive(m-7) {
+                    column-gap: 1rem;
+                }
+
+                @include Responsive(m-4) {
+                    grid-template-columns: 1fr;
+                    gap: .75rem;
+                }
+
+                .child {
+                    display: flex;
+                    align-items: center;
+
+                    @include Responsive(m-10) {
+                        justify-content: space-between;
+                    }
+
+                    gap: .9375rem;
+                    padding: 1.0625rem 1.25rem;
+                    border-radius: .4375rem;
+                    background: #EDF9EC;
+
+                    @include Responsive(m-14) {
+                        padding: .875rem 1rem;
+                        gap: .5rem;
+                    }
+
+                    @include Responsive(m-12) {
+                        padding: .75rem .5rem;
+                        gap: .375rem;
+                    }
+
+                    .logo {
+                        svg {
+                            width: 1.5rem;
+                            height: 1.5rem;
+                        }
+                    }
+
+                    span {
+                        color: #414141;
+                        font-size: 1rem;
+                        font-weight: 500;
+                        line-height: 150%;
+
+                        @include Responsive(m-12) {
+                            font-size: .875rem;
+                        }
+                    }
+
+                    .download {
+                        svg {
+                            width: 1.25rem;
+                            height: 1.25rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .section-4-about {
+        padding: 4.375rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 6.25rem;
+
+        @include Responsive(m-7) {
+            margin-bottom: 3.75rem;
+        }
+
+        .container {
+            .top {
+                text-align: center;
+                margin-bottom: 2.625rem;
+
+                h2.title {
+                    margin-bottom: 1rem;
+                    font-size: 2.5rem;
+                    font-weight: 600;
+                    line-height: 160%;
+                    color: var(--black);
+
+                    @include Responsive(m-12) {
+                        font-size: 2rem;
+                    }
+
+                    span {
+                        color: var(--green);
+                    }
+                }
+
+                .description {
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 160%;
+                    letter-spacing: .01rem;
+                    color: var(--black);
+                    padding: 0 14.0625rem;
+                    margin-bottom: 2.5rem;
+
+                    @include Responsive(m-12) {
+                        padding: 0 10rem;
+                        margin-bottom: 2rem;
+                    }
+
+                    @include Responsive(m-10) {
+                        padding: 0 6rem;
+                        margin-bottom: 1.5rem;
+                    }
+
+                    @include Responsive(m-7) {
+                        padding: 0;
+                        font-size: .875rem;
+                        margin-bottom: 1rem;
+                    }
+                }
+            }
+
+            .bottom {
+                display: flex;
+                justify-content: center;
+                flex-flow: wrap;
                 gap: 1.25rem;
 
                 @include Responsive(m-7) {
-                    overflow: scroll;
-                    display: flex;
+                    gap: 1rem;
                 }
-                .child {
-                    position: relative;
-                    display: flex;
-                    justify-content: center;
-                    height: 30rem;
-                    border-radius: .625rem;
-                    overflow: hidden;
+
+                a {
+                    width: 12.25rem;
+                    height: 7.1875rem;
+                    border-radius: .5rem;
+                    background: #EDF9EC;
+
                     @include Responsive(m-12) {
-                        height: 26rem;
+                        height: 6rem;
                     }
+
                     @include Responsive(m-10) {
-                        height: 20rem;
+                        height: 5.5rem;
                     }
+
                     @include Responsive(m-7) {
-                        width: 60%;
-                        flex: none;
+                        width: 10rem;
+                        height: 4rem;
                     }
+
                     @include Responsive(m-4) {
-                        width: 80%;
+                        width: 8rem;
+                        height: 3.5rem;
                     }
 
-                    .backdrop-child {
-                        position: absolute;
-                        z-index: 10;
+                    img {
                         width: 100%;
                         height: 100%;
-                        background: #000000;
                         border-radius: inherit;
-                        opacity: 0; // Ban đầu ẩn đi
-                        transition: opacity 1s ease; // Thêm transition
-                    }
-
-                    .text {
-                        position: absolute;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-align: center;
-                        font-size: 1.125rem;
-                        font-weight: 300;
-                        line-height: 160%;
-                        z-index: 20;
-                        width: 19.125rem;
-                        height: 100%;
-                        color: var(--white);
-                        opacity: 0; // Ban đầu ẩn đi
-                        transition: opacity 1s ease;
-                        @include Responsive(m-10) {
-                            font-size: 1rem;
-                            width: 14rem;
-                        }
-                    }
-
-                    .content {
-                        width: 100%;
-                        height: 100%;
-                        position: relative;
-                        border-radius: inherit;
-
-                        img {
-                            position: relative;
-                            width: 100%;
-                            height: 100%;
-                            border-radius: inherit;
-                        }
-
-                        .infor {
-                            position: absolute;
-                            left: 2.8125rem;
-                            bottom: 3.125rem;
-                            color: var(--white);
-                            @include Responsive(m-12) {
-                                left: 2rem;
-                                bottom: 2.5rem;
-                            }
-                            @include Responsive(m-10) {
-                                left: 1rem;
-                                bottom: 1.25rem;
-                            }
-
-                            h3 {
-                                font-size: 1.5rem;
-                                font-weight: 600;
-                                line-height: normal;
-                                margin-bottom: .625rem;
-                                @include Responsive(m-10) {
-                                    font-size: 1.25rem;
-                                }
-                            }
-
-                            span {
-                                font-size: 1rem;
-                                font-weight: 500;
-                                line-height: normal;
-                                @include Responsive(m-10) {
-                                    font-size: .875rem;
-                                }
-                            }
-                        }
-                    }
-
-                    &:hover {
-
-                        .backdrop-child,
-                        .text {
-                            opacity: 0.7;
-                        }
-
-                        .infor {
-                            opacity: 0;
-                        }
+                        flex-shrink: 0;
+                        object-fit: contain;
+                        mix-blend-mode: multiply;
                     }
                 }
             }
@@ -3044,6 +3264,7 @@ main {
                 flex-direction: column;
                 align-items: center;
                 gap: 3.125rem;
+
                 @include Responsive(m-12) {
                     gap: 2rem;
                 }
@@ -3054,6 +3275,7 @@ main {
                     line-height: normal;
                     color: var(--black);
                     align-self: flex-start;
+
                     @include Responsive(m-12) {
                         font-size: 1.75rem;
                     }
@@ -3168,6 +3390,7 @@ main {
                     line-height: 185%;
                     letter-spacing: .01rem;
                     border-radius: .625rem;
+
                     @include Responsive(m-7) {
                         width: 4.0625rem;
                         font-size: .75rem;
@@ -3191,9 +3414,11 @@ main {
         align-items: center;
         justify-content: center;
         gap: 6.25rem;
+
         @include Responsive(m-12) {
             padding-top: 8rem;
         }
+
         @include Responsive(m-10) {
             padding-top: 6.25rem;
         }
@@ -3202,9 +3427,11 @@ main {
             position: relative;
             display: flex;
             gap: 5rem;
+
             @include Responsive(m-14) {
                 gap: 3rem;
             }
+
             @include Responsive(m-12) {
                 flex-direction: column;
             }
@@ -3221,12 +3448,15 @@ main {
                 font-weight: 400;
                 line-height: 160%;
                 letter-spacing: .01rem;
+
                 @include Responsive(m-10) {
                     font-size: .875rem;
                 }
+
                 @include Responsive(m-7) {
                     flex-flow: wrap;
                 }
+
                 @include Responsive(m-4) {
                     font-size: .75rem;
                 }
@@ -3254,12 +3484,15 @@ main {
                 gap: 1.875rem;
                 margin-top: 3.25rem;
                 width: 52.875rem;
+
                 @include Responsive(m-14) {
                     width: 47rem;
                 }
+
                 @include Responsive(m-12) {
                     width: 100%;
                 }
+
                 @include Responsive(m-7) {
                     margin-top: 5rem;
                 }
@@ -3268,21 +3501,26 @@ main {
                     width: 100%;
                     height: 28.75rem;
                     border-radius: .625rem;
+
                     @include Responsive(m-14) {
                         width: 47rem;
                         height: 27rem;
                     }
+
                     @include Responsive(m-12) {
                         width: 100%;
                         height: 30rem;
                     }
+
                     @include Responsive(m-10) {
                         height: 25rem;
                         border-radius: .5rem;
                     }
+
                     @include Responsive(m-7) {
                         height: 17rem;
                     }
+
                     @include Responsive(m-4) {
                         height: 14rem;
                     }
@@ -3302,6 +3540,7 @@ main {
                     font-weight: 400;
                     line-height: 160%;
                     letter-spacing: .01rem;
+
                     @include Responsive(m-7) {
                         gap: .75rem;
                         font-size: .875rem;
@@ -3314,10 +3553,12 @@ main {
                     font-size: 1.875rem;
                     font-weight: 600;
                     line-height: 160%;
+
                     @include Responsive(m-12) {
                         font-size: 1.75rem;
                         width: 100%;
                     }
+
                     @include Responsive(m-7) {
                         font-size: 1.5rem;
                     }
@@ -3329,10 +3570,12 @@ main {
                     gap: 1.875rem;
                     font-size: 1rem;
                     line-height: 150%;
+
                     @include Responsive(m-7) {
                         gap: 1.25rem;
                     }
-                    img{
+
+                    img {
                         border-radius: .625rem;
                     }
                 }
@@ -3365,23 +3608,28 @@ main {
                     color: var(--black);
                     margin-bottom: 1.75rem;
                 }
-                .list:nth-child(n+4){
+
+                .list:nth-child(n+4) {
                     display: none;
                 }
+
                 .list {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     gap: 1.5rem;
+
                     @include Responsive(m-12) {
                         display: grid;
                         grid-template-columns: 1fr 1fr 1fr 1fr;
                         column-gap: 1.25rem;
                     }
+
                     @include Responsive(m-10) {
                         grid-template-columns: 1fr 1fr;
                         row-gap: 1rem;
                     }
+
                     @include Responsive(m-7) {
                         column-gap: 1rem;
                     }
@@ -3391,14 +3639,17 @@ main {
                         gap: 1rem;
                         border-radius: 1rem;
                         width: 100%;
+
                         @include Responsive(m-12) {
                             flex-direction: column;
                             overflow: hidden;
                             gap: 1.25rem;
+
                             &:nth-child(n+5) {
                                 display: none;
                             }
                         }
+
                         @include Responsive(m-10) {
                             box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
                         }
@@ -3407,16 +3658,20 @@ main {
                             width: 100%;
                             height: 6.25rem;
                             border-radius: .4375rem;
+
                             @include Responsive(m-12) {
                                 height: 9.5rem;
                                 border-radius: initial;
                             }
+
                             @include Responsive(m-10) {
                                 height: 12rem;
                             }
+
                             @include Responsive(m-7) {
                                 height: 9rem;
                             }
+
                             @include Responsive(m-4) {
                                 height: 7rem;
                             }
@@ -3433,6 +3688,7 @@ main {
                             flex-direction: column;
                             justify-content: center;
                             gap: .625rem;
+
                             @include Responsive(m-10) {
                                 padding: 0 1rem 1rem;
                             }
@@ -3445,6 +3701,7 @@ main {
                                 letter-spacing: .0088rem;
                                 display: flex;
                                 gap: .625rem;
+
                                 @include Responsive(m-4) {
                                     font-size: .625rem;
                                     gap: .25rem;
@@ -3475,15 +3732,18 @@ main {
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 -webkit-line-clamp: 2;
+
                                 @include Responsive(m-12) {
                                     width: 100%;
                                     font-size: 1rem;
                                 }
+
                                 @include Responsive(m-4) {
                                     font-size: .875rem;
                                 }
                             }
-                            h3:hover{
+
+                            h3:hover {
                                 color: var(--green);
                             }
                         }
@@ -3494,25 +3754,27 @@ main {
 
         .relate {
             width: 80rem;
+
             @include Responsive(m-14) {
                 width: 72rem;
             }
-    
+
             @include Responsive(m-12) {
                 width: 60rem;
             }
-    
+
             @include Responsive(m-10) {
                 width: 44rem;
             }
-    
+
             @include Responsive(m-7) {
                 width: 28rem;
             }
-    
+
             @include Responsive(m-4) {
                 width: 22rem;
             }
+
             h2.title {
                 font-size: 1.5rem;
                 font-weight: 600;
@@ -3526,10 +3788,12 @@ main {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 column-gap: 1.25rem;
+
                 @include Responsive(m-10) {
                     grid-template-columns: 1fr 1fr;
                     row-gap: 1rem;
                 }
+
                 @include Responsive(m-7) {
                     column-gap: 1rem;
                 }
@@ -3540,9 +3804,11 @@ main {
                     gap: 1.25rem;
                     border-radius: 1rem;
                     overflow: hidden;
+
                     &:nth-child(n+5) {
                         display: none;
                     }
+
                     @include Responsive(m-10) {
                         box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
                     }
@@ -3550,15 +3816,19 @@ main {
                     a {
                         width: 100%;
                         height: 11.375rem;
+
                         @include Responsive(m-14) {
                             height: 9.5rem;
                         }
+
                         @include Responsive(m-10) {
                             height: 12rem;
                         }
+
                         @include Responsive(m-7) {
                             height: 9rem;
                         }
+
                         @include Responsive(m-4) {
                             height: 7rem;
                         }
@@ -3573,6 +3843,7 @@ main {
                         display: flex;
                         flex-direction: column;
                         gap: .625rem;
+
                         @include Responsive(m-10) {
                             padding: 0 1rem 1rem;
                         }
@@ -3585,6 +3856,7 @@ main {
                             letter-spacing: .0088rem;
                             display: flex;
                             gap: .625rem;
+
                             @include Responsive(m-4) {
                                 font-size: .625rem;
                                 gap: .25rem;
@@ -3614,11 +3886,13 @@ main {
                             overflow: hidden;
                             text-overflow: ellipsis;
                             -webkit-line-clamp: 2;
+
                             @include Responsive(m-4) {
                                 font-size: .875rem;
                             }
                         }
-                        h3:hover{
+
+                        h3:hover {
                             color: var(--green);
                         }
                     }
@@ -3626,15 +3900,18 @@ main {
             }
         }
     }
+
     // ----------- Customer -----------
-    .section-customer{
+    .section-customer {
         display: flex;
         align-items: center;
         justify-content: center;
-        .container{
+
+        .container {
             position: relative;
             padding: 6.25rem 0;
-            h2.title{
+
+            h2.title {
                 display: flex;
                 justify-content: center;
                 text-align: center;
@@ -3643,11 +3920,13 @@ main {
                 font-weight: 600;
                 line-height: 160%;
                 margin-bottom: 1rem;
+
                 @include Responsive(m-12) {
                     font-size: 2rem;
                 }
             }
-            .description{
+
+            .description {
                 display: flex;
                 justify-content: center;
                 text-align: center;
@@ -3657,22 +3936,64 @@ main {
                 font-weight: 400;
                 line-height: 150%;
                 margin-bottom: 3.125rem;
+
+                @include Responsive(m-12) {
+                    font-size: .875rem;
+                    padding: 0 10rem;
+                }
+
+                @include Responsive(m-10) {
+                    padding: 0 2rem;
+                    margin-bottom: 2rem;
+                }
+
+                @include Responsive(m-7) {
+                    font-size: .75rem;
+                    padding: 0;
+                    margin-bottom: 1rem;
+                }
             }
-            .list-customer{
+
+            .list-customer {
                 display: flex;
                 justify-content: center;
                 flex-flow: wrap;
                 column-gap: 1.25rem;
                 row-gap: 1.875rem;
                 margin-bottom: 6.25rem;
-                span{
-                    width: 305px;
-                    height: 11.125rem;
-                    border-radius: .75rem;
-                    background: rgba(61, 163, 51, 0.05);
+
+                @include Responsive(m-10) {
+                    justify-content: center;
+                    gap: 1rem;
+                }
+
+                span {
+                    width: 12.25rem;
+                    height: 7.1875rem;
+                    border-radius: .5rem;
+                    background: #EDF9EC;
                     box-sizing: border-box;
                     cursor: pointer;
-                    img{
+
+                    @include Responsive(m-12) {
+                        height: 6rem;
+                    }
+
+                    @include Responsive(m-10) {
+                        height: 5.5rem;
+                    }
+
+                    @include Responsive(m-7) {
+                        width: 10rem;
+                        height: 4rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        width: 8rem;
+                        height: 3.5rem;
+                    }
+
+                    img {
                         width: 100%;
                         height: 100%;
                         border-radius: inherit;
@@ -3681,87 +4002,210 @@ main {
                         mix-blend-mode: multiply;
                     }
                 }
-                span:hover{
+
+                span:hover {
                     border: 1.5px solid var(--green);
                 }
             }
-            form{
+
+            form {
                 display: flex;
                 gap: 1.25rem;
                 margin-bottom: 2.5rem;
-                input, select{
+
+                @include Responsive(m-4) {
+                    gap: 1rem;
+                }
+
+                input,
+                select {
                     box-sizing: border-box;
                     padding: .9375rem .9375rem .9375rem 2.8125rem;
                     border-radius: .4375rem;
                     border: 1px solid #D3D3D3;
+
+                    @include Responsive(m-12) {
+                        padding: .75rem .75rem .75rem 2.25rem;
+                    }
+
+                    @include Responsive(m-7) {
+                        padding: .5rem .5rem .5rem 1.75rem;
+                    }
                 }
-                input{
+
+                input {
                     width: 19.0625rem;
+
+                    @include Responsive(m-7) {
+                        width: 14rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        width: 10rem;
+                    }
                 }
-                select{
+
+                select {
                     width: 16.375rem;
+
+                    @include Responsive(m-7) {
+                        width: 12rem;
+                        font-size: .875rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        width: 10rem;
+                    }
                 }
-                input:focus, select:focus{
+
+                input:focus,
+                select:focus {
                     border: 1px solid var(--black);
                 }
-                input::placeholder{
+
+                input::placeholder {
                     color: #BFBFBF;
                     font-size: .875rem;
                     font-weight: 500;
                     line-height: 150%;
                 }
-                select option{
+
+                select option {
                     color: #212121;
                     font-size: .875rem;
                     font-weight: 500;
                     line-height: 150%;
                 }
-                .search, .filter{
+
+                .search,
+                .filter {
                     position: relative;
                 }
-                .search{
-                    button{
+
+                .search {
+                    button {
                         position: absolute;
                         top: 1rem;
                         left: .9375rem;
+
+                        @include Responsive(m-12) {
+                            top: .875rem;
+                            left: .875rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            top: .75rem;
+                            left: .5rem;
+
+                            svg {
+                                width: 1rem;
+                                height: 1rem;
+                            }
+                        }
                     }
                 }
-                .filter{
-                    label{
+
+                .filter {
+                    label {
                         position: absolute;
                         top: 1rem;
                         left: .9375rem;
+
+                        @include Responsive(m-12) {
+                            top: .875rem;
+                            left: .875rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            top: .75rem;
+                            left: .5rem;
+
+                            svg {
+                                width: 1rem;
+                                height: 1rem;
+                            }
+                        }
                     }
                 }
             }
-            table{
-                width: 100%;
-                margin-bottom: 2.5rem;
-                tr{
-                    color: #2A2B2E;
-                    font-size: 1rem;
-                    th{
-                        text-align: start;
-                        font-weight: 500;
-                        line-height: 125%;
-                        padding-bottom: 1.5625rem;
+
+            .table-wrapper::-webkit-scrollbar {
+                width: 0;
+                /* Chiều rộng của thanh cuộn */
+                background: transparent;
+                /* Làm thanh cuộn trong suốt */
+            }
+            .table-wrapper{ 
+                overflow: auto; 
+                table {
+                    width: 100%;
+                    border-radius: .75rem .75rem 0 0;
+                    overflow: hidden;
+                    margin-bottom: 2.5rem;
+                    @include Responsive(m-12) {
+                        width: 72rem;
+                        overflow: scroll;
                     }
-                    td{
-                        width: 13.75rem;
-                        font-weight: 400;
-                        line-height: 180%;
-                        padding: 1.5625rem 0;
-                        border-top: 1px solid #D3D3D3;
+    
+                    tr:nth-child(odd) {
+                        background-color: #F2F2F2;
+                    }
+
+                    tr {
+                        color: #2A2B2E;
+                        font-size: 1rem;
+                        @include Responsive(m-12) {
+                            overflow: scroll;
+                            width: auto;
+                        }
+    
+                        @include Responsive(m-10) {
+                            overflow: scroll;
+                            font-size: .875rem;
+                        }
+    
+                        th {
+                            text-align: start;
+                            font-weight: 500;
+                            line-height: 125%;
+                            padding: 1.25rem .75rem;
+                            color: #848484;
+                            background-color: #F2F2F2;
+    
+                            @include Responsive(m-12) {
+                                width: inherit;
+                            }
+    
+                            @include Responsive(m-7) {
+                                padding: .75rem .5rem;
+                            }
+                        }
+    
+                        td {
+                            width: 13.75rem;
+                            font-weight: 400;
+                            line-height: 180%;
+                            padding: 1.5625rem .75rem;
+                            @include Responsive(m-10) {
+                                width: inherit;
+    
+                                @include Responsive(m-7) {
+                                    padding: 1rem .5rem;
+                                }
+                            }
+                        }
                     }
                 }
             }
-            .pagination{
+
+            .pagination {
                 justify-content: end;
             }
-        }       
-        .list-modal-customer{
+        }
+
+        .list-modal-customer {
             position: fixed;
-            z-index: 99;
+            z-index: 9995;
             box-sizing: border-box;
             top: 20rem;
             width: 80rem;
@@ -3785,27 +4229,31 @@ main {
             @include Responsive(m-4) {
                 width: 22rem;
             }
-            .modal{
+
+            .modal {
                 padding: 0 10rem;
                 border-radius: 1rem;
-                >.child.active{
+
+                >.child.active {
                     display: flex;
                 }
-                >.child{
+
+                >.child {
                     display: none;
-                    overflow: hidden;
                     width: inherit;
                     box-sizing: border-box;
                     padding: 3.125rem 2.5rem;
                     border-radius: inherit;
                     background: var(--white);
                     gap: 2.5rem;
-                    .image{
+
+                    .image {
                         width: 19.125rem;
                         height: 12.625rem;
                         border-radius: .75rem;
                         background: rgba(61, 163, 51, 0.05);
-                        img{
+
+                        img {
                             width: 100%;
                             height: 100%;
                             border-radius: inherit;
@@ -3814,172 +4262,922 @@ main {
                             mix-blend-mode: multiply;
                         }
                     }
-                    .infor{
+
+                    .infor {
                         width: 34.625rem;
-                        h3.name{
+
+                        h3.name {
                             color: #2A2B2E;
                             font-size: 1.5rem;
                             font-weight: 700;
                             line-height: normal;
                             margin-bottom: 1.25rem;
                         }
-                        .bottom{
+
+                        .bottom {
                             display: flex;
                             flex-direction: column;
                             gap: 1.5rem;
-                            .child{
+
+                            >.child {
                                 width: 100%;
                                 display: flex;
                                 align-items: start;
                                 gap: 2.5rem;
-                                .left{
+
+                                .left {
                                     display: flex;
                                     align-items: start;
                                     gap: .375rem;
                                     color: #000;
                                     font-size: 1rem;
                                     font-weight: 500;
-                                    b{
+
+                                    b {
                                         width: 11rem;
                                     }
                                 }
-                                .right{
+
+                                .right {
                                     color: #2A2B2E;
                                     font-size: 1rem;
                                     font-weight: 400;
                                     line-height: 1.5rem;
                                 }
                             }
-                            
+
                         }
                     }
                 }
             }
         }
     }
-    .section-training{
+
+    .section-training {
         display: flex;
         align-items: center;
         justify-content: center;
-        .container{
+
+        .container {
             padding: 6.25rem 0;
-            form{
+
+            form {
                 display: flex;
                 gap: 1.25rem;
                 margin-bottom: 2.5rem;
-                input, select{
+
+                @include Responsive(m-4) {
+                    gap: 1rem;
+                }
+
+                input,
+                select {
                     box-sizing: border-box;
                     padding: .9375rem .9375rem .9375rem 2.8125rem;
                     border-radius: .4375rem;
                     border: 1px solid #D3D3D3;
+
+                    @include Responsive(m-12) {
+                        padding: .75rem .75rem .75rem 2.25rem;
+                    }
+
+                    @include Responsive(m-7) {
+                        padding: .5rem .5rem .5rem 1.75rem;
+                    }
                 }
-                input{
+
+                input {
                     width: 19.0625rem;
+
+                    @include Responsive(m-7) {
+                        width: 14rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        width: 10rem;
+                    }
                 }
-                select{
+
+                select {
                     width: 16.375rem;
+
+                    @include Responsive(m-7) {
+                        width: 12rem;
+                        font-size: .875rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        width: 10rem;
+                    }
                 }
-                input:focus, select:focus{
+
+                input:focus,
+                select:focus {
                     border: 1px solid var(--black);
                 }
-                input::placeholder{
+
+                input::placeholder {
                     color: #BFBFBF;
                     font-size: .875rem;
                     font-weight: 500;
                     line-height: 150%;
                 }
-                select option{
+
+                select option {
                     color: #212121;
                     font-size: .875rem;
                     font-weight: 500;
                     line-height: 150%;
                 }
-                .search, .filter{
+
+                .search,
+                .filter {
                     position: relative;
                 }
-                .search{
-                    button{
+
+                .search {
+                    button {
                         position: absolute;
                         top: 1rem;
                         left: .9375rem;
+
+                        @include Responsive(m-12) {
+                            top: .875rem;
+                            left: .875rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            top: .75rem;
+                            left: .5rem;
+
+                            svg {
+                                width: 1rem;
+                                height: 1rem;
+                            }
+                        }
                     }
                 }
-                .filter{
-                    label{
+
+                .filter {
+                    label {
                         position: absolute;
                         top: 1rem;
                         left: .9375rem;
+
+                        @include Responsive(m-12) {
+                            top: .875rem;
+                            left: .875rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            top: .75rem;
+                            left: .5rem;
+
+                            svg {
+                                width: 1rem;
+                                height: 1rem;
+                            }
+                        }
                     }
                 }
             }
-            table{
-                width: 100%;
-                margin-bottom: 2.5rem;
-                tr{
-                    th,td{
-                        &:nth-child(1){
-                            width: 6.25rem;
+
+            .table-wrapper::-webkit-scrollbar {
+                width: 0;
+                /* Chiều rộng của thanh cuộn */
+                background: transparent;
+                /* Làm thanh cuộn trong suốt */
+            }
+            .table-wrapper{ 
+                overflow: auto; 
+                table {
+                    width: 100%;
+                    margin-bottom: 2.5rem;
+    
+                    @include Responsive(m-10) {
+                        width: 60rem;
+                        overflow: scroll;
+                    }
+                    @include Responsive(m-7) {
+                        width: 54rem;
+                    }
+                    tr {
+    
+                        th,
+                        td {
+                            &:nth-child(1) {
+                                width: 6.25rem;
+    
+                                @include Responsive(m-10) {
+                                    width: 3rem;
+                                }
+                            }
+    
+                            &:nth-child(2) {
+                                width: 18rem;
+    
+                                @include Responsive(m-7) {
+                                    width: 16rem;
+                                }
+                            }
+    
+                            &:nth-child(3),
+                            &:nth-child(4) {
+                                width: 14rem;
+    
+                                @include Responsive(m-10) {
+                                    width: 12.5rem;
+                                }
+                            }
                         }
-                        &:nth-child(2){
-                            width: 18rem;
+    
+                        color: #2A2B2E;
+                        font-size: 1rem;
+    
+                        @include Responsive(m-7) {
+                            font-size: .75rem;
                         }
-                        &:nth-child(3), &:nth-child(4){
-                            width: 14rem;
+    
+                        th {
+                            text-align: start;
+                            font-weight: 500;
+                            line-height: 125%;
+                            padding-bottom: 1.5625rem;
+                            color: #848484;
+                        }
+    
+                        td {
+                            width: 13.75rem;
+                            font-weight: 500;
+                            line-height: 180%;
+                            padding: 1.5625rem 0;
+                            border-top: 1px solid #D3D3D3;
+    
+                            &:nth-child(2) {
+                                font-weight: 600;
+                                color: #3CA333;
+                            }
+    
+                            span {
+                                color: #ABABAB;
+                                font-size: .75rem;
+                                line-height: 130%;
+    
+                                @include Responsive(m-7) {
+                                    font-size: .5rem;
+                                }
+                            }
                         }
                     }
+                }
+            }
+
+            .pagination {
+                justify-content: end;
+            }
+        }
+    }
+
+    .section-detail-training {
+        padding-top: 11.875rem;
+        padding-bottom: 6.25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6.25rem;
+
+        @include Responsive(m-12) {
+            padding-top: 8rem;
+        }
+
+        @include Responsive(m-10) {
+            padding-top: 6.25rem;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            gap: 5rem;
+
+            @include Responsive(m-14) {
+                gap: 3rem;
+            }
+
+            @include Responsive(m-12) {
+                flex-direction: column;
+            }
+
+            .bot {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                gap: .4375rem;
+                color: var(--black);
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 160%;
+                letter-spacing: .01rem;
+
+                @include Responsive(m-10) {
+                    font-size: .875rem;
+                }
+
+                @include Responsive(m-7) {
+                    flex-flow: wrap;
+                }
+
+                @include Responsive(m-4) {
+                    font-size: .75rem;
+                }
+
+                a,
+                span {
+                    display: flex;
+                }
+
+                a:hover,
+                span:hover {
+                    color: var(--red);
+                }
+
+                svg:hover {
+                    path {
+                        fill: var(--red);
+                    }
+                }
+            }
+
+            .left {
+                display: flex;
+                flex-direction: column;
+                margin-top: 3.25rem;
+                width: 52.2656rem;
+
+                @include Responsive(m-14) {
+                    width: 47rem;
+                }
+
+                @include Responsive(m-12) {
+                    width: 100%;
+                }
+
+                @include Responsive(m-7) {
+                    margin-top: 5rem;
+                }
+
+                h2.title {
+                    width: 100%;
+                    color: var(--black);
+                    font-size: 1.875rem;
+                    font-weight: 600;
+                    line-height: 160%;
+                    margin-bottom: 1.5rem;
+
+                    @include Responsive(m-12) {
+                        font-size: 1.75rem;
+                        width: 100%;
+                        margin-bottom: 1.25rem;
+                    }
+
+                    @include Responsive(m-7) {
+                        font-size: 1.5rem;
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                .share {
+                    display: flex;
+                    align-items: center;
+                    gap: .375rem;
+                    margin-bottom: 1.875rem;
+
+                    span {
+                        color: var(--black);
+                        font-size: .875rem;
+                        font-weight: 500;
+                        line-height: 150%;
+                    }
+                }
+
+                .time,
+                .address {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.25rem;
+                    margin-bottom: 1.5rem;
+
+                    @include Responsive(m-7) {
+                        margin-bottom: 1rem;
+                    }
+
+                    h4 {
+                        color: var(--black);
+                        font-size: 1.25rem;
+                        font-weight: 700;
+                        line-height: normal;
+
+                        @include Responsive(m-7) {
+                            font-size: 1rem;
+                        }
+                    }
+
+                    .infor {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+
+                        span {
+                            color: #2A2B2E;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            line-height: 180%;
+
+                            @include Responsive(m-7) {
+                                font-size: .875rem;
+                            }
+                        }
+                    }
+                }
+                .address{
+                    .infor{
+                        span{
+                            width: 27.75rem;
+                        }
+                    }
+                }
+
+                .explain,
+                .organize {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+
+                    @include Responsive(m-7) {
+                        margin-bottom: 1rem;
+                    }
+
+                    h4 {
+                        color: var(--black);
+                        font-size: 1.25rem;
+                        font-weight: 700;
+                        line-height: normal;
+
+                        @include Responsive(m-7) {
+                            font-size: 1rem;
+                        }
+                    }
+
+                    span {
+                        font-size: 1rem;
+
+                        @include Responsive(m-7) {
+                            font-size: .875rem;
+                        }
+                    }
+
+                }
+
+                .content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.5rem;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 150%;
+                    width: 52.2656rem;
+                    color: #2A2B2E;
+
+                    @include Responsive(m-14) {
+                        width: 47rem;
+                    }
+
+                    @include Responsive(m-12) {
+                        width: 100%;
+                    }
+
+                    @include Responsive(m-7) {
+                        gap: 1.25rem;
+                    }
+
+                    img {
+                        border-radius: .625rem;
+                    }
+                }
+            }
+
+            .right {
+                display: flex;
+                flex-direction: column;
+                gap: 1.875rem;
+                margin-top: 3.25rem;
+                width: 100%;
+
+                h2.title {
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    line-height: 140%;
+                    color: var(--black);
+                    margin-bottom: 1.5rem;
+                }
+
+                .training {
+                    @include Responsive(m-12) {
+                        display: none;
+                    }
+                    .list-training {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.25rem;
+
+                        .child {
+                            padding-bottom: 1.25rem;
+
+                            &:nth-child(1),
+                            &:nth-child(2) {
+                                border-bottom: 1px solid #BFBFBF;
+                            }
+                            &:nth-child(3){
+                                display: none;
+                            }
+
+                            h3 {
+                                color: #3CA333;
+                                font-size: 1rem;
+                                font-weight: 500;
+                                line-height: 125%;
+                                margin-bottom: .9375rem;
+                            }
+
+                            .time {
+                                display: flex;
+                                align-items: center;
+                                gap: .9375rem;
+                                margin-bottom: .625rem;
+
+                                >div {
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: .3125rem;
+
+                                    p {
+                                        color: var(--black);
+                                        font-size: .875rem;
+                                        font-weight: 500;
+                                        line-height: 150%;
+                                    }
+
+                                    span {
+                                        color: #ABABAB;
+                                        font-size: .75rem;
+                                        font-weight: 500;
+                                        line-height: 130%;
+                                    }
+                                }
+                            }
+
+                            .address {
+                                display: flex;
+                                align-items: center;
+                                gap: .9375rem;
+
+                                @include Responsive(m-12) {
+                                    font-size: .875rem;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .news {
+                    .list-news::-webkit-scrollbar {
+                        width: 0;
+                        /* Chiều rộng của thanh cuộn */
+                        background: transparent;
+                        /* Làm thanh cuộn trong suốt */
+                    }
+                    .list-news {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 1.5rem;
+                        padding-bottom: .5rem;
+
+                        @include Responsive(m-12) {
+                            justify-content: center;
+                            flex-direction: row;
+                            gap: 1.25rem;
+                            overflow: scroll;
+                        }
+                        @include Responsive(m-10) {
+                            justify-content: flex-start;
+                        }
+                        @include Responsive(m-7) {
+                            gap: 1rem;
+                        }
+
+                        .child {
+                            display: flex;
+                            gap: 1rem;
+                            border-radius: 1rem;
+                            width: 100%;
+                            &:nth-child(n+4){
+                                display: none;
+                            }
+
+                            @include Responsive(m-12) {
+                                width: 18.75rem;
+                                flex-direction: column;
+                                flex: none;
+                                overflow: hidden;
+                                gap: 1.25rem;
+                            }
+
+                            @include Responsive(m-10) {
+                                width: 16rem;
+                                box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+                            }
+                            @include Responsive(m-7) {
+                                width: 14rem;
+                            }
+
+                            a {
+                                width: 100%;
+                                height: 6.25rem;
+                                border-radius: .4375rem;
+
+                                @include Responsive(m-12) {
+                                    height: 10.625rem;
+                                    border-radius: initial;
+                                }
+
+                                @include Responsive(m-10) {
+                                    height: 12rem;
+                                }
+
+                                @include Responsive(m-7) {
+                                    height: 9rem;
+                                }
+
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: inherit;
+                                }
+                            }
+
+                            .infor {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                gap: .625rem;
+
+                                @include Responsive(m-10) {
+                                    padding: 0 1rem 1rem;
+                                }
+
+                                .date-and-hour {
+                                    color: var(--black);
+                                    font-size: .875rem;
+                                    font-weight: 300;
+                                    line-height: 170%;
+                                    letter-spacing: .0088rem;
+                                    display: flex;
+                                    gap: .625rem;
+
+                                    @include Responsive(m-4) {
+                                        font-size: .625rem;
+                                        gap: .25rem;
+                                    }
+
+                                    .date,
+                                    .time {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        gap: .3125rem;
+
+                                        .icon {
+                                            display: flex;
+                                        }
+                                    }
+                                }
+
+                                h3 {
+                                    width: 12.625rem;
+                                    color: var(--black);
+                                    font-size: .875rem;
+                                    font-weight: 600;
+                                    line-height: 160%;
+                                    letter-spacing: .0112rem;
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    -webkit-line-clamp: 2;
+
+                                    @include Responsive(m-12) {
+                                        width: 100%;
+                                        font-size: 1rem;
+                                    }
+
+                                    @include Responsive(m-4) {
+                                        font-size: .875rem;
+                                    }
+                                }
+
+                                h3:hover {
+                                    color: var(--green);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        .relate::-webkit-scrollbar, .latest::-webkit-scrollbar {
+            width: 0;
+            /* Chiều rộng của thanh cuộn */
+            background: transparent;
+            /* Làm thanh cuộn trong suốt */
+        }
+        .latest{
+            display: none;
+            @include Responsive(m-12) {
+                display: block;
+            }
+
+        }
+        .relate, .latest {
+            overflow: auto; 
+            width: 80rem;
+
+            @include Responsive(m-14) {
+                width: 72rem;
+            }
+
+            @include Responsive(m-12) {
+                width: 60rem;
+            }
+
+            @include Responsive(m-10) {
+                width: 44rem;
+            }
+
+            @include Responsive(m-7) {
+                width: 28rem;
+            }
+
+            @include Responsive(m-4) {
+                width: 22rem;
+            }
+
+            h3.title {
+                color: var(--black);
+                font-size: 1.5rem;
+                font-weight: 500;
+                line-height: 100%;
+                margin-bottom: 3.125rem;
+
+                @include Responsive(m-7) {
+                    margin-bottom: 1.25rem;
+                }
+            }
+
+            table {
+                width: 100%;
+                margin-bottom: 2.5rem;
+
+                @include Responsive(m-12) {
+                    width: 60rem;
+                    overflow: scroll;
+                }
+                tr {
+
+                    th,
+                    td {
+                        &:nth-child(1) {
+                            width: 18rem;
+
+                            @include Responsive(m-7) {
+                                width: 16rem;
+                            }
+                        }
+
+                        &:nth-child(2),
+                        &:nth-child(3) {
+                            width: 14rem;
+
+                            @include Responsive(m-10) {
+                                width: 11rem;
+                            }
+                        }
+                    }
+
                     color: #2A2B2E;
                     font-size: 1rem;
-                    th{
+
+                    @include Responsive(m-7) {
+                        font-size: .75rem;
+                    }
+
+                    th {
                         text-align: start;
                         font-weight: 500;
                         line-height: 125%;
                         padding-bottom: 1.5625rem;
                     }
-                    td{
+
+                    td {
                         width: 13.75rem;
                         font-weight: 500;
                         line-height: 180%;
                         padding: 1.5625rem 0;
                         border-top: 1px solid #D3D3D3;
-                        &:nth-child(2){
+
+                        &:nth-child(1) {
                             font-weight: 600;
                             color: #3CA333;
                         }
-                        span{
+
+                        span {
                             color: #ABABAB;
                             font-size: .75rem;
                             line-height: 130%;
+
+                            @include Responsive(m-7) {
+                                font-size: .5rem;
+                            }
                         }
                     }
                 }
             }
-            .pagination{
-                justify-content: end;
-            }
         }
     }
-    .section-detail-training{
 
-    }
     // ----------- Halal nqi -----------
-    .section-halal-nqi{
+    .section-halal-nqi {
         display: flex;
         align-items: center;
         justify-content: center;
-        .container{
+
+        .container {
             padding: 6.25rem 0;
             display: flex;
             gap: 3.75rem;
-            .left{
+
+            @include Responsive(m-12) {
+                gap: 2.5rem;
+            }
+
+            @include Responsive(m-7) {
+                gap: 1rem;
+                padding: 3rem 0;
+            }
+
+            @include Responsive(m-4) {
+                flex-direction: column;
+            }
+
+            .left {
                 width: 25.75rem;
-                nav{
+
+                @include Responsive(m-14) {
+                    width: 20rem;
+                }
+
+                @include Responsive(m-10) {
+                    width: 17rem;
+                }
+
+                @include Responsive(m-7) {
+                    width: 10rem;
+                }
+
+                @include Responsive(m-4) {
+                    width: 100%;
+                }
+
+                nav {
                     width: inherit;
-                    ul{
+
+                    ul {
                         display: flex;
                         flex-direction: column;
                         gap: .9375rem;
                         cursor: pointer;
-                        li{
+
+                        @include Responsive(m-4) {
+                            flex-direction: row;
+                            flex-flow: wrap;
+                        }
+
+                        li {
                             border-radius: .4375rem;
                             padding: 1rem 1.5rem;
                             background: #EDF9EC;
@@ -3987,8 +5185,25 @@ main {
                             font-size: 1.25rem;
                             font-weight: 500;
                             line-height: 150%;
+
+                            @include Responsive(m-14) {
+                                font-size: 1.125rem;
+                                padding: .875rem 1.25rem;
+                            }
+
+                            @include Responsive(m-10) {
+                                font-size: 1rem;
+                                padding: .75rem 1rem;
+                            }
+
+                            @include Responsive(m-7) {
+                                font-size: .75rem;
+                                padding: .5rem .75rem;
+                            }
                         }
-                        li.active, li:hover{
+
+                        li.active,
+                        li:hover {
                             background: var(--green);
                             color: var(--white);
                         }
@@ -3996,20 +5211,29 @@ main {
 
                 }
             }
-            .right{
-                .child.active{
+
+            .right {
+                .child.active {
                     display: block;
                 }
-                .child{
+
+                .child {
                     display: none;
-                    h3.title{
+
+                    h3.title {
                         color: #515151;
                         font-size: 1.875rem;
                         font-weight: 600;
                         line-height: 100%;
                         margin-bottom: 1.5rem;
-                    } 
-                    .content{
+
+                        @include Responsive(m-7) {
+                            font-size: 1.5rem;
+                            margin-bottom: 1rem;
+                        }
+                    }
+
+                    .content {
                         display: flex;
                         flex-direction: column;
                         gap: 2.5rem;
@@ -4018,12 +5242,32 @@ main {
                         font-size: 1.125rem;
                         font-weight: 400;
                         line-height: 180%;
+
+                        @include Responsive(m-12) {
+                            gap: 2rem;
+                        }
+
+                        @include Responsive(m-10) {
+                            font-size: 1rem;
+                            gap: 1.5rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            gap: 1rem;
+                            font-size: .75rem;
+                        }
                     }
-                    ul{
+
+                    ul {
                         display: flex;
                         flex-direction: column;
                         gap: 2.25rem;
-                        li{
+
+                        @include Responsive(m-12) {
+                            gap: 1.75rem;
+                        }
+
+                        li {
                             background: #EDF9EC;
                             border-radius: .4375rem;
                             width: 30.125rem;
@@ -4032,11 +5276,39 @@ main {
                             padding: 1rem 1.25rem;
                             display: flex;
                             justify-content: space-between;
-                            span{
+
+                            @include Responsive(m-10) {
+                                width: 100%;
+                                padding: .75rem 1rem;
+                            }
+
+                            @include Responsive(m-7) {
+                                padding: 0 .75rem;
+                            }
+
+                            span {
+                                display: flex;
+                                align-items: center;
                                 color: #414141;
                                 font-size: 1rem;
                                 font-weight: 500;
                                 line-height: 150%;
+
+                                @include Responsive(m-7) {
+                                    font-size: .75rem;
+                                }
+                            }
+
+                            a {
+                                display: flex;
+                                align-items: center;
+
+                                svg {
+                                    @include Responsive(m-7) {
+                                        width: 1rem;
+                                        height: 1rem;
+                                    }
+                                }
                             }
                         }
                     }
@@ -4044,24 +5316,64 @@ main {
             }
         }
     }
-    .section-cretify{
+
+    .section-cretify {
         display: flex;
         align-items: center;
         justify-content: center;
-        .container{
+
+        .container {
             padding: 6.25rem 0;
             display: flex;
             gap: 3.75rem;
-            .left{
+
+            @include Responsive(m-12) {
+                gap: 2.5rem;
+            }
+
+            @include Responsive(m-7) {
+                gap: 1rem;
+                padding: 3rem 0;
+            }
+
+            @include Responsive(m-4) {
+                flex-direction: column;
+            }
+
+            .left {
                 width: 25.75rem;
-                nav{
+
+                @include Responsive(m-14) {
+                    width: 20rem;
+                }
+
+                @include Responsive(m-10) {
+                    width: 17rem;
+                }
+
+                @include Responsive(m-7) {
+                    width: 10rem;
+                }
+
+                @include Responsive(m-4) {
+                    width: 100%;
+                }
+
+                nav {
                     width: inherit;
-                    ul{
+
+                    ul {
                         display: flex;
                         flex-direction: column;
                         gap: .9375rem;
                         cursor: pointer;
-                        li{
+
+                        @include Responsive(m-4) {
+                            flex-direction: row;
+                            flex-flow: wrap;
+                        }
+
+                        li {
                             border-radius: .4375rem;
                             padding: 1rem 1.5rem;
                             background: #EDF9EC;
@@ -4069,43 +5381,112 @@ main {
                             font-size: 1.25rem;
                             font-weight: 500;
                             line-height: 150%;
+
+                            @include Responsive(m-14) {
+                                font-size: 1.125rem;
+                                padding: .875rem 1.25rem;
+                            }
+
+                            @include Responsive(m-10) {
+                                font-size: 1rem;
+                                padding: .75rem 1rem;
+                            }
+
+                            @include Responsive(m-7) {
+                                font-size: .75rem;
+                                padding: .5rem .75rem;
+                            }
                         }
-                        li.active, li:hover{
+
+                        li.active,
+                        li:hover {
                             background: var(--green);
                             color: var(--white);
                         }
                     }
                 }
             }
-            .right{
-                .child.active{
+
+            .right {
+                @include Responsive(m-10) {
+                    width: 100%;
+                }
+
+                .child.active {
                     display: block;
                 }
-                .child{
+
+                .child {
                     display: none;
                     width: 36.875rem;
-                    ul{
+
+                    @include Responsive(m-10) {
+                        width: inherit;
+                    }
+
+                    ul {
                         width: inherit;
                         display: flex;
                         flex-direction: column;
                         gap: 1.875rem;
-                        li{
+
+                        @include Responsive(m-7) {
+                            gap: 1.5rem;
+                        }
+
+                        li {
                             display: flex;
                             flex-direction: column;
                             gap: 1.25rem;
-                            h4{
+
+                            @include Responsive(m-7) {
+                                gap: .5rem;
+                            }
+
+                            h4 {
                                 color: #515151;
                                 font-size: 1.5rem;
                                 font-weight: 600;
                                 line-height: 125%;
+
+                                @include Responsive(m-10) {
+                                    font-size: 1.25rem;
+                                }
+
+                                @include Responsive(m-7) {
+                                    font-size: 1.125rem;
+                                }
                             }
-                            span{
+
+                            span {
                                 display: flex;
                                 align-items: center;
                                 justify-content: space-between;
                                 background: #EDF9EC;
                                 border-radius: .4375rem;
                                 padding: 1rem 1.25rem;
+
+                                @include Responsive(m-10) {
+                                    padding: .75rem 1rem;
+                                }
+
+                                @include Responsive(m-7) {
+                                    padding: .5rem .5rem;
+
+                                    p {
+                                        font-size: .875rem;
+                                    }
+
+                                    a {
+                                        display: flex;
+                                        align-items: center;
+
+                                        svg {
+                                            width: 1rem;
+                                            height: 1rem;
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -4113,12 +5494,14 @@ main {
             }
         }
     }
-    .section-register-cretify{
+
+    .section-register-cretify {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        img.background{
+
+        img.background {
             width: 100%;
             height: 87.875rem;
             position: absolute;
@@ -4127,18 +5510,25 @@ main {
             flex-shrink: 0;
             opacity: 0.8;
         }
-        .container{
+
+        .container {
             z-index: 10;
             padding: 6.25rem 0;
-            h2.title{
+
+            h2.title {
                 color: var(--green);
                 font-size: 1.75rem;
                 font-weight: 500;
                 line-height: 115%;
                 margin-bottom: .375rem;
                 text-align: center;
+
+                @include Responsive(m-7) {
+                    font-size: 1.5rem;
+                }
             }
-            .description{
+
+            .description {
                 padding: 0 20rem;
                 text-align: center;
                 color: #373737;
@@ -4146,34 +5536,79 @@ main {
                 font-weight: 400;
                 line-height: 150%;
                 margin-bottom: 2.5rem;
+
+                @include Responsive(m-12) {
+                    padding: 0 10rem;
+                }
+
+                @include Responsive(m-10) {
+                    padding: 0 8rem;
+                }
+
+                @include Responsive(m-7) {
+                    padding: 0;
+                    font-size: .75rem;
+                }
             }
-            .form{
+
+            .form {
                 padding: 0 13.125rem;
-                form{
+
+                @include Responsive(m-12) {
+                    padding: 0 8rem;
+                }
+
+                @include Responsive(m-10) {
+                    padding: 0 2rem;
+                }
+
+                @include Responsive(m-7) {
+                    padding: 0;
+                }
+
+                form {
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    >h3{
+
+                    >h3 {
                         align-self: flex-start;
                         color: #3CA333;
                         font-size: 1.125rem;
                         font-weight: 500;
                         line-height: 160%;
                         margin-bottom: 1.875rem;
+
+                        @include Responsive(m-10) {
+                            margin-bottom: 1.5rem;
+                        }
                     }
-                    .line{
+
+                    .line {
                         margin-bottom: 1.875rem;
                         width: 100%;
-                        .form-group{
+
+                        @include Responsive(m-10) {
+                            margin-bottom: 1.5rem;
+                        }
+
+                        .form-group {
                             position: relative;
-                            label{
+
+                            label {
                                 position: absolute;
                                 top: -.75rem;
                                 left: .75rem;
                                 padding: 0 .5rem;
                                 background: var(--white);
+
+                                @include Responsive(m-7) {
+                                    font-size: .875rem;
+                                    left: .5rem;
+                                }
                             }
-                            input{
+
+                            input {
                                 box-sizing: border-box;
                                 width: 100%;
                                 padding: .875rem 1.25rem;
@@ -4182,39 +5617,75 @@ main {
                                 font-size: .875rem;
                                 font-weight: 400;
                                 line-height: 160%;
+
+                                @include Responsive(m-7) {
+                                    font-size: .875rem;
+                                    padding: .5rem .75rem;
+                                }
                             }
-                            input::placeholder{
+
+                            input::placeholder {
+                                font-size: 1rem;
                                 color: #BDBDBD;
+
+                                @include Responsive(m-7) {
+                                    font-size: .75rem;
+                                }
                             }
                         }
                     }
-                    .line-1, .line-3, .line-5, .line-7, .line-9{
+
+                    .line-1,
+                    .line-3,
+                    .line-5,
+                    .line-7,
+                    .line-9 {
                         display: grid;
                         grid-template-columns: 1fr 1fr;
                         gap: 1.375rem;
-                    }       
-                    .form-register{
+                    }
+
+                    .form-register {
                         box-sizing: border-box;
                         background: #EDF9EC;
                         width: 17.875rem;
                         padding: 1rem 1.25rem;
                         border-radius: .4375rem;
                         display: flex;
+                        align-items: center;
                         justify-content: space-between;
                         margin-bottom: 1.25rem;
-                        span{
+
+                        @include Responsive(m-7) {
+                            padding: .5rem .75rem;
+                        }
+
+                        span {
                             color: #414141;
                             font-size: 1rem;
                             font-weight: 500;
                             line-height: 150%;
+
+                            @include Responsive(m-7) {
+                                font-size: .875rem;
+
+                                svg {
+                                    width: 1rem;
+                                    height: 1rem;
+                                }
+                            }
                         }
-                    }    
-                    .line-10{
+                    }
+
+                    .line-10 {
                         width: 100%;
                         height: 7.8125rem;
                         position: relative;
                         margin-bottom: 2.5rem;
-                        label{
+
+                        label {
+                            cursor: pointer;
+                            box-sizing: border-box;
                             position: absolute;
                             top: 0;
                             left: 0;
@@ -4227,18 +5698,45 @@ main {
                             justify-content: center;
                             align-items: center;
                             gap: .625rem;
-                            span{
+
+                            span {
                                 color: var(--green);
                                 font-size: 1rem;
                                 font-weight: 400;
                                 line-height: 150%;
+
+                                @include Responsive(m-7) {
+                                    font-size: .875rem;
+
+                                    svg {
+                                        width: 1rem;
+                                        height: 1rem;
+                                    }
+                                }
                             }
                         }
-                        input{
+
+                        label:hover {
+                            border: 1px dashed var(--white);
+                            background: #3CA333;
+
+                            svg {
+                                path {
+                                    fill: var(--white);
+                                }
+                            }
+
+                            span {
+                                color: var(--white);
+                            }
+                        }
+
+                        input {
                             display: none;
                         }
-                    } 
-                    button{
+                    }
+
+                    button {
                         padding: 1rem 3.75rem;
                         background: #FE3131;
                         border: 1px solid #FE3131;
@@ -4247,18 +5745,26 @@ main {
                         font-size: 1rem;
                         font-weight: 400;
                         line-height: 150%;
+
+                        @include Responsive(m-7) {
+                            padding: .75rem 2.5rem;
+                            font-size: .875rem;
+                        }
                     }
-                    button:hover{
+
+                    button:hover {
                         background: var(--white);
                         color: #FE3131;
                     }
                 }
             }
-            .text-bottom{
+
+            .text-bottom {
                 margin-top: .625rem;
                 display: flex;
                 justify-content: center;
-                span{
+
+                span {
                     text-align: center;
                     width: 28.125rem;
                     color: #414141;
@@ -4269,13 +5775,16 @@ main {
             }
         }
     }
+
     // ----------- Footer -----------
-    .section-contact{
+    .section-contact {
         display: flex;
         align-items: center;
         justify-content: center;
-        .container{
+
+        .container {
             padding: 6.25rem 0;
+
             h2.title {
                 color: var(--black);
                 font-size: 2.5rem;
@@ -4302,6 +5811,7 @@ main {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 margin-bottom: 6.25rem;
+
                 @include Responsive(m-10) {
                     grid-template-columns: 1fr;
                     gap: 3rem;
@@ -4313,6 +5823,7 @@ main {
                     width: inherit;
                     padding-right: 3.75rem;
                     border-right: 1px solid #999;
+
                     @include Responsive(m-10) {
                         padding-right: 0;
                         border: none;
@@ -4343,6 +5854,7 @@ main {
                             padding: 1rem;
                             border-radius: 8px;
                             border: 1px solid var(--Primary-Color-600, #999);
+
                             @include Responsive(m-7) {
                                 padding: .5rem;
                                 font-size: .875rem;
@@ -4362,6 +5874,7 @@ main {
                             font-size: 1rem;
                             font-weight: 400;
                             line-height: 150%;
+
                             @include Responsive(m-7) {
                                 font-size: .875rem;
                             }
@@ -4371,6 +5884,7 @@ main {
                             resize: none;
                             height: 8.25rem;
                             width: 94.5%;
+
                             @include Responsive(m-4) {
                                 height: 6.25rem;
                             }
@@ -4383,15 +5897,18 @@ main {
                         grid-template-columns: 1fr 1fr;
                         gap: 1.875rem;
                         margin-bottom: 1.5rem;
+
                         @include Responsive(m-4) {
                             grid-template-columns: 1fr;
                             gap: 1.5rem;
                         }
                     }
-                    .line-3{
+
+                    .line-3 {
                         margin-bottom: 55px;
                     }
-                    button{
+
+                    button {
                         border: 1px solid #FE3131;
                         background: #FE3131;
                         color: var(--white);
@@ -4402,7 +5919,8 @@ main {
                         line-height: 150%;
                         align-self: end;
                     }
-                    button:hover{
+
+                    button:hover {
                         color: #FE3131;
                         background: var(--white);
                     }
@@ -4410,7 +5928,7 @@ main {
 
                 .infor {
                     margin-left: 3.75rem;
-                    
+
                     @include Responsive(m-10) {
                         margin-left: 0;
                         padding: 2rem 3rem;
@@ -4424,15 +5942,16 @@ main {
                         line-height: 150%;
                         text-transform: uppercase;
                         margin-bottom: 2.625rem;
+
                         @include Responsive(m-10) {
                             font-size: 1.5rem;
                         }
-    
+
                         @include Responsive(m-7) {
                             font-size: 1.25rem;
                             margin-bottom: 1.5rem;
                         }
-    
+
                         @include Responsive(m-4) {
                             font-size: 1rem;
                         }
@@ -4456,6 +5975,7 @@ main {
                                 font-size: 1.25rem;
                                 font-weight: 700;
                                 line-height: 150%;
+
                                 @include Responsive(m-7) {
                                     font-size: 1rem;
                                 }
@@ -4473,6 +5993,7 @@ main {
                                     padding: .5rem;
                                     border-radius: 50px;
                                     background: var(--csk-3-da-333100, #DAF3D8);
+
                                     @include Responsive(m-7) {
                                         width: 1rem;
                                         height: 1rem;
@@ -4486,6 +6007,7 @@ main {
                                     font-size: 1.125rem;
                                     font-weight: 600;
                                     line-height: 150%;
+
                                     @include Responsive(m-7) {
                                         font-size: .875rem;
                                     }
@@ -4498,6 +6020,7 @@ main {
 
             .mapouter {
                 width: inherit;
+
                 @include Responsive(m-7) {
                     margin-bottom: 5rem;
                 }
@@ -4508,6 +6031,7 @@ main {
                     iframe {
                         width: inherit;
                         height: 31.625rem;
+
                         @include Responsive(m-7) {
                             height: 24rem;
                         }
@@ -4540,6 +6064,7 @@ footer {
         @include Responsive(m-10) {
             height: 57rem;
         }
+
         @include Responsive(m-4) {
             height: 46rem;
         }
@@ -4771,6 +6296,7 @@ footer {
             gap: 1.375rem;
             padding-bottom: 5rem;
             border-bottom: 1px solid var(--white);
+
             @include Responsive(m-14) {
                 grid-template-columns: 20.25rem 30rem 19rem;
             }
@@ -4931,6 +6457,7 @@ footer {
                             display: flex;
                             align-items: center;
                             gap: 1.5rem;
+
                             @include Responsive(m-12) {
                                 gap: 1rem;
                             }
@@ -4998,9 +6525,11 @@ footer {
 
             .col-3 {
                 color: var(--white);
+
                 @include Responsive(m-10) {
                     display: none;
                 }
+
                 h3 {
                     font-size: 1.25rem;
                     font-weight: 500;

@@ -59,22 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-// Next and Prev list training
-document.getElementById('next-train').addEventListener('click', function() {
-    const listTraining = document.querySelector('.list-training');
-    listTraining.scrollBy({
-        left: listTraining.clientWidth,
-        behavior: 'smooth'
-    });
-});
-
-document.getElementById('prev-train').addEventListener('click', function() {
-    const listTraining = document.querySelector('.list-training');
-    listTraining.scrollBy({
-        left: -listTraining.clientWidth,
-        behavior: 'smooth'
-    });
-});
 
 // Drop sub menu account
 document.addEventListener('DOMContentLoaded', function () {
@@ -133,8 +117,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 // Tab list halal nqi
 document.addEventListener('DOMContentLoaded', function () {
-    const tabs = document.querySelectorAll('#list-tab-section-4 li');
-    const section = document.querySelectorAll('#tab-section-4 .child');
+    const tabs = document.querySelectorAll('#list-tab-section-3 li');
+    const section = document.querySelectorAll('#tab-section-3 .child');
 
     tabs[0].classList.add('active');
     section[0].classList.add('active');
