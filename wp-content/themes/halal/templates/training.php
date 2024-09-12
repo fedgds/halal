@@ -1,15 +1,30 @@
 <?php 
 /* Template Name: Đào tạo */
+
+// Số khách hàng trên mỗi trang
+$trains_per_page = 5;
+
+// Lấy số trang hiện tại
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+if ( get_query_var('paged') ) {
+    $paged = get_query_var('paged');
+} elseif ( get_query_var('page') ) {
+    $paged = get_query_var('page');
+} else {
+    $paged = 1;
+}
 $list_training_query = new WP_Query(array(
     'post_type' => 'dao-tao',
     'post_status' => 'publish',
-    'posts_per_page' => 5,
     'orderby' => 'date',
+    'posts_per_page' => $trains_per_page,
+    'paged' => $paged
 ));
 get_header(); ?>
 <main>
     <?php include('section/section-training.php') ?>
-    <div class="section-training">
+    <div class="section-training fade-in">
         <div class="container">  
             <form action="">
                 <div class="search">
@@ -34,76 +49,63 @@ get_header(); ?>
             </form>
             <div class="table-wrapper">
                 <table>
-                    <tr>
-                        <th>STT</th>
-                        <th>Tên khóa đào tạo</th>
-                        <th>Thời gian bắt đầu</th>
-                        <th>Thời gian kết thúc</th>
-                        <th>Địa điểm</th>
-                    </tr>
-                    <?php if ($list_training_query->have_posts()) : $count = 0;?>
-                        <?php while ($list_training_query->have_posts()) : $list_training_query->the_post(); ?>
-                            <?php
-                                $count++;
-                                $train_id = get_the_ID();
-                                $train = get_field('training', $train_id);
-                                $start_time = $train['start_time'];
-                                $end_time = $train['end_time'];
-                                $address = $train['address'];
-                            ?>
-                            <tr>
-                                <td><?= $count ?></td>
-                                <td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>
-                                <td>
-                                    <p><?= $start_time['date'] ?></p>
-                                    <?php if($start_time['date']): ?>
-                                        <span><?= date('h:i:s A', strtotime($start_time['time'])) ?></span>
-                                    <?php endif ?>
-                                </td>
-                                <td>
-                                    <p><?= $end_time['date'] ?></p>
-                                    <?php if($end_time['date']): ?>
-                                        <span><?= date('h:i:s A', strtotime($end_time['time'])) ?></span>
-                                    <?php endif ?>
-                                </td>
-                                <td><?= $address ?></td>
-                            </tr>
-                        <?php endwhile; ?>
-                        <?php wp_reset_postdata(); ?>
-                    <?php else : ?>
-                        <p>Không có khóa đào tạo nào.</p>
-                    <?php endif; ?>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên khóa đào tạo</th>
+                            <th>Thời gian bắt đầu</th>
+                            <th>Thời gian kết thúc</th>
+                            <th>Địa điểm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if ($list_training_query->have_posts()) : $count = 0;?>
+                            <?php while ($list_training_query->have_posts()) : $list_training_query->the_post(); ?>
+                                <?php
+                                    $count++;
+                                    $train_id = get_the_ID();
+                                    $train = get_field('training', $train_id);
+                                    $start_time = $train['start_time'];
+                                    $end_time = $train['end_time'];
+                                    $address = $train['address'];
+                                ?>
+                                <tr>
+                                    <td><?= $count ?></td>
+                                    <td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>
+                                    <td>
+                                        <p><?= $start_time['date'] ?></p>
+                                        <?php if($start_time['date']): ?>
+                                            <span><?= date('h:i:s A', strtotime($start_time['time'])) ?></span>
+                                        <?php endif ?>
+                                    </td>
+                                    <td>
+                                        <p><?= $end_time['date'] ?></p>
+                                        <?php if($end_time['date']): ?>
+                                            <span><?= date('h:i:s A', strtotime($end_time['time'])) ?></span>
+                                        <?php endif ?>
+                                    </td>
+                                    <td><?= $address ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                            <?php wp_reset_postdata(); ?>
+                        <?php else : ?>
+                            <p>Không có khóa đào tạo nào.</p>
+                        <?php endif; ?>
+                    </tbody>
                 </table>
             </div>
             <nav class="pagination">
-                <ul>
-                    <li class="prev">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                            <path d="M14 7.33301L9 12.333L14 17.333" stroke="#3CA333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </li>
-                    <li><a href="">1</a></li>
-                    <li class="active"><a href="">2</a></li>
-                    <li><a href="">3</a></li>
-                    <li><a href="">4</a></li>
-                    <li>
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none">
-                                <rect x="0.5" y="0.5" width="35" height="35" rx="3.5"/>
-                                <circle cx="11" cy="18" r="2" fill="#303030"/>
-                                <circle cx="18" cy="18" r="2" fill="#303030"/>
-                                <circle cx="25" cy="18" r="2" fill="#303030"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="next">
-                        <a href="">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                <path d="M10 7.33301L15 12.333L10 17.333" stroke="#3CA333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
+                <?php
+                    $big = 999999999;
+                    echo paginate_links(array(
+                        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                        'format' => '?paged=%#%',
+                        'current' => max(1, $paged),
+                        'total' => $list_training_query->max_num_pages,
+                        'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#3CA333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                        'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#3CA333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                    ));
+                ?>
             </nav>
         </div>     
     </div>

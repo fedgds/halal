@@ -10,10 +10,10 @@ $categories = get_terms($args);
 get_header(); ?>
 <main>
     <?php include('section/section-tap-san-halal.php') ?>
-    <div class="section-halal">
+    <div class="section-halal fade-in">
         <div class="container">
             <?php foreach ($categories as $category) { ?>
-                <div class="list-menu">
+                <div class="list-menu fade-in">
                     <h2 class="title"><?= $category->name ?></h2>
                     <div class="list">
                         <?php 
@@ -31,11 +31,12 @@ get_header(); ?>
                             $projects = new WP_Query($project_args);
 
                             if ($projects->have_posts()) : 
+                                $count = 0;
                                 while ($projects->have_posts()) : $projects->the_post(); 
                                     $project_id = get_the_ID();
                                     $project = get_field('tap_san', $project_id);
                                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-
+                                    $count++; 
                         ?>
                         <div class="child">
                             <a href="<?php the_permalink(); ?>">
@@ -69,13 +70,16 @@ get_header(); ?>
                                 <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
                             </div>
                         </div>
+                        <?php if ($count >= 6) break;?>
                         <?php endwhile; 
                             wp_reset_postdata();
                             else : ?>
                             <p>Không có gì nào trong danh mục này.</p>
                         <?php endif; ?>
                     </div>
-                    <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>" class="view-more">XEM THÊM</a>
+                    <?php if ($projects->found_posts > 6) : ?>
+                        <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>" class="view-more">XEM THÊM</a>
+                    <?php endif; ?>
                 </div>
             <?php } ?>
         </div>

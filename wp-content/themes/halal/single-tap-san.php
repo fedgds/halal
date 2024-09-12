@@ -43,7 +43,7 @@ $related_projects_query = new WP_Query(array(
 $url = get_template_directory_uri();
 get_header(); ?>
 <main>
-    <div class="section-detail-halal">
+    <div class="section-detail-halal fade-in">
         <div class="container">
             <div class="bot">
                 <a href="">
@@ -73,7 +73,7 @@ get_header(); ?>
                     </svg>
                 </span>
                 <a href="">
-                    Chứng Nhận Halal: Đảm Bảo Chất Lượng và Uy Tín Hồi Giáo
+                    <?php the_title(); ?>
                 </a>
             </div>
             <div class="left">
@@ -145,7 +145,7 @@ get_header(); ?>
                 </div>
             </div>
         </div>
-        <div class="relate">
+        <div class="relate fade-in">
             <h2 class="title">Tập san liên quan</h2>
             <div class="list">
             <?php if ($related_projects_query->have_posts()) : ?>

@@ -115,6 +115,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+// fade-in
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll('.fade-in');
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Ngừng theo dõi sau khi phần tử xuất hiện
+            }
+        });
+    });
+
+    elements.forEach(element => {
+        observer.observe(element);
+    });
+});
 // Tab list halal nqi
 document.addEventListener('DOMContentLoaded', function () {
     const tabs = document.querySelectorAll('#list-tab-section-3 li');

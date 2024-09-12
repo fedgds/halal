@@ -182,4 +182,33 @@ function custom_date_format() {
 function custom_time_format() {
     return get_the_time('H:i');
 }
-
+function customer_search_ajax() {
+    $search = $_POST['search'];
+    $args = array(
+        'post_type' => 'khach-hang',
+        'post_status' => 'publish',
+        's' => $search,
+        'posts_per_page' => -1
+    );
+    $query = new WP_Query($args);
+    $results = array();
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $customer = get_field('customer', get_the_ID());
+            $results[] = array(
+                'title' => get_the_title(),
+                'address' => $customer['address'],
+                'number' => $customer['number'],
+                'scope' => $customer['scope'],
+                'from' => $customer['effect']['from'],
+                'to' => $customer['effect']['to']
+            );
+        }
+    }
+    wp_reset_postdata();
+    wp_send_json($results);
+    wp_die();
+}
+add_action('wp_ajax_customer_search', 'customer_search_ajax');
+add_action('wp_ajax_nopriv_customer_search', 'customer_search_ajax');

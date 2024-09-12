@@ -143,13 +143,8 @@ body {
 // pagination
 .pagination {
     display: flex;
-
-    ul {
-        display: flex;
-        gap: .6875rem;
-    }
-
-    li {
+    gap: .6875rem;
+    >* {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -168,19 +163,11 @@ body {
             height: 1.75rem;
             font-size: .75rem;
         }
-
-        a {
-            width: inherit;
-            height: inherit;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
     }
 
-    li.active,
-    li:not(.prev):not(.next):hover {
-        background: #3CA333;
+    >*.current,
+    >*:not(.prev):not(.next):hover {
+        background: #136451;
         color: var(--white);
 
         svg {
@@ -196,6 +183,18 @@ body {
     }
 }
 
+/* Tạo sẵn kiểu mặc định khi phần tử chưa xuất hiện */
+.fade-in {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Kiểu phần tử sau khi đã xuất hiện */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 //  ------------------------------------------------Header------------------------------------------------
 header {
@@ -233,7 +232,7 @@ header {
             }
 
             @include Responsive(m-12) {
-                padding: 1rem;
+                padding: .75rem;
             }
 
             .logo {
@@ -271,11 +270,7 @@ header {
                     }
 
                     @include Responsive(m-14) {
-                        gap: 1.375rem;
-                    }
-
-                    @include Responsive(m-12) {
-                        gap: 1rem;
+                        gap: 1.25rem;
                     }
 
                     .child {
@@ -284,7 +279,7 @@ header {
                         justify-content: center;
                         align-items: center;
                         font-size: 1rem;
-                        color: var(--black);
+                        color: #136451;
                         font-weight: 500;
                         line-height: normal;
 
@@ -297,6 +292,11 @@ header {
                             display: flex;
                             position: absolute;
                             right: -1.25rem;
+                            svg{
+                                path{
+                                    fill: #136451;
+                                }
+                            }
                         }
 
                         .up {
@@ -351,7 +351,7 @@ header {
                                     width: 23.75rem;
                                     height: 3.625rem;
                                     padding: 1rem 2.25rem;
-                                    font-weight: 300;
+                                    font-weight: 400;
                                     line-height: 150%;
                                     color: var(--black);
                                     background: var(--white);
@@ -366,6 +366,8 @@ header {
                                 }
 
                                 li:hover {
+                                    font-weight: 500;
+                                    color: #136451;
                                     background: #F2F2F2;
                                 }
                             }
@@ -373,7 +375,18 @@ header {
                     }
 
                     .child:hover {
-                        color: var(--green);
+                        color: var(--black);
+                        .up,
+                        .down {
+                            display: flex;
+                            position: absolute;
+                            right: -1.25rem;
+                            svg{
+                                path{
+                                    fill: var(--black);
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -543,7 +556,7 @@ header {
                 >li {
                     position: relative;
                     padding: .625rem .5rem;
-                    color: var(--black);
+                    color: #136451;
                     font-family: var(--f-body);
                     font-size: 1.125rem;
                     font-weight: 400;
@@ -561,6 +574,11 @@ header {
                         right: .5rem;
                         top: .75rem;
                         cursor: pointer;
+                        svg{
+                            path{
+                                fill: #136451;
+                            }
+                        }
                     }
 
                     .up {
@@ -608,7 +626,7 @@ header {
                 }
 
                 li:hover {
-                    color: var(--red);
+                    color: var(--black);
                 }
             }
         }
@@ -713,7 +731,6 @@ main {
                         font-size: 2.5rem;
                         font-weight: 700;
                         line-height: 150%;
-                        color: var(--black);
 
                         @include Responsive(m-12) {
                             font-size: 2rem;
@@ -730,10 +747,6 @@ main {
                         @include Responsive(m-4) {
                             font-size: 1rem;
                             margin-top: 2rem;
-                        }
-
-                        .line-3 {
-                            color: var(--green);
                         }
                     }
 
@@ -869,16 +882,14 @@ main {
             display: grid;
             grid-template-columns: 1fr 1fr;
             column-gap: 8.75rem;
-            height: 36.875rem;
+            height: auto;
 
             @include Responsive(m-12) {
                 column-gap: 5rem;
-                height: 30rem;
             }
 
             @include Responsive(m-10) {
                 column-gap: 3rem;
-                height: 28.25rem;
             }
 
             @include Responsive(m-7) {
@@ -887,7 +898,17 @@ main {
 
             .left {
                 position: relative;
-                height: inherit;
+                height: 36.875rem;
+
+                @include Responsive(m-12) {
+                    column-gap: 5rem;
+                    height: 30rem;
+                }
+
+                @include Responsive(m-10) {
+                    column-gap: 3rem;
+                    height: 28.25rem;
+                }
 
                 @include Responsive(m-7) {
                     display: none;
@@ -1134,7 +1155,7 @@ main {
                 font-weight: 400;
                 line-height: 160%;
                 letter-spacing: .01rem;
-                color: var(--black);
+                color: var(--white);
                 padding: 0 14.0625rem;
                 margin-bottom: 3.125rem;
 
@@ -1275,12 +1296,15 @@ main {
                             }
 
                             &.active {
-                                background: #3CA333;
+                                background: #136451;
+                            }
+                            &.active:hover {
+                                background: #136451;
                             }
                         }
 
                         li:hover {
-                            background: #3CA333;
+                            background: #c1e1b7;
                         }
                     }
                 }
@@ -1295,16 +1319,14 @@ main {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 5.5rem;
-                    height: 36.875rem;
+                    height: auto;
 
                     @include Responsive(m-12) {
                         column-gap: 5rem;
-                        height: 30rem;
                     }
 
                     @include Responsive(m-10) {
                         column-gap: 3rem;
-                        height: 28.25rem;
                     }
 
                     @include Responsive(m-7) {
@@ -1436,7 +1458,15 @@ main {
 
                     .right {
                         position: relative;
-                        height: inherit;
+                        height: 36.875rem;
+
+                        @include Responsive(m-12) {
+                            height: 30rem;
+                        }
+    
+                        @include Responsive(m-10) {
+                            height: 28.25rem;
+                        }
 
                         @include Responsive(m-7) {
                             display: none;
@@ -1523,11 +1553,10 @@ main {
         align-items: center;
         justify-content: center;
         width: 100%;
-        height: 41.875rem;
+        padding: 5.625rem 0;
 
         @include Responsive(m-7) {
-            height: 34rem;
-            margin-bottom: 3rem;
+            padding: 3.125rem 0;
         }
 
         .background {
@@ -1627,7 +1656,7 @@ main {
                     }
 
                     h4 {
-                        color: #3CA333;
+                        color: #136451;
                         font-size: 1.25rem;
                         font-weight: 500;
                         line-height: 140%;
@@ -1646,6 +1675,9 @@ main {
                         @include Responsive(m-4) {
                             font-size: 1rem;
                         }
+                    }
+                    h4:hover{
+                        color: var(--black);
                     }
 
                     .description {
@@ -1865,184 +1897,8 @@ main {
     }
 
     .section-6-home {
-        position: relative;
-        margin-bottom: 7.5rem;
-        height: 44.375rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        @include Responsive(m-12) {
-            height: 40rem;
-        }
-
-        @include Responsive(m-7) {
-            margin-bottom: 2.75rem;
-        }
-
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            flex-shrink: 0;
-
-            img {
-                height: 100%;
-            }
-        }
-
-        .container {
-            z-index: 10;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            gap: 11.5rem;
-            height: 32rem;
-
-            @include Responsive(m-12) {
-                gap: 6rem;
-                height: 28rem;
-            }
-
-            @include Responsive(m-10) {
-                gap: 2rem;
-                height: 23rem;
-            }
-
-            @include Responsive(m-7) {
-                height: 26rem;
-                grid-template-columns: 1fr;
-            }
-
-            .left {
-                color: var(--white);
-
-                h3 {
-                    font-size: 2.5rem;
-                    font-weight: 500;
-                    line-height: normal;
-                    letter-spacing: .025rem;
-                    margin-bottom: 1.25rem;
-
-                    @include Responsive(m-12) {
-                        font-size: 2rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        font-size: 1.75rem;
-                        margin-bottom: 1rem;
-                    }
-                }
-
-                .sub-setion {
-                    font-size: 1rem;
-                    font-weight: 300;
-                    line-height: 150%;
-                    letter-spacing: .01rem;
-                }
-
-                .sub-setion-1 {
-                    margin-bottom: 2rem;
-
-                    @include Responsive(m-10) {
-                        margin-bottom: 1rem;
-                    }
-                }
-
-                .sub-setion-2 {
-                    margin-bottom: 2.5rem;
-
-                    @include Responsive(m-10) {
-                        margin-bottom: 1.5rem;
-                    }
-                }
-
-                .subscribe {
-                    padding: 1rem 2rem;
-                    border-radius: .625rem;
-                    background: var(--red);
-                    border: 1px solid var(--red);
-                    font-size: 1rem;
-                    font-weight: 500;
-                    line-height: normal;
-                    letter-spacing: .01rem;
-
-                    @include Responsive(m-7) {
-                        padding: .5rem 1rem;
-                    }
-                }
-
-                .subscribe:hover {
-                    background: var(--white);
-                    color: var(--red);
-                }
-            }
-
-            .right {
-                position: relative;
-                height: inherit;
-
-                @include Responsive(m-7) {
-                    display: none;
-                }
-
-                .image-1 {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 22.875rem;
-                    height: inherit;
-                    flex-shrink: 0;
-                    border-radius: 1.25rem;
-
-                    @include Responsive(m-12) {
-                        width: 20rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        width: 16rem;
-                    }
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        border-radius: inherit;
-                    }
-                }
-
-                .image-2 {
-                    position: absolute;
-                    bottom: 0;
-                    right: 0;
-                    width: 14rem;
-                    height: 19.75rem;
-                    border-radius: .625rem;
-                    z-index: 20;
-
-                    @include Responsive(m-12) {
-                        width: 12rem;
-                        height: 16rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        width: 9rem;
-                        height: 12rem;
-                    }
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        border-radius: inherit;
-                    }
-                }
-            }
-        }
-    }
-
-    .section-7-home {
-        margin-bottom: 7.5rem;
+        padding-top: 6.25rem;
+        padding-bottom: 3.125rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2081,7 +1937,7 @@ main {
                     }
 
                     span {
-                        color: var(--green);
+                        color: #136451;
                     }
                 }
 
@@ -2102,7 +1958,7 @@ main {
                             font-weight: 500;
                             line-height: 150%;
                             padding: .3125rem .5rem;
-                            border-bottom: 0px solid var(--green);
+                            border-bottom: 0px solid #136451;
                             cursor: pointer;
 
                             @include Responsive(m-4) {
@@ -2112,7 +1968,7 @@ main {
 
                         li.active {
                             font-weight: 600;
-                            color: var(--green);
+                            color: #136451;
                         }
 
                         li.active::after {
@@ -2122,7 +1978,7 @@ main {
                             bottom: 0;
                             width: 50%;
                             height: 2px;
-                            background-color: var(--green);
+                            background-color: #136451;
                             transition: width 0.3s ease;
                         }
 
@@ -2133,7 +1989,7 @@ main {
                             bottom: 0;
                             width: 0%;
                             height: 2px;
-                            background-color: var(--green);
+                            background-color: #136451;
                             transition: width 0.3s ease;
                         }
 
@@ -2166,14 +2022,13 @@ main {
                     }
 
                     .list-news.active {
-                        display: flex;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
                         gap: 1.25rem;
-
+                        width: 52.875rem;
                         @include Responsive(m-12) {
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
+                            width: 100%;
                         }
-
                         @include Responsive(m-7) {
                             overflow: scroll;
                             display: flex;
@@ -2249,7 +2104,7 @@ main {
                                 }
 
                                 h3:hover {
-                                    color: var(--green);
+                                    color: #136451;
                                 }
 
                                 .date-and-views {
@@ -2321,7 +2176,7 @@ main {
                         }
 
                         h3:hover {
-                            color: var(--green);
+                            color: #136451;
                         }
 
                         .date-and-views {
@@ -2349,13 +2204,27 @@ main {
         }
     }
 
-    .section-8-home {
-        margin-bottom: 7.5rem;
+    .section-7-home {
+        padding-top: 6.25rem;
+        padding-bottom: 10.625rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+        .image{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
 
         .container {
+            z-index: 10;
             .top {
                 margin-bottom: 3.125rem;
                 text-align: center;
@@ -2381,7 +2250,7 @@ main {
                     }
 
                     span {
-                        color: var(--green);
+                        color: #136451;
                     }
                 }
 
@@ -2424,7 +2293,7 @@ main {
 
                         li.active {
                             font-weight: 600;
-                            color: var(--green);
+                            color: #136451;
                         }
 
                         li.active::after {
@@ -2434,7 +2303,7 @@ main {
                             bottom: 0;
                             width: 85%;
                             height: 2px;
-                            background-color: var(--green);
+                            background-color: #136451;
                             transition: width 0.3s ease;
                         }
 
@@ -2445,7 +2314,7 @@ main {
                             bottom: 0;
                             width: 0%;
                             height: 2px;
-                            background-color: var(--green);
+                            background-color: #136451;
                             transition: width 0.3s ease;
                         }
 
@@ -2465,133 +2334,154 @@ main {
                 .list {
                     display: none;
                 }
+                
+                .list::-webkit-scrollbar {
+                    width: 0;
+                    /* Chiều rộng của thanh cuộn */
+                    background: transparent;
+                    /* Làm thanh cuộn trong suốt */
+                }
 
                 .list.active {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
-                    gap: 1.25rem;
+                    display: flex;
                     width: 100%;
-
-                    @include Responsive(m-7) {
-                        grid-template-columns: 1fr;
-                        padding: 0 3rem;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 50px;
+                    overflow: scroll;
+                    
+                    @include Responsive(m-10) {
+                        align-items: flex-start;
                     }
-
-                    @include Responsive(m-4) {
-                        padding: 0;
-                    }
-
-
-                    .child {
-                        display: flex;
-                        flex-direction: column;
+                    .wrap-list{
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
                         gap: 1.25rem;
-                        border-radius: 1rem;
-                        overflow: hidden;
-
+                        width: 100%;
                         @include Responsive(m-10) {
-                            gap: 1rem;
-                            box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+                            display: flex;
+                            width: 60rem;
+                            padding-bottom: .5rem;
                         }
-
-                        a {
-                            width: 100%;
-                            height: 15.625rem;
-                            border-radius: inherit;
-
-                            @include Responsive(m-12) {
-                                height: 12rem;
-                            }
-
-                            @include Responsive(m-10) {
-                                height: 10rem;
-                                border-radius: 1rem 1rem 0 0;
-                            }
-
-                            @include Responsive(m-7) {
-                                height: 13rem;
-                            }
-
-                            img {
-                                width: 100%;
-                                height: 100%;
-                                border-radius: inherit;
-                            }
+    
+                        @include Responsive(m-4) {
+                            padding: 0;
                         }
-
-                        .infor {
+                        .child {
                             display: flex;
                             flex-direction: column;
-                            gap: .625rem;
-
+                            gap: 1.25rem;
+                            border-radius: 1rem;
+                            overflow: hidden;
+    
                             @include Responsive(m-10) {
-                                padding: 0 1rem 1rem 1rem;
-                                border-radius: 0 0 1rem 1rem;
+                                width: 20rem;
+                                gap: 1rem;
+                                box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
                             }
+                            @include Responsive(m-7) {
+                                width: 17rem;
+                            }
+    
+                            a {
+                                width: 100%;
+                                height: 15.625rem;
+                                border-radius: inherit;
+    
+                                @include Responsive(m-12) {
+                                    height: 12rem;
+                                }
+    
+                                @include Responsive(m-10) {
+                                    border-radius: 1rem 1rem 0 0;
+                                }
 
-                            .date-and-hour {
-                                color: var(--black);
-                                font-size: .875rem;
-                                font-weight: 300;
-                                line-height: 170%;
-                                letter-spacing: .0088rem;
-                                display: flex;
-                                gap: .625rem;
-
-                                .date,
-                                .time {
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    gap: .3125rem;
-
-                                    .icon {
-                                        display: flex;
-                                    }
+                                @include Responsive(m-7) {
+                                    height: 10rem;
+                                }
+    
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: inherit;
                                 }
                             }
-
-                            h3 {
-                                color: var(--black);
-                                font-size: 1.125rem;
-                                font-weight: 500;
-                                line-height: 160%;
-                                letter-spacing: .0112rem;
-                                display: -webkit-box;
-                                -webkit-box-orient: vertical;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                -webkit-line-clamp: 2;
-                            }
-
-                            h3:hover {
-                                color: var(--green);
+    
+                            .infor {
+                                display: flex;
+                                flex-direction: column;
+                                gap: .625rem;
+    
+                                @include Responsive(m-10) {
+                                    padding: 0 1rem 1rem 1rem;
+                                    border-radius: 0 0 1rem 1rem;
+                                }
+    
+                                .date-and-hour {
+                                    color: var(--black);
+                                    font-size: .875rem;
+                                    font-weight: 300;
+                                    line-height: 170%;
+                                    letter-spacing: .0088rem;
+                                    display: flex;
+                                    gap: .625rem;
+    
+                                    .date,
+                                    .time {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        gap: .3125rem;
+    
+                                        .icon {
+                                            display: flex;
+                                        }
+                                    }
+                                }
+    
+                                h3 {
+                                    color: var(--black);
+                                    font-size: 1.125rem;
+                                    font-weight: 500;
+                                    line-height: 160%;
+                                    letter-spacing: .0112rem;
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    -webkit-line-clamp: 2;
+                                }
+    
+                                h3:hover {
+                                    color: #136451;
+                                }
                             }
                         }
                     }
-                }
-
-                .view-more {
-                    width: 5.375rem;
-                    padding: .75rem 2rem !important;
-                    background: var(--white);
-                    color: var(--red);
-                    border: 1.5px solid var(--red);
-                    font-size: 1rem;
-                    font-weight: 400;
-                    line-height: 185%;
-                    letter-spacing: .01rem;
-                    border-radius: .625rem;
-
-                    @include Responsive(m-7) {
-                        width: 4.0625rem;
-                        font-size: .75rem;
+                    .view-more {
+                        width: 5.375rem;
+                        padding: .75rem 2rem !important;
+                        background: var(--red);
+                        color: var(--white);
+                        border: 1.5px solid var(--red);
+                        font-size: 1rem;
+                        font-weight: 400;
+                        line-height: 185%;
+                        letter-spacing: .01rem;
+                        border-radius: .625rem;
+                        align-self: center;
+    
+                        @include Responsive(m-7) {
+                            width: 4.0625rem;
+                            font-size: .75rem;
+                        }
                     }
-                }
-
-                .view-more:hover {
-                    color: var(--white);
-                    background: var(--red);
+    
+                    .view-more:hover {
+                        color: var(--red);
+                        background: var(--white);
+                    }
                 }
             }
         }
@@ -2794,16 +2684,14 @@ main {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 column-gap: 8.75rem;
-                height: 36.875rem;
+                height: auto;
 
                 @include Responsive(m-12) {
                     column-gap: 5rem;
-                    height: 30rem;
                 }
 
                 @include Responsive(m-10) {
                     column-gap: 3rem;
-                    height: 28.25rem;
                 }
 
                 @include Responsive(m-7) {
@@ -2812,7 +2700,17 @@ main {
 
                 .left {
                     position: relative;
-                    height: inherit;
+                    height: 36.875rem;
+
+                    @include Responsive(m-12) {
+                        column-gap: 5rem;
+                        height: 30rem;
+                    }
+
+                    @include Responsive(m-10) {
+                        column-gap: 3rem;
+                        height: 28.25rem;
+                    }
 
                     @include Responsive(m-7) {
                         display: none;
@@ -3248,7 +3146,7 @@ main {
 
     // ----------- Tập san HALAL -----------
     .section-halal {
-        margin-bottom: 6.25rem;
+        margin-bottom: 12.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -3273,7 +3171,7 @@ main {
                     font-size: 1.875rem;
                     font-weight: 600;
                     line-height: normal;
-                    color: var(--black);
+                    color: #136451;
                     align-self: flex-start;
 
                     @include Responsive(m-12) {
@@ -3372,7 +3270,7 @@ main {
                             }
 
                             h3:hover {
-                                color: var(--green);
+                                color: #136451;
                             }
                         }
                     }
@@ -3408,7 +3306,7 @@ main {
 
     .section-detail-halal {
         padding-top: 11.875rem;
-        padding-bottom: 6.25rem;
+        padding-bottom: 12.5rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -3900,314 +3798,514 @@ main {
             }
         }
     }
-
-    // ----------- Customer -----------
-    .section-customer {
+    // ----------- News and event -----------
+    .section-news-and-event {
+        margin-bottom: 12.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
 
         .container {
-            position: relative;
             padding: 6.25rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6.25rem;
 
-            h2.title {
+            .list-menu {
                 display: flex;
-                justify-content: center;
-                text-align: center;
-                color: var(--black);
-                font-size: 2.5rem;
-                font-weight: 600;
-                line-height: 160%;
-                margin-bottom: 1rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 3.125rem;
 
                 @include Responsive(m-12) {
-                    font-size: 2rem;
-                }
-            }
-
-            .description {
-                display: flex;
-                justify-content: center;
-                text-align: center;
-                padding: 0 17.25rem;
-                color: var(--black);
-                font-size: 1rem;
-                font-weight: 400;
-                line-height: 150%;
-                margin-bottom: 3.125rem;
-
-                @include Responsive(m-12) {
-                    font-size: .875rem;
-                    padding: 0 10rem;
+                    gap: 2rem;
                 }
 
-                @include Responsive(m-10) {
-                    padding: 0 2rem;
-                    margin-bottom: 2rem;
-                }
-
-                @include Responsive(m-7) {
-                    font-size: .75rem;
-                    padding: 0;
-                    margin-bottom: 1rem;
-                }
-            }
-
-            .list-customer {
-                display: flex;
-                justify-content: center;
-                flex-flow: wrap;
-                column-gap: 1.25rem;
-                row-gap: 1.875rem;
-                margin-bottom: 6.25rem;
-
-                @include Responsive(m-10) {
-                    justify-content: center;
-                    gap: 1rem;
-                }
-
-                span {
-                    width: 12.25rem;
-                    height: 7.1875rem;
-                    border-radius: .5rem;
-                    background: #EDF9EC;
-                    box-sizing: border-box;
-                    cursor: pointer;
+                h2.title {
+                    font-size: 1.875rem;
+                    font-weight: 600;
+                    line-height: normal;
+                    color: var(--black);
+                    align-self: flex-start;
 
                     @include Responsive(m-12) {
-                        height: 6rem;
+                        font-size: 1.75rem;
                     }
+                }
 
-                    @include Responsive(m-10) {
-                        height: 5.5rem;
-                    }
+                .list {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    gap: 1.25rem;
+                    width: 100%;
 
                     @include Responsive(m-7) {
-                        width: 10rem;
-                        height: 4rem;
+                        grid-template-columns: 1fr 1fr;
                     }
 
                     @include Responsive(m-4) {
-                        width: 8rem;
-                        height: 3.5rem;
+                        grid-template-columns: 1fr;
+                    }
+
+                    .child {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.25rem;
+
+                        @include Responsive(m-10) {
+                            gap: 1rem;
+                            box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+                        }
+
+                        a {
+                            width: 100%;
+                            height: 15.625rem;
+                            border-radius: 1rem;
+
+                            @include Responsive(m-12) {
+                                height: 12rem;
+                            }
+
+                            @include Responsive(m-10) {
+                                height: 10rem;
+                                border-radius: 1rem 1rem 0 0;
+                            }
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: inherit;
+                            }
+                        }
+
+                        .infor {
+                            display: flex;
+                            flex-direction: column;
+                            gap: .625rem;
+
+                            @include Responsive(m-10) {
+                                padding: 0 1rem 1rem 1rem;
+                                border-radius: 0 0 1rem 1rem;
+                            }
+
+                            .date-and-hour {
+                                color: var(--black);
+                                font-size: .875rem;
+                                font-weight: 300;
+                                line-height: 170%;
+                                letter-spacing: .0088rem;
+                                display: flex;
+                                gap: .625rem;
+
+                                .date,
+                                .time {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: .3125rem;
+
+                                    .icon {
+                                        display: flex;
+                                    }
+                                }
+                            }
+
+                            h3 {
+                                color: var(--black);
+                                font-size: 1.125rem;
+                                font-weight: 500;
+                                line-height: 160%;
+                                letter-spacing: .0112rem;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                -webkit-line-clamp: 2;
+                            }
+
+                            h3:hover {
+                                color: var(--green);
+                            }
+                        }
+                    }
+                }
+
+                .view-more {
+                    width: 5.375rem;
+                    padding: .75rem 2rem !important;
+                    background: var(--white);
+                    color: var(--red);
+                    padding: 1.5px;
+                    border: 1.5px solid var(--red);
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 185%;
+                    letter-spacing: .01rem;
+                    border-radius: .625rem;
+
+                    @include Responsive(m-7) {
+                        width: 4.0625rem;
+                        font-size: .75rem;
+                    }
+                }
+
+                .view-more:hover {
+                    color: var(--white);
+                    background: var(--red);
+                }
+
+            }
+        }
+    }
+    .section-detail-news-and-event {
+        padding-top: 11.875rem;
+        padding-bottom: 12.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6.25rem;
+
+        @include Responsive(m-12) {
+            padding-top: 8rem;
+        }
+
+        @include Responsive(m-10) {
+            padding-top: 6.25rem;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            gap: 5rem;
+
+            @include Responsive(m-14) {
+                gap: 3rem;
+            }
+
+            @include Responsive(m-12) {
+                flex-direction: column;
+            }
+
+            .bot {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: flex;
+                align-items: center;
+                gap: .4375rem;
+                color: var(--black);
+                font-size: 1rem;
+                font-weight: 400;
+                line-height: 160%;
+                letter-spacing: .01rem;
+
+                @include Responsive(m-10) {
+                    font-size: .875rem;
+                }
+
+                @include Responsive(m-7) {
+                    flex-flow: wrap;
+                }
+
+                @include Responsive(m-4) {
+                    font-size: .75rem;
+                }
+
+                a,
+                span {
+                    display: flex;
+                }
+
+                a:hover,
+                span:hover {
+                    color: var(--red);
+                }
+
+                svg:hover {
+                    path {
+                        fill: var(--red);
+                    }
+                }
+            }
+
+            .left {
+                display: flex;
+                flex-direction: column;
+                gap: 1.875rem;
+                margin-top: 3.25rem;
+                width: 52.875rem;
+
+                @include Responsive(m-14) {
+                    width: 47rem;
+                }
+
+                @include Responsive(m-12) {
+                    width: 100%;
+                }
+
+                @include Responsive(m-7) {
+                    margin-top: 5rem;
+                }
+
+                .thumbnail {
+                    width: 100%;
+                    height: 28.75rem;
+                    border-radius: .625rem;
+
+                    @include Responsive(m-14) {
+                        width: 47rem;
+                        height: 27rem;
+                    }
+
+                    @include Responsive(m-12) {
+                        width: 100%;
+                        height: 30rem;
+                    }
+
+                    @include Responsive(m-10) {
+                        height: 25rem;
+                        border-radius: .5rem;
+                    }
+
+                    @include Responsive(m-7) {
+                        height: 17rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        height: 14rem;
                     }
 
                     img {
                         width: 100%;
                         height: 100%;
                         border-radius: inherit;
-                        flex-shrink: 0;
-                        object-fit: contain;
-                        mix-blend-mode: multiply;
                     }
                 }
 
-                span:hover {
-                    border: 1.5px solid var(--green);
-                }
-            }
-
-            form {
-                display: flex;
-                gap: 1.25rem;
-                margin-bottom: 2.5rem;
-
-                @include Responsive(m-4) {
+                .date-and-address {
+                    display: flex;
                     gap: 1rem;
-                }
-
-                input,
-                select {
-                    box-sizing: border-box;
-                    padding: .9375rem .9375rem .9375rem 2.8125rem;
-                    border-radius: .4375rem;
-                    border: 1px solid #D3D3D3;
-
-                    @include Responsive(m-12) {
-                        padding: .75rem .75rem .75rem 2.25rem;
-                    }
+                    color: var(--green);
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 160%;
+                    letter-spacing: .01rem;
 
                     @include Responsive(m-7) {
-                        padding: .5rem .5rem .5rem 1.75rem;
-                    }
-                }
-
-                input {
-                    width: 19.0625rem;
-
-                    @include Responsive(m-7) {
-                        width: 14rem;
-                    }
-
-                    @include Responsive(m-4) {
-                        width: 10rem;
-                    }
-                }
-
-                select {
-                    width: 16.375rem;
-
-                    @include Responsive(m-7) {
-                        width: 12rem;
+                        gap: .75rem;
                         font-size: .875rem;
                     }
-
-                    @include Responsive(m-4) {
-                        width: 10rem;
-                    }
                 }
 
-                input:focus,
-                select:focus {
-                    border: 1px solid var(--black);
-                }
+                h2.title {
+                    width: 46.125rem;
+                    color: var(--black);
+                    font-size: 1.875rem;
+                    font-weight: 600;
+                    line-height: 160%;
 
-                input::placeholder {
-                    color: #BFBFBF;
-                    font-size: .875rem;
-                    font-weight: 500;
-                    line-height: 150%;
-                }
-
-                select option {
-                    color: #212121;
-                    font-size: .875rem;
-                    font-weight: 500;
-                    line-height: 150%;
-                }
-
-                .search,
-                .filter {
-                    position: relative;
-                }
-
-                .search {
-                    button {
-                        position: absolute;
-                        top: 1rem;
-                        left: .9375rem;
-
-                        @include Responsive(m-12) {
-                            top: .875rem;
-                            left: .875rem;
-                        }
-
-                        @include Responsive(m-7) {
-                            top: .75rem;
-                            left: .5rem;
-
-                            svg {
-                                width: 1rem;
-                                height: 1rem;
-                            }
-                        }
-                    }
-                }
-
-                .filter {
-                    label {
-                        position: absolute;
-                        top: 1rem;
-                        left: .9375rem;
-
-                        @include Responsive(m-12) {
-                            top: .875rem;
-                            left: .875rem;
-                        }
-
-                        @include Responsive(m-7) {
-                            top: .75rem;
-                            left: .5rem;
-
-                            svg {
-                                width: 1rem;
-                                height: 1rem;
-                            }
-                        }
-                    }
-                }
-            }
-
-            .table-wrapper::-webkit-scrollbar {
-                width: 0;
-                /* Chiều rộng của thanh cuộn */
-                background: transparent;
-                /* Làm thanh cuộn trong suốt */
-            }
-            .table-wrapper{ 
-                overflow: auto; 
-                table {
-                    width: 100%;
-                    border-radius: .75rem .75rem 0 0;
-                    overflow: hidden;
-                    margin-bottom: 2.5rem;
                     @include Responsive(m-12) {
-                        width: 72rem;
-                        overflow: scroll;
+                        font-size: 1.75rem;
+                        width: 100%;
+                    }
+
+                    @include Responsive(m-7) {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                .content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.875rem;
+                    font-size: 1rem;
+                    line-height: 150%;
+
+                    @include Responsive(m-7) {
+                        gap: 1.25rem;
+                    }
+
+                    img {
+                        border-radius: .625rem;
+                    }
+                }
+
+                .share {
+                    display: flex;
+                    align-items: center;
+                    gap: .375rem;
+                    margin-bottom: 1.875rem;
+
+                    span {
+                        color: var(--black);
+                        font-size: .875rem;
+                        font-weight: 500;
+                        line-height: 150%;
+                    }
+                }
+            }
+
+            .right {
+                display: flex;
+                flex-direction: column;
+                gap: 3.125rem;
+                margin-top: 3.25rem;
+
+                .top, .bottom{
+                    h2.title {
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        line-height: 140%;
+                        color: var(--black);
+                        margin-bottom: 1.75rem;
                     }
     
-                    tr:nth-child(odd) {
-                        background-color: #F2F2F2;
+                    .list:nth-child(n+4) {
+                        display: none;
                     }
-
-                    tr {
-                        color: #2A2B2E;
-                        font-size: 1rem;
+    
+                    .list {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 1.5rem;
+    
                         @include Responsive(m-12) {
-                            overflow: scroll;
-                            width: auto;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr 1fr 1fr;
+                            column-gap: 1.25rem;
                         }
     
                         @include Responsive(m-10) {
-                            overflow: scroll;
-                            font-size: .875rem;
+                            grid-template-columns: 1fr 1fr;
+                            row-gap: 1rem;
                         }
     
-                        th {
-                            text-align: start;
-                            font-weight: 500;
-                            line-height: 125%;
-                            padding: 1.25rem .75rem;
-                            color: #848484;
-                            background-color: #F2F2F2;
+                        @include Responsive(m-7) {
+                            column-gap: 1rem;
+                        }
+    
+                        .child {
+                            display: flex;
+                            gap: 1rem;
+                            border-radius: 1rem;
+                            width: 100%;
     
                             @include Responsive(m-12) {
-                                width: inherit;
+                                flex-direction: column;
+                                overflow: hidden;
+                                gap: 1.25rem;
+    
+                                &:nth-child(n+5) {
+                                    display: none;
+                                }
                             }
     
-                            @include Responsive(m-7) {
-                                padding: .75rem .5rem;
-                            }
-                        }
-    
-                        td {
-                            width: 13.75rem;
-                            font-weight: 400;
-                            line-height: 180%;
-                            padding: 1.5625rem .75rem;
                             @include Responsive(m-10) {
-                                width: inherit;
+                                box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+                            }
+    
+                            a {
+                                width: 100%;
+                                height: 6.25rem;
+                                border-radius: .4375rem;
+    
+                                @include Responsive(m-12) {
+                                    height: 9.5rem;
+                                    border-radius: initial;
+                                }
+    
+                                @include Responsive(m-10) {
+                                    height: 12rem;
+                                }
     
                                 @include Responsive(m-7) {
-                                    padding: 1rem .5rem;
+                                    height: 9rem;
+                                }
+    
+                                @include Responsive(m-4) {
+                                    height: 7rem;
+                                }
+    
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: inherit;
+                                }
+                            }
+    
+                            .infor {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                gap: .625rem;
+    
+                                @include Responsive(m-10) {
+                                    padding: 0 1rem 1rem;
+                                }
+    
+                                .date-and-hour {
+                                    color: var(--black);
+                                    font-size: .875rem;
+                                    font-weight: 300;
+                                    line-height: 170%;
+                                    letter-spacing: .0088rem;
+                                    display: flex;
+                                    gap: .625rem;
+    
+                                    @include Responsive(m-4) {
+                                        font-size: .625rem;
+                                        gap: .25rem;
+                                    }
+    
+                                    .date,
+                                    .time {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        gap: .3125rem;
+    
+                                        .icon {
+                                            display: flex;
+                                        }
+                                    }
+                                }
+    
+                                h3 {
+                                    width: 12.625rem;
+                                    color: var(--black);
+                                    font-size: .875rem;
+                                    font-weight: 600;
+                                    line-height: 160%;
+                                    letter-spacing: .0112rem;
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    -webkit-line-clamp: 2;
+    
+                                    @include Responsive(m-12) {
+                                        width: 100%;
+                                        font-size: 1rem;
+                                    }
+    
+                                    @include Responsive(m-4) {
+                                        font-size: .875rem;
+                                    }
+                                }
+    
+                                h3:hover {
+                                    color: var(--green);
                                 }
                             }
                         }
                     }
                 }
             }
-
-            .pagination {
-                justify-content: end;
-            }
         }
 
-        .list-modal-customer {
-            position: fixed;
-            z-index: 9995;
-            box-sizing: border-box;
-            top: 20rem;
+        .relate {
             width: 80rem;
 
             @include Responsive(m-14) {
@@ -4230,12 +4328,456 @@ main {
                 width: 22rem;
             }
 
+            h2.title {
+                font-size: 1.5rem;
+                font-weight: 600;
+                line-height: 100%;
+                color: var(--black);
+                margin-bottom: 1.75rem;
+                align-self: flex-start;
+            }
+
+            .list {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                column-gap: 1.25rem;
+
+                @include Responsive(m-10) {
+                    grid-template-columns: 1fr 1fr;
+                    row-gap: 1rem;
+                }
+
+                @include Responsive(m-7) {
+                    column-gap: 1rem;
+                }
+
+                .child {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1.25rem;
+                    border-radius: 1rem;
+                    overflow: hidden;
+
+                    &:nth-child(n+5) {
+                        display: none;
+                    }
+
+                    @include Responsive(m-10) {
+                        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+                    }
+
+                    a {
+                        width: 100%;
+                        height: 11.375rem;
+
+                        @include Responsive(m-14) {
+                            height: 9.5rem;
+                        }
+
+                        @include Responsive(m-10) {
+                            height: 12rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            height: 9rem;
+                        }
+
+                        @include Responsive(m-4) {
+                            height: 7rem;
+                        }
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+
+                    .infor {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .625rem;
+
+                        @include Responsive(m-10) {
+                            padding: 0 1rem 1rem;
+                        }
+
+                        .date-and-hour {
+                            color: var(--black);
+                            font-size: .875rem;
+                            font-weight: 300;
+                            line-height: 170%;
+                            letter-spacing: .0088rem;
+                            display: flex;
+                            gap: .625rem;
+
+                            @include Responsive(m-4) {
+                                font-size: .625rem;
+                                gap: .25rem;
+                            }
+
+                            .date,
+                            .time {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                gap: .3125rem;
+
+                                .icon {
+                                    display: flex;
+                                }
+                            }
+                        }
+
+                        h3 {
+                            color: var(--black);
+                            font-size: 1rem;
+                            font-weight: 600;
+                            line-height: 160%;
+                            letter-spacing: .0112rem;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            -webkit-line-clamp: 2;
+
+                            @include Responsive(m-4) {
+                                font-size: .875rem;
+                            }
+                        }
+
+                        h3:hover {
+                            color: var(--green);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // ----------- Customer -----------
+    .section-customer {
+        position: relative;
+        .wrap-customer{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            .container {
+                position: relative;
+                padding-top: 6.25rem;
+                padding-bottom: 12.5rem;
+    
+                h2.title {
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    color: var(--black);
+                    font-size: 2.5rem;
+                    font-weight: 600;
+                    line-height: 160%;
+                    margin-bottom: 1rem;
+    
+                    @include Responsive(m-12) {
+                        font-size: 2rem;
+                    }
+                }
+    
+                .description {
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                    padding: 0 17.25rem;
+                    color: var(--black);
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 150%;
+                    margin-bottom: 3.125rem;
+    
+                    @include Responsive(m-12) {
+                        font-size: .875rem;
+                        padding: 0 10rem;
+                    }
+    
+                    @include Responsive(m-10) {
+                        padding: 0 2rem;
+                        margin-bottom: 2rem;
+                    }
+    
+                    @include Responsive(m-7) {
+                        font-size: .75rem;
+                        padding: 0;
+                        margin-bottom: 1rem;
+                    }
+                }
+    
+                .list-customer {
+                    display: flex;
+                    justify-content: center;
+                    flex-flow: wrap;
+                    column-gap: 1.25rem;
+                    row-gap: 1.875rem;
+                    margin-bottom: 6.25rem;
+    
+                    @include Responsive(m-10) {
+                        justify-content: center;
+                        gap: 1rem;
+                    }
+    
+                    span {
+                        width: 12.25rem;
+                        height: 7.1875rem;
+                        border-radius: .5rem;
+                        background: #EDF9EC;
+                        box-sizing: border-box;
+                        cursor: pointer;
+    
+                        @include Responsive(m-12) {
+                            height: 6rem;
+                        }
+    
+                        @include Responsive(m-10) {
+                            height: 5.5rem;
+                        }
+    
+                        @include Responsive(m-7) {
+                            width: 10rem;
+                            height: 4rem;
+                        }
+    
+                        @include Responsive(m-4) {
+                            width: 8rem;
+                            height: 3.5rem;
+                        }
+    
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: inherit;
+                            flex-shrink: 0;
+                            object-fit: contain;
+                            mix-blend-mode: multiply;
+                        }
+                    }
+    
+                    span:hover {
+                        border: 1.5px solid var(--green);
+                    }
+                }
+    
+                form {
+                    display: flex;
+                    gap: 1.25rem;
+                    margin-bottom: 2.5rem;
+    
+                    @include Responsive(m-4) {
+                        gap: 1rem;
+                    }
+    
+                    input,
+                    select {
+                        box-sizing: border-box;
+                        padding: .9375rem .9375rem .9375rem 2.8125rem;
+                        border-radius: .4375rem;
+                        border: 1px solid #D3D3D3;
+    
+                        @include Responsive(m-12) {
+                            padding: .75rem .75rem .75rem 2.25rem;
+                        }
+    
+                        @include Responsive(m-7) {
+                            padding: .5rem .5rem .5rem 1.75rem;
+                        }
+                    }
+    
+                    input {
+                        width: 19.0625rem;
+    
+                        @include Responsive(m-7) {
+                            width: 14rem;
+                        }
+    
+                        @include Responsive(m-4) {
+                            width: 10rem;
+                        }
+                    }
+    
+                    select {
+                        width: 16.375rem;
+    
+                        @include Responsive(m-7) {
+                            width: 12rem;
+                            font-size: .875rem;
+                        }
+    
+                        @include Responsive(m-4) {
+                            width: 10rem;
+                        }
+                    }
+    
+                    input:focus,
+                    select:focus {
+                        border: 1px solid var(--black);
+                    }
+    
+                    input::placeholder {
+                        color: #BFBFBF;
+                        font-size: .875rem;
+                        font-weight: 500;
+                        line-height: 150%;
+                    }
+    
+                    select option {
+                        color: #212121;
+                        font-size: .875rem;
+                        font-weight: 500;
+                        line-height: 150%;
+                    }
+    
+                    .search,
+                    .filter {
+                        position: relative;
+                    }
+    
+                    .search {
+                        button {
+                            position: absolute;
+                            top: 1rem;
+                            left: .9375rem;
+    
+                            @include Responsive(m-12) {
+                                top: .875rem;
+                                left: .875rem;
+                            }
+    
+                            @include Responsive(m-7) {
+                                top: .75rem;
+                                left: .5rem;
+    
+                                svg {
+                                    width: 1rem;
+                                    height: 1rem;
+                                }
+                            }
+                        }
+                    }
+    
+                    .filter {
+                        label {
+                            position: absolute;
+                            top: 1rem;
+                            left: .9375rem;
+    
+                            @include Responsive(m-12) {
+                                top: .875rem;
+                                left: .875rem;
+                            }
+    
+                            @include Responsive(m-7) {
+                                top: .75rem;
+                                left: .5rem;
+    
+                                svg {
+                                    width: 1rem;
+                                    height: 1rem;
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                .table-wrapper::-webkit-scrollbar {
+                    width: 0;
+                    /* Chiều rộng của thanh cuộn */
+                    background: transparent;
+                    /* Làm thanh cuộn trong suốt */
+                }
+                .table-wrapper{ 
+                    overflow: auto; 
+                    table {
+                        width: 100%;
+                        border-radius: .75rem .75rem 0 0;
+                        overflow: hidden;
+                        margin-bottom: 2.5rem;
+                        @include Responsive(m-12) {
+                            width: 72rem;
+                            overflow: scroll;
+                        }
+        
+                        tr:nth-child(even) {
+                            background-color: #EDF9EC;
+                        }
+    
+                        tr {
+                            color: #2A2B2E;
+                            font-size: 1rem;
+                            @include Responsive(m-12) {
+                                overflow: scroll;
+                                width: auto;
+                            }
+        
+                            @include Responsive(m-10) {
+                                overflow: scroll;
+                                font-size: .875rem;
+                            }
+        
+                            th {
+                                text-align: start;
+                                font-weight: 500;
+                                line-height: 125%;
+                                padding: 1.25rem .75rem;
+                                color: #848484;
+                                background-color: #EDF9EC;
+        
+                                @include Responsive(m-12) {
+                                    width: inherit;
+                                }
+        
+                                @include Responsive(m-7) {
+                                    padding: .75rem .5rem;
+                                }
+                            }
+        
+                            td {
+                                width: 13.75rem;
+                                font-weight: 400;
+                                line-height: 180%;
+                                padding: 1.5625rem .75rem;
+                                @include Responsive(m-10) {
+                                    width: inherit;
+        
+                                    @include Responsive(m-7) {
+                                        padding: 1rem .5rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                .pagination {
+                    justify-content: end;
+                }
+            }   
+        }
+
+        .list-modal-customer {
+            position: fixed;
+            z-index: 9995;
+            box-sizing: border-box;
+            top: 20rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            @include Responsive(m-7) {
+                top: 10rem;
+            }
+
             .modal {
-                padding: 0 10rem;
                 border-radius: 1rem;
 
                 >.child.active {
                     display: flex;
+                    cursor: auto;
                 }
 
                 >.child {
@@ -4245,13 +4787,46 @@ main {
                     padding: 3.125rem 2.5rem;
                     border-radius: inherit;
                     background: var(--white);
-                    gap: 2.5rem;
+                    gap: 2.5rem;            width: 60rem;
+
+                    @include Responsive(m-14) {
+                        top: 16rem;
+                    }
+        
+                    @include Responsive(m-12) {
+                        top: 14rem;
+                    }
+        
+                    @include Responsive(m-10) {
+                        padding: 2rem 1.75rem;
+                        gap: 2rem;
+                        width: 44rem;
+                    }
+        
+                    @include Responsive(m-7) {
+                        padding: 1rem .75rem;
+                        gap: 1rem;
+                        width: 28rem;
+                        top: 10rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        width: 22rem;
+                    }
 
                     .image {
                         width: 19.125rem;
                         height: 12.625rem;
                         border-radius: .75rem;
                         background: rgba(61, 163, 51, 0.05);
+                        @include Responsive(m-10) {
+                            width: 16rem;
+                            height: 10rem;
+                        }
+                        @include Responsive(m-7) {
+                            width: 10rem;
+                            height: 6rem;
+                        }
 
                         img {
                             width: 100%;
@@ -4265,6 +4840,9 @@ main {
 
                     .infor {
                         width: 34.625rem;
+                        @include Responsive(m-7) {
+                            width: 100%;
+                        }
 
                         h3.name {
                             color: #2A2B2E;
@@ -4272,18 +4850,31 @@ main {
                             font-weight: 700;
                             line-height: normal;
                             margin-bottom: 1.25rem;
+                            @include Responsive(m-7) {
+                                margin-bottom: 1rem;
+                            }
                         }
 
                         .bottom {
                             display: flex;
                             flex-direction: column;
                             gap: 1.5rem;
+                            @include Responsive(m-10) {
+                                gap: 1rem;
+                            }
 
                             >.child {
                                 width: 100%;
                                 display: flex;
                                 align-items: start;
                                 gap: 2.5rem;
+                                @include Responsive(m-10) {
+                                    gap: 1.5rem;
+                                }
+                                @include Responsive(m-7) {
+                                    flex-direction: column;
+                                    gap: .5rem;
+                                }
 
                                 .left {
                                     display: flex;
@@ -4319,7 +4910,8 @@ main {
         justify-content: center;
 
         .container {
-            padding: 6.25rem 0;
+            padding-top: 6.25rem;
+            padding-bottom: 12.5rem;
 
             form {
                 display: flex;
@@ -4515,7 +5107,7 @@ main {
     
                             &:nth-child(2) {
                                 font-weight: 600;
-                                color: #3CA333;
+                                color: #136451;
                             }
     
                             span {
@@ -4540,7 +5132,7 @@ main {
 
     .section-detail-training {
         padding-top: 11.875rem;
-        padding-bottom: 6.25rem;
+        padding-bottom: 12.5rem;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -5127,7 +5719,8 @@ main {
         justify-content: center;
 
         .container {
-            padding: 6.25rem 0;
+            padding-top: 6.25rem;
+            padding-bottom: 12.5rem;
             display: flex;
             gap: 3.75rem;
 
@@ -5204,7 +5797,7 @@ main {
 
                         li.active,
                         li:hover {
-                            background: var(--green);
+                            background: #136451;
                             color: var(--white);
                         }
                     }
@@ -5323,7 +5916,8 @@ main {
         justify-content: center;
 
         .container {
-            padding: 6.25rem 0;
+            padding-top: 6.25rem;
+            padding-bottom: 12.5rem;
             display: flex;
             gap: 3.75rem;
 
@@ -5400,7 +5994,7 @@ main {
 
                         li.active,
                         li:hover {
-                            background: var(--green);
+                            background: #136451;
                             color: var(--white);
                         }
                     }
@@ -5513,10 +6107,11 @@ main {
 
         .container {
             z-index: 10;
-            padding: 6.25rem 0;
+            padding-top: 6.25rem;
+            padding-bottom: 12.5rem;
 
             h2.title {
-                color: var(--green);
+                color: #136451;
                 font-size: 1.75rem;
                 font-weight: 500;
                 line-height: 115%;
@@ -5776,14 +6371,15 @@ main {
         }
     }
 
-    // ----------- Footer -----------
+    // ----------- Contact -----------
     .section-contact {
         display: flex;
         align-items: center;
         justify-content: center;
 
         .container {
-            padding: 6.25rem 0;
+            padding-top: 6.25rem;
+            padding-bottom: 12.5rem;
 
             h2.title {
                 color: var(--black);
@@ -5865,6 +6461,9 @@ main {
                         select:focus,
                         textarea:focus {
                             border: 1px solid var(--Primary-Color-600, #3CA333);
+                            &::placeholder{
+                                color: #3CA333;
+                            }
                         }
 
                         input::placeholder,
@@ -5936,7 +6535,7 @@ main {
                     }
 
                     h3.title {
-                        color: var(--Primary-Color-500, #3CA333);
+                        color: var(--Primary-Color-500, #136451);
                         font-size: 1.625rem;
                         font-weight: 700;
                         line-height: 150%;
@@ -6003,7 +6602,7 @@ main {
                                 p {
                                     display: flex;
                                     align-items: center;
-                                    color: #3CA333;
+                                    color: #136451;
                                     font-size: 1.125rem;
                                     font-weight: 600;
                                     line-height: 150%;
@@ -6047,7 +6646,7 @@ footer {
     position: relative;
     display: flex;
     justify-content: center;
-    height: 53.75rem;
+    height: 46.25rem;
 
     @include Responsive(m-10) {
         height: auto;
@@ -6055,19 +6654,11 @@ footer {
 
     >.background {
         position: absolute;
-        height: 46.375rem;
+        height: 100%;
         width: 100%;
         bottom: 0;
         left: 0;
         background: lightgray -4px -852.883px / 100.104% 248.607% no-repeat, #1A5B33;
-
-        @include Responsive(m-10) {
-            height: 57rem;
-        }
-
-        @include Responsive(m-4) {
-            height: 46rem;
-        }
 
         img {
             width: 100%;
@@ -6079,7 +6670,6 @@ footer {
         width: 80rem;
         z-index: 10;
         position: relative;
-
         @include Responsive(m-14) {
             width: 72rem;
         }
@@ -6102,12 +6692,14 @@ footer {
 
         .top {
             width: 100%;
-            position: relative;
+            position: absolute;
             height: 15rem;
             display: flex;
             align-items: center;
             gap: 2rem;
             margin-bottom: 4.375rem;
+            top: -7.5rem;
+            flex-shrink: 0;
 
             @include Responsive(m-7) {
                 flex-direction: column;
@@ -6118,6 +6710,7 @@ footer {
             @include Responsive(m-4) {
                 height: 12rem;
                 margin-bottom: 2rem;
+                top: -6rem;
             }
 
             >.background {
@@ -6126,6 +6719,7 @@ footer {
                 width: 100%;
                 height: 100%;
                 border-radius: 1.5rem;
+                box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
 
                 img {
                     width: 100%;
@@ -6294,6 +6888,7 @@ footer {
             display: grid;
             grid-template-columns: 25.75rem 32.5rem 19rem;
             gap: 1.375rem;
+            padding-top: 11.875rem;
             padding-bottom: 5rem;
             border-bottom: 1px solid var(--white);
 
@@ -6308,11 +6903,10 @@ footer {
             @include Responsive(m-10) {
                 display: flex;
                 flex-direction: column;
-                padding-bottom: 6rem;
+                padding-bottom: 2rem;
             }
-
             @include Responsive(m-4) {
-                padding-bottom: 4rem;
+                padding-top: 8rem;
             }
 
             .col-1 {
@@ -6584,6 +7178,7 @@ footer {
             font-weight: 400;
             line-height: normal;
             padding-top: 1.75rem;
+            padding-bottom: 1.5rem;
         }
     }
 }

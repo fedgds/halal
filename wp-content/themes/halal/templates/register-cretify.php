@@ -4,7 +4,7 @@ $url = get_template_directory_uri();
 get_header(); ?>
 <main>
     <?php include('section/section-register-cretify.php') ?>
-    <div class="section-register-cretify">
+    <div class="section-register-cretify fade-in">
         <img class="background" src="<?= $url ?>/dist/images/background-register.png" alt="">
         <div class="container">
             <h2 class="title">Đăng ký chứng nhận Halal</h2>

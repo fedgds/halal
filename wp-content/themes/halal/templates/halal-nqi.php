@@ -9,7 +9,7 @@ $list_halal_nqi_query = new WP_Query(array(
 get_header(); ?>
 <main>
     <?php include('section/section-halal-nqi.php') ?>
-    <div class="section-halal-nqi">
+    <div class="section-halal-nqi fade-in">
         <div class="container">  
             <div class="left">
                 <nav class="list-tab" id="list-tab-nqi">
@@ -24,7 +24,7 @@ get_header(); ?>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p>Không có khách hàng.</p>
+                            <p>Không có.</p>
                         <?php endif; ?>
                     </ul>
                 </nav>
