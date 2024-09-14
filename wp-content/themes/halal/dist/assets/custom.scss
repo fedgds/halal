@@ -491,10 +491,11 @@ header {
 
     .menu-mobile {
         position: fixed;
+        box-sizing: border-box;
         top: 0;
         left: -100%;
         height: 100vh;
-        width: 20rem;
+        width: 22.5rem;
         background-color: var(--white);
         z-index: 9998;
         transition: 0.6s all ease-in-out;
@@ -1258,15 +1259,22 @@ main {
                         margin-bottom: 1rem;
                     }
                 }
+                nav.tab::-webkit-scrollbar {
+                    width: 0;
+                    /* Chiều rộng của thanh cuộn */
+                    background: transparent;
+                    /* Làm thanh cuộn trong suốt */
+                }
 
                 nav.tab {
                     display: flex;
-                    justify-content: center;
+                    justify-content: space-evenly;
+                    overflow: auto;
 
                     ul {
                         display: flex;
-                        flex-flow: wrap;
                         gap: 1.25rem;
+                        width: fit-content; 
 
                         @include Responsive(m-10) {
                             gap: 1rem;
@@ -1277,6 +1285,7 @@ main {
                         }
 
                         li {
+                            white-space: nowrap;
                             padding: .625rem 1.25rem;
                             border-radius: 3.375rem;
                             background: #CCC;
@@ -1681,6 +1690,11 @@ main {
                     }
 
                     .description {
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        -webkit-line-clamp: 2;
                         color: var(--black);
                         font-size: 1rem;
                         font-weight: 400;
@@ -1848,48 +1862,58 @@ main {
                     }
                 }
             }
-
+            .bottom::-webkit-scrollbar {
+                width: 0;
+                /* Chiều rộng của thanh cuộn */
+                background: transparent;
+                /* Làm thanh cuộn trong suốt */
+            }
             .bottom {
                 display: flex;
-                justify-content: center;
-                flex-flow: wrap;
-                gap: 1.25rem;
-
-                @include Responsive(m-7) {
-                    gap: 1rem;
-                }
-
-                a {
-                    width: 12.25rem;
-                    height: 7.1875rem;
-                    border-radius: .5rem;
-                    background: var(--white);
-
-                    @include Responsive(m-12) {
-                        height: 6rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        height: 5.5rem;
-                    }
-
+                justify-content: space-evenly;
+                overflow: scroll;
+                .wrap{
+                    display: flex;
+                    justify-content: flex-start;
+                    gap: 1.25rem;
+                    width: fit-content; 
+            
                     @include Responsive(m-7) {
-                        width: 10rem;
-                        height: 4rem;
+                        gap: 1rem;
                     }
-
-                    @include Responsive(m-4) {
-                        width: 8rem;
-                        height: 3.5rem;
-                    }
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        border-radius: inherit;
-                        flex-shrink: 0;
-                        object-fit: contain;
-                        mix-blend-mode: multiply;
+            
+                    a {
+                        width: 12.25rem;
+                        height: 7.1875rem;
+                        border-radius: .5rem;
+                        background: var(--white);
+            
+                        @include Responsive(m-12) {
+                            height: 6rem;
+                        }
+            
+                        @include Responsive(m-10) {
+                            height: 5.5rem;
+                        }
+            
+                        @include Responsive(m-7) {
+                            width: 10rem;
+                            height: 4rem;
+                        }
+            
+                        @include Responsive(m-4) {
+                            width: 8rem;
+                            height: 3.5rem;
+                        }
+            
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: inherit;
+                            flex-shrink: 0;
+                            object-fit: contain;
+                            mix-blend-mode: multiply;
+                        }
                     }
                 }
             }
@@ -2043,7 +2067,7 @@ main {
                             overflow: hidden;
 
                             @include Responsive(m-10) {
-                                box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+                                border: 1px solid #ABABAB;
                             }
 
                             @include Responsive(m-7) {
@@ -2335,13 +2359,6 @@ main {
                     display: none;
                 }
                 
-                .list::-webkit-scrollbar {
-                    width: 0;
-                    /* Chiều rộng của thanh cuộn */
-                    background: transparent;
-                    /* Làm thanh cuộn trong suốt */
-                }
-
                 .list.active {
                     display: flex;
                     width: 100%;
@@ -2349,112 +2366,123 @@ main {
                     align-items: center;
                     justify-content: flex-start;
                     gap: 50px;
-                    overflow: scroll;
                     
                     @include Responsive(m-10) {
                         align-items: flex-start;
                     }
-                    .wrap-list{
-                        display: grid;
-                        grid-template-columns: 1fr 1fr 1fr;
-                        gap: 1.25rem;
+                    .wrap::-webkit-scrollbar {
+                        width: 0;
+                        /* Chiều rộng của thanh cuộn */
+                        background: transparent;
+                        /* Làm thanh cuộn trong suốt */
+                    }
+    
+                    .wrap{
                         width: 100%;
-                        @include Responsive(m-10) {
-                            display: flex;
-                            width: 60rem;
-                            padding-bottom: .5rem;
-                        }
-    
-                        @include Responsive(m-4) {
-                            padding: 0;
-                        }
-                        .child {
-                            display: flex;
-                            flex-direction: column;
+                        overflow: scroll;
+                        .wrap-list{
+                            display: grid;
+                            grid-template-columns: 1fr 1fr 1fr;
                             gap: 1.25rem;
-                            border-radius: 1rem;
-                            overflow: hidden;
-    
+                            width: 100%;
                             @include Responsive(m-10) {
-                                width: 20rem;
-                                gap: 1rem;
-                                box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+                                display: flex;
+                                width: fit-content; 
+                                padding-bottom: .5rem;
                             }
-                            @include Responsive(m-7) {
-                                width: 17rem;
+        
+                            @include Responsive(m-4) {
+                                padding: 0;
                             }
-    
-                            a {
-                                width: 100%;
-                                height: 15.625rem;
-                                border-radius: inherit;
-    
-                                @include Responsive(m-12) {
-                                    height: 12rem;
-                                }
-    
-                                @include Responsive(m-10) {
-                                    border-radius: 1rem 1rem 0 0;
-                                }
-
-                                @include Responsive(m-7) {
-                                    height: 10rem;
-                                }
-    
-                                img {
-                                    width: 100%;
-                                    height: 100%;
-                                    border-radius: inherit;
-                                }
-                            }
-    
-                            .infor {
+                            .child {
                                 display: flex;
                                 flex-direction: column;
-                                gap: .625rem;
-    
+                                gap: 1.25rem;
+                                border-radius: 1rem;
+                                overflow: hidden;
+        
                                 @include Responsive(m-10) {
-                                    padding: 0 1rem 1rem 1rem;
-                                    border-radius: 0 0 1rem 1rem;
+                                    width: 20rem;
+                                    gap: 1rem;
+                                    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+                                    background: var(--white);
                                 }
+                                @include Responsive(m-7) {
+                                    width: 17rem;
+                                }
+        
+                                a {
+                                    width: 100%;
+                                    height: 15.625rem;
+                                    border-radius: inherit;
+        
+                                    @include Responsive(m-12) {
+                                        height: 12rem;
+                                    }
+        
+                                    @include Responsive(m-10) {
+                                        border-radius: 1rem 1rem 0 0;
+                                    }
     
-                                .date-and-hour {
-                                    color: var(--black);
-                                    font-size: .875rem;
-                                    font-weight: 300;
-                                    line-height: 170%;
-                                    letter-spacing: .0088rem;
-                                    display: flex;
-                                    gap: .625rem;
-    
-                                    .date,
-                                    .time {
-                                        display: flex;
-                                        align-items: center;
-                                        justify-content: center;
-                                        gap: .3125rem;
-    
-                                        .icon {
-                                            display: flex;
-                                        }
+                                    @include Responsive(m-7) {
+                                        height: 10rem;
+                                    }
+        
+                                    img {
+                                        width: 100%;
+                                        height: 100%;
+                                        border-radius: inherit;
                                     }
                                 }
-    
-                                h3 {
-                                    color: var(--black);
-                                    font-size: 1.125rem;
-                                    font-weight: 500;
-                                    line-height: 160%;
-                                    letter-spacing: .0112rem;
-                                    display: -webkit-box;
-                                    -webkit-box-orient: vertical;
-                                    overflow: hidden;
-                                    text-overflow: ellipsis;
-                                    -webkit-line-clamp: 2;
-                                }
-    
-                                h3:hover {
-                                    color: #136451;
+        
+                                .infor {
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: .625rem;
+        
+                                    @include Responsive(m-10) {
+                                        padding: 0 1rem 1rem 1rem;
+                                        border-radius: 0 0 1rem 1rem;
+                                    }
+        
+                                    .date-and-hour {
+                                        color: var(--black);
+                                        font-size: .875rem;
+                                        font-weight: 300;
+                                        line-height: 170%;
+                                        letter-spacing: .0088rem;
+                                        display: flex;
+                                        gap: .625rem;
+        
+                                        .date,
+                                        .time {
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                            gap: .3125rem;
+        
+                                            .icon {
+                                                display: flex;
+                                            }
+                                        }
+                                    }
+        
+                                    h3 {
+                                        color: var(--black);
+                                        font-size: 1.125rem;
+                                        font-weight: 500;
+                                        line-height: 160%;
+                                        letter-spacing: .0112rem;
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        -webkit-line-clamp: 2;
+                                    }
+        
+                                    h3:hover {
+                                        color: #136451;
+                                    }
                                 }
                             }
                         }
@@ -2571,12 +2599,12 @@ main {
 
                 a:hover,
                 span:hover {
-                    color: var(--red);
+                    color: var(--green);
                 }
 
                 svg:hover {
                     path {
-                        fill: var(--red);
+                        fill: var(--green);
                     }
                 }
             }
@@ -2586,6 +2614,7 @@ main {
                 font-weight: 500;
                 line-height: 160%;
                 margin-bottom: 1.875rem;
+                text-transform: uppercase;
 
                 @include Responsive(m-10) {
                     font-size: 2.25rem;
@@ -3040,15 +3069,12 @@ main {
 
     .section-4-about {
         padding: 4.375rem 0;
+        margin-bottom: 13.75rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 6.25rem;
-
-        @include Responsive(m-7) {
-            margin-bottom: 3.75rem;
-        }
-
+        background: #EDF9EC;
+        
         .container {
             .top {
                 text-align: center;
@@ -3097,47 +3123,58 @@ main {
                 }
             }
 
+            .bottom::-webkit-scrollbar {
+                width: 0;
+                /* Chiều rộng của thanh cuộn */
+                background: transparent;
+                /* Làm thanh cuộn trong suốt */
+            }
             .bottom {
                 display: flex;
-                justify-content: center;
-                flex-flow: wrap;
-                gap: 1.25rem;
-
-                @include Responsive(m-7) {
-                    gap: 1rem;
-                }
-
-                a {
-                    width: 12.25rem;
-                    height: 7.1875rem;
-                    border-radius: .5rem;
-                    background: #EDF9EC;
-
-                    @include Responsive(m-12) {
-                        height: 6rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        height: 5.5rem;
-                    }
-
+                justify-content: space-evenly;
+                overflow: scroll;
+                .wrap{
+                    display: flex;
+                    justify-content: flex-start;
+                    gap: 1.25rem;
+                    width: fit-content; 
+            
                     @include Responsive(m-7) {
-                        width: 10rem;
-                        height: 4rem;
+                        gap: 1rem;
                     }
-
-                    @include Responsive(m-4) {
-                        width: 8rem;
-                        height: 3.5rem;
-                    }
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        border-radius: inherit;
-                        flex-shrink: 0;
-                        object-fit: contain;
-                        mix-blend-mode: multiply;
+            
+                    a {
+                        width: 12.25rem;
+                        height: 7.1875rem;
+                        border-radius: .5rem;
+                        background: var(--white);
+            
+                        @include Responsive(m-12) {
+                            height: 6rem;
+                        }
+            
+                        @include Responsive(m-10) {
+                            height: 5.5rem;
+                        }
+            
+                        @include Responsive(m-7) {
+                            width: 10rem;
+                            height: 4rem;
+                        }
+            
+                        @include Responsive(m-4) {
+                            width: 8rem;
+                            height: 3.5rem;
+                        }
+            
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            border-radius: inherit;
+                            flex-shrink: 0;
+                            object-fit: contain;
+                            mix-blend-mode: multiply;
+                        }
                     }
                 }
             }
@@ -3148,25 +3185,62 @@ main {
     .section-halal {
         margin-bottom: 12.5rem;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        .category{
+            padding-top: 5.625rem;
+        }
+        .list-menu:nth-child(odd){
+            .background{
+                opacity: 1;
+            }
+            .container{
+                .list{
+                    .child{
+                        @include Responsive(m-12) {
+                            background: var(--white);
+                        }
+                    }
+                }
+            }
+        }
+        .list-menu:nth-child(even){
+            .background{
+                opacity: 0;
+            }
+        }
 
-        .container {
-            padding: 6.25rem 0;
+        .list-menu {
+            position: relative;
+            width: 100%;
+            padding: 4.625rem 0;
             display: flex;
             flex-direction: column;
-            gap: 6.25rem;
+            align-items: center;
+            gap: 3.125rem;
 
-            .list-menu {
+            @include Responsive(m-12) {
+                gap: 2rem;
+            }
+            .background{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .container {
+                z-index: 10;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 3.125rem;
-
-                @include Responsive(m-12) {
-                    gap: 2rem;
-                }
-
                 h2.title {
                     font-size: 1.875rem;
                     font-weight: 600;
@@ -3197,6 +3271,8 @@ main {
                         display: flex;
                         flex-direction: column;
                         gap: 1.25rem;
+                        border-radius: 1rem;
+                        overflow: hidden;
 
                         @include Responsive(m-10) {
                             gap: 1rem;
@@ -3229,7 +3305,7 @@ main {
                             flex-direction: column;
                             gap: .625rem;
 
-                            @include Responsive(m-10) {
+                            @include Responsive(m-12) {
                                 padding: 0 1rem 1rem 1rem;
                                 border-radius: 0 0 1rem 1rem;
                             }
@@ -3299,7 +3375,6 @@ main {
                     color: var(--white);
                     background: var(--red);
                 }
-
             }
         }
     }
@@ -3511,6 +3586,12 @@ main {
                     display: none;
                 }
 
+                .list::-webkit-scrollbar {
+                    width: 0;
+                    /* Chiều rộng của thanh cuộn */
+                    background: transparent;
+                    /* Làm thanh cuộn trong suốt */
+                }
                 .list {
                     display: flex;
                     flex-direction: column;
@@ -3518,18 +3599,15 @@ main {
                     gap: 1.5rem;
 
                     @include Responsive(m-12) {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr 1fr 1fr;
-                        column-gap: 1.25rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        grid-template-columns: 1fr 1fr;
-                        row-gap: 1rem;
+                        justify-content: center;
+                        flex-direction: row;
+                        gap: 1.25rem;
+                        overflow: scroll;
+                        justify-content: flex-start;
                     }
 
                     @include Responsive(m-7) {
-                        column-gap: 1rem;
+                        gap: 1rem;
                     }
 
                     .child {
@@ -3539,17 +3617,16 @@ main {
                         width: 100%;
 
                         @include Responsive(m-12) {
+                            width: 18.75rem;
                             flex-direction: column;
+                            flex: none;
                             overflow: hidden;
                             gap: 1.25rem;
+                            border: 1px solid #ABABAB;
 
                             &:nth-child(n+5) {
                                 display: none;
                             }
-                        }
-
-                        @include Responsive(m-10) {
-                            box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
                         }
 
                         a {
@@ -3587,7 +3664,7 @@ main {
                             justify-content: center;
                             gap: .625rem;
 
-                            @include Responsive(m-10) {
+                            @include Responsive(m-12) {
                                 padding: 0 1rem 1rem;
                             }
 
@@ -3649,8 +3726,14 @@ main {
                 }
             }
         }
-
+        .relate::-webkit-scrollbar {
+            width: 0;
+            /* Chiều rộng của thanh cuộn */
+            background: transparent;
+            /* Làm thanh cuộn trong suốt */
+        }
         .relate {
+            overflow: auto; 
             width: 80rem;
 
             @include Responsive(m-14) {
@@ -3681,19 +3764,26 @@ main {
                 margin-bottom: 1.75rem;
                 align-self: flex-start;
             }
-
+            .list::-webkit-scrollbar {
+                width: 0;
+                /* Chiều rộng của thanh cuộn */
+                background: transparent;
+                /* Làm thanh cuộn trong suốt */
+            }
             .list {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 column-gap: 1.25rem;
 
-                @include Responsive(m-10) {
-                    grid-template-columns: 1fr 1fr;
-                    row-gap: 1rem;
+                @include Responsive(m-12) {
+                    justify-content: center;
+                    flex-direction: row;
+                    gap: 1.25rem;
+                    overflow: scroll;
+                    justify-content: flex-start;
                 }
-
                 @include Responsive(m-7) {
-                    column-gap: 1rem;
+                    gap: 1rem;
                 }
 
                 .child {
@@ -3707,16 +3797,23 @@ main {
                         display: none;
                     }
 
-                    @include Responsive(m-10) {
-                        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+                    @include Responsive(m-12) {
+                        width: 18.75rem;
+                        flex-direction: column;
+                        flex: none;
+                        overflow: hidden;
+                        gap: 1.25rem;
+                        border: 1px solid #ABABAB;
                     }
 
                     a {
                         width: 100%;
-                        height: 11.375rem;
+                        height: 200px;
+                        border-radius: .4375rem;
 
-                        @include Responsive(m-14) {
+                        @include Responsive(m-12) {
                             height: 9.5rem;
+                            border-radius: initial;
                         }
 
                         @include Responsive(m-10) {
@@ -3734,6 +3831,7 @@ main {
                         img {
                             width: 100%;
                             height: 100%;
+                            border-radius: inherit;
                         }
                     }
 
@@ -3742,7 +3840,7 @@ main {
                         flex-direction: column;
                         gap: .625rem;
 
-                        @include Responsive(m-10) {
+                        @include Responsive(m-12) {
                             padding: 0 1rem 1rem;
                         }
 
@@ -4151,6 +4249,9 @@ main {
                 flex-direction: column;
                 gap: 3.125rem;
                 margin-top: 3.25rem;
+                @include Responsive(m-12) {
+                    flex-direction: column-reverse;
+                }
 
                 .top, .bottom{
                     h2.title {
@@ -4164,6 +4265,13 @@ main {
                     .list:nth-child(n+4) {
                         display: none;
                     }
+
+                    .list::-webkit-scrollbar {
+                        width: 0;
+                        /* Chiều rộng của thanh cuộn */
+                        background: transparent;
+                        /* Làm thanh cuộn trong suốt */
+                    }
     
                     .list {
                         display: flex;
@@ -4172,18 +4280,14 @@ main {
                         gap: 1.5rem;
     
                         @include Responsive(m-12) {
-                            display: grid;
-                            grid-template-columns: 1fr 1fr 1fr 1fr;
-                            column-gap: 1.25rem;
+                            justify-content: center;
+                            flex-direction: row;
+                            gap: 1.25rem;
+                            overflow: scroll;
+                            justify-content: flex-start;
                         }
-    
-                        @include Responsive(m-10) {
-                            grid-template-columns: 1fr 1fr;
-                            row-gap: 1rem;
-                        }
-    
                         @include Responsive(m-7) {
-                            column-gap: 1rem;
+                            gap: 1rem;
                         }
     
                         .child {
@@ -4191,19 +4295,19 @@ main {
                             gap: 1rem;
                             border-radius: 1rem;
                             width: 100%;
+                            overflow: hidden;
     
                             @include Responsive(m-12) {
+                                width: 18.75rem;
                                 flex-direction: column;
+                                flex: none;
                                 overflow: hidden;
                                 gap: 1.25rem;
+                                border: 1px solid #ABABAB;
     
                                 &:nth-child(n+5) {
                                     display: none;
                                 }
-                            }
-    
-                            @include Responsive(m-10) {
-                                box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
                             }
     
                             a {
@@ -4241,7 +4345,7 @@ main {
                                 justify-content: center;
                                 gap: .625rem;
     
-                                @include Responsive(m-10) {
+                                @include Responsive(m-12) {
                                     padding: 0 1rem 1rem;
                                 }
     
@@ -4307,6 +4411,7 @@ main {
 
         .relate {
             width: 80rem;
+            overflow: auto;
 
             @include Responsive(m-14) {
                 width: 72rem;
@@ -4337,18 +4442,27 @@ main {
                 align-self: flex-start;
             }
 
+            .list::-webkit-scrollbar {
+                width: 0;
+                /* Chiều rộng của thanh cuộn */
+                background: transparent;
+                /* Làm thanh cuộn trong suốt */
+            }
+
             .list {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
                 column-gap: 1.25rem;
 
-                @include Responsive(m-10) {
-                    grid-template-columns: 1fr 1fr;
-                    row-gap: 1rem;
+                @include Responsive(m-12) {
+                    justify-content: center;
+                    flex-direction: row;
+                    gap: 1.25rem;
+                    overflow: scroll;
+                    justify-content: flex-start;
                 }
-
                 @include Responsive(m-7) {
-                    column-gap: 1rem;
+                    gap: 1rem;
                 }
 
                 .child {
@@ -4362,16 +4476,23 @@ main {
                         display: none;
                     }
 
-                    @include Responsive(m-10) {
-                        box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
+                    @include Responsive(m-12) {
+                        width: 18.75rem;
+                        flex-direction: column;
+                        flex: none;
+                        overflow: hidden;
+                        gap: 1.25rem;
+                        border: 1px solid #ABABAB;
                     }
 
                     a {
                         width: 100%;
                         height: 11.375rem;
+                        border-radius: .4375rem;
 
-                        @include Responsive(m-14) {
+                        @include Responsive(m-12) {
                             height: 9.5rem;
+                            border-radius: initial;
                         }
 
                         @include Responsive(m-10) {
@@ -4389,6 +4510,7 @@ main {
                         img {
                             width: 100%;
                             height: 100%;
+                            border-radius: inherit;
                         }
                     }
 
@@ -4397,7 +4519,7 @@ main {
                         flex-direction: column;
                         gap: .625rem;
 
-                        @include Responsive(m-10) {
+                        @include Responsive(m-12) {
                             padding: 0 1rem 1rem;
                         }
 
@@ -4508,58 +4630,65 @@ main {
                         margin-bottom: 1rem;
                     }
                 }
-    
+                .list-customer::-webkit-scrollbar {
+                    width: 0;
+                    /* Chiều rộng của thanh cuộn */
+                    background: transparent;
+                    /* Làm thanh cuộn trong suốt */
+                }
                 .list-customer {
-                    display: flex;
-                    justify-content: center;
-                    flex-flow: wrap;
-                    column-gap: 1.25rem;
-                    row-gap: 1.875rem;
                     margin-bottom: 6.25rem;
-    
-                    @include Responsive(m-10) {
-                        justify-content: center;
-                        gap: 1rem;
-                    }
-    
-                    span {
-                        width: 12.25rem;
-                        height: 7.1875rem;
-                        border-radius: .5rem;
-                        background: #EDF9EC;
-                        box-sizing: border-box;
-                        cursor: pointer;
-    
-                        @include Responsive(m-12) {
-                            height: 6rem;
-                        }
-    
-                        @include Responsive(m-10) {
-                            height: 5.5rem;
-                        }
-    
+                    overflow: scroll;
+                    display: flex;
+                    justify-content: space-evenly;
+                    .wrap{
+                        display: flex;
+                        justify-content: flex-start;
+                        gap: 1.25rem;
+                        width: fit-content; 
+                
                         @include Responsive(m-7) {
-                            width: 10rem;
-                            height: 4rem;
+                            gap: 1rem;
                         }
-    
-                        @include Responsive(m-4) {
-                            width: 8rem;
-                            height: 3.5rem;
+                
+                        span {
+                            box-sizing: border-box;
+                            width: 12.25rem;
+                            height: 7.1875rem;
+                            border-radius: .5rem;
+                            background: #EDF9EC;
+                            cursor: pointer;
+                
+                            @include Responsive(m-12) {
+                                height: 6rem;
+                            }
+                
+                            @include Responsive(m-10) {
+                                height: 5.5rem;
+                            }
+                
+                            @include Responsive(m-7) {
+                                width: 10rem;
+                                height: 4rem;
+                            }
+                
+                            @include Responsive(m-4) {
+                                width: 8rem;
+                                height: 3.5rem;
+                            }
+                
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: inherit;
+                                flex-shrink: 0;
+                                object-fit: contain;
+                                mix-blend-mode: multiply;
+                            }
                         }
-    
-                        img {
-                            width: 100%;
-                            height: 100%;
-                            border-radius: inherit;
-                            flex-shrink: 0;
-                            object-fit: contain;
-                            mix-blend-mode: multiply;
+                        span:hover {
+                            border: 1.5px solid var(--green);
                         }
-                    }
-    
-                    span:hover {
-                        border: 1.5px solid var(--green);
                     }
                 }
     
@@ -5464,8 +5593,6 @@ main {
                             flex-direction: row;
                             gap: 1.25rem;
                             overflow: scroll;
-                        }
-                        @include Responsive(m-10) {
                             justify-content: flex-start;
                         }
                         @include Responsive(m-7) {
@@ -5487,11 +5614,11 @@ main {
                                 flex: none;
                                 overflow: hidden;
                                 gap: 1.25rem;
+                                border: 1px solid #ABABAB;
                             }
 
                             @include Responsive(m-10) {
                                 width: 16rem;
-                                box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.10);
                             }
                             @include Responsive(m-7) {
                                 width: 14rem;
@@ -5528,7 +5655,7 @@ main {
                                 justify-content: center;
                                 gap: .625rem;
 
-                                @include Responsive(m-10) {
+                                @include Responsive(m-12) {
                                     padding: 0 1rem 1rem;
                                 }
 
@@ -5694,7 +5821,7 @@ main {
 
                         &:nth-child(1) {
                             font-weight: 600;
-                            color: #3CA333;
+                            color: #136451;
                         }
 
                         span {
@@ -5730,7 +5857,8 @@ main {
 
             @include Responsive(m-7) {
                 gap: 1rem;
-                padding: 3rem 0;
+                padding-top: 3rem;
+                padding-bottom: 8rem;
             }
 
             @include Responsive(m-4) {
@@ -5927,7 +6055,8 @@ main {
 
             @include Responsive(m-7) {
                 gap: 1rem;
-                padding: 3rem 0;
+                padding-top: 3rem;
+                padding-bottom: 8rem;
             }
 
             @include Responsive(m-4) {
@@ -6147,18 +6276,18 @@ main {
             }
 
             .form {
-                padding: 0 13.125rem;
+                display: grid;
+                grid-template-columns: 52.875rem auto;
+                gap: 4.375rem;
+
+                @include Responsive(m-14) {
+                    grid-template-columns: 48rem auto;
+                    gap: 3rem;
+                }
 
                 @include Responsive(m-12) {
-                    padding: 0 8rem;
-                }
-
-                @include Responsive(m-10) {
-                    padding: 0 2rem;
-                }
-
-                @include Responsive(m-7) {
-                    padding: 0;
+                    display: flex;
+                    flex-direction: column;
                 }
 
                 form {
@@ -6352,20 +6481,272 @@ main {
                         color: #FE3131;
                     }
                 }
+                .notice{
+                    h3{
+                        color: var(--red);
+                        font-size: 1.25rem;
+                        font-weight: 600;
+                        line-height: 160%;
+                        margin-bottom: 1.25rem;
+                    }
+                    strong{
+                        color: var(--black);
+                        font-size: 1rem;
+                        font-weight: 500;
+                        line-height: 150%;
+                        text-transform: uppercase;
+                    }
+                    >ul{
+                        margin-top: 1.25rem;
+                        margin-bottom: 1.625rem;
+                        display: flex;
+                        flex-direction: column;
+                        list-style: disc;
+                        padding-left: 1.75rem;
+                        li{
+                            color: var(--black);
+                            font-size: 1rem;
+                            font-weight: 400;
+                            line-height: 150%;
+                        }
+                    }
+                    .infor{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.625rem;
+                        .child{
+                            display: flex;
+                            align-items: center;
+                            gap: 1.5rem;
+                            .icon {
+                                svg {
+                                    padding: 1rem;
+                                    border-radius: 12.5rem;
+                                    background: var(--csk-3-da-33350, #EDF9EC);
+                                }
+                            }
+                            .right {
+                                color: var(--black);
+
+                                p {
+                                    font-size: .875rem;
+                                    font-weight: 300;
+                                    line-height: normal;
+                                }
+
+                                span {
+                                    display: flex;
+                                    width: 100%;
+                                    font-size: 1rem;
+                                    font-weight: 500;
+                                    line-height: normal;
+                                }
+                            }
+                        }
+                    }
+                }
             }
+        }
+    }
 
-            .text-bottom {
-                margin-top: .625rem;
+    // ----------- FAQS -----------
+    .section-faqs{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .container{
+            padding-top: 6.25rem;
+            padding-bottom: 12.5rem;
+            display: grid;
+            grid-template-columns: 39.375rem auto;
+            gap: 4.375rem;
+            @include Responsive(m-14) {
+                grid-template-columns: 34rem auto;
+            }
+            @include Responsive(m-12) {
+                grid-template-columns: 28rem auto;
+            }
+            @include Responsive(m-10) {
                 display: flex;
-                justify-content: center;
+                flex-direction: column;
+                gap: 3rem;   
+            }
+            .left{
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                .child-faq{
+                    padding-bottom: 1.25rem;
+                    border-bottom: 1px solid #CFCFCF;
+                    &:last-child{
+                        border: none;
+                    }
+                    .question{
+                        display: flex;
+                        justify-content: space-between;
+                        .title{
+                            color: var(--black);
+                            font-size: 1.125rem;
+                            font-weight: 500;
+                            line-height: 150%;
+                            &.show{
+                                color: #136451;
+                            }
+                        }
+                        .icon {
+                            position: relative;
+                            transition: all 0.3s ease-in-out;
+                            cursor: pointer;
+                            .plus-icon, .minus-icon{
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                            }
 
-                span {
-                    text-align: center;
-                    width: 28.125rem;
-                    color: #414141;
-                    font-size: .875rem;
-                    font-weight: 400;
-                    line-height: 170%;
+                            .plus-icon {
+                                display: block;
+
+                                &.hide {
+                                    display: none;
+                                }
+                            }
+
+                            .minus-icon {
+                                display: none;
+
+                                &.show {
+                                    display: block;
+                                }
+                            }
+                        }
+                    }
+                    .answer{
+                        display: none;
+                        margin-top: .75rem;
+                        color: var(--black);
+                        font-size: 1rem;
+                        font-weight: 400;
+                        line-height: 150%;
+                        transition: 0.5s ease-in-out;
+                        &.show{
+                            display: block;
+                        }
+                    }
+                }
+            }
+            .right{
+                padding-top: 3.125rem;
+                @include Responsive(m-12) {
+                    padding-top: 1.875rem;
+                }
+                @include Responsive(m-10) {
+                    padding-top: 0;   
+                }
+                h2.title{
+                    color: #136451;
+                    font-size: 1.875rem;
+                    font-weight: 600;
+                    line-height: 160%;
+                    margin-bottom: 1.875rem;
+                    @include Responsive(m-12) {
+                        font-size: 1.5rem;
+                        margin-bottom: 1.5rem;
+                    }
+                }
+                form{
+                    h4{
+                        margin-bottom: 1.875rem;
+                        color: #3F3F3F;
+                        font-size: 1.125rem;
+                        font-weight: 700;
+                        line-height: 160%;
+                        @include Responsive(m-7) {
+                            font-size: 1rem;
+                        }
+                    }
+                    .line{
+                        width: 100%;
+                        .form-group {
+                            position: relative;
+
+                            label {
+                                position: absolute;
+                                top: -.75rem;
+                                left: .75rem;
+                                padding: 0 .5rem;
+                                background: var(--white);
+
+                                @include Responsive(m-7) {
+                                    font-size: .875rem;
+                                    left: .5rem;
+                                }
+                            }
+
+                            input, select, textarea {
+                                box-sizing: border-box;
+                                width: 100%;
+                                padding: .875rem 1.25rem;
+                                border: 1px solid #999;
+                                border-radius: .625rem;
+                                font-size: .875rem;
+                                font-weight: 400;
+                                line-height: 160%;
+
+                                @include Responsive(m-7) {
+                                    font-size: .875rem;
+                                    padding: .5rem .75rem;
+                                }
+                            }
+                            
+                            textarea{
+                                height: 11.5rem;
+                                box-sizing: border-box;
+                                resize: none;
+                            }
+
+                            input::placeholder, textarea::placeholder {
+                                font-size: 1rem;
+                                color: #BDBDBD;
+
+                                @include Responsive(m-7) {
+                                    font-size: .75rem;
+                                }
+                            }
+                        }
+                    }
+                    .line-1{
+                        margin-bottom: 1.875rem;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 1.25rem;
+                    }
+                    .line-2{
+                        margin-bottom: 2.25rem;
+                    }
+                    .line-3{
+                        margin-bottom: 1.875rem;
+                    }
+                    button{
+                        padding: 1rem 2rem;
+                        box-sizing: border-box;
+                        border-radius: .625rem;
+                        color: var(--white);
+                        background: var(--red);
+                        border: 1px solid var(--red);
+                        font-weight: 400;
+                        line-height: 150%;
+                        @include Responsive(m-7) {
+                            padding: .5rem 1rem;
+                            font-size: .875rem;
+                        }
+                    }
+                    button:hover{
+                        color: var(--red);
+                        background: var(--white);
+                    }
                 }
             }
         }
@@ -6444,6 +6825,10 @@ main {
                     .line {
                         width: inherit;
 
+                        br{
+                            display: none;
+                        }
+
                         input,
                         select,
                         textarea {
@@ -6455,6 +6840,9 @@ main {
                                 padding: .5rem;
                                 font-size: .875rem;
                             }
+                        }
+                        textarea{
+                            resize: none;
                         }
 
                         input:focus,

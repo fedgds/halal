@@ -222,3 +222,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+// Question and answer contact page
+document.addEventListener('DOMContentLoaded', function () {
+    const children = document.querySelectorAll('.child-faq');
+
+    children.forEach(child => {
+        const openAnswer = child.querySelector('.plus-icon');
+        const closeAnswer = child.querySelector('.minus-icon');
+        const answer = child.querySelector('#answer-question');
+        const title = child.querySelector('.title');
+
+        function showAnswer() {
+            answer.classList.add('show');  
+            openAnswer.classList.add('hide');  
+            closeAnswer.classList.add('show');  
+            title.classList.add('show');  
+        }
+
+        function hideAnswer() {
+            answer.classList.remove('show');
+            openAnswer.classList.remove('hide');  
+            closeAnswer.classList.remove('show');  
+            title.classList.remove('show'); 
+        }
+
+        openAnswer.addEventListener('click', showAnswer);
+        closeAnswer.addEventListener('click', hideAnswer);
+    });
+});

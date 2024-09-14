@@ -7,7 +7,6 @@ $section_4 = get_field('section-4', $id);
 $section_3 = get_field('section-3', $id);
 $url = get_template_directory_uri();
 
-
 $list_customers_query = new WP_Query(array(
     'post_type' => 'khach-hang',
     'post_status' => 'publish',
@@ -141,21 +140,23 @@ get_header(); ?>
                 </div>
             </div>
             <div class="bottom">
-                <?php if ($list_customers_query->have_posts()) : ?>
-                    <?php while ($list_customers_query->have_posts()) : $list_customers_query->the_post(); ?>
-                        <?php
-                            $customer_id = get_the_ID();
-                            $customer = get_field('customer', $customer_id);
-                            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                        ?>
-                        <?php if($customer['typical'] == true): ?>
-                            <a href=""><img src="<?= esc_url($thumbnail_url) ?>" alt=""></a>
-                        <?php endif; ?>
-                    <?php endwhile; ?>
-                    <?php wp_reset_postdata(); ?>
-                <?php else : ?>
-                    <p>Không có khách hàng.</p>
-                <?php endif; ?>
+                <div class="wrap">
+                    <?php if ($list_customers_query->have_posts()) : ?>
+                        <?php while ($list_customers_query->have_posts()) : $list_customers_query->the_post(); ?>
+                            <?php
+                                $customer_id = get_the_ID();
+                                $customer = get_field('customer', $customer_id);
+                                $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                            ?>
+                            <?php if($customer['typical'] == true): ?>
+                                <a href=""><img src="<?= esc_url($thumbnail_url) ?>" alt=""></a>
+                            <?php endif; ?>
+                        <?php endwhile; ?>
+                        <?php wp_reset_postdata(); ?>
+                    <?php else : ?>
+                        <p>Không có khách hàng.</p>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

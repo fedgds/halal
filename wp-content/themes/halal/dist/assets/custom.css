@@ -384,10 +384,11 @@ header .header-mobile .icon svg {
 }
 header .menu-mobile {
   position: fixed;
+  box-sizing: border-box;
   top: 0;
   left: -100%;
   height: 100vh;
-  width: 20rem;
+  width: 22.5rem;
   background-color: var(--white);
   z-index: 9998;
   transition: 0.6s all ease-in-out;
@@ -1135,14 +1136,22 @@ main .section-3-home .container .top .description {
     margin-bottom: 1rem;
   }
 }
+main .section-3-home .container .top nav.tab::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-3-home .container .top nav.tab {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  overflow: auto;
 }
 main .section-3-home .container .top nav.tab ul {
   display: flex;
-  flex-flow: wrap;
   gap: 1.25rem;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 @media only screen and (max-width: 1060px) {
   main .section-3-home .container .top nav.tab ul {
@@ -1155,6 +1164,7 @@ main .section-3-home .container .top nav.tab ul {
   }
 }
 main .section-3-home .container .top nav.tab ul li {
+  white-space: nowrap;
   padding: 0.625rem 1.25rem;
   border-radius: 3.375rem;
   background: #CCC;
@@ -1558,6 +1568,11 @@ main .section-4-home .container .list-training .child h4:hover {
   color: var(--black);
 }
 main .section-4-home .container .list-training .child .description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
   color: var(--black);
   font-size: 1rem;
   font-weight: 400;
@@ -1719,46 +1734,58 @@ main .section-5-home .container .top .description {
     margin-bottom: 1rem;
   }
 }
+main .section-5-home .container .bottom::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-5-home .container .bottom {
   display: flex;
-  justify-content: center;
-  flex-flow: wrap;
+  justify-content: space-evenly;
+  overflow: scroll;
+}
+main .section-5-home .container .bottom .wrap {
+  display: flex;
+  justify-content: flex-start;
   gap: 1.25rem;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 @media only screen and (max-width: 767px) {
-  main .section-5-home .container .bottom {
+  main .section-5-home .container .bottom .wrap {
     gap: 1rem;
   }
 }
-main .section-5-home .container .bottom a {
+main .section-5-home .container .bottom .wrap a {
   width: 12.25rem;
   height: 7.1875rem;
   border-radius: 0.5rem;
   background: var(--white);
 }
 @media only screen and (max-width: 1280px) {
-  main .section-5-home .container .bottom a {
+  main .section-5-home .container .bottom .wrap a {
     height: 6rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-5-home .container .bottom a {
+  main .section-5-home .container .bottom .wrap a {
     height: 5.5rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-5-home .container .bottom a {
+  main .section-5-home .container .bottom .wrap a {
     width: 10rem;
     height: 4rem;
   }
 }
 @media only screen and (max-width: 480px) {
-  main .section-5-home .container .bottom a {
+  main .section-5-home .container .bottom .wrap a {
     width: 8rem;
     height: 3.5rem;
   }
 }
-main .section-5-home .container .bottom a img {
+main .section-5-home .container .bottom .wrap a img {
   width: 100%;
   height: 100%;
   border-radius: inherit;
@@ -1911,7 +1938,7 @@ main .section-6-home .container .bottom .left .list-news.active .child {
 }
 @media only screen and (max-width: 1060px) {
   main .section-6-home .container .bottom .left .list-news.active .child {
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ABABAB;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -2180,12 +2207,6 @@ main .section-7-home .container .bottom {
 main .section-7-home .container .bottom .list {
   display: none;
 }
-main .section-7-home .container .bottom .list::-webkit-scrollbar {
-  width: 0;
-  /* Chiều rộng của thanh cuộn */
-  background: transparent;
-  /* Làm thanh cuộn trong suốt */
-}
 main .section-7-home .container .bottom .list.active {
   display: flex;
   width: 100%;
@@ -2193,32 +2214,42 @@ main .section-7-home .container .bottom .list.active {
   align-items: center;
   justify-content: flex-start;
   gap: 50px;
-  overflow: scroll;
 }
 @media only screen and (max-width: 1060px) {
   main .section-7-home .container .bottom .list.active {
     align-items: flex-start;
   }
 }
-main .section-7-home .container .bottom .list.active .wrap-list {
+main .section-7-home .container .bottom .list.active .wrap::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
+main .section-7-home .container .bottom .list.active .wrap {
+  width: 100%;
+  overflow: scroll;
+}
+main .section-7-home .container .bottom .list.active .wrap .wrap-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.25rem;
   width: 100%;
 }
 @media only screen and (max-width: 1060px) {
-  main .section-7-home .container .bottom .list.active .wrap-list {
+  main .section-7-home .container .bottom .list.active .wrap .wrap-list {
     display: flex;
-    width: 60rem;
+    width: -moz-fit-content;
+    width: fit-content;
     padding-bottom: 0.5rem;
   }
 }
 @media only screen and (max-width: 480px) {
-  main .section-7-home .container .bottom .list.active .wrap-list {
+  main .section-7-home .container .bottom .list.active .wrap .wrap-list {
     padding: 0;
   }
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -2226,54 +2257,55 @@ main .section-7-home .container .bottom .list.active .wrap-list .child {
   overflow: hidden;
 }
 @media only screen and (max-width: 1060px) {
-  main .section-7-home .container .bottom .list.active .wrap-list .child {
+  main .section-7-home .container .bottom .list.active .wrap .wrap-list .child {
     width: 20rem;
     gap: 1rem;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    background: var(--white);
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-7-home .container .bottom .list.active .wrap-list .child {
+  main .section-7-home .container .bottom .list.active .wrap .wrap-list .child {
     width: 17rem;
   }
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child a {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child a {
   width: 100%;
   height: 15.625rem;
   border-radius: inherit;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-7-home .container .bottom .list.active .wrap-list .child a {
+  main .section-7-home .container .bottom .list.active .wrap .wrap-list .child a {
     height: 12rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-7-home .container .bottom .list.active .wrap-list .child a {
+  main .section-7-home .container .bottom .list.active .wrap .wrap-list .child a {
     border-radius: 1rem 1rem 0 0;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-7-home .container .bottom .list.active .wrap-list .child a {
+  main .section-7-home .container .bottom .list.active .wrap .wrap-list .child a {
     height: 10rem;
   }
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child a img {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child a img {
   width: 100%;
   height: 100%;
   border-radius: inherit;
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child .infor {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
 }
 @media only screen and (max-width: 1060px) {
-  main .section-7-home .container .bottom .list.active .wrap-list .child .infor {
+  main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor {
     padding: 0 1rem 1rem 1rem;
     border-radius: 0 0 1rem 1rem;
   }
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child .infor .date-and-hour {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor .date-and-hour {
   color: var(--black);
   font-size: 0.875rem;
   font-weight: 300;
@@ -2282,18 +2314,18 @@ main .section-7-home .container .bottom .list.active .wrap-list .child .infor .d
   display: flex;
   gap: 0.625rem;
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child .infor .date-and-hour .date,
-main .section-7-home .container .bottom .list.active .wrap-list .child .infor .date-and-hour .time {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor .date-and-hour .date,
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor .date-and-hour .time {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.3125rem;
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child .infor .date-and-hour .date .icon,
-main .section-7-home .container .bottom .list.active .wrap-list .child .infor .date-and-hour .time .icon {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor .date-and-hour .date .icon,
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor .date-and-hour .time .icon {
   display: flex;
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child .infor h3 {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor h3 {
   color: var(--black);
   font-size: 1.125rem;
   font-weight: 500;
@@ -2305,7 +2337,7 @@ main .section-7-home .container .bottom .list.active .wrap-list .child .infor h3
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
 }
-main .section-7-home .container .bottom .list.active .wrap-list .child .infor h3:hover {
+main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor h3:hover {
   color: #136451;
 }
 main .section-7-home .container .bottom .list.active .view-more {
@@ -2417,16 +2449,17 @@ main .section-banner .container .bot * {
 }
 main .section-banner .container .bot a:hover,
 main .section-banner .container .bot span:hover {
-  color: var(--red);
+  color: var(--green);
 }
 main .section-banner .container .bot svg:hover path {
-  fill: var(--red);
+  fill: var(--green);
 }
 main .section-banner .container h2.title {
   font-size: 2.5rem;
   font-weight: 500;
   line-height: 160%;
   margin-bottom: 1.875rem;
+  text-transform: uppercase;
 }
 @media only screen and (max-width: 1060px) {
   main .section-banner .container h2.title {
@@ -2882,15 +2915,11 @@ main .section-3-about .container .bottom .child .download svg {
 }
 main .section-4-about {
   padding: 4.375rem 0;
+  margin-bottom: 13.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 6.25rem;
-}
-@media only screen and (max-width: 767px) {
-  main .section-4-about {
-    margin-bottom: 3.75rem;
-  }
+  background: #EDF9EC;
 }
 main .section-4-about .container .top {
   text-align: center;
@@ -2939,46 +2968,58 @@ main .section-4-about .container .top .description {
     margin-bottom: 1rem;
   }
 }
+main .section-4-about .container .bottom::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-4-about .container .bottom {
   display: flex;
-  justify-content: center;
-  flex-flow: wrap;
+  justify-content: space-evenly;
+  overflow: scroll;
+}
+main .section-4-about .container .bottom .wrap {
+  display: flex;
+  justify-content: flex-start;
   gap: 1.25rem;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 @media only screen and (max-width: 767px) {
-  main .section-4-about .container .bottom {
+  main .section-4-about .container .bottom .wrap {
     gap: 1rem;
   }
 }
-main .section-4-about .container .bottom a {
+main .section-4-about .container .bottom .wrap a {
   width: 12.25rem;
   height: 7.1875rem;
   border-radius: 0.5rem;
-  background: #EDF9EC;
+  background: var(--white);
 }
 @media only screen and (max-width: 1280px) {
-  main .section-4-about .container .bottom a {
+  main .section-4-about .container .bottom .wrap a {
     height: 6rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-4-about .container .bottom a {
+  main .section-4-about .container .bottom .wrap a {
     height: 5.5rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-4-about .container .bottom a {
+  main .section-4-about .container .bottom .wrap a {
     width: 10rem;
     height: 4rem;
   }
 }
 @media only screen and (max-width: 480px) {
-  main .section-4-about .container .bottom a {
+  main .section-4-about .container .bottom .wrap a {
     width: 8rem;
     height: 3.5rem;
   }
 }
-main .section-4-about .container .bottom a img {
+main .section-4-about .container .bottom .wrap a img {
   width: 100%;
   height: 100%;
   border-radius: inherit;
@@ -2990,27 +3031,57 @@ main .section-4-about .container .bottom a img {
 main .section-halal {
   margin-bottom: 12.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-main .section-halal .container {
-  padding: 6.25rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6.25rem;
+main .section-halal .category {
+  padding-top: 5.625rem;
 }
-main .section-halal .container .list-menu {
+main .section-halal .list-menu:nth-child(odd) .background {
+  opacity: 1;
+}
+@media only screen and (max-width: 1280px) {
+  main .section-halal .list-menu:nth-child(odd) .container .list .child {
+    background: var(--white);
+  }
+}
+main .section-halal .list-menu:nth-child(even) .background {
+  opacity: 0;
+}
+main .section-halal .list-menu {
+  position: relative;
+  width: 100%;
+  padding: 4.625rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3.125rem;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-halal .container .list-menu {
+  main .section-halal .list-menu {
     gap: 2rem;
   }
 }
-main .section-halal .container .list-menu h2.title {
+main .section-halal .list-menu .background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+main .section-halal .list-menu .background img {
+  width: 100%;
+  height: 100%;
+}
+main .section-halal .list-menu .container {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.125rem;
+}
+main .section-halal .list-menu .container h2.title {
   font-size: 1.875rem;
   font-weight: 600;
   line-height: normal;
@@ -3018,70 +3089,72 @@ main .section-halal .container .list-menu h2.title {
   align-self: flex-start;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-halal .container .list-menu h2.title {
+  main .section-halal .list-menu .container h2.title {
     font-size: 1.75rem;
   }
 }
-main .section-halal .container .list-menu .list {
+main .section-halal .list-menu .container .list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.25rem;
   width: 100%;
 }
 @media only screen and (max-width: 767px) {
-  main .section-halal .container .list-menu .list {
+  main .section-halal .list-menu .container .list {
     grid-template-columns: 1fr 1fr;
   }
 }
 @media only screen and (max-width: 480px) {
-  main .section-halal .container .list-menu .list {
+  main .section-halal .list-menu .container .list {
     grid-template-columns: 1fr;
   }
 }
-main .section-halal .container .list-menu .list .child {
+main .section-halal .list-menu .container .list .child {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  border-radius: 1rem;
+  overflow: hidden;
 }
 @media only screen and (max-width: 1060px) {
-  main .section-halal .container .list-menu .list .child {
+  main .section-halal .list-menu .container .list .child {
     gap: 1rem;
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
   }
 }
-main .section-halal .container .list-menu .list .child a {
+main .section-halal .list-menu .container .list .child a {
   width: 100%;
   height: 15.625rem;
   border-radius: 1rem;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-halal .container .list-menu .list .child a {
+  main .section-halal .list-menu .container .list .child a {
     height: 12rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-halal .container .list-menu .list .child a {
+  main .section-halal .list-menu .container .list .child a {
     height: 10rem;
     border-radius: 1rem 1rem 0 0;
   }
 }
-main .section-halal .container .list-menu .list .child a img {
+main .section-halal .list-menu .container .list .child a img {
   width: 100%;
   height: 100%;
   border-radius: inherit;
 }
-main .section-halal .container .list-menu .list .child .infor {
+main .section-halal .list-menu .container .list .child .infor {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
 }
-@media only screen and (max-width: 1060px) {
-  main .section-halal .container .list-menu .list .child .infor {
+@media only screen and (max-width: 1280px) {
+  main .section-halal .list-menu .container .list .child .infor {
     padding: 0 1rem 1rem 1rem;
     border-radius: 0 0 1rem 1rem;
   }
 }
-main .section-halal .container .list-menu .list .child .infor .date-and-hour {
+main .section-halal .list-menu .container .list .child .infor .date-and-hour {
   color: var(--black);
   font-size: 0.875rem;
   font-weight: 300;
@@ -3090,18 +3163,18 @@ main .section-halal .container .list-menu .list .child .infor .date-and-hour {
   display: flex;
   gap: 0.625rem;
 }
-main .section-halal .container .list-menu .list .child .infor .date-and-hour .date,
-main .section-halal .container .list-menu .list .child .infor .date-and-hour .time {
+main .section-halal .list-menu .container .list .child .infor .date-and-hour .date,
+main .section-halal .list-menu .container .list .child .infor .date-and-hour .time {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.3125rem;
 }
-main .section-halal .container .list-menu .list .child .infor .date-and-hour .date .icon,
-main .section-halal .container .list-menu .list .child .infor .date-and-hour .time .icon {
+main .section-halal .list-menu .container .list .child .infor .date-and-hour .date .icon,
+main .section-halal .list-menu .container .list .child .infor .date-and-hour .time .icon {
   display: flex;
 }
-main .section-halal .container .list-menu .list .child .infor h3 {
+main .section-halal .list-menu .container .list .child .infor h3 {
   color: var(--black);
   font-size: 1.125rem;
   font-weight: 500;
@@ -3113,10 +3186,10 @@ main .section-halal .container .list-menu .list .child .infor h3 {
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
 }
-main .section-halal .container .list-menu .list .child .infor h3:hover {
+main .section-halal .list-menu .container .list .child .infor h3:hover {
   color: #136451;
 }
-main .section-halal .container .list-menu .view-more {
+main .section-halal .list-menu .container .view-more {
   width: 5.375rem;
   padding: 0.75rem 2rem !important;
   background: var(--white);
@@ -3130,12 +3203,12 @@ main .section-halal .container .list-menu .view-more {
   border-radius: 0.625rem;
 }
 @media only screen and (max-width: 767px) {
-  main .section-halal .container .list-menu .view-more {
+  main .section-halal .list-menu .container .view-more {
     width: 4.0625rem;
     font-size: 0.75rem;
   }
 }
-main .section-halal .container .list-menu .view-more:hover {
+main .section-halal .list-menu .container .view-more:hover {
   color: var(--white);
   background: var(--red);
 }
@@ -3347,6 +3420,12 @@ main .section-detail-halal .container .right h2.title {
 main .section-detail-halal .container .right .list:nth-child(n+4) {
   display: none;
 }
+main .section-detail-halal .container .right .list::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-detail-halal .container .right .list {
   display: flex;
   flex-direction: column;
@@ -3355,22 +3434,16 @@ main .section-detail-halal .container .right .list {
 }
 @media only screen and (max-width: 1280px) {
   main .section-detail-halal .container .right .list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    -moz-column-gap: 1.25rem;
-         column-gap: 1.25rem;
-  }
-}
-@media only screen and (max-width: 1060px) {
-  main .section-detail-halal .container .right .list {
-    grid-template-columns: 1fr 1fr;
-    row-gap: 1rem;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1.25rem;
+    overflow: scroll;
+    justify-content: flex-start;
   }
 }
 @media only screen and (max-width: 767px) {
   main .section-detail-halal .container .right .list {
-    -moz-column-gap: 1rem;
-         column-gap: 1rem;
+    gap: 1rem;
   }
 }
 main .section-detail-halal .container .right .list .child {
@@ -3381,17 +3454,15 @@ main .section-detail-halal .container .right .list .child {
 }
 @media only screen and (max-width: 1280px) {
   main .section-detail-halal .container .right .list .child {
+    width: 18.75rem;
     flex-direction: column;
+    flex: none;
     overflow: hidden;
     gap: 1.25rem;
+    border: 1px solid #ABABAB;
   }
   main .section-detail-halal .container .right .list .child:nth-child(n+5) {
     display: none;
-  }
-}
-@media only screen and (max-width: 1060px) {
-  main .section-detail-halal .container .right .list .child {
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
   }
 }
 main .section-detail-halal .container .right .list .child a {
@@ -3431,7 +3502,7 @@ main .section-detail-halal .container .right .list .child .infor {
   justify-content: center;
   gap: 0.625rem;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-halal .container .right .list .child .infor {
     padding: 0 1rem 1rem;
   }
@@ -3489,7 +3560,14 @@ main .section-detail-halal .container .right .list .child .infor h3 {
 main .section-detail-halal .container .right .list .child .infor h3:hover {
   color: var(--green);
 }
+main .section-detail-halal .relate::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-detail-halal .relate {
+  overflow: auto;
   width: 80rem;
 }
 @media only screen and (max-width: 1480px) {
@@ -3525,22 +3603,30 @@ main .section-detail-halal .relate h2.title {
   margin-bottom: 1.75rem;
   align-self: flex-start;
 }
+main .section-detail-halal .relate .list::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-detail-halal .relate .list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   -moz-column-gap: 1.25rem;
        column-gap: 1.25rem;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-halal .relate .list {
-    grid-template-columns: 1fr 1fr;
-    row-gap: 1rem;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1.25rem;
+    overflow: scroll;
+    justify-content: flex-start;
   }
 }
 @media only screen and (max-width: 767px) {
   main .section-detail-halal .relate .list {
-    -moz-column-gap: 1rem;
-         column-gap: 1rem;
+    gap: 1rem;
   }
 }
 main .section-detail-halal .relate .list .child {
@@ -3553,18 +3639,25 @@ main .section-detail-halal .relate .list .child {
 main .section-detail-halal .relate .list .child:nth-child(n+5) {
   display: none;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-halal .relate .list .child {
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
+    width: 18.75rem;
+    flex-direction: column;
+    flex: none;
+    overflow: hidden;
+    gap: 1.25rem;
+    border: 1px solid #ABABAB;
   }
 }
 main .section-detail-halal .relate .list .child a {
   width: 100%;
-  height: 11.375rem;
+  height: 200px;
+  border-radius: 0.4375rem;
 }
-@media only screen and (max-width: 1480px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-halal .relate .list .child a {
     height: 9.5rem;
+    border-radius: initial;
   }
 }
 @media only screen and (max-width: 1060px) {
@@ -3585,13 +3678,14 @@ main .section-detail-halal .relate .list .child a {
 main .section-detail-halal .relate .list .child a img {
   width: 100%;
   height: 100%;
+  border-radius: inherit;
 }
 main .section-detail-halal .relate .list .child .infor {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-halal .relate .list .child .infor {
     padding: 0 1rem 1rem;
   }
@@ -3993,6 +4087,11 @@ main .section-detail-news-and-event .container .right {
   gap: 3.125rem;
   margin-top: 3.25rem;
 }
+@media only screen and (max-width: 1280px) {
+  main .section-detail-news-and-event .container .right {
+    flex-direction: column-reverse;
+  }
+}
 main .section-detail-news-and-event .container .right .top h2.title, main .section-detail-news-and-event .container .right .bottom h2.title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -4003,6 +4102,12 @@ main .section-detail-news-and-event .container .right .top h2.title, main .secti
 main .section-detail-news-and-event .container .right .top .list:nth-child(n+4), main .section-detail-news-and-event .container .right .bottom .list:nth-child(n+4) {
   display: none;
 }
+main .section-detail-news-and-event .container .right .top .list::-webkit-scrollbar, main .section-detail-news-and-event .container .right .bottom .list::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-detail-news-and-event .container .right .top .list, main .section-detail-news-and-event .container .right .bottom .list {
   display: flex;
   flex-direction: column;
@@ -4011,22 +4116,16 @@ main .section-detail-news-and-event .container .right .top .list, main .section-
 }
 @media only screen and (max-width: 1280px) {
   main .section-detail-news-and-event .container .right .top .list, main .section-detail-news-and-event .container .right .bottom .list {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    -moz-column-gap: 1.25rem;
-         column-gap: 1.25rem;
-  }
-}
-@media only screen and (max-width: 1060px) {
-  main .section-detail-news-and-event .container .right .top .list, main .section-detail-news-and-event .container .right .bottom .list {
-    grid-template-columns: 1fr 1fr;
-    row-gap: 1rem;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1.25rem;
+    overflow: scroll;
+    justify-content: flex-start;
   }
 }
 @media only screen and (max-width: 767px) {
   main .section-detail-news-and-event .container .right .top .list, main .section-detail-news-and-event .container .right .bottom .list {
-    -moz-column-gap: 1rem;
-         column-gap: 1rem;
+    gap: 1rem;
   }
 }
 main .section-detail-news-and-event .container .right .top .list .child, main .section-detail-news-and-event .container .right .bottom .list .child {
@@ -4034,20 +4133,19 @@ main .section-detail-news-and-event .container .right .top .list .child, main .s
   gap: 1rem;
   border-radius: 1rem;
   width: 100%;
+  overflow: hidden;
 }
 @media only screen and (max-width: 1280px) {
   main .section-detail-news-and-event .container .right .top .list .child, main .section-detail-news-and-event .container .right .bottom .list .child {
+    width: 18.75rem;
     flex-direction: column;
+    flex: none;
     overflow: hidden;
     gap: 1.25rem;
+    border: 1px solid #ABABAB;
   }
   main .section-detail-news-and-event .container .right .top .list .child:nth-child(n+5), main .section-detail-news-and-event .container .right .bottom .list .child:nth-child(n+5) {
     display: none;
-  }
-}
-@media only screen and (max-width: 1060px) {
-  main .section-detail-news-and-event .container .right .top .list .child, main .section-detail-news-and-event .container .right .bottom .list .child {
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
   }
 }
 main .section-detail-news-and-event .container .right .top .list .child a, main .section-detail-news-and-event .container .right .bottom .list .child a {
@@ -4087,7 +4185,7 @@ main .section-detail-news-and-event .container .right .top .list .child .infor, 
   justify-content: center;
   gap: 0.625rem;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-news-and-event .container .right .top .list .child .infor, main .section-detail-news-and-event .container .right .bottom .list .child .infor {
     padding: 0 1rem 1rem;
   }
@@ -4149,6 +4247,7 @@ main .section-detail-news-and-event .container .right .top .list .child .infor h
 }
 main .section-detail-news-and-event .relate {
   width: 80rem;
+  overflow: auto;
 }
 @media only screen and (max-width: 1480px) {
   main .section-detail-news-and-event .relate {
@@ -4183,22 +4282,30 @@ main .section-detail-news-and-event .relate h2.title {
   margin-bottom: 1.75rem;
   align-self: flex-start;
 }
+main .section-detail-news-and-event .relate .list::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-detail-news-and-event .relate .list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   -moz-column-gap: 1.25rem;
        column-gap: 1.25rem;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-news-and-event .relate .list {
-    grid-template-columns: 1fr 1fr;
-    row-gap: 1rem;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1.25rem;
+    overflow: scroll;
+    justify-content: flex-start;
   }
 }
 @media only screen and (max-width: 767px) {
   main .section-detail-news-and-event .relate .list {
-    -moz-column-gap: 1rem;
-         column-gap: 1rem;
+    gap: 1rem;
   }
 }
 main .section-detail-news-and-event .relate .list .child {
@@ -4211,18 +4318,25 @@ main .section-detail-news-and-event .relate .list .child {
 main .section-detail-news-and-event .relate .list .child:nth-child(n+5) {
   display: none;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-news-and-event .relate .list .child {
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
+    width: 18.75rem;
+    flex-direction: column;
+    flex: none;
+    overflow: hidden;
+    gap: 1.25rem;
+    border: 1px solid #ABABAB;
   }
 }
 main .section-detail-news-and-event .relate .list .child a {
   width: 100%;
   height: 11.375rem;
+  border-radius: 0.4375rem;
 }
-@media only screen and (max-width: 1480px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-news-and-event .relate .list .child a {
     height: 9.5rem;
+    border-radius: initial;
   }
 }
 @media only screen and (max-width: 1060px) {
@@ -4243,13 +4357,14 @@ main .section-detail-news-and-event .relate .list .child a {
 main .section-detail-news-and-event .relate .list .child a img {
   width: 100%;
   height: 100%;
+  border-radius: inherit;
 }
 main .section-detail-news-and-event .relate .list .child .infor {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-news-and-event .relate .list .child .infor {
     padding: 0 1rem 1rem;
   }
@@ -4358,52 +4473,61 @@ main .section-customer .wrap-customer .container .description {
     margin-bottom: 1rem;
   }
 }
-main .section-customer .wrap-customer .container .list-customer {
-  display: flex;
-  justify-content: center;
-  flex-flow: wrap;
-  -moz-column-gap: 1.25rem;
-       column-gap: 1.25rem;
-  row-gap: 1.875rem;
-  margin-bottom: 6.25rem;
+main .section-customer .wrap-customer .container .list-customer::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
 }
-@media only screen and (max-width: 1060px) {
-  main .section-customer .wrap-customer .container .list-customer {
-    justify-content: center;
+main .section-customer .wrap-customer .container .list-customer {
+  margin-bottom: 6.25rem;
+  overflow: scroll;
+  display: flex;
+  justify-content: space-evenly;
+}
+main .section-customer .wrap-customer .container .list-customer .wrap {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.25rem;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+@media only screen and (max-width: 767px) {
+  main .section-customer .wrap-customer .container .list-customer .wrap {
     gap: 1rem;
   }
 }
-main .section-customer .wrap-customer .container .list-customer span {
+main .section-customer .wrap-customer .container .list-customer .wrap span {
+  box-sizing: border-box;
   width: 12.25rem;
   height: 7.1875rem;
   border-radius: 0.5rem;
   background: #EDF9EC;
-  box-sizing: border-box;
   cursor: pointer;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-customer .wrap-customer .container .list-customer span {
+  main .section-customer .wrap-customer .container .list-customer .wrap span {
     height: 6rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-customer .wrap-customer .container .list-customer span {
+  main .section-customer .wrap-customer .container .list-customer .wrap span {
     height: 5.5rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-customer .wrap-customer .container .list-customer span {
+  main .section-customer .wrap-customer .container .list-customer .wrap span {
     width: 10rem;
     height: 4rem;
   }
 }
 @media only screen and (max-width: 480px) {
-  main .section-customer .wrap-customer .container .list-customer span {
+  main .section-customer .wrap-customer .container .list-customer .wrap span {
     width: 8rem;
     height: 3.5rem;
   }
 }
-main .section-customer .wrap-customer .container .list-customer span img {
+main .section-customer .wrap-customer .container .list-customer .wrap span img {
   width: 100%;
   height: 100%;
   border-radius: inherit;
@@ -4412,7 +4536,7 @@ main .section-customer .wrap-customer .container .list-customer span img {
      object-fit: contain;
   mix-blend-mode: multiply;
 }
-main .section-customer .wrap-customer .container .list-customer span:hover {
+main .section-customer .wrap-customer .container .list-customer .wrap span:hover {
   border: 1.5px solid var(--green);
 }
 main .section-customer .wrap-customer .container form {
@@ -5330,10 +5454,6 @@ main .section-detail-training .container .right .news .list-news {
     flex-direction: row;
     gap: 1.25rem;
     overflow: scroll;
-  }
-}
-@media only screen and (max-width: 1060px) {
-  main .section-detail-training .container .right .news .list-news {
     justify-content: flex-start;
   }
 }
@@ -5358,12 +5478,12 @@ main .section-detail-training .container .right .news .list-news .child:nth-chil
     flex: none;
     overflow: hidden;
     gap: 1.25rem;
+    border: 1px solid #ABABAB;
   }
 }
 @media only screen and (max-width: 1060px) {
   main .section-detail-training .container .right .news .list-news .child {
     width: 16rem;
-    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
   }
 }
 @media only screen and (max-width: 767px) {
@@ -5403,7 +5523,7 @@ main .section-detail-training .container .right .news .list-news .child .infor {
   justify-content: center;
   gap: 0.625rem;
 }
-@media only screen and (max-width: 1060px) {
+@media only screen and (max-width: 1280px) {
   main .section-detail-training .container .right .news .list-news .child .infor {
     padding: 0 1rem 1rem;
   }
@@ -5578,7 +5698,7 @@ main .section-detail-training .relate table tr td, main .section-detail-training
 }
 main .section-detail-training .relate table tr td:nth-child(1), main .section-detail-training .latest table tr td:nth-child(1) {
   font-weight: 600;
-  color: #3CA333;
+  color: #136451;
 }
 main .section-detail-training .relate table tr td span, main .section-detail-training .latest table tr td span {
   color: #ABABAB;
@@ -5609,7 +5729,8 @@ main .section-halal-nqi .container {
 @media only screen and (max-width: 767px) {
   main .section-halal-nqi .container {
     gap: 1rem;
-    padding: 3rem 0;
+    padding-top: 3rem;
+    padding-bottom: 8rem;
   }
 }
 @media only screen and (max-width: 480px) {
@@ -5806,7 +5927,8 @@ main .section-cretify .container {
 @media only screen and (max-width: 767px) {
   main .section-cretify .container {
     gap: 1rem;
-    padding: 3rem 0;
+    padding-top: 3rem;
+    padding-bottom: 8rem;
   }
 }
 @media only screen and (max-width: 480px) {
@@ -6026,21 +6148,20 @@ main .section-register-cretify .container .description {
   }
 }
 main .section-register-cretify .container .form {
-  padding: 0 13.125rem;
+  display: grid;
+  grid-template-columns: 52.875rem auto;
+  gap: 4.375rem;
+}
+@media only screen and (max-width: 1480px) {
+  main .section-register-cretify .container .form {
+    grid-template-columns: 48rem auto;
+    gap: 3rem;
+  }
 }
 @media only screen and (max-width: 1280px) {
   main .section-register-cretify .container .form {
-    padding: 0 8rem;
-  }
-}
-@media only screen and (max-width: 1060px) {
-  main .section-register-cretify .container .form {
-    padding: 0 2rem;
-  }
-}
-@media only screen and (max-width: 767px) {
-  main .section-register-cretify .container .form {
-    padding: 0;
+    display: flex;
+    flex-direction: column;
   }
 }
 main .section-register-cretify .container .form form {
@@ -6228,18 +6349,280 @@ main .section-register-cretify .container .form form button:hover {
   background: var(--white);
   color: #FE3131;
 }
-main .section-register-cretify .container .text-bottom {
-  margin-top: 0.625rem;
+main .section-register-cretify .container .form .notice h3 {
+  color: var(--red);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 160%;
+  margin-bottom: 1.25rem;
+}
+main .section-register-cretify .container .form .notice strong {
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 150%;
+  text-transform: uppercase;
+}
+main .section-register-cretify .container .form .notice > ul {
+  margin-top: 1.25rem;
+  margin-bottom: 1.625rem;
   display: flex;
+  flex-direction: column;
+  list-style: disc;
+  padding-left: 1.75rem;
+}
+main .section-register-cretify .container .form .notice > ul li {
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+}
+main .section-register-cretify .container .form .notice .infor {
+  display: flex;
+  flex-direction: column;
+  gap: 1.625rem;
+}
+main .section-register-cretify .container .form .notice .infor .child {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+main .section-register-cretify .container .form .notice .infor .child .icon svg {
+  padding: 1rem;
+  border-radius: 12.5rem;
+  background: var(--csk-3-da-33350, #EDF9EC);
+}
+main .section-register-cretify .container .form .notice .infor .child .right {
+  color: var(--black);
+}
+main .section-register-cretify .container .form .notice .infor .child .right p {
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: normal;
+}
+main .section-register-cretify .container .form .notice .infor .child .right span {
+  display: flex;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: normal;
+}
+main .section-faqs {
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
-main .section-register-cretify .container .text-bottom span {
-  text-align: center;
-  width: 28.125rem;
-  color: #414141;
+main .section-faqs .container {
+  padding-top: 6.25rem;
+  padding-bottom: 12.5rem;
+  display: grid;
+  grid-template-columns: 39.375rem auto;
+  gap: 4.375rem;
+}
+@media only screen and (max-width: 1480px) {
+  main .section-faqs .container {
+    grid-template-columns: 34rem auto;
+  }
+}
+@media only screen and (max-width: 1280px) {
+  main .section-faqs .container {
+    grid-template-columns: 28rem auto;
+  }
+}
+@media only screen and (max-width: 1060px) {
+  main .section-faqs .container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
+main .section-faqs .container .left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+main .section-faqs .container .left .child-faq {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #CFCFCF;
+}
+main .section-faqs .container .left .child-faq:last-child {
+  border: none;
+}
+main .section-faqs .container .left .child-faq .question {
+  display: flex;
+  justify-content: space-between;
+}
+main .section-faqs .container .left .child-faq .question .title {
+  color: var(--black);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+main .section-faqs .container .left .child-faq .question .title.show {
+  color: #136451;
+}
+main .section-faqs .container .left .child-faq .question .icon {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+main .section-faqs .container .left .child-faq .question .icon .plus-icon, main .section-faqs .container .left .child-faq .question .icon .minus-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+main .section-faqs .container .left .child-faq .question .icon .plus-icon {
+  display: block;
+}
+main .section-faqs .container .left .child-faq .question .icon .plus-icon.hide {
+  display: none;
+}
+main .section-faqs .container .left .child-faq .question .icon .minus-icon {
+  display: none;
+}
+main .section-faqs .container .left .child-faq .question .icon .minus-icon.show {
+  display: block;
+}
+main .section-faqs .container .left .child-faq .answer {
+  display: none;
+  margin-top: 0.75rem;
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+  transition: 0.5s ease-in-out;
+}
+main .section-faqs .container .left .child-faq .answer.show {
+  display: block;
+}
+main .section-faqs .container .right {
+  padding-top: 3.125rem;
+}
+@media only screen and (max-width: 1280px) {
+  main .section-faqs .container .right {
+    padding-top: 1.875rem;
+  }
+}
+@media only screen and (max-width: 1060px) {
+  main .section-faqs .container .right {
+    padding-top: 0;
+  }
+}
+main .section-faqs .container .right h2.title {
+  color: #136451;
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 160%;
+  margin-bottom: 1.875rem;
+}
+@media only screen and (max-width: 1280px) {
+  main .section-faqs .container .right h2.title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+main .section-faqs .container .right form h4 {
+  margin-bottom: 1.875rem;
+  color: #3F3F3F;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 160%;
+}
+@media only screen and (max-width: 767px) {
+  main .section-faqs .container .right form h4 {
+    font-size: 1rem;
+  }
+}
+main .section-faqs .container .right form .line {
+  width: 100%;
+}
+main .section-faqs .container .right form .line .form-group {
+  position: relative;
+}
+main .section-faqs .container .right form .line .form-group label {
+  position: absolute;
+  top: -0.75rem;
+  left: 0.75rem;
+  padding: 0 0.5rem;
+  background: var(--white);
+}
+@media only screen and (max-width: 767px) {
+  main .section-faqs .container .right form .line .form-group label {
+    font-size: 0.875rem;
+    left: 0.5rem;
+  }
+}
+main .section-faqs .container .right form .line .form-group input, main .section-faqs .container .right form .line .form-group select, main .section-faqs .container .right form .line .form-group textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid #999;
+  border-radius: 0.625rem;
   font-size: 0.875rem;
   font-weight: 400;
-  line-height: 170%;
+  line-height: 160%;
+}
+@media only screen and (max-width: 767px) {
+  main .section-faqs .container .right form .line .form-group input, main .section-faqs .container .right form .line .form-group select, main .section-faqs .container .right form .line .form-group textarea {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+main .section-faqs .container .right form .line .form-group textarea {
+  height: 11.5rem;
+  box-sizing: border-box;
+  resize: none;
+}
+main .section-faqs .container .right form .line .form-group input::-moz-placeholder, main .section-faqs .container .right form .line .form-group textarea::-moz-placeholder {
+  font-size: 1rem;
+  color: #BDBDBD;
+}
+main .section-faqs .container .right form .line .form-group input::placeholder, main .section-faqs .container .right form .line .form-group textarea::placeholder {
+  font-size: 1rem;
+  color: #BDBDBD;
+}
+@media only screen and (max-width: 767px) {
+  main .section-faqs .container .right form .line .form-group input::-moz-placeholder, main .section-faqs .container .right form .line .form-group textarea::-moz-placeholder {
+    font-size: 0.75rem;
+  }
+  main .section-faqs .container .right form .line .form-group input::placeholder, main .section-faqs .container .right form .line .form-group textarea::placeholder {
+    font-size: 0.75rem;
+  }
+}
+main .section-faqs .container .right form .line-1 {
+  margin-bottom: 1.875rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+main .section-faqs .container .right form .line-2 {
+  margin-bottom: 2.25rem;
+}
+main .section-faqs .container .right form .line-3 {
+  margin-bottom: 1.875rem;
+}
+main .section-faqs .container .right form button {
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  border-radius: 0.625rem;
+  color: var(--white);
+  background: var(--red);
+  border: 1px solid var(--red);
+  font-weight: 400;
+  line-height: 150%;
+}
+@media only screen and (max-width: 767px) {
+  main .section-faqs .container .right form button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+main .section-faqs .container .right form button:hover {
+  color: var(--red);
+  background: var(--white);
 }
 main .section-contact {
   display: flex;
@@ -6315,6 +6698,9 @@ main .section-contact .container .form-and-infor form > p {
 main .section-contact .container .form-and-infor form .line {
   width: inherit;
 }
+main .section-contact .container .form-and-infor form .line br {
+  display: none;
+}
 main .section-contact .container .form-and-infor form .line input,
 main .section-contact .container .form-and-infor form .line select,
 main .section-contact .container .form-and-infor form .line textarea {
@@ -6329,6 +6715,9 @@ main .section-contact .container .form-and-infor form .line textarea {
     padding: 0.5rem;
     font-size: 0.875rem;
   }
+}
+main .section-contact .container .form-and-infor form .line textarea {
+  resize: none;
 }
 main .section-contact .container .form-and-infor form .line input:focus,
 main .section-contact .container .form-and-infor form .line select:focus,

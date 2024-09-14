@@ -22,6 +22,7 @@ $list_customers_query = new WP_Query(array(
     'posts_per_page' => $customers_per_page,
     'paged' => $paged
 ));
+
 $list_query = new WP_Query(array(
     'post_type' => 'khach-hang',
     'post_status' => 'publish',
@@ -29,11 +30,10 @@ $list_query = new WP_Query(array(
     'order' => 'ASC'
 ));
 
-
 get_header(); ?>
 <main>
     <div class="section-customer">
-        <?php include('section/section-customer.php') ?>
+        <?php include('section/section-banner.php') ?>
         <div class="wrap-customer fade-in">
             <div class="container">
                 <h2 class="title">Khách hàng tiêu biểu</h2>
@@ -41,21 +41,23 @@ get_header(); ?>
                     Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempo, Lorem ipsum dolor sit amet, consecte adipiscing elit, sed do eiusmod tempo.
                 </div>
                 <div class="list-customer" id="list-tab-customer">
-                    <?php if ($list_query->have_posts()) : ?>
-                        <?php while ($list_query->have_posts()) : $list_query->the_post(); ?>
-                            <?php
-                                $customer_id = get_the_ID();
-                                $customer = get_field('customer', $customer_id);
-                                $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                            ?>
-                            <?php if($customer['typical'] == true): ?>
-                                <span><img src="<?= esc_url($thumbnail_url) ?>" alt=""></span>
-                            <?php endif; ?>
-                        <?php endwhile; ?>
-                        <?php wp_reset_postdata(); ?>
-                    <?php else : ?>
-                        <p>Không có khách hàng nào.</p>
-                    <?php endif; ?>
+                    <div class="wrap">
+                        <?php if ($list_query->have_posts()) : ?>
+                            <?php while ($list_query->have_posts()) : $list_query->the_post(); ?>
+                                <?php
+                                    $customer_id = get_the_ID();
+                                    $customer = get_field('customer', $customer_id);
+                                    $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                                ?>
+                                <?php if($customer['typical'] == true): ?>
+                                    <span><img src="<?= esc_url($thumbnail_url) ?>" alt=""></span>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
+                            <?php wp_reset_postdata(); ?>
+                        <?php else : ?>
+                            <p>Không có khách hàng nào.</p>
+                        <?php endif; ?>
+                    </div>
                 </div>   
                 <form action="" id="search-form">
                     <div class="search">
@@ -124,8 +126,8 @@ get_header(); ?>
                             'format' => '?paged=%#%',
                             'current' => max(1, $paged),
                             'total' => $list_customers_query->max_num_pages,
-                            'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#3CA333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                            'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#3CA333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                            'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                            'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
                         ));
                     ?>
                 </nav>

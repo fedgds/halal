@@ -83,7 +83,7 @@ $url = get_template_directory_uri();
 		</div>
 		<div class="header-mobile">
             <div class="logo">
-                <a href=""><img src="<?= $url ?>/dist/images/logo.png" alt="HALAL Logo" class="logo"></a>
+                <a href="<?= home_url() ?>"><img src="<?= $url ?>/dist/images/logo.png" alt="HALAL Logo" class="logo"></a>
             </div>
             <div class="icon" id="open-menu-header">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

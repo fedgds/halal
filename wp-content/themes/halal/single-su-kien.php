@@ -82,7 +82,9 @@ get_header(); ?>
                 </div>
                 <div class="date-and-address">
                     <span class="date"><?= get_the_date() ?></span>
-                    <span>|</span>
+                    <?php if($address): ?>
+                        <span>|</span>
+                    <?php endif ?>
                     <span class="address"><?= $address ?></span>
                 </div>
                 <h2 class="title"><?php the_title(); ?></h2>

@@ -7,34 +7,38 @@ $email = get_field('email', $id);
 $link = get_field('link', $id);
 
 $url = get_template_directory_uri();
+
 get_header(); ?>
 <main>
-    <?php include('section/section-contact.php') ?>
+    <?php include('section/section-banner.php') ?>
     <div class="section-contact fade-in">
         <div class="container">
             <h2 class="title">
                 Giữ liên lạc với chúng tôi
             </h2>
             <div class="form-and-infor">
-                <form action="">
+                <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                     <h4 class="guide">Để lại lời nhắn</h4>
                     <p>Sorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
                     <div class="line line-1">
-                        <input type="text" placeholder="Tên">
-                        <input type="text" placeholder="Email">
+                        <input type="text" name="your-name" placeholder="Tên" required>
+                        <input type="email" name="your-email" placeholder="Email" required>
                     </div>
                     <div class="line line-2">
-                        <select name="" id="">
+                        <select name="your-interest" id="">
                             <option value="">Có hứng thú với</option>
-                            <option value="">Option 1</option>
-                            <option value="">Option 2</option>
+                            <option value="Option 1">Option 1</option>
+                            <option value="Option 2">Option 2</option>
                         </select>
-                        <input type="text" placeholder="Số điện thoại">
+                        <input type="tel" name="your-phone" placeholder="Số điện thoại" required>
                     </div>
                     <div class="line line-3">
-                        <textarea name="" id="" placeholder="Lời nhắn"></textarea>
+                        <textarea name="your-message" id="" placeholder="Lời nhắn" required></textarea>
                     </div>
-                    <button>Gửi ngay</button>
+                    <button type="submit">Gửi ngay</button>
+
+                    <input type="hidden" name="action" value="submit_contact_form">
+                    <?php wp_nonce_field('submit_contact_form', 'contact_form_nonce'); ?>
                 </form>
                 <div class="infor">
                     <h3 class="title">

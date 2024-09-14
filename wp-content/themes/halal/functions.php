@@ -184,19 +184,25 @@ function custom_time_format() {
 }
 function customer_search_ajax() {
     $search = $_POST['search'];
+    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
+    $posts_per_page = 6; // Số lượng kết quả trên mỗi trang
+
     $args = array(
         'post_type' => 'khach-hang',
         'post_status' => 'publish',
         's' => $search,
-        'posts_per_page' => -1
+        'posts_per_page' => $posts_per_page,
+        'paged' => $paged
     );
+
     $query = new WP_Query($args);
     $results = array();
+    
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
             $customer = get_field('customer', get_the_ID());
-            $results[] = array(
+            $results['customers'][] = array(
                 'title' => get_the_title(),
                 'address' => $customer['address'],
                 'number' => $customer['number'],
@@ -206,9 +212,145 @@ function customer_search_ajax() {
             );
         }
     }
+
+    // Thêm thông tin phân trang
+    $results['pagination'] = array(
+        'current_page' => $paged,
+        'total_pages' => $query->max_num_pages,
+        'total_results' => $query->found_posts
+    );
+
     wp_reset_postdata();
     wp_send_json($results);
     wp_die();
 }
 add_action('wp_ajax_customer_search', 'customer_search_ajax');
 add_action('wp_ajax_nopriv_customer_search', 'customer_search_ajax');
+function custom_rewrite_rules() {
+    add_rewrite_rule(
+        'khach-hang/page/([0-9]+)/?$',
+        'index.php?pagename=khach-hang&paged=$matches[1]',
+        'top'
+    );
+}
+add_action('init', 'custom_rewrite_rules');
+
+function custom_query_vars($vars) {
+    $vars[] = 'paged';
+    return $vars;
+}
+add_filter('query_vars', 'custom_query_vars');
+
+function handle_contact_form_submission() {
+    if (isset($_POST['action']) && $_POST['action'] == 'submit_contact_form') {
+        if (!wp_verify_nonce($_POST['contact_form_nonce'], 'submit_contact_form')) {
+            wp_die('Nonce verification failed');
+        }
+
+        $name = sanitize_text_field($_POST['your-name']);
+        $email = sanitize_email($_POST['your-email']);
+        $interest = sanitize_text_field($_POST['your-interest']);
+        $phone = sanitize_text_field($_POST['your-phone']);
+        $message = sanitize_textarea_field($_POST['your-message']);
+
+        $contact_form = WPCF7_ContactForm::get_instance(6);
+        $submission = WPCF7_Submission::get_instance();
+
+        if ($contact_form && !$submission) {
+            $submission = WPCF7_Submission::get_instance(
+                array(
+                    'contact_form' => $contact_form,
+                    'posted_data' => array(
+                        'your-name' => $name,
+                        'your-email' => $email,
+                        'your-interest' => $interest,
+                        'your-phone' => $phone,
+                        'your-message' => $message,
+                    ),
+                )
+            );
+
+            $contact_form->submit();
+        }
+
+        wp_redirect(home_url('/lien-he'));
+        exit;
+    }
+}
+add_action('admin_post_submit_contact_form', 'handle_contact_form_submission');
+add_action('admin_post_nopriv_submit_contact_form', 'handle_contact_form_submission');
+
+function handle_certify_form_submission() {
+    if (isset($_POST['action']) && $_POST['action'] == 'submit_cretify_form') {
+        if (!wp_verify_nonce($_POST['cretify_form_nonce'], 'submit_cretify_form')) {
+            wp_die('Nonce verification failed');
+        }
+
+        // Sanitize and collect form data
+        $org_name = sanitize_text_field($_POST['org-name']);
+        $org_address = sanitize_text_field($_POST['org-address']);
+        $org_rep_name = sanitize_text_field($_POST['org-rep-name']);
+        $org_rep_address = sanitize_text_field($_POST['org-rep-address']);
+        $org_rep_position = sanitize_text_field($_POST['org-rep-position']);
+        $org_rep_phone = sanitize_text_field($_POST['org-rep-phone']);
+        $org_rep_email = sanitize_email($_POST['org-rep-email']);
+        $org_rep_fax = sanitize_text_field($_POST['org-rep-fax']);
+        $contact_name = sanitize_text_field($_POST['contact-name']);
+        $contact_address = sanitize_text_field($_POST['contact-address']);
+        $contact_position = sanitize_text_field($_POST['contact-position']);
+        $contact_phone = sanitize_text_field($_POST['contact-phone']);
+        $contact_email = sanitize_email($_POST['contact-email']);
+        $contact_fax = sanitize_text_field($_POST['contact-fax']);
+
+        // Handle file upload
+        $uploaded_file = $_FILES['file-upload'];
+        $upload_overrides = array('test_form' => false);
+        $movefile = wp_handle_upload($uploaded_file, $upload_overrides);
+
+        if ($movefile && !isset($movefile['error'])) {
+            $file_url = $movefile['url'];
+        } else {
+            $file_url = '';
+            // Handle error if needed
+        }
+
+        // Prepare data for Contact Form 7
+        $submission_data = array(
+            'org-name' => $org_name,
+            'org-address' => $org_address,
+            'org-rep-name' => $org_rep_name,
+            'org-rep-address' => $org_rep_address,
+            'org-rep-position' => $org_rep_position,
+            'org-rep-phone' => $org_rep_phone,
+            'org-rep-email' => $org_rep_email,
+            'org-rep-fax' => $org_rep_fax,
+            'contact-name' => $contact_name,
+            'contact-address' => $contact_address,
+            'contact-position' => $contact_position,
+            'contact-phone' => $contact_phone,
+            'contact-email' => $contact_email,
+            'contact-fax' => $contact_fax,
+            'file-upload' => $file_url
+        );
+
+        $contact_form = WPCF7_ContactForm::get_instance(403);
+        $submission = WPCF7_Submission::get_instance();
+
+        if ($contact_form && !$submission) {
+            $submission = WPCF7_Submission::get_instance(
+                array(
+                    'contact_form' => $contact_form,
+                    'posted_data' => $submission_data
+                )
+            );
+
+            $contact_form->submit();
+        }
+
+        // Redirect after form submission
+        wp_redirect(home_url('/lien-he'));
+        exit;
+    }
+}
+add_action('admin_post_submit_cretify_form', 'handle_certify_form_submission');
+add_action('admin_post_nopriv_submit_cretify_form', 'handle_certify_form_submission');

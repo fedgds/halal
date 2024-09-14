@@ -19,10 +19,10 @@ $query = new WP_Query(
 $url = get_template_directory_uri();
 get_header(); ?>
 <main>
-    <?php include('templates/section/section-banner.php') ?>
     <div class="section-halal fade-in">
-        <div class="container">
-            <div class="list-menu">
+        <div class="category"></div>
+        <div class="list-menu fade-in">
+            <div class="container">
                 <h2 class="title"><?= $current_category->name ?></h2>
                 <div class="list">
                     <?php if ($query->have_posts()) :

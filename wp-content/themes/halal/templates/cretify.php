@@ -8,7 +8,7 @@ $list_cretify_query = new WP_Query(array(
 ));
 get_header(); ?>
 <main>
-    <?php include('section/section-cretify.php') ?>
+    <?php include('section/section-banner.php') ?>
     <div class="section-cretify fade-in">
         <div class="container">  
             <div class="left">
@@ -20,7 +20,7 @@ get_header(); ?>
                                     $cretify_id = get_the_ID();
                                     $cretify = get_field('cretify', $cretify_id);
                                 ?>
-                                <li><?php the_title(); ?></li>
+                                <li><a href="#<?= get_post_field('post_name', get_post()); ?>"><?php the_title(); ?></a></li>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else : ?>
@@ -84,5 +84,21 @@ get_header(); ?>
             tabs[activeIndex].classList.add('active');
             cretify[activeIndex].classList.add('active');
         }
+        
+        // Function to set tab based on URL hash
+        function setTabFromHash() {
+            const hash = window.location.hash.substring(1); // Get the hash without the '#'
+            const targetTab = Array.from(tabs).findIndex(tab => tab.querySelector('a').getAttribute('href').substring(1) === hash);
+
+            if (targetTab !== -1) {
+                setActiveTab(targetTab);
+            }
+        }
+
+        // Call function to set tab from hash
+        setTabFromHash();
+
+        // Optional: Update tab when URL hash changes (e.g., when users use the back/forward buttons)
+        window.addEventListener('hashchange', setTabFromHash);
     });
 </script>

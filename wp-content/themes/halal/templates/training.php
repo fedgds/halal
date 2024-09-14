@@ -23,7 +23,7 @@ $list_training_query = new WP_Query(array(
 ));
 get_header(); ?>
 <main>
-    <?php include('section/section-training.php') ?>
+    <?php include('section/section-banner.php') ?>
     <div class="section-training fade-in">
         <div class="container">  
             <form action="">
@@ -84,7 +84,9 @@ get_header(); ?>
                                             <span><?= date('h:i:s A', strtotime($end_time['time'])) ?></span>
                                         <?php endif ?>
                                     </td>
-                                    <td><?= $address ?></td>
+                                    <?php if($address): ?>
+                                        <td><?= $address ?></td>
+                                    <?php endif ?>
                                 </tr>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
@@ -102,8 +104,8 @@ get_header(); ?>
                         'format' => '?paged=%#%',
                         'current' => max(1, $paged),
                         'total' => $list_training_query->max_num_pages,
-                        'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#3CA333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                        'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#3CA333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                        'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                        'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
                     ));
                 ?>
             </nav>
