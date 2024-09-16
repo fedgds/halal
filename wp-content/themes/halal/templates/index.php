@@ -54,30 +54,21 @@ get_header(); ?>
 <main>
     <div class="section-banner-home">
         <div class="list-slide" id="list-slide">
-            <?php foreach($slider as $slide): ?>
-                <div class="child">
-                    <div class="slider">
-                        <img src="<?= $slide['image'] ?>" alt="">
-                         <!-- <video autoplay>
-                            <source src="<?= $url ?>/dist/images/video-banner.mp4" type="video/mp4">
-                        </video> -->
+            <div class="child">
+                <div class="slider">
+                    <!-- <img src="<?= $slider['image'] ?>" alt=""> -->
+                    <video autoplay muted loop src="<?= $slider['image'] ?>"></video>
+                </div>
+                <div class="container">
+                    <div class="title">
+                        <h1 class="line-1"><?= $slider['title'] ?></h1>
                     </div>
-                    <div class="container">
-                        <div class="title">
-                            <h1 class="line-1"><?= $slide['title'] ?></h1>
-                        </div>
-                        <div class="text">
-                            <?= $slide['text'] ?>
-                        </div>
+                    <div class="text">
+                        <?= $slider['text'] ?>
                     </div>
                 </div>
-            <?php endforeach ?>
+            </div>
         </div>
-        <ul class="list-dot" id="list-dot">
-            <?php foreach($slider as $slide): ?>
-                <li><span></span></li>
-            <?php endforeach ?>
-        </ul>
     </div>
     <div class="section-1-home fade-in">
         <div class="background">
@@ -356,7 +347,7 @@ get_header(); ?>
                                                 <span><?= get_the_date() ?></span>
                                             </div>
                                             <span class="minus">-</span>
-                                            <span class="views"><?= $views ?> views</span>
+                                            <span class="views"><?= $views ?> lượt xem</span>
                                         </div>
                                     </div>
                                 </div>
@@ -399,7 +390,7 @@ get_header(); ?>
                                                         <span><?= get_the_date() ?></span>
                                                     </div>
                                                     <span class="minus">-</span>
-                                                    <span class="views"><?= $views ?> views</span>
+                                                    <span class="views"><?= $views ?> lượt xem</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -441,7 +432,7 @@ get_header(); ?>
                                                 <span><?= get_the_date() ?></span>
                                             </div>
                                             <span class="minus">-</span>
-                                            <span class="views"><?= $views ?> views</span>
+                                            <span class="views"><?= $views ?> lượt xem</span>
                                         </div>
                                     </div>
                                 <?php $count++; ?>

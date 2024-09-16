@@ -276,6 +276,52 @@ function training_query_vars($vars) {
     return $vars;
 }
 add_filter('query_vars', 'training_query_vars');
+// Phân trang tin tức
+function news_rewrite_rules() {
+    add_rewrite_rule(
+        'tin-tuc/page/([0-9]+)/?$',
+        'index.php?pagename=tin-tuc&paged=$matches[1]',
+        'top'
+    );
+}
+add_action('init', 'news_rewrite_rules');
+
+function news_query_vars($vars) {
+    $vars[] = 'paged';
+    return $vars;
+}
+add_filter('query_vars', 'news_query_vars');
+
+// Phân trang sự kiện
+function event_rewrite_rules() {
+    add_rewrite_rule(
+        'su-kien/page/([0-9]+)/?$',
+        'index.php?pagename=su-kien&paged=$matches[1]',
+        'top'
+    );
+}
+add_action('init', 'event_rewrite_rules');
+
+function event_query_vars($vars) {
+    $vars[] = 'paged';
+    return $vars;
+}
+add_filter('query_vars', 'event_query_vars');
+
+// Phân trang danh mục tập san
+function modify_tapsan_query($query) {
+    if (!is_admin() && $query->is_main_query() && is_tax('danh_muc_tap_san')) {
+        $query->set('post_type', 'tap-san');
+        $query->set('posts_per_page', 3);
+    }
+}
+add_action('pre_get_posts', 'modify_tapsan_query');
+function tap_san_query_vars($vars) {
+    $vars[] = 'paged';
+    return $vars;
+}
+add_filter('query_vars', 'event_query_vars');
+// Gửi form liên hệ
 function handle_contact_form_submission() {
     if (isset($_POST['action']) && $_POST['action'] == 'submit_contact_form') {
         if (!wp_verify_nonce($_POST['contact_form_nonce'], 'submit_contact_form')) {
@@ -315,6 +361,40 @@ function handle_contact_form_submission() {
 add_action('admin_post_submit_contact_form', 'handle_contact_form_submission');
 add_action('admin_post_nopriv_submit_contact_form', 'handle_contact_form_submission');
 
+// Gửi form đăng ký nhận thông tin(footer)
+function handle_register_form_submission() {
+    if (isset($_POST['action']) && $_POST['action'] == 'submit_register_form') {
+        if (!wp_verify_nonce($_POST['register_form_nonce'], 'submit_register_form')) {
+            wp_die('Nonce verification failed');
+        }
+
+        $email = sanitize_email($_POST['your-email']);
+
+        $register_form = WPCF7_ContactForm::get_instance(406);
+        $submission = WPCF7_Submission::get_instance();
+
+        if ($register_form && !$submission) {
+            $submission = WPCF7_Submission::get_instance(
+                array(
+                    'register_form' => $register_form,
+                    'posted_data' => array(
+                        'your-email' => $email,
+                    ),
+                )
+            );
+
+            $register_form->submit();
+        }
+        // Redirect back to the current page
+        $redirect_url = wp_get_referer();
+        wp_redirect($redirect_url ? $redirect_url : home_url());
+        exit;
+    }
+}
+add_action('admin_post_submit_register_form', 'handle_register_form_submission');
+add_action('admin_post_nopriv_submit_register_form', 'handle_register_form_submission');
+
+// Gửi form đăng ký chứng nhận
 function handle_certify_form_submission() {
     if (isset($_POST['action']) && $_POST['action'] == 'submit_cretify_form') {
         if (!wp_verify_nonce($_POST['cretify_form_nonce'], 'submit_cretify_form')) {
@@ -368,18 +448,18 @@ function handle_certify_form_submission() {
             'file-upload' => $file_url
         );
 
-        $contact_form = WPCF7_ContactForm::get_instance(403);
+        $certify_form = WPCF7_ContactForm::get_instance(403);
         $submission = WPCF7_Submission::get_instance();
 
-        if ($contact_form && !$submission) {
+        if ($certify_form && !$submission) {
             $submission = WPCF7_Submission::get_instance(
                 array(
-                    'contact_form' => $contact_form,
+                    'certify_form' => $certify_form,
                     'posted_data' => $submission_data
                 )
             );
 
-            $contact_form->submit();
+            $certify_form->submit();
         }
 
         // Redirect after form submission
@@ -394,33 +474,81 @@ add_action('admin_post_nopriv_submit_cretify_form', 'handle_certify_form_submiss
 function update_news_views() {
     if (is_single()) {
         $news_id = get_the_ID();
-        $news = get_field('news', $news_id);
-        
-        if (isset($news['views'])) {
-            $views = intval($news['views']) + 1;
-        } else {
-            $views = 1;
-        }
+        // Kiểm tra nếu đã lưu cookie cho bài viết này
+        if (!isset($_COOKIE['viewed_news_' . $news_id])) {
+            $news = get_field('news', $news_id);
+            
+            if (isset($news['views'])) {
+                $views = intval($news['views']) + 1;
+            } else {
+                $views = 1;
+            }
 
-        $news['views'] = $views;
-        update_field('news', $news, $news_id);
+            $news['views'] = $views;
+            update_field('news', $news, $news_id);
+
+            // Đặt cookie với thời hạn 1 giờ
+            setcookie('viewed_news_' . $news_id, '1', time() + 3600, '/');
+        }
     }
 }
 add_action('template_redirect', 'update_news_views');
+
 // Tăng lượt xem khi ấn vào trang trang chi tiết sự kiện
 function update_event_views() {
     if (is_single()) {
         $event_id = get_the_ID();
-        $event = get_field('event', $event_id);
-        
-        if (isset($event['views'])) {
-            $views = intval($event['views']) + 1;
-        } else {
-            $views = 1;
-        }
+        // Kiểm tra nếu đã lưu cookie cho bài viết này
+        if (!isset($_COOKIE['viewed_event_' . $event_id])) {
+            $event = get_field('event', $event_id);
+            
+            if (isset($event['views'])) {
+                $views = intval($event['views']) + 1;
+            } else {
+                $views = 1;
+            }
 
-        $event['views'] = $views;
-        update_field('event', $event, $event_id);
+            $event['views'] = $views;
+            update_field('event', $event, $event_id);
+            // Đặt cookie với thời hạn 1 giờ
+            setcookie('viewed_event_' . $event_id, '1', time() + 3600, '/');
+        }
     }
 }
 add_action('template_redirect', 'update_event_views');
+
+function update_total_site_views() {
+    // Kiểm tra nếu đã lưu cookie cho lượt xem tổng
+    if (!isset($_COOKIE['viewed_total_site'])) {
+        // Lấy giá trị hiện tại của trường ACF 'total_site_views'
+        $total_views = get_field('total_site_views', 'option');
+        
+        if (isset($total_views)) {
+            $total_views = intval($total_views) + 1;
+        } else {
+            $total_views = 1;
+        }
+
+        // Cập nhật giá trị mới vào trường ACF
+        update_field('total_site_views', $total_views, 'option');
+        
+        // Đặt cookie với thời hạn 1 giờ
+        setcookie('viewed_total_site', '1', time() + 3600, '/');
+    }
+}
+add_action('wp', 'update_total_site_views');
+
+// Hàm để hiển thị tổng số lượt xem
+function display_total_site_views() {
+    $total_views = get_field('total_site_views', 'option');
+    if (!$total_views) {
+        $total_views = 0;
+    }
+    return number_format($total_views);
+}
+
+// Shortcode để hiển thị tổng số lượt xem
+function total_site_views_shortcode() {
+    return display_total_site_views();
+}
+add_shortcode('total_site_views', 'total_site_views_shortcode');

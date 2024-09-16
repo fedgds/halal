@@ -4,7 +4,7 @@ $current_category = get_queried_object();
 
 
 // Số bài viết trên mỗi trang
-$posts_per_page = 9;
+$posts_per_page = 6;
 
 // Lấy số trang hiện tại
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -89,16 +89,17 @@ get_header(); ?>
                     <?php endif; ?>
                 </div>
                 <nav class="pagination">
-                    <?php
-                        $big = 999999999;
-                        echo paginate_links(array(
-                            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-                            'format' => '?paged=%#%',
-                            'current' => max(1, $paged),
-                            'total' => $query->max_num_pages,
-                            'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                            'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-                        ));
+                <?php
+                    global $wp_query;
+                    $big = 999999999;
+                    echo paginate_links(array(
+                        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                        'format' => '?paged=%#%',
+                        'current' => max(1, get_query_var('paged')),
+                        'total' => $wp_query->max_num_pages,
+                        'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                        'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                    ));
                     ?>
                 </nav>
             </div>

@@ -6,6 +6,8 @@ $query = new WP_Query(
     )
 );
 
+$thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'full');
+
 $train_id = get_the_ID();
 $train = get_field('training', $train_id);
 $start_time = $train['start_time'];
@@ -29,6 +31,25 @@ $latest_news_query = new WP_Query(array(
     'post_status' => 'publish',
     'posts_per_page' => 3,
     'orderby' => 'date'
+));
+
+// Đào tạo liên quan
+// Lấy ra danh mục
+$categories = wp_get_post_terms($train_id, 'danh_muc_dao_tao', array('fields' => 'ids'));
+
+// Query cùng danh mục
+$related_trains_query = new WP_Query(array(
+    'post_type' => 'dao-tao',
+    'post_status' => 'publish',
+    'posts_per_page' => 5,
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'danh_muc_dao_tao',
+            'field' => 'id',
+            'terms' => $categories,
+        )
+    ),
+    'post__not_in' => array($train_id)
 ));
 function formatDate($date) {
     // Tạo đối tượng DateTime từ định dạng ngày đầu vào
@@ -145,6 +166,9 @@ get_header(); ?>
                 <?php endif ?>
                 <div class="content">
                     <?php the_content() ?>
+                </div>
+                <div class="thumbnail">
+                    <img src="<?= esc_url($thumbnail) ?>" alt="">
                 </div>
             </div>
             <div class="right">
@@ -263,9 +287,9 @@ get_header(); ?>
                         <?php
                             $training_id = get_the_ID();
                             $training = get_field('training', $training_id);
-                            $start_time = $train['start_time'];
-                            $end_time = $train['end_time'];
-                            $address = $train['address'];
+                            $start_time = $training['start_time'];
+                            $end_time = $training['end_time'];
+                            $address = $training['address'];
                         ?>
                         <tr>
                             <td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>
@@ -299,14 +323,14 @@ get_header(); ?>
                     <th>Thời gian kết thúc</th>
                     <th>Địa điểm</th>
                 </tr>
-                <?php if ($latest_train_query->have_posts()) : ?>
-                    <?php while ($latest_train_query->have_posts()) : $latest_train_query->the_post(); ?>
+                <?php if ($related_trains_query->have_posts()) : ?>
+                    <?php while ($related_trains_query->have_posts()) : $related_trains_query->the_post(); ?>
                         <?php
                             $training_id = get_the_ID();
                             $training = get_field('training', $training_id);
-                            $start_time = $train['start_time'];
-                            $end_time = $train['end_time'];
-                            $address = $train['address'];
+                            $start_time = $training['start_time'];
+                            $end_time = $training['end_time'];
+                            $address = $training['address'];
                         ?>
                         <tr>
                             <td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>

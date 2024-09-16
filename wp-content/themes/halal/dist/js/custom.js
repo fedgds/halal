@@ -1,35 +1,3 @@
-// Tab slider
-document.addEventListener('DOMContentLoaded', function () {
-    const dot = document.querySelectorAll('#list-dot li');
-    const section = document.querySelectorAll('#list-slide .child');
-    let currentIndex = 0;
-
-    function setActiveTab(activeIndex) {
-        dot.forEach(t => t.classList.remove('active'));
-        section.forEach(p => p.classList.remove('active'));
-        dot[activeIndex].classList.add('active');
-        section[activeIndex].classList.add('active');
-    }
-
-    function autoSwitchTab() {
-        currentIndex = (currentIndex + 1) % dot.length;
-        setActiveTab(currentIndex);
-    }
-
-    // Thiết lập tab đầu tiên là active
-    setActiveTab(0);
-
-    // Thêm sự kiện click cho mỗi dot
-    dot.forEach((tab, index) => {
-        tab.addEventListener('click', () => {
-            currentIndex = index;
-            setActiveTab(currentIndex);
-        });
-    });
-
-    // Tự động chuyển tab mỗi 3 giây
-    setInterval(autoSwitchTab, 3000);
-});
 // Modal menu header
 document.addEventListener('DOMContentLoaded', function () {
     const openMenu = document.querySelector('#open-menu-header');

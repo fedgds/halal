@@ -1,10 +1,26 @@
 <?php 
 /* Template Name: Tin tức */
+
+// Số tin tức trên mỗi trang
+$news_per_page = 6;
+
+// Lấy số trang hiện tại
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+if ( get_query_var('paged') ) {
+    $paged = get_query_var('paged');
+} elseif ( get_query_var('page') ) {
+    $paged = get_query_var('page');
+} else {
+    $paged = 1;
+}
+
 $list_news_query = new WP_Query(array(
     'post_type' => 'tin-tuc',
-    'posts_per_page' => 9,
     'post_status' => 'publish',
     'orderby' => 'date',
+    'posts_per_page' => $news_per_page,
+    'paged' => $paged
 ));
 
 
@@ -63,6 +79,19 @@ get_header(); ?>
                         <p>Không có tin tức nào.</p>
                     <?php endif; ?>
                 </div>
+                <nav class="pagination search-pagination">
+                    <?php
+                        $big = 999999999;
+                        echo paginate_links(array(
+                            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                            'format' => '?paged=%#%',
+                            'current' => max(1, $paged),
+                            'total' => $list_news_query->max_num_pages,
+                            'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                            'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                        ));
+                    ?>
+                </nav>
             </div>
         </div>
     </div>

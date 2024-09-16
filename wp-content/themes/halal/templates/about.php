@@ -1,5 +1,5 @@
 <?php 
-/* Template Name: Giới thiệu */
+/* Template Name: Về Halcret */
 $id = get_the_ID();
 $section_1 = get_field('section-1', $id);
 $section_2 = get_field('section-2', $id);

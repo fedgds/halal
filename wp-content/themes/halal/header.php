@@ -37,7 +37,7 @@ $url = get_template_directory_uri();
 				<div class="mega-menu">
 					<ul>
 						<li class="child">
-							<a href="<?= home_url() ?>/gioi-thieu">Về HALCERT</a>
+							<a href="<?= home_url() ?>/ve-halcret">Về HALCERT</a>
 						</li>
 						<li class="child">
 							<a href="<?= home_url() ?>/dich-vu">Dịch vụ</a>
@@ -104,7 +104,7 @@ $url = get_template_directory_uri();
             </div>
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="<?= home_url() ?>/gioi-thieu">Về HALCERT</a></li>
+                    <li><a href="<?= home_url() ?>/ve-halcret">Về HALCERT</a></li>
                     <li><a href="<?= home_url() ?>/dich-vu">Dịch vụ</a></li>
                     <li><a href="<?= home_url() ?>/halal-nqi">Halal NQI</a></li>
                     <li><a href="<?= home_url() ?>/khach-hang">Khách hàng</a></li>
