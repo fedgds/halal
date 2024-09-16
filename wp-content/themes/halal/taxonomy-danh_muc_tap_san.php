@@ -2,10 +2,27 @@
 /* Template Name: Tập san HALAL */
 $current_category = get_queried_object();
 
+
+// Số bài viết trên mỗi trang
+$posts_per_page = 9;
+
+// Lấy số trang hiện tại
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+if ( get_query_var('paged') ) {
+    $paged = get_query_var('paged');
+} elseif ( get_query_var('page') ) {
+    $paged = get_query_var('page');
+} else {
+    $paged = 1;
+}
+
 $query = new WP_Query(
     array(
         'post_type' => 'tap-san',
         'post_status' => 'publish',
+        'posts_per_page' => $posts_per_page,
+        'paged' => $paged,
         'tax_query' => array(
             array(
                 'taxonomy' => 'danh_muc_tap_san',
@@ -28,8 +45,8 @@ get_header(); ?>
                     <?php if ($query->have_posts()) :
                         while ($query->have_posts()) :
                             $query->the_post();
-                            $project_id = get_the_ID();
-                            $project = get_field('tap_san', $project_id);
+                            $post_id = get_the_ID();
+                            $item = get_field('tap_san', $post_id);
                             $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
 
                     ?>
@@ -71,6 +88,19 @@ get_header(); ?>
                         <p>Không có gì nào trong danh mục này.</p>
                     <?php endif; ?>
                 </div>
+                <nav class="pagination">
+                    <?php
+                        $big = 999999999;
+                        echo paginate_links(array(
+                            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                            'format' => '?paged=%#%',
+                            'current' => max(1, $paged),
+                            'total' => $query->max_num_pages,
+                            'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                            'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                        ));
+                    ?>
+                </nav>
             </div>
         </div>
     </div>

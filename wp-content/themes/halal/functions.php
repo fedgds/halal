@@ -182,27 +182,22 @@ function custom_date_format() {
 function custom_time_format() {
     return get_the_time('H:i');
 }
+// Tìm kiếm khách hàng
 function customer_search_ajax() {
     $search = $_POST['search'];
-    $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
-    $posts_per_page = 6; // Số lượng kết quả trên mỗi trang
-
     $args = array(
         'post_type' => 'khach-hang',
         'post_status' => 'publish',
         's' => $search,
-        'posts_per_page' => $posts_per_page,
-        'paged' => $paged
+        'posts_per_page' => -1
     );
-
     $query = new WP_Query($args);
     $results = array();
-    
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
             $customer = get_field('customer', get_the_ID());
-            $results['customers'][] = array(
+            $results[] = array(
                 'title' => get_the_title(),
                 'address' => $customer['address'],
                 'number' => $customer['number'],
@@ -212,20 +207,13 @@ function customer_search_ajax() {
             );
         }
     }
-
-    // Thêm thông tin phân trang
-    $results['pagination'] = array(
-        'current_page' => $paged,
-        'total_pages' => $query->max_num_pages,
-        'total_results' => $query->found_posts
-    );
-
     wp_reset_postdata();
     wp_send_json($results);
     wp_die();
 }
 add_action('wp_ajax_customer_search', 'customer_search_ajax');
 add_action('wp_ajax_nopriv_customer_search', 'customer_search_ajax');
+// Phân trang khách hàng
 function custom_rewrite_rules() {
     add_rewrite_rule(
         'khach-hang/page/([0-9]+)/?$',
@@ -241,6 +229,53 @@ function custom_query_vars($vars) {
 }
 add_filter('query_vars', 'custom_query_vars');
 
+// Tìm kiếm khóa đào tạo
+function training_search_ajax() {
+    $search = $_POST['search'];
+    $args = array(
+        'post_type' => 'dao-tao',
+        'post_status' => 'publish',
+        's' => $search,
+        'posts_per_page' => -1
+    );
+    $query = new WP_Query($args);
+    $results = array();
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $training = get_field('training', get_the_ID());
+            $results[] = array(
+                'title' => get_the_title(),
+                'address' => $training['address'],
+                'start_date' => $training['start_time']['date'],
+                'start_time' => date('h:i:s A', strtotime($training['start_time']['time'])),
+                'end_date' => $training['end_time']['date'],
+                'end_time' => date('h:i:s A', strtotime($training['end_time']['time']))
+            );
+        }
+    }
+    wp_reset_postdata();
+    wp_send_json($results);
+    wp_die();
+}
+add_action('wp_ajax_training_search', 'training_search_ajax');
+add_action('wp_ajax_nopriv_training_search', 'training_search_ajax');
+
+// Phân trang đào tạo
+function training_rewrite_rules() {
+    add_rewrite_rule(
+        'dao-tao/page/([0-9]+)/?$',
+        'index.php?pagename=dao-tao&paged=$matches[1]',
+        'top'
+    );
+}
+add_action('init', 'training_rewrite_rules');
+
+function training_query_vars($vars) {
+    $vars[] = 'paged';
+    return $vars;
+}
+add_filter('query_vars', 'training_query_vars');
 function handle_contact_form_submission() {
     if (isset($_POST['action']) && $_POST['action'] == 'submit_contact_form') {
         if (!wp_verify_nonce($_POST['contact_form_nonce'], 'submit_contact_form')) {
@@ -348,9 +383,44 @@ function handle_certify_form_submission() {
         }
 
         // Redirect after form submission
-        wp_redirect(home_url('/lien-he'));
+        wp_redirect(home_url('/dang-ky-chung-nhan'));
         exit;
     }
 }
 add_action('admin_post_submit_cretify_form', 'handle_certify_form_submission');
 add_action('admin_post_nopriv_submit_cretify_form', 'handle_certify_form_submission');
+
+// Tăng lượt xem khi ấn vào trang trang chi tiết tin tức
+function update_news_views() {
+    if (is_single()) {
+        $news_id = get_the_ID();
+        $news = get_field('news', $news_id);
+        
+        if (isset($news['views'])) {
+            $views = intval($news['views']) + 1;
+        } else {
+            $views = 1;
+        }
+
+        $news['views'] = $views;
+        update_field('news', $news, $news_id);
+    }
+}
+add_action('template_redirect', 'update_news_views');
+// Tăng lượt xem khi ấn vào trang trang chi tiết sự kiện
+function update_event_views() {
+    if (is_single()) {
+        $event_id = get_the_ID();
+        $event = get_field('event', $event_id);
+        
+        if (isset($event['views'])) {
+            $views = intval($event['views']) + 1;
+        } else {
+            $views = 1;
+        }
+
+        $event['views'] = $views;
+        update_field('event', $event, $event_id);
+    }
+}
+add_action('template_redirect', 'update_event_views');

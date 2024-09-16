@@ -118,7 +118,7 @@ get_header(); ?>
                         </tbody>
                     </table>
                 </div>
-                <nav class="pagination">
+                <nav class="pagination search-pagination">
                     <?php
                         $big = 999999999;
                         echo paginate_links(array(
@@ -257,6 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const tableBody = document.querySelector('table tbody');
+    const pagination = document.querySelector('.search-pagination');
 
     searchForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -284,8 +285,47 @@ document.addEventListener('DOMContentLoaded', function () {
                 `;
                 tableBody.innerHTML += row;
             });
+
+            // Ẩn pagination khi có kết quả tìm kiếm
+            if (searchTerm) {
+                pagination.style.display = 'none';
+            } else {
+                pagination.style.display = 'flex';
+            }
         })
         .catch(error => console.error('Error:', error));
+    });
+
+    // Thêm event listener cho searchInput để hiển thị lại pagination khi xóa tìm kiếm
+    searchInput.addEventListener('input', function() {
+        if (this.value === '') {
+            pagination.style.display = 'flex';
+            // Tải lại dữ liệu ban đầu (không có tìm kiếm)
+            fetch(ajaxurl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'action=customer_search&search=',
+            })
+            .then(response => response.json())
+            .then(data => {
+                tableBody.innerHTML = '';
+                data.forEach(customer => {
+                    const row = `
+                        <tr>
+                            <td>${customer.title}</td>
+                            <td>${customer.address}</td>
+                            <td>${customer.number}</td>
+                            <td>${customer.scope}</td>
+                            <td>Từ ${customer.from} - Đến ${customer.to}</td>
+                        </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        }
     });
 });
 </script>

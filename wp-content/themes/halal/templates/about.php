@@ -149,7 +149,7 @@ get_header(); ?>
                                 $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
                             ?>
                             <?php if($customer['typical'] == true): ?>
-                                <a href=""><img src="<?= esc_url($thumbnail_url) ?>" alt=""></a>
+                                <span><img src="<?= esc_url($thumbnail_url) ?>" alt=""></span>
                             <?php endif; ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>

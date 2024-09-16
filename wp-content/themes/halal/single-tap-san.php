@@ -6,27 +6,27 @@ $query = new WP_Query(
     )
 );
 
-$project_id = get_the_ID();
-$project = get_field('tap_san', $project_id);
+$post_id = get_the_ID();
+$item = get_field('tap_san', $post_id);
 
 $thumbnail = get_the_post_thumbnail_url(get_the_ID(), 'full');
-$address = $project['address'];
+$address = $item['address'];
 
 // Tập san mới nhất
-$latest_projects_query = new WP_Query(array(
+$latest_posts_query = new WP_Query(array(
     'post_type' => 'tap-san',
     'post_status' => 'publish',
     'posts_per_page' => 5,
     'orderby' => 'date',
-    'post__not_in' => array($project_id)
+    'post__not_in' => array($post_id)
 ));
 
 // Tập san liên quan
 // Lấy ra danh mục
-$categories = wp_get_post_terms($project_id, 'danh_muc_tap_san', array('fields' => 'ids'));
+$categories = wp_get_post_terms($post_id, 'danh_muc_tap_san', array('fields' => 'ids'));
 
 // Query cùng danh mục
-$related_projects_query = new WP_Query(array(
+$related_posts_query = new WP_Query(array(
     'post_type' => 'tap-san',
     'post_status' => 'publish',
     'posts_per_page' => 4,
@@ -37,7 +37,7 @@ $related_projects_query = new WP_Query(array(
             'terms' => $categories,
         )
     ),
-    'post__not_in' => array($project_id)
+    'post__not_in' => array($post_id)
 ));
 
 $url = get_template_directory_uri();
@@ -100,11 +100,11 @@ get_header(); ?>
             <div class="right">
                 <h2 class="title">Tập san mới nhất</h2>
                 <div class="list">
-                    <?php if ($latest_projects_query->have_posts()) : ?>
-                        <?php while ($latest_projects_query->have_posts()) : $latest_projects_query->the_post(); ?>
+                    <?php if ($latest_posts_query->have_posts()) : ?>
+                        <?php while ($latest_posts_query->have_posts()) : $latest_posts_query->the_post(); ?>
                             <?php
-                                $latest_project_id = get_the_ID();
-                                $latest_project = get_field('tap_san', $latest_project_id);
+                                $latest_post_id = get_the_ID();
+                                $latest_post = get_field('tap_san', $latest_post_id);
                                 $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
                             ?>
                             <div class="child">
@@ -150,11 +150,11 @@ get_header(); ?>
         <div class="relate fade-in">
             <h2 class="title">Tập san liên quan</h2>
             <div class="list">
-            <?php if ($related_projects_query->have_posts()) : ?>
-                <?php while ($related_projects_query->have_posts()) : $related_projects_query->the_post(); ?>
+            <?php if ($related_posts_query->have_posts()) : ?>
+                <?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
                     <?php
-                        $related_project_id = get_the_ID();
-                        $related_project = get_field('tap_san', $related_project_id);
+                        $related_post_id = get_the_ID();
+                        $related_post = get_field('tap_san', $related_post_id);
                         $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
                     ?>
                     <div class="child">

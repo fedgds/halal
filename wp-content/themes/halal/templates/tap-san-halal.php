@@ -21,7 +21,7 @@ get_header(); ?>
                         <h2 class="title"><?= $category->name ?></h2>
                         <div class="list">
                             <?php 
-                                $project_args = array(
+                                $post_args = array(
                                     'post_type' => 'tap-san', 
                                     'posts_per_page' => 6,
                                     'tax_query' => array(
@@ -32,13 +32,13 @@ get_header(); ?>
                                         ),
                                     ),
                                 );
-                                $projects = new WP_Query($project_args);
+                                $posts = new WP_Query($post_args);
 
-                                if ($projects->have_posts()) : 
+                                if ($posts->have_posts()) : 
                                     $count = 0;
-                                    while ($projects->have_posts()) : $projects->the_post(); 
-                                        $project_id = get_the_ID();
-                                        $project = get_field('tap_san', $project_id);
+                                    while ($posts->have_posts()) : $posts->the_post(); 
+                                        $post_id = get_the_ID();
+                                        $item = get_field('tap_san', $post_id);
                                         $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
                                         $count++; 
                             ?>
@@ -81,7 +81,7 @@ get_header(); ?>
                                 <p>Không có gì nào trong danh mục này.</p>
                             <?php endif; ?>
                         </div>
-                        <?php if ($projects->found_posts > 6) : ?>
+                        <?php if ($posts->found_posts > 6) : ?>
                             <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>" class="view-more">XEM THÊM</a>
                         <?php endif; ?>
                     </div>
