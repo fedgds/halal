@@ -612,6 +612,7 @@ main .section-banner-home .list-slide .child .container .title {
   font-size: 2.5rem;
   font-weight: 700;
   line-height: 150%;
+  color: #414141;
 }
 @media only screen and (max-width: 1280px) {
   main .section-banner-home .list-slide .child .container .title {
@@ -917,9 +918,6 @@ main .section-1-home .container .right .sub-1 .content {
     width: 100%;
   }
 }
-main .section-1-home .container .right .sub-1 .content span {
-  color: var(--green);
-}
 main .section-1-home .container .right .sub-2 {
   margin-bottom: 2.5rem;
 }
@@ -940,14 +938,14 @@ main .section-1-home .container .right .button {
   border-radius: 0.625rem;
   border: 1.5px solid var(--red);
   background: var(--white);
-  width: 8.75rem;
+  width: -moz-fit-content;
+  width: fit-content;
   cursor: pointer;
 }
 @media only screen and (max-width: 767px) {
   main .section-1-home .container .right .button {
     border: 1px solid var(--red);
     padding: 0.375rem 1rem;
-    width: 7.75rem;
     font-size: 0.875rem;
   }
 }
@@ -1704,9 +1702,6 @@ main .section-5-home .container .top h2.title {
     font-size: 2rem;
   }
 }
-main .section-5-home .container .top h2.title span {
-  color: var(--green);
-}
 main .section-5-home .container .top .description {
   font-size: 1rem;
   font-weight: 400;
@@ -1837,9 +1832,6 @@ main .section-6-home .container .top h2.title {
   main .section-6-home .container .top h2.title {
     font-size: 2rem;
   }
-}
-main .section-6-home .container .top h2.title span {
-  color: #136451;
 }
 main .section-6-home .container .top nav.tab ul {
   display: flex;
@@ -2138,9 +2130,6 @@ main .section-7-home .container .top h2.title {
     margin-bottom: 2rem;
   }
 }
-main .section-7-home .container .top h2.title span {
-  color: #136451;
-}
 @media only screen and (max-width: 1280px) {
   main .section-7-home .container .top nav.tab {
     padding-right: 0.5rem;
@@ -2319,6 +2308,7 @@ main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .in
   line-height: 170%;
   letter-spacing: 0.0088rem;
   display: flex;
+  align-items: center;
   gap: 0.625rem;
 }
 main .section-7-home .container .bottom .list.active .wrap .wrap-list .child .infor .date-and-hour .date,
@@ -2748,9 +2738,6 @@ main .section-2-about .container .top h2.title {
     font-size: 2rem;
   }
 }
-main .section-2-about .container .top h2.title span {
-  color: var(--green);
-}
 main .section-2-about .container .top .description {
   font-size: 1rem;
   font-weight: 400;
@@ -2822,9 +2809,6 @@ main .section-3-about .container .top h2.title {
   main .section-3-about .container .top h2.title {
     font-size: 2rem;
   }
-}
-main .section-3-about .container .top h2.title span {
-  color: var(--green);
 }
 main .section-3-about .container .top .description {
   font-size: 1rem;
@@ -2901,9 +2885,13 @@ main .section-3-about .container .bottom .child {
     gap: 0.375rem;
   }
 }
-main .section-3-about .container .bottom .child .logo svg {
+main .section-3-about .container .bottom .child .logo {
   width: 1.5rem;
   height: 1.5rem;
+}
+main .section-3-about .container .bottom .child .logo img {
+  width: 100%;
+  height: 100%;
 }
 main .section-3-about .container .bottom .child span {
   color: #414141;
@@ -2943,9 +2931,6 @@ main .section-4-about .container .top h2.title {
   main .section-4-about .container .top h2.title {
     font-size: 2rem;
   }
-}
-main .section-4-about .container .top h2.title span {
-  color: var(--green);
 }
 main .section-4-about .container .top .description {
   font-size: 1rem;
@@ -3168,6 +3153,7 @@ main .section-halal .list-menu .container .list .child .infor .date-and-hour {
   line-height: 170%;
   letter-spacing: 0.0088rem;
   display: flex;
+  align-items: center;
   gap: 0.625rem;
 }
 main .section-halal .list-menu .container .list .child .infor .date-and-hour .date,
@@ -3197,7 +3183,6 @@ main .section-halal .list-menu .container .list .child .infor h3:hover {
   color: #136451;
 }
 main .section-halal .list-menu .container .view-more {
-  width: 5.375rem;
   padding: 0.75rem 2rem !important;
   background: var(--white);
   color: var(--red);
@@ -3524,6 +3509,7 @@ main .section-detail-halal .container .right .list .child .infor .date-and-hour 
   line-height: 170%;
   letter-spacing: 0.0088rem;
   display: flex;
+  align-items: center;
   gap: 0.625rem;
 }
 @media only screen and (max-width: 480px) {
@@ -3707,6 +3693,7 @@ main .section-detail-halal .relate .list .child .infor .date-and-hour {
   line-height: 170%;
   letter-spacing: 0.0088rem;
   display: flex;
+  align-items: center;
   gap: 0.625rem;
 }
 @media only screen and (max-width: 480px) {
@@ -3847,6 +3834,7 @@ main .section-news-and-event .container .list-menu .list .child .infor .date-and
   line-height: 170%;
   letter-spacing: 0.0088rem;
   display: flex;
+  align-items: center;
   gap: 0.625rem;
 }
 main .section-news-and-event .container .list-menu .list .child .infor .date-and-hour .date,
@@ -4207,6 +4195,7 @@ main .section-detail-news-and-event .container .right .top .list .child .infor .
   line-height: 170%;
   letter-spacing: 0.0088rem;
   display: flex;
+  align-items: center;
   gap: 0.625rem;
 }
 @media only screen and (max-width: 480px) {
@@ -4386,6 +4375,7 @@ main .section-detail-news-and-event .relate .list .child .infor .date-and-hour {
   line-height: 170%;
   letter-spacing: 0.0088rem;
   display: flex;
+  align-items: center;
   gap: 0.625rem;
 }
 @media only screen and (max-width: 480px) {
@@ -5463,6 +5453,9 @@ main .section-detail-training .container .right .training .list-training .child 
   line-height: 125%;
   margin-bottom: 0.9375rem;
 }
+main .section-detail-training .container .right .training .list-training .child h3:hover {
+  color: var(--black);
+}
 main .section-detail-training .container .right .training .list-training .child .time {
   display: flex;
   align-items: center;
@@ -5597,6 +5590,7 @@ main .section-detail-training .container .right .news .list-news .child .infor .
   line-height: 170%;
   letter-spacing: 0.0088rem;
   display: flex;
+  align-items: center;
   gap: 0.625rem;
 }
 @media only screen and (max-width: 480px) {
@@ -5761,6 +5755,9 @@ main .section-detail-training .relate table tr td, main .section-detail-training
 main .section-detail-training .relate table tr td:nth-child(1), main .section-detail-training .latest table tr td:nth-child(1) {
   font-weight: 600;
   color: #136451;
+}
+main .section-detail-training .relate table tr td:nth-child(1):hover, main .section-detail-training .latest table tr td:nth-child(1):hover {
+  color: var(--black);
 }
 main .section-detail-training .relate table tr td span, main .section-detail-training .latest table tr td span {
   color: #ABABAB;
@@ -6331,7 +6328,6 @@ main .section-register-cretify .container .form form .line-9 {
 main .section-register-cretify .container .form form .form-register {
   box-sizing: border-box;
   background: #EDF9EC;
-  width: 17.875rem;
   padding: 1rem 1.25rem;
   border-radius: 0.4375rem;
   display: flex;
@@ -6980,6 +6976,19 @@ main .section-contact .container .form-and-infor .infor .infor-detail .email spa
     font-size: 0.875rem;
   }
 }
+main .section-contact .container .form-and-infor .infor .infor-detail .social-media .list {
+  display: flex;
+  gap: 0.625rem;
+}
+main .section-contact .container .form-and-infor .infor .infor-detail .social-media .list a {
+  width: 2.25rem;
+  height: auto;
+  border-radius: 2.25rem;
+}
+main .section-contact .container .form-and-infor .infor .infor-detail .social-media .list a img {
+  width: 100%;
+  height: 100%;
+}
 main .section-contact .container .mapouter {
   width: inherit;
 }
@@ -7416,6 +7425,10 @@ footer .container .bottom .col-2 .link ul {
     row-gap: 0.75rem;
   }
 }
+footer .container .bottom .col-2 .contact {
+  max-width: 100%;
+  overflow: hidden;
+}
 footer .container .bottom .col-2 .contact h3 {
   color: var(--white);
   font-size: 1.25rem;
@@ -7426,10 +7439,16 @@ footer .container .bottom .col-2 .contact h3 {
 footer .container .bottom .col-2 .contact ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto;
   -moz-column-gap: 2rem;
        column-gap: 2rem;
   row-gap: 1.5rem;
+}
+@media only screen and (max-width: 1280px) {
+  footer .container .bottom .col-2 .contact ul {
+    -moz-column-gap: 1rem;
+         column-gap: 1rem;
+  }
 }
 @media only screen and (max-width: 480px) {
   footer .container .bottom .col-2 .contact ul {
@@ -7538,11 +7557,17 @@ footer .container .bottom .col-3 a img {
 }
 footer .container .bottom .col-3 .date {
   display: flex;
-  gap: 0.75rem;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: 300;
   line-height: 170%;
   margin-bottom: 1rem;
+}
+@media only screen and (max-width: 1280px) {
+  footer .container .bottom .col-3 .date {
+    font-size: 11px;
+  }
 }
 footer .container .bottom .col-3 span {
   font-size: 14px;

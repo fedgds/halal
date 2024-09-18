@@ -33,40 +33,77 @@ get_header() ?>
                     </div>
                 <?php endforeach ?>
             </div>
-            <div class="right fade-in">
-                <h2 class="title">Đặt câu hỏi cho chúng tôi</h2>
-                <form action="">
-                    <h4>Thông tin liên hệ</h4>
-                    <div class="line line-1">
-                        <div class="form-group">
-                            <label for="">Email</label>
-                            <input type="text" placeholder="Email">
+            <?php if (pll_current_language() == 'en-us') : ?>
+                <div class="right fade-in">
+                    <h2 class="title">Ask us questions</h2>
+                    <form action="">
+                        <h4>Contact information</h4>
+                        <div class="line line-1">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" name="your-email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Phone number</label>
+                                <input type="text" name="your-phone" placeholder="Phone number" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="">Số điện thoại</label>
-                            <input type="text" placeholder="Số điện thoại">
+                        <h4>Need for advice</h4>
+                        <div class="line line-2">
+                            <div class="form-group">
+                                <label for="">Need</label>
+                                <select name="" id="">
+                                    <option value="">Select your consulting needs</option>
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <h4>Nhu cầu muốn tư vấn</h4>
-                    <div class="line line-2">
-                        <div class="form-group">
-                            <label for="">Nhu cầu</label>
-                            <select name="" id="">
-                                <option value="">Chọn nhu cầu tư vấn</option>
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                            </select>
+                        <div class="line line-3">
+                            <div class="form-group">
+                                <label for="">Content</label>
+                                <textarea name="" id="" placeholder="Enter specific needs content"></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="line line-3">
-                        <div class="form-group">
-                            <label for="">Nội dung</label>
-                            <textarea name="" id="" placeholder="Nhập nội dung nhu cầu cụ thể"></textarea>
+                        <button>Submit a question</button>
+                    </form>
+                </div>
+            <?php else: ?>
+                <div class="right fade-in">
+                    <h2 class="title">Đặt câu hỏi cho chúng tôi</h2>
+                    <form action="">
+                        <h4>Thông tin liên hệ</h4>
+                        <div class="line line-1">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="email" name="your-email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Số điện thoại</label>
+                                <input type="text" name="your-phone" placeholder="Số điện thoại" required>
+                            </div>
                         </div>
-                    </div>
-                    <button>Gửi câu hỏi</button>
-                </form>
-            </div>
+                        <h4>Nhu cầu muốn tư vấn</h4>
+                        <div class="line line-2">
+                            <div class="form-group">
+                                <label for="">Nhu cầu</label>
+                                <select name="" id="">
+                                    <option value="">Chọn nhu cầu tư vấn</option>
+                                    <option value="">Option 1</option>
+                                    <option value="">Option 2</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="line line-3">
+                            <div class="form-group">
+                                <label for="">Nội dung</label>
+                                <textarea name="" id="" placeholder="Nhập nội dung nhu cầu cụ thể"></textarea>
+                            </div>
+                        </div>
+                        <button>Gửi câu hỏi</button>
+                    </form>
+                </div>
+            <?php endif ?>
         </div>
     </div>
 </main>

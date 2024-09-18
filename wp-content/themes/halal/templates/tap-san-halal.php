@@ -78,11 +78,11 @@ get_header(); ?>
                             <?php endwhile; 
                                 wp_reset_postdata();
                                 else : ?>
-                                <p>Không có gì nào trong danh mục này.</p>
+                                <p><?= (pll_current_language() == 'en-us') ? "There are no journals." : "Không có tập san nào." ?></p>
                             <?php endif; ?>
                         </div>
-                        <?php if ($posts->found_posts > 6) : ?>
-                            <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>" class="view-more">XEM THÊM</a>
+                        <?php if ($posts->found_posts > 1) : ?>
+                            <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>" class="view-more"><?= (pll_current_language() == 'en-us') ? "VIEW MORE" : "XEM THÊM" ?></a>
                         <?php endif; ?>
                     </div>
                 </div>

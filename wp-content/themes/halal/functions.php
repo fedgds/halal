@@ -353,8 +353,9 @@ function handle_contact_form_submission() {
 
             $contact_form->submit();
         }
-
-        wp_redirect(home_url('/lien-he'));
+        // Redirect back to the current page
+        $redirect_url = wp_get_referer();
+        wp_redirect($redirect_url ? $redirect_url : home_url());
         exit;
     }
 }
@@ -461,9 +462,9 @@ function handle_certify_form_submission() {
 
             $certify_form->submit();
         }
-
-        // Redirect after form submission
-        wp_redirect(home_url('/dang-ky-chung-nhan'));
+        // Redirect back to the current page
+        $redirect_url = wp_get_referer();
+        wp_redirect($redirect_url ? $redirect_url : home_url());
         exit;
     }
 }
@@ -552,3 +553,34 @@ function total_site_views_shortcode() {
     return display_total_site_views();
 }
 add_shortcode('total_site_views', 'total_site_views_shortcode');
+
+function formatDate($date) {
+    // Tạo đối tượng DateTime từ định dạng ngày đầu vào
+    $dateTime = DateTime::createFromFormat('d/m/Y', $date);
+    
+    // Kiểm tra xem đối tượng DateTime có hợp lệ không
+    if ($dateTime === false) {
+        return 'Ngày không hợp lệ';
+    }
+    
+    // Định dạng ngày sử dụng các ký tự định dạng chuẩn
+    $formattedDate = $dateTime->format('d-m-Y');
+    
+    // Tách các phần của ngày
+    list($day, $month, $year) = explode('-', $formattedDate);
+    
+    // Tạo chuỗi kết quả với các từ tiếng Việt
+    return "$day, tháng $month, $year";
+}
+function formatDateEn($dateString) {
+    // Tạo đối tượng DateTime từ chuỗi đầu vào
+    $date = DateTime::createFromFormat('d/m/Y', $dateString);
+    
+    // Kiểm tra nếu việc tạo DateTime thành công
+    if ($date) {
+        // Định dạng lại ngày theo yêu cầu "M d, Y"
+        return $date->format('M d, Y');
+    } else {
+        return "Invalid date format";
+    }
+}

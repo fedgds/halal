@@ -51,24 +51,6 @@ $related_trains_query = new WP_Query(array(
     ),
     'post__not_in' => array($train_id)
 ));
-function formatDate($date) {
-    // Tạo đối tượng DateTime từ định dạng ngày đầu vào
-    $dateTime = DateTime::createFromFormat('d/m/Y', $date);
-    
-    // Kiểm tra xem đối tượng DateTime có hợp lệ không
-    if ($dateTime === false) {
-        return 'Ngày không hợp lệ';
-    }
-    
-    // Định dạng ngày sử dụng các ký tự định dạng chuẩn
-    $formattedDate = $dateTime->format('d-m-Y');
-    
-    // Tách các phần của ngày
-    list($day, $month, $year) = explode('-', $formattedDate);
-    
-    // Tạo chuỗi kết quả với các từ tiếng Việt
-    return "Ngày $day, tháng $month, năm $year";
-}
 
 get_header(); ?>
 <main>
@@ -85,9 +67,15 @@ get_header(); ?>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
                     </svg>
                 </span>
-                <a href="">
-                    Đào tạo Halal
-                </a>
+                <?php if(pll_current_language() == 'en-us'): ?>
+                    <a href="<?= home_url() ?>/training">
+                        Training
+                    </a>
+                <?php else: ?>
+                    <a href="<?= home_url() ?>/dao-tao">
+                        Đào tạo
+                    </a>
+                <?php endif ?>
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
@@ -100,7 +88,7 @@ get_header(); ?>
             <div class="left">
                 <h2 class="title"><?php the_title(); ?></h2>
                 <div class="share">
-                    <span>Chia sẻ:</span>
+                    <span><?= (pll_current_language() == 'en-us') ? "Share:" : "Chia sẻ:" ?></span>
                     <a href="" class="instagram">
                         <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                             <circle cx="16.7708" cy="16.0013" r="13.3333" fill="#C13584"/>
@@ -118,7 +106,7 @@ get_header(); ?>
                 </div>
                 <?php if($start_time['date'] || $end_time['date']): ?>
                 <div class="time">
-                    <h4>Thời gian sự kiện:</h4>
+                    <h4><?= (pll_current_language() == 'en-us') ? "Event time:" : "Thời gian sự kiện:" ?></h4>
                     <div class="infor">
                         <div class="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
@@ -126,21 +114,33 @@ get_header(); ?>
                             </svg>
                         </div>
                         <span>
-                            <?php if($start_time['date']): ?>
-                                <?= formatDate($start_time['date']) ?>
-                            <?php endif ?>
-                            <?php if($start_time['date'] && $end_time['date']): ?>
-                                <span> - </span>
-                            <?php endif ?>
-                            <?php if($end_time['date']): ?>
-                                <?= formatDate($end_time['date']) ?>
+                            <?php if(pll_current_language() == 'en-us'): ?>
+                                <?php if($start_time['date']): ?>
+                                    <?= formatDateEn($start_time['date']) ?>
+                                <?php endif ?>
+                                <?php if($start_time['date'] && $end_time['date']): ?>
+                                    <span> - </span>
+                                <?php endif ?>
+                                <?php if($end_time['date']): ?>
+                                    <?= formatDateEn($end_time['date']) ?>
+                                <?php endif ?>
+                            <?php else: ?>
+                                <?php if($start_time['date']): ?>
+                                    <?= formatDate($start_time['date']) ?>
+                                <?php endif ?>
+                                <?php if($start_time['date'] && $end_time['date']): ?>
+                                    <span> - </span>
+                                <?php endif ?>
+                                <?php if($end_time['date']): ?>
+                                    <?= formatDate($end_time['date']) ?>
+                                <?php endif ?>
                             <?php endif ?>
                     </div>
                 </div>
                 <?php endif ?>
                 <?php if($address): ?>
                     <div class="address">
-                        <h4>Địa chỉ:</h4>
+                        <h4><?= (pll_current_language() == 'en-us') ? "Address:" : "Địa chỉ:" ?></h4>
                         <div class="infor">
                             <div class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -154,13 +154,13 @@ get_header(); ?>
                 <?php endif ?>
                 <?php if($explain): ?>
                     <div class="explain">
-                        <h4>Diễn giả:</h4>
+                        <h4><?= (pll_current_language() == 'en-us') ? "Explain:" : "Diễn giả:" ?></h4>
                         <span><?= $explain ?></span>
                     </div>
                 <?php endif ?>
                 <?php if($organize): ?>
                     <div class="organize">
-                        <h4>Đơn vị tổ chức:</h4>
+                        <h4><?= (pll_current_language() == 'en-us') ? "Organize:" : "Đơn vị tổ chức:" ?></h4>
                         <span><?= $organize ?></span>
                     </div>
                 <?php endif ?>
@@ -173,7 +173,7 @@ get_header(); ?>
             </div>
             <div class="right">
                 <div class="training">
-                    <h2 class="title">Đào tạo mới nhât</h2>
+                    <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Latest training" : "Đào tạo mới nhất" ?></h2>
                     <div class="list-training">
                         <?php if ($latest_train_query->have_posts()) : ?>
                             <?php while ($latest_train_query->have_posts()) : $latest_train_query->the_post(); ?>
@@ -218,12 +218,12 @@ get_header(); ?>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p>Không có khóa đào tạo nào.</p>
+                            <p><?= (pll_current_language() == 'en-us') ? "There are no training." : "Không có khóa đào tạo nào." ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="news">
-                    <h2 class="title">Tin tức mới nhất</h2>
+                    <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Latest event" : "Tin tức mới nhất" ?></h2>
                     <div class="list-news">
                         <?php if ($latest_news_query->have_posts()) : ?>
                             <?php while ($latest_news_query->have_posts()) : $latest_news_query->the_post(); ?>
@@ -267,21 +267,30 @@ get_header(); ?>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p>Không có tin tức nào.</p>
+                            <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
         <div class="latest">
-            <h3 class="title">Đào tạo mới nhất</h3>
+            <h3 class="title"><?= (pll_current_language() == 'en-us') ? "Latest training" : "Đào tạo mới nhất" ?></h3>
             <table>
-                <tr>
-                    <th>Tên khóa đào tạo</th>
-                    <th>Thời gian bắt đầu</th>
-                    <th>Thời gian kết thúc</th>
-                    <th>Địa điểm</th>
-                </tr>
+                <?php if (pll_current_language() == 'en-us') : ?>
+                    <tr>
+                        <th>Course name</th>
+                        <th>Start time</th>
+                        <th>End Time</th>
+                        <th>Address</th>
+                    </tr>
+                <?php else: ?>
+                    <tr>
+                        <th>Tên khóa đào tạo</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
+                        <th>Địa điểm</th>
+                    </tr>
+                <?php endif ?>
                 <?php if ($latest_train_query->have_posts()) : ?>
                     <?php while ($latest_train_query->have_posts()) : $latest_train_query->the_post(); ?>
                         <?php
@@ -310,19 +319,28 @@ get_header(); ?>
                     <?php endwhile; ?>
                     <?php wp_reset_postdata(); ?>
                 <?php else : ?>
-                    <p>Không có khóa đào tạo nào.</p>
+                    <p><?= (pll_current_language() == 'en-us') ? "There are no training." : "Không có khóa đào tạo nào." ?></p>
                 <?php endif; ?>
             </table>
         </div>
         <div class="relate fade-in">
-            <h3 class="title">Đào tạo liên quan</h3>
+            <h3 class="title"><?= (pll_current_language() == 'en-us') ? "Relevant training" : "Đào tạo liên quan" ?></h3>
             <table>
-                <tr>
-                    <th>Tên khóa đào tạo</th>
-                    <th>Thời gian bắt đầu</th>
-                    <th>Thời gian kết thúc</th>
-                    <th>Địa điểm</th>
-                </tr>
+                <?php if (pll_current_language() == 'en-us') : ?>
+                    <tr>
+                        <th>Course name</th>
+                        <th>Start time</th>
+                        <th>End Time</th>
+                        <th>Address</th>
+                    </tr>
+                <?php else: ?>
+                    <tr>
+                        <th>Tên khóa đào tạo</th>
+                        <th>Thời gian bắt đầu</th>
+                        <th>Thời gian kết thúc</th>
+                        <th>Địa điểm</th>
+                    </tr>
+                <?php endif ?>
                 <?php if ($related_trains_query->have_posts()) : ?>
                     <?php while ($related_trains_query->have_posts()) : $related_trains_query->the_post(); ?>
                         <?php
@@ -351,7 +369,7 @@ get_header(); ?>
                     <?php endwhile; ?>
                     <?php wp_reset_postdata(); ?>
                 <?php else : ?>
-                    <p>Không có khóa đào tạo nào.</p>
+                    <p><?= (pll_current_language() == 'en-us') ? "There are no training." : "Không có khóa đào tạo nào." ?></p>
                 <?php endif; ?>
             </table>
         </div>

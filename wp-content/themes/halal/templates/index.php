@@ -5,7 +5,10 @@ $slider = get_field('slider', $id);
 $section_1 = get_field('section-1', $id);
 $section_2 = get_field('section-2', $id);
 $section_3 = get_field('section-3', $id);
+$section_4 = get_field('section-4', $id);
 $section_5 = get_field('section-5', $id);
+$section_6 = get_field('section-6', $id);
+$section_7 = get_field('section-7', $id);
 
 $args = array(
     'taxonomy' => 'danh_muc_tap_san',
@@ -98,8 +101,8 @@ get_header(); ?>
                     </div>
                 </div>
                 <div class="button">
-                    <a href="<?= home_url() ?>/gioi-thieu">
-                        <span>Tìm hiểu thêm</span>
+                    <a href="<?= $section_1['button']['link'] ?>">
+                        <span><?= $section_1['button']['text'] ?></span>
                         <div class="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z" fill="#FE3131" stroke="#FE3131"/>
@@ -175,8 +178,8 @@ get_header(); ?>
                                     <?php endforeach ?>
                                 </ul>
                             </nav>
-                            <a href="<?= home_url() ?>/halal-nqi/#<?= get_post_field('post_name', get_post()); ?>" class="view-more">
-                                <span>Tìm hiểu thêm</span>
+                            <a href="<?= $section_3['button']['link'] ?>#<?= get_post_field('post_name', get_post()); ?>" class="view-more">
+                                <span><?= $section_3['button']['text'] ?></span>
                                 <div class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4.5C5.72386 4.5 5.5 4.27614 5.5 4C5.5 3.72386 5.72386 3.5 6 3.5H12C12.2761 3.5 12.5 3.72386 12.5 4V10C12.5 10.2761 12.2761 10.5 12 10.5C11.7239 10.5 11.5 10.2761 11.5 10V5.20711L4.35355 12.3536C4.15829 12.5488 3.84171 12.5488 3.64645 12.3536C3.45118 12.1583 3.45118 11.8417 3.64645 11.6464L10.7929 4.5H6Z" fill="#FE3131"/>
@@ -204,9 +207,9 @@ get_header(); ?>
             <img src="<?= $url ?>/dist/images/background-section-4.png" alt="">
         </div>
         <div class="container">
-            <h2 class="title">Đào tạo về Halal</h2>
+            <h2 class="title"><?= $section_4['title'] ?></h2>
             <div class="description">
-                Lorem Ipsum có ưu điểm hơn so với đoạn văn bản chỉ gồm nội dung kiểu "Nội dung, nội dung, nội dung" là nó khiến văn bản giống thật hơn, bình thường hơn.
+                <?= $section_4['description'] ?>
             </div>
             <div class="wrap-list">
                 <div class="list-training">
@@ -305,12 +308,12 @@ get_header(); ?>
         <div class="container">
             <div class="top">
                 <h2 class="title">
-                    <p>Tin tức <span>& sự kiện</span></p>
+                    <p><?= $section_6['title'] ?></p>
                 </h2>
                 <nav class="tab">
                     <ul id="list-tab-news">
-                        <li>Tin tức mới nhất</li>
-                        <li>Sự kiện nóng hổi</li>
+                        <li><?= $section_6['tab_1'] ?></li>
+                        <li><?= $section_6['tab_2'] ?></li>
                     </ul>
                 </nav>
             </div>
@@ -453,7 +456,7 @@ get_header(); ?>
         <div class="container">
             <div class="top">
                 <h2 class="title">
-                    <p>Tập san <span>HALAL</span></p>
+                    <p><?= $section_7['title'] ?></p>
                 </h2>
                 <nav class="tab">
                     <ul id="tab-halal">
@@ -495,11 +498,25 @@ get_header(); ?>
                                     <div class="infor">
                                         <div class="date-and-hour">
                                             <div class="date">
+                                                <div class="icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.375 1.92969C4.63388 1.92969 4.84375 2.13956 4.84375 2.39844V3.02344H10.1562V2.39844C10.1562 2.13956 10.3661 1.92969 10.625 1.92969C10.8839 1.92969 11.0937 2.13956 11.0937 2.39844V3.02344H11.875C12.9106 3.02344 13.75 3.86291 13.75 4.89844V12.3984C13.75 13.434 12.9106 14.2734 11.875 14.2734H3.125C2.08947 14.2734 1.25 13.434 1.25 12.3984V4.89844C1.25 3.86291 2.08947 3.02344 3.125 3.02344H3.90625V2.39844C3.90625 2.13956 4.11612 1.92969 4.375 1.92969ZM10.1562 3.96094V4.89844C10.1562 5.15732 10.3661 5.36719 10.625 5.36719C10.8839 5.36719 11.0937 5.15732 11.0937 4.89844V3.96094H11.875C12.3927 3.96094 12.8125 4.38067 12.8125 4.89844V6.92969H2.1875V4.89844C2.1875 4.38067 2.60723 3.96094 3.125 3.96094H3.90625V4.89844C3.90625 5.15732 4.11612 5.36719 4.375 5.36719C4.63388 5.36719 4.84375 5.15732 4.84375 4.89844V3.96094H10.1562ZM2.1875 7.86719V12.3984C2.1875 12.9162 2.60723 13.3359 3.125 13.3359H11.875C12.3927 13.3359 12.8125 12.9162 12.8125 12.3984V7.86719H2.1875Z" fill="#414141"/>
+                                                    </svg>
+                                                </div>
                                                 <span><?= custom_date_format(get_the_date()) ?></span>
                                             </div>
                                             <div class="dot">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="5" height="6" viewBox="0 0 5 6" fill="none">
+                                                    <circle cx="2.5" cy="3.02344" r="2.5" fill="#414141"/>
+                                                </svg>
                                             </div>
                                             <div class="time">
+                                                <div class="icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 13.3359C10.434 13.3359 12.8125 10.9574 12.8125 8.02344C12.8125 5.08942 10.434 2.71094 7.5 2.71094C4.56599 2.71094 2.1875 5.08942 2.1875 8.02344C2.1875 10.9574 4.56599 13.3359 7.5 13.3359ZM7.5 14.2734C10.9517 14.2734 13.75 11.4752 13.75 8.02344C13.75 4.57166 10.9517 1.77344 7.5 1.77344C4.04822 1.77344 1.25 4.57166 1.25 8.02344C1.25 11.4752 4.04822 14.2734 7.5 14.2734Z" fill="#414141"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 4.42969C7.75888 4.42969 7.96875 4.63956 7.96875 4.89844V7.76456C7.96875 7.806 7.98519 7.84575 8.0145 7.87506L9.39394 9.2545C9.577 9.43756 9.577 9.73431 9.39394 9.91738C9.21088 10.1004 8.91413 10.1004 8.73106 9.91738L7.35162 8.53794C7.1465 8.33281 7.03125 8.05463 7.03125 7.76456V4.89844C7.03125 4.63956 7.24113 4.42969 7.5 4.42969Z" fill="#414141"/>
+                                                    </svg>
+                                                </div>
                                                 <span><?= custom_time_format(get_the_time()) ?></span>
                                             </div>
                                         </div>
@@ -509,7 +526,7 @@ get_header(); ?>
                                 <?php endwhile; 
                                     wp_reset_postdata();
                                     else : ?>
-                                    <p>Không có bài viết nào trong danh mục này.</p>
+                                    <p><?= (pll_current_language() == 'en-us') ? "There are no journals." : "Không có tập san nào." ?></p>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -528,7 +545,7 @@ get_header(); ?>
                             );
                             $all_projects = new WP_Query($all_project_args);
                             if ($all_projects->found_posts > 3) : ?>
-                                <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>" class="view-more">XEM THÊM</a>
+                                <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>" class="view-more"><?= (pll_current_language() == 'en-us') ? "VIEW MORE" : "XEM THÊM" ?></a>
                         <?php endif; ?>
                     </div>
                 <?php endforeach ?>

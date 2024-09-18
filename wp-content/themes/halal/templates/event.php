@@ -20,7 +20,8 @@ $list_events_query = new WP_Query(array(
     'post_status' => 'publish',
     'orderby' => 'date',
     'posts_per_page' => $event_per_page,
-    'paged' => $paged
+    'paged' => $paged,
+    'lang' => 'en-us'
 ));
 
 
@@ -31,7 +32,7 @@ get_header(); ?>
     <div class="section-news-and-event fade-in">
         <div class="container">
             <div class="list-menu">
-                <h2 class="title">Sự kiện</h2>
+                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Event" : "Sự kiện" ?></h2>
                 <div class="list">
                     <?php if ($list_events_query->have_posts()) : ?>
                         <?php while ($list_events_query->have_posts()) : $list_events_query->the_post(); ?>
@@ -76,7 +77,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có sự kiện nào.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?></p>
                     <?php endif; ?>
                 </div>
                 <nav class="pagination search-pagination">

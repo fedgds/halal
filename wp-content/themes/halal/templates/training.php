@@ -19,7 +19,7 @@ $list_training_query = new WP_Query(array(
     'post_status' => 'publish',
     'orderby' => 'date',
     'posts_per_page' => $trains_per_page,
-    'paged' => $paged
+    'paged' => $paged,
 ));
 get_header(); ?>
 <main>
@@ -28,7 +28,7 @@ get_header(); ?>
         <div class="container">  
             <form action="" id="search-form">
                     <div class="search">
-                        <input type="text" id="search-input" placeholder="Tìm kiếm">
+                        <input type="text" id="search-input" placeholder="<?= (pll_current_language() == 'en-us') ? "Search" : "Tìm kiếm" ?>">
                         <button type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.58317 2.625C5.55609 2.625 2.2915 5.88959 2.2915 9.91667C2.2915 13.9437 5.55609 17.2083 9.58317 17.2083C13.6102 17.2083 16.8748 13.9437 16.8748 9.91667C16.8748 5.88959 13.6102 2.625 9.58317 2.625ZM1.0415 9.91667C1.0415 5.19923 4.86574 1.375 9.58317 1.375C14.3006 1.375 18.1248 5.19923 18.1248 9.91667C18.1248 12.0504 17.3424 14.0015 16.0489 15.4985L18.7751 18.2247C19.0192 18.4688 19.0192 18.8645 18.7751 19.1086C18.531 19.3527 18.1353 19.3527 17.8912 19.1086L15.165 16.3824C13.668 17.6759 11.7169 18.4583 9.58317 18.4583C4.86574 18.4583 1.0415 14.6341 1.0415 9.91667Z" fill="#1C274C"/>
@@ -49,15 +49,27 @@ get_header(); ?>
                 </form>
             <div class="table-wrapper fade-in">
                 <table>
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Tên khóa đào tạo</th>
-                            <th>Thời gian bắt đầu</th>
-                            <th>Thời gian kết thúc</th>
-                            <th>Địa điểm</th>
-                        </tr>
-                    </thead>
+                    <?php if (pll_current_language() == 'en-us') : ?>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Course name</th>
+                                <th>Start time</th>
+                                <th>End Time</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                    <?php else: ?>
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên khóa đào tạo</th>
+                                <th>Thời gian bắt đầu</th>
+                                <th>Thời gian kết thúc</th>
+                                <th>Địa điểm</th>
+                            </tr>
+                        </thead>
+                    <?php endif ?>
                     <tbody>
                         <?php if ($list_training_query->have_posts()) : $count = 0;?>
                             <?php while ($list_training_query->have_posts()) : $list_training_query->the_post(); ?>

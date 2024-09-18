@@ -64,9 +64,15 @@ get_header(); ?>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
                     </svg>
                 </span>
-                <a href="">
-                    Tin tức
-                </a>
+                <?php if(pll_current_language() == 'en-us'): ?>
+                    <a href="<?= home_url() ?>/event">
+                        Event
+                    </a>
+                <?php else: ?>
+                    <a href="<?= home_url() ?>/su-kien">
+                        Sự kiện
+                    </a>
+                <?php endif ?>
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
@@ -92,7 +98,7 @@ get_header(); ?>
                     <?php the_content(); ?>
                 </div>
                 <div class="share">
-                    <span>Chia sẻ:</span>
+                    <span><?= (pll_current_language() == 'en-us') ? "Share:" : "Chia sẻ:" ?></span>
                     <a href="" class="instagram">
                         <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
                             <circle cx="16.7708" cy="16.0013" r="13.3333" fill="#C13584"/>
@@ -111,7 +117,7 @@ get_header(); ?>
             </div>
             <div class="right">
                 <div class="top">
-                    <h2 class="title">Sự kiện mới nhất</h2>
+                    <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Latest event" : "Sự kiện mới nhất" ?></h2>
                     <div class="list">
                         <?php if ($latest_events_query->have_posts()) : ?>
                             <?php while ($latest_events_query->have_posts()) : $latest_events_query->the_post(); ?>
@@ -155,12 +161,12 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p>Không có sự kiện nào.</p>
+                            <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="bottom">
-                    <h2 class="title">Tin tức mới nhất</h2>
+                    <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Latest news" : "Tin tức mới nhất" ?></h2>
                     <div class="list">
                         <?php if ($latest_news_query->have_posts()) : ?>
                             <?php while ($latest_news_query->have_posts()) : $latest_news_query->the_post(); ?>
@@ -204,14 +210,14 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p>Không có tin tức nào.</p>
+                            <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
         <div class="relate fade-in">
-            <h2 class="title">Sự kiện liên quan</h2>
+            <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Relevant event" : "Sự kiện liên quan" ?></h2>
             <div class="list">
             <?php if ($related_events_query->have_posts()) : ?>
                 <?php while ($related_events_query->have_posts()) : $related_events_query->the_post(); ?>
@@ -255,7 +261,7 @@ get_header(); ?>
                 <?php endwhile; ?>
                 <?php wp_reset_postdata(); ?>
             <?php else : ?>
-                <p>Không có tin tức liên quan.</p>
+                <p><?= (pll_current_language() == 'en-us') ? "There is no related event." : "Không có sự kiện liên quan nào." ?></p>
             <?php endif; ?>
             </div>
         </div>

@@ -31,7 +31,7 @@ get_header(); ?>
     <div class="section-news-and-event fade-in">
         <div class="container">
             <div class="list-menu">
-                <h2 class="title">Tin tức</h2>
+                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "There are no news." : "Tin tức" ?></h2>
                 <div class="list">
                     <?php if ($list_news_query->have_posts()) : ?>
                         <?php while ($list_news_query->have_posts()) : $list_news_query->the_post(); ?>
@@ -76,7 +76,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có tin tức nào.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?></p>
                     <?php endif; ?>
                 </div>
                 <nav class="pagination search-pagination">

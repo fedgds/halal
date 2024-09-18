@@ -39,6 +39,17 @@ $related_posts_query = new WP_Query(array(
     ),
     'post__not_in' => array($post_id)
 ));
+// Lấy danh mục đầu tiên của bài viết
+$post_categories = get_the_terms($post_id, 'danh_muc_tap_san');
+$has_category = !empty($post_categories) && !is_wp_error($post_categories);
+$category_name = '';
+$category_link = '';
+
+if ($has_category) {
+    $first_category = reset($post_categories);
+    $category_name = $first_category->name;
+    $category_link = get_term_link($first_category);
+}
 
 $url = get_template_directory_uri();
 get_header(); ?>
@@ -56,17 +67,25 @@ get_header(); ?>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
                     </svg>
                 </span>
-                <a href="">
-                    Tập san Halal
-                </a>
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
-                    </svg>
-                </span>
-                <a href="">
-                    Chính sách
-                </a>
+                <?php if(pll_current_language() == 'en-us'): ?>
+                    <a href="<?= home_url() ?>/halal-journal">
+                        Halal Journal
+                    </a>
+                <?php else: ?>
+                    <a href="<?= home_url() ?>/tap-san-halal">
+                        Tập san Halal
+                    </a>
+                <?php endif ?>
+                <?php if ($has_category): ?>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
+                        </svg>
+                    </span>
+                    <a href="<?= esc_url($category_link); ?>">
+                        <?= esc_html($category_name); ?>
+                    </a>
+                <?php endif; ?>
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
@@ -98,7 +117,7 @@ get_header(); ?>
                 </div>
             </div>
             <div class="right">
-                <h2 class="title">Tập san mới nhất</h2>
+                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Latest journal" : "Tập san mới nhất" ?></h2>
                 <div class="list">
                     <?php if ($latest_posts_query->have_posts()) : ?>
                         <?php while ($latest_posts_query->have_posts()) : $latest_posts_query->the_post(); ?>
@@ -142,13 +161,13 @@ get_header(); ?>
                     <?php endwhile; ?>
                     <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có tập san nào.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no journals." : "Không có tập san nào." ?></p>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
         <div class="relate fade-in">
-            <h2 class="title">Tập san liên quan</h2>
+            <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Relevant journal" : "Tập san liên quan" ?></h2>
             <div class="list">
             <?php if ($related_posts_query->have_posts()) : ?>
                 <?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
@@ -192,7 +211,7 @@ get_header(); ?>
                 <?php endwhile; ?>
                 <?php wp_reset_postdata(); ?>
                 <?php else : ?>
-                    <p>Không có tập san liên quan.</p>
+                    <p><?= (pll_current_language() == 'en-us') ? "There are no relevant journals." : "Không có tập san liên quan nào." ?></p>
                 <?php endif; ?>
             </div>
         </div>

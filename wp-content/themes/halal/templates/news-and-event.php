@@ -20,7 +20,7 @@ get_header(); ?>
     <div class="section-news-and-event fade-in">
         <div class="container">
             <div class="list-menu fade-in">
-                <h2 class="title">Tin tức</h2>
+                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "News" : "Tin tức" ?></h2>
                 <div class="list">
                     <?php if ($list_news_query->have_posts()) : ?>
                         <?php $count = 0; ?>
@@ -67,15 +67,15 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có tin tức nào.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?></p>
                     <?php endif; ?>
                 </div>
                 <?php if ($list_news_query->found_posts > 6) : ?>
-                    <a href="<?= home_url() ?>/tin-tuc" class="view-more">XEM THÊM</a>
+                    <a href="<?= home_url() ?>/tin-tuc" class="view-more"><?= (pll_current_language() == 'en-us') ? "VIEW MORE" : "XEM THÊM" ?></a>
                 <?php endif; ?>
             </div>
             <div class="list-menu fade-in">
-                <h2 class="title">Sự kiện</h2>
+                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Event" : "Sự kiện" ?></h2>
                 <div class="list">
                     <?php if ($list_events_query->have_posts()) : ?>
                         <?php $count = 0; ?>
@@ -122,11 +122,11 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có sự kiện nào.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?></p>
                     <?php endif; ?>
                 </div>
                 <?php if ($list_events_query->found_posts > 6) : ?>
-                    <a href="<?= home_url() ?>/su-kien" class="view-more">XEM THÊM</a>
+                    <a href="<?= home_url() ?>/su-kien" class="view-more"><?= (pll_current_language() == 'en-us') ? "VIEW MORE" : "XEM THÊM" ?></a>
                 <?php endif; ?>
             </div>
         </div>
