@@ -22,11 +22,9 @@ $url = get_template_directory_uri();
 	<meta property="og:description" content="" />
 	<meta property="og:url" content="" />
 	<link rel="shortcut icon" href="#" type="image/x-icon" />
-	<link rel="stylesheet" type="text/css" href="<?= $url ?>/dist/assets/jquery-ui.css">
-
 	<link rel="stylesheet" type="text/css" href="<?= $url ?>/dist/assets/custom.css">
 	
-	<!-- <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>  -->
+	<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'> 
      
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script> 
 	

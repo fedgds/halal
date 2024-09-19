@@ -4780,6 +4780,9 @@ main {
                 position: relative;
                 padding-top: 6.25rem;
                 padding-bottom: 12.5rem;
+                @include Responsive(m-7) {
+                    padding-top: 3.125rem;
+                }
 
                 h2.title {
                     display: flex;
@@ -4793,6 +4796,10 @@ main {
 
                     @include Responsive(m-12) {
                         font-size: 2rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        font-size: 1.375rem;
                     }
                 }
 
@@ -4836,6 +4843,13 @@ main {
                     overflow: scroll;
                     display: flex;
                     justify-content: space-evenly;
+                    @include Responsive(m-7) {
+                        margin-bottom: 3.125rem;
+                    }
+
+                    @include Responsive(m-4) {
+                        margin-bottom: 2rem;
+                    }
 
                     .wrap {
                         display: flex;
@@ -4891,68 +4905,24 @@ main {
 
                 form {
                     display: flex;
+                    flex-flow: wrap;
                     gap: 1.25rem;
                     margin-bottom: 2.5rem;
 
-                    @include Responsive(m-4) {
+                    @include Responsive(m-7) {
                         gap: 1rem;
                     }
 
-                    input,
-                    select {
-                        box-sizing: border-box;
-                        padding: .9375rem .9375rem .9375rem 2.8125rem;
-                        border-radius: .4375rem;
-                        border: 1px solid #D3D3D3;
-
-                        @include Responsive(m-12) {
-                            padding: .75rem .75rem .75rem 2.25rem;
-                        }
-
-                        @include Responsive(m-7) {
-                            padding: .5rem .5rem .5rem 1.75rem;
-                        }
+                    @include Responsive(m-4) {
+                        gap: .5rem;
                     }
 
-                    input {
-                        width: 19.0625rem;
-
-                        @include Responsive(m-7) {
-                            width: 14rem;
-                        }
-
-                        @include Responsive(m-4) {
-                            width: 10rem;
-                        }
-                    }
-
-                    select {
-                        width: 16.375rem;
-
-                        @include Responsive(m-7) {
-                            width: 12rem;
-                            font-size: .875rem;
-                        }
-
-                        @include Responsive(m-4) {
-                            width: 10rem;
-                        }
-                    }
-
-                    input:focus,
-                    select:focus {
+                    input:focus {
                         border: 1px solid var(--black);
                     }
 
                     input::placeholder {
                         color: #BFBFBF;
-                        font-size: .875rem;
-                        font-weight: 500;
-                        line-height: 150%;
-                    }
-
-                    select option {
-                        color: #212121;
                         font-size: .875rem;
                         font-weight: 500;
                         line-height: 150%;
@@ -4964,6 +4934,32 @@ main {
                     }
 
                     .search {
+                        input{
+                            box-sizing: border-box;
+                            padding: .9375rem .9375rem .9375rem 2.8125rem;
+                            border-radius: .4375rem;
+                            border: 1px solid #D3D3D3;
+
+                            @include Responsive(m-12) {
+                                padding: .75rem .75rem .75rem 2.25rem;
+                            }
+
+                            @include Responsive(m-7) {
+                                padding: .5rem .5rem .5rem 1.75rem;
+                            }
+                        }
+
+                        input {
+                            width: 19.0625rem;
+
+                            @include Responsive(m-7) {
+                                width: 28rem;
+                            }
+
+                            @include Responsive(m-4) {
+                                width: 22rem;
+                            }
+                        }
                         button {
                             position: absolute;
                             top: 1rem;
@@ -4987,24 +4983,57 @@ main {
                     }
 
                     .filter {
+                        input{
+                            box-sizing: border-box;
+                            padding: .9375rem .9375rem .9375rem 5.75rem;
+                            border-radius: .4375rem;
+                            border: 1px solid #D3D3D3;
+
+                            @include Responsive(m-12) {
+                                padding: .75rem .75rem .75rem 5.75rem;
+                            }
+
+                            @include Responsive(m-7) {
+                                padding: .5rem .5rem .5rem 4.75rem;
+                            }
+                        }
+
+                        input {
+                            width: 14rem;
+
+                            @include Responsive(m-7) {
+                                width: 12rem;
+                            }
+
+                            @include Responsive(m-4) {
+                                font-size: .875rem;
+                                width: 10.75rem;
+                            }
+                        }
                         label {
+                            display: flex;
+                            align-items: center;
+                            gap: .5rem;
                             position: absolute;
                             top: 1rem;
                             left: .9375rem;
 
                             @include Responsive(m-12) {
-                                top: .875rem;
-                                left: .875rem;
+                                top: .75rem;
+                                left: .75rem;
                             }
 
                             @include Responsive(m-7) {
-                                top: .75rem;
+                                top: .5rem;
                                 left: .5rem;
 
                                 svg {
                                     width: 1rem;
                                     height: 1rem;
                                 }
+                            }
+                            @include Responsive(m-4) {
+                                font-size: .875rem;
                             }
                         }
                     }
@@ -5272,6 +5301,9 @@ main {
         .container {
             padding-top: 6.25rem;
             padding-bottom: 12.5rem;
+            @include Responsive(m-7) {
+                padding-top: 3.125rem;
+            }
 
             h2.title {
                 color: var(--black);
@@ -5283,72 +5315,32 @@ main {
                 @include Responsive(m-12) {
                     font-size: 1.5rem;
                 }
+
+                @include Responsive(m-7) {
+                    font-size: 1.375rem;
+                }
             }
 
             form {
                 display: flex;
+                flex-flow: wrap;
                 gap: 1.25rem;
                 margin-bottom: 2.5rem;
 
-                @include Responsive(m-4) {
+                @include Responsive(m-7) {
                     gap: 1rem;
                 }
 
-                input,
-                select {
-                    box-sizing: border-box;
-                    padding: .9375rem .9375rem .9375rem 2.8125rem;
-                    border-radius: .4375rem;
-                    border: 1px solid #D3D3D3;
-
-                    @include Responsive(m-12) {
-                        padding: .75rem .75rem .75rem 2.25rem;
-                    }
-
-                    @include Responsive(m-7) {
-                        padding: .5rem .5rem .5rem 1.75rem;
-                    }
+                @include Responsive(m-4) {
+                    gap: .5rem;
                 }
 
-                input {
-                    width: 19.0625rem;
-
-                    @include Responsive(m-7) {
-                        width: 14rem;
-                    }
-
-                    @include Responsive(m-4) {
-                        width: 10rem;
-                    }
-                }
-
-                select {
-                    width: 16.375rem;
-
-                    @include Responsive(m-7) {
-                        width: 12rem;
-                        font-size: .875rem;
-                    }
-
-                    @include Responsive(m-4) {
-                        width: 10rem;
-                    }
-                }
-
-                input:focus,
-                select:focus {
+                input:focus {
                     border: 1px solid var(--black);
                 }
 
                 input::placeholder {
                     color: #BFBFBF;
-                    font-size: .875rem;
-                    font-weight: 500;
-                    line-height: 150%;
-                }
-
-                select option {
-                    color: #212121;
                     font-size: .875rem;
                     font-weight: 500;
                     line-height: 150%;
@@ -5360,6 +5352,32 @@ main {
                 }
 
                 .search {
+                    input{
+                        box-sizing: border-box;
+                        padding: .9375rem .9375rem .9375rem 2.8125rem;
+                        border-radius: .4375rem;
+                        border: 1px solid #D3D3D3;
+
+                        @include Responsive(m-12) {
+                            padding: .75rem .75rem .75rem 2.25rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            padding: .5rem .5rem .5rem 1.75rem;
+                        }
+                    }
+
+                    input {
+                        width: 19.0625rem;
+
+                        @include Responsive(m-7) {
+                            width: 28rem;
+                        }
+
+                        @include Responsive(m-4) {
+                            width: 22rem;
+                        }
+                    }
                     button {
                         position: absolute;
                         top: 1rem;
@@ -5383,24 +5401,57 @@ main {
                 }
 
                 .filter {
+                    input{
+                        box-sizing: border-box;
+                        padding: .9375rem .9375rem .9375rem 5.75rem;
+                        border-radius: .4375rem;
+                        border: 1px solid #D3D3D3;
+
+                        @include Responsive(m-12) {
+                            padding: .75rem .75rem .75rem 5.75rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            padding: .5rem .5rem .5rem 4.75rem;
+                        }
+                    }
+
+                    input {
+                        width: 14rem;
+
+                        @include Responsive(m-7) {
+                            width: 12rem;
+                        }
+
+                        @include Responsive(m-4) {
+                            font-size: .875rem;
+                            width: 10.75rem;
+                        }
+                    }
                     label {
+                        display: flex;
+                        align-items: center;
+                        gap: .5rem;
                         position: absolute;
                         top: 1rem;
                         left: .9375rem;
 
                         @include Responsive(m-12) {
-                            top: .875rem;
-                            left: .875rem;
+                            top: .75rem;
+                            left: .75rem;
                         }
 
                         @include Responsive(m-7) {
-                            top: .75rem;
+                            top: .5rem;
                             left: .5rem;
 
                             svg {
                                 width: 1rem;
                                 height: 1rem;
                             }
+                        }
+                        @include Responsive(m-4) {
+                            font-size: .875rem;
                         }
                     }
                 }
@@ -6384,6 +6435,10 @@ main {
 
                 @include Responsive(m-12) {
                     font-size: 1.5rem;
+                }
+                
+                @include Responsive(m-7) {
+                    font-size: 1.375rem;
                 }
             }
 
