@@ -218,3 +218,58 @@ document.addEventListener('DOMContentLoaded', function () {
         closeAnswer.addEventListener('click', hideAnswer);
     });
 });
+// Drop sub menu account
+document.addEventListener('DOMContentLoaded', function () {
+    const downMenu = document.querySelector('#down-menu-header');
+    const dropMenu = document.querySelector('#drop-menu-header');
+    const subMenu = document.getElementById('sub-menu');
+
+    function showMenu() {
+        subMenu.classList.add('show');
+        downMenu.classList.add('show');
+        dropMenu.classList.add('show');
+    }
+
+    function hideMenu() {
+        subMenu.classList.remove('show');
+        dropMenu.classList.remove('show');
+        downMenu.classList.remove('show');
+    }
+
+    downMenu.addEventListener('click', showMenu);
+
+    dropMenu.addEventListener('click', hideMenu);
+
+    document.addEventListener('click', function (event) {
+        if (!subMenu.contains(event.target) && !downMenu.contains(event.target)) {
+            hideMenu();
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const downMenu = document.querySelector('#down-menu-mobile');
+    const dropMenu = document.querySelector('#drop-menu-mobile');
+    const subMenu = document.getElementById('sub-menu-mobile');
+
+    function showMenu() {
+        subMenu.classList.add('show');
+        downMenu.classList.add('show');
+        dropMenu.classList.add('show');
+    }
+
+    function hideMenu() {
+        subMenu.classList.remove('show');
+        dropMenu.classList.remove('show');
+        downMenu.classList.remove('show');
+    }
+
+    downMenu.addEventListener('click', showMenu);
+
+    dropMenu.addEventListener('click', hideMenu);
+
+    document.addEventListener('click', function (event) {
+        if (!subMenu.contains(event.target) && !downMenu.contains(event.target)) {
+            hideMenu();
+        }
+    });
+});

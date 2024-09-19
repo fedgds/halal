@@ -101,14 +101,25 @@ get_header(); ?>
                     </div>
                 </div>
                 <div class="button">
-                    <a href="<?= $section_1['button']['link'] ?>">
-                        <span><?= $section_1['button']['text'] ?></span>
-                        <div class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z" fill="#FE3131" stroke="#FE3131"/>
-                            </svg>
-                        </div>
-                    </a>
+                    <?php if(pll_current_language() == 'en-us'): ?>
+                        <a href="<?= home_url() ?>/en-us/about-halcert">
+                            <span>View more</span>
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z" fill="#FE3131" stroke="#FE3131"/>
+                                </svg>
+                            </div>
+                        </a>
+                    <?php else: ?>
+                        <a href="<?= home_url() ?>/ve-halcert">
+                            <span>Tìm hiểu thêm</span>
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z" fill="#FE3131" stroke="#FE3131"/>
+                                </svg>
+                            </div>
+                        </a>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
@@ -122,7 +133,9 @@ get_header(); ?>
             <div class="description">
                 <?= $section_2['description'] ?>
             </div>
-            <a href="<?= $section_2['button']['link'] ?>"><?= $section_2['button']['text'] ?></a>
+            <a href="<?= home_url() ?><?= (pll_current_language() == 'en-us') ? "/en-us/register-cretify/" : "/dang-ky-chung-nhan" ?>">
+                <?= (pll_current_language() == 'en-us') ? "Register cretify" : "Đăng ký chứng nhận" ?>
+            </a>
         </div>
     </div>
     <div class="section-3-home fade-in">
@@ -143,8 +156,6 @@ get_header(); ?>
                                 <li><?php the_title(); ?></li>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
-                        <?php else : ?>
-                            <p>Không có khách hàng.</p>
                         <?php endif; ?>
                     </ul>
                 </nav>
@@ -167,8 +178,8 @@ get_header(); ?>
                                 <ul>
                                     <?php foreach($policy_list as $item): ?>
                                         <li>
-                                            <span><?= $item['policy'] ?></span>
                                             <a href="<?= $item['link_download'] ?>">
+                                                <span><?= $item['policy'] ?></span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                     <path d="M12.442 15.6051C12.3284 15.7294 12.1677 15.8002 11.9992 15.8002C11.8308 15.8002 11.6701 15.7294 11.5564 15.6051L8.3564 12.1051C8.1328 11.8605 8.1498 11.481 8.39436 11.2574C8.63892 11.0338 9.01844 11.0508 9.24204 11.2953L11.3992 13.6548V4.8002C11.3992 4.46882 11.6679 4.2002 11.9992 4.2002C12.3306 4.2002 12.5992 4.46882 12.5992 4.8002V13.6548L14.7564 11.2953C14.98 11.0508 15.3595 11.0338 15.6041 11.2574C15.8486 11.481 15.8656 11.8605 15.642 12.1051L12.442 15.6051Z" fill="#414141"/>
                                                     <path d="M5.39922 14.4002C5.39922 14.0688 5.13059 13.8002 4.79922 13.8002C4.46785 13.8002 4.19922 14.0688 4.19922 14.4002V14.4441C4.1992 15.5382 4.19919 16.42 4.29244 17.1136C4.38925 17.8337 4.59637 18.44 5.0779 18.9215C5.55943 19.403 6.16573 19.6102 6.88582 19.707C7.57939 19.8002 8.46125 19.8002 9.55532 19.8002H14.4431C15.5372 19.8002 16.419 19.8002 17.1126 19.707C17.8327 19.6102 18.439 19.403 18.9205 18.9215C19.4021 18.44 19.6092 17.8337 19.706 17.1136C19.7993 16.42 19.7992 15.5382 19.7992 14.4441V14.4002C19.7992 14.0688 19.5306 13.8002 19.1992 13.8002C18.8679 13.8002 18.5992 14.0688 18.5992 14.4002C18.5992 15.5485 18.5979 16.3494 18.5167 16.9537C18.4378 17.5407 18.2934 17.8516 18.072 18.073C17.8506 18.2944 17.5397 18.4388 16.9527 18.5177C16.3484 18.5989 15.5476 18.6002 14.3992 18.6002H9.59922C8.45089 18.6002 7.65 18.5989 7.04572 18.5177C6.4587 18.4388 6.14784 18.2944 5.92643 18.073C5.70502 17.8516 5.56066 17.5407 5.48174 16.9537C5.40049 16.3494 5.39922 15.5485 5.39922 14.4002Z" fill="#414141"/>
@@ -178,14 +189,25 @@ get_header(); ?>
                                     <?php endforeach ?>
                                 </ul>
                             </nav>
-                            <a href="<?= $section_3['button']['link'] ?>#<?= get_post_field('post_name', get_post()); ?>" class="view-more">
-                                <span><?= $section_3['button']['text'] ?></span>
-                                <div class="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4.5C5.72386 4.5 5.5 4.27614 5.5 4C5.5 3.72386 5.72386 3.5 6 3.5H12C12.2761 3.5 12.5 3.72386 12.5 4V10C12.5 10.2761 12.2761 10.5 12 10.5C11.7239 10.5 11.5 10.2761 11.5 10V5.20711L4.35355 12.3536C4.15829 12.5488 3.84171 12.5488 3.64645 12.3536C3.45118 12.1583 3.45118 11.8417 3.64645 11.6464L10.7929 4.5H6Z" fill="#FE3131"/>
-                                    </svg>
-                                </div>
-                            </a>
+                            <?php if(pll_current_language() == 'en-us'): ?>
+                                <a href="<?= home_url() ?>/en-us/halal-nqi-en#<?= get_post_field('post_name', get_post()); ?>" class="view-more">
+                                    <span>View more</span>
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4.5C5.72386 4.5 5.5 4.27614 5.5 4C5.5 3.72386 5.72386 3.5 6 3.5H12C12.2761 3.5 12.5 3.72386 12.5 4V10C12.5 10.2761 12.2761 10.5 12 10.5C11.7239 10.5 11.5 10.2761 11.5 10V5.20711L4.35355 12.3536C4.15829 12.5488 3.84171 12.5488 3.64645 12.3536C3.45118 12.1583 3.45118 11.8417 3.64645 11.6464L10.7929 4.5H6Z" fill="#FE3131"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                            <?php else: ?>
+                                <a href="<?= home_url() ?>/halal-nqi#<?= get_post_field('post_name', get_post()); ?>" class="view-more">
+                                    <span>Tìm hiểu thêm</span>
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 4.5C5.72386 4.5 5.5 4.27614 5.5 4C5.5 3.72386 5.72386 3.5 6 3.5H12C12.2761 3.5 12.5 3.72386 12.5 4V10C12.5 10.2761 12.2761 10.5 12 10.5C11.7239 10.5 11.5 10.2761 11.5 10V5.20711L4.35355 12.3536C4.15829 12.5488 3.84171 12.5488 3.64645 12.3536C3.45118 12.1583 3.45118 11.8417 3.64645 11.6464L10.7929 4.5H6Z" fill="#FE3131"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                            <?php endif ?>
                         </div>
                         <div class="right">
                             <div class="image-1">
@@ -258,7 +280,7 @@ get_header(); ?>
                                     <?php endif ?>
                                 </div>
                                 <a class="view-more" href="<?php the_permalink(); ?>">
-                                    <span>Tìm hiểu thêm</span>
+                                    <span><?= (pll_current_language() == 'en-us') ? "View more" : "Tìm hiểu thêm" ?></span>
                                     <div class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M6.09375 5.18262C5.81761 5.18262 5.59375 4.95876 5.59375 4.68262C5.59375 4.40647 5.81761 4.18262 6.09375 4.18262H12.0938C12.3699 4.18262 12.5938 4.40647 12.5938 4.68262V10.6826C12.5938 10.9588 12.3699 11.1826 12.0938 11.1826C11.8176 11.1826 11.5938 10.9588 11.5938 10.6826V5.88972L4.4473 13.0362C4.25204 13.2314 3.93546 13.2314 3.7402 13.0362C3.54493 12.8409 3.54493 12.5243 3.7402 12.3291L10.8866 5.18262H6.09375Z" fill="#FE3131"/>
@@ -269,7 +291,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có khóa đào tạo nào.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no training." : "Không có khóa đào tạo nào." ?></p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -298,7 +320,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có khách hàng.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no customer." : "Không có khách hàng nào." ?></p>
                     <?php endif; ?>
                 </div>
             </div>
@@ -350,14 +372,14 @@ get_header(); ?>
                                                 <span><?= get_the_date() ?></span>
                                             </div>
                                             <span class="minus">-</span>
-                                            <span class="views"><?= $views ?> lượt xem</span>
+                                            <span class="views"><?= $views ?> <?= (pll_current_language() == 'en-us') ? "views" : "lượt xem" ?></span>
                                         </div>
                                     </div>
                                 </div>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p>Không có tin tức nào.</p>
+                            <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?></p>
                         <?php endif; ?>
                     </div>
                     <div class="list-news">
@@ -393,7 +415,7 @@ get_header(); ?>
                                                         <span><?= get_the_date() ?></span>
                                                     </div>
                                                     <span class="minus">-</span>
-                                                    <span class="views"><?= $views ?> lượt xem</span>
+                                                    <span class="views"><?= $views ?> <?= (pll_current_language() == 'en-us') ? "views" : "lượt xem" ?></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -402,7 +424,7 @@ get_header(); ?>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p>Không có sự kiện nào.</p>
+                            <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -435,7 +457,7 @@ get_header(); ?>
                                                 <span><?= get_the_date() ?></span>
                                             </div>
                                             <span class="minus">-</span>
-                                            <span class="views"><?= $views ?> lượt xem</span>
+                                            <span class="views"><?= $views ?> <?= (pll_current_language() == 'en-us') ? "views" : "lượt xem" ?></span>
                                         </div>
                                     </div>
                                 <?php $count++; ?>
@@ -443,7 +465,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có sự kiện nào.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?></p>
                     <?php endif; ?>
                 </div>
             </div>

@@ -36,7 +36,7 @@ get_header() ?>
             <?php if (pll_current_language() == 'en-us') : ?>
                 <div class="right fade-in">
                     <h2 class="title">Ask us questions</h2>
-                    <form action="">
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                         <h4>Contact information</h4>
                         <div class="line line-1">
                             <div class="form-group">
@@ -52,7 +52,7 @@ get_header() ?>
                         <div class="line line-2">
                             <div class="form-group">
                                 <label for="">Need</label>
-                                <select name="" id="">
+                                <select name="your-demand" id="">
                                     <option value="">Select your consulting needs</option>
                                     <option value="">Option 1</option>
                                     <option value="">Option 2</option>
@@ -62,16 +62,19 @@ get_header() ?>
                         <div class="line line-3">
                             <div class="form-group">
                                 <label for="">Content</label>
-                                <textarea name="" id="" placeholder="Enter specific needs content"></textarea>
+                                <textarea name="content" id="" placeholder="Enter specific needs content"></textarea>
                             </div>
                         </div>
-                        <button>Submit a question</button>
+                        <button type="submit">Submit a question</button>
+
+                        <input type="hidden" name="action" value="submit_faq_form">
+                        <?php wp_nonce_field('submit_faq_form', 'faq_form_nonce'); ?>
                     </form>
                 </div>
             <?php else: ?>
                 <div class="right fade-in">
                     <h2 class="title">Đặt câu hỏi cho chúng tôi</h2>
-                    <form action="">
+                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
                         <h4>Thông tin liên hệ</h4>
                         <div class="line line-1">
                             <div class="form-group">
@@ -87,7 +90,7 @@ get_header() ?>
                         <div class="line line-2">
                             <div class="form-group">
                                 <label for="">Nhu cầu</label>
-                                <select name="" id="">
+                                <select name="your-demand" id="">
                                     <option value="">Chọn nhu cầu tư vấn</option>
                                     <option value="">Option 1</option>
                                     <option value="">Option 2</option>
@@ -97,10 +100,13 @@ get_header() ?>
                         <div class="line line-3">
                             <div class="form-group">
                                 <label for="">Nội dung</label>
-                                <textarea name="" id="" placeholder="Nhập nội dung nhu cầu cụ thể"></textarea>
+                                <textarea name="content" id="" placeholder="Nhập nội dung nhu cầu cụ thể"></textarea>
                             </div>
                         </div>
-                        <button>Gửi câu hỏi</button>
+                        <button type="submit">Gửi câu hỏi</button>
+
+                        <input type="hidden" name="action" value="submit_faq_form">
+                        <?php wp_nonce_field('submit_faq_form', 'faq_form_nonce'); ?>
                     </form>
                 </div>
             <?php endif ?>

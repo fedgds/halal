@@ -25,7 +25,7 @@ get_header(); ?>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else: ?>
-                            <p>Không có.</p>
+                            <p><?= (pll_current_language() == 'en-us') ? "There are not nqi." : "Không có nqi nào." ?></p>
                         <?php endif; ?>
                     </ul>
                 </nav>
@@ -47,8 +47,8 @@ get_header(); ?>
                             <ul>
                                 <?php foreach ($policy_list as $item): ?>
                                     <li>
-                                        <span><?= $item['policy'] ?></span>
                                         <a href="<?= $item['link_download'] ?>">
+                                            <span><?= $item['policy'] ?></span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                                 fill="none">
                                                 <path

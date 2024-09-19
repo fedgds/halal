@@ -89,6 +89,38 @@ body {
   border: none;
 }
 
+.ui-datepicker-div {
+  font-family: var(--f-body) !important;
+}
+
+.ui-widget-header {
+  border: 1px solid #136451 !important;
+  background: var(--green) !important;
+}
+
+.ui-datepicker td span,
+.ui-datepicker td a {
+  text-align: center !important;
+}
+
+.ui-widget-content {
+  background: var(--white) !important;
+}
+
+.ui-state-default {
+  background: var(--white) !important;
+  color: #136451 !important;
+}
+
+.ui-state-default:hover,
+.ui-state-default:focus,
+.ui-state-hover,
+.ui-state-active {
+  border: 1px solid var(--green) !important;
+  background: var(--green) !important;
+  color: var(--white) !important;
+}
+
 /* Tạo sẵn kiểu mặc định khi phần tử chưa xuất hiện */
 .fade-in {
   opacity: 0;
@@ -373,8 +405,8 @@ header .header-mobile .icon {
 }
 @media only screen and (max-width: 767px) {
   header .header-mobile .icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
   }
 }
 header .header-mobile .icon svg {
@@ -392,10 +424,11 @@ header .menu-mobile {
   background-color: var(--white);
   z-index: 9998;
   transition: 0.6s all ease-in-out;
-  padding: 2rem;
+  padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  gap: 1rem;
 }
 @media only screen and (min-width: 1800px) {
   header .menu-mobile {
@@ -422,7 +455,7 @@ header .menu-mobile .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 10rem;
+  height: 3rem;
 }
 header .menu-mobile .top img {
   width: 10rem;
@@ -444,6 +477,24 @@ header .menu-mobile .nav-menu {
 header .menu-mobile .nav-menu ul {
   display: flex;
   flex-direction: column;
+}
+header .menu-mobile .nav-menu ul > li.register:last-child {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: start;
+}
+header .menu-mobile .nav-menu ul > li.register:last-child a {
+  font-size: 0.875rem;
+  border-radius: 0.625rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--red);
+  color: var(--white);
+  background: var(--red);
+  box-sizing: border-box;
+}
+header .menu-mobile .nav-menu ul > li.register:last-child:hover a {
+  color: var(--red);
+  background: var(--white);
 }
 header .menu-mobile .nav-menu ul > li {
   position: relative;
@@ -503,6 +554,7 @@ header .menu-mobile .nav-menu ul > li .sub-menu.show {
 header .menu-mobile .nav-menu ul > li .sub-menu ul li {
   font-size: 1rem;
   padding: 0.375rem 0;
+  text-decoration: underline !important;
 }
 header .menu-mobile .nav-menu ul li:hover {
   color: var(--black);
@@ -616,21 +668,25 @@ main .section-banner-home .list-slide .child .container .title {
 }
 @media only screen and (max-width: 1280px) {
   main .section-banner-home .list-slide .child .container .title {
+    width: 32rem;
     font-size: 2rem;
   }
 }
 @media only screen and (max-width: 1060px) {
   main .section-banner-home .list-slide .child .container .title {
+    width: 28rem;
     font-size: 1.5rem;
   }
 }
 @media only screen and (max-width: 767px) {
   main .section-banner-home .list-slide .child .container .title {
+    width: 20rem;
     font-size: 1.25rem;
   }
 }
 @media only screen and (max-width: 480px) {
   main .section-banner-home .list-slide .child .container .title {
+    width: 14rem;
     font-size: 1rem;
     margin-top: 2rem;
   }
@@ -720,6 +776,11 @@ main .section-1-home {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media only screen and (max-width: 767px) {
+  main .section-1-home {
+    padding: 3.125rem 0;
+  }
 }
 main .section-1-home .background {
   position: absolute;
@@ -894,6 +955,11 @@ main .section-1-home .container .right h2.title {
     font-size: 2rem;
   }
 }
+@media only screen and (max-width: 480px) {
+  main .section-1-home .container .right h2.title {
+    font-size: 1.375rem;
+  }
+}
 main .section-1-home .container .right .sub-1 {
   padding-left: 1.5rem;
   margin-bottom: 1rem;
@@ -987,6 +1053,11 @@ main .section-2-home {
     height: 22rem;
   }
 }
+@media only screen and (max-width: 480px) {
+  main .section-2-home {
+    height: 18rem;
+  }
+}
 main .section-2-home .background {
   position: absolute;
   top: 0;
@@ -1021,6 +1092,7 @@ main .section-2-home .container h2.title {
 @media only screen and (max-width: 480px) {
   main .section-2-home .container h2.title {
     margin-bottom: 0.75rem;
+    font-size: 1.375rem;
   }
 }
 main .section-2-home .container h2.title span {
@@ -1049,6 +1121,7 @@ main .section-2-home .container .description {
   main .section-2-home .container .description {
     font-size: 0.75rem;
     padding: 0;
+    margin-bottom: 1.5rem;
   }
 }
 main .section-2-home .container a {
@@ -1086,11 +1159,17 @@ main .section-3-home {
 @media only screen and (max-width: 767px) {
   main .section-3-home {
     margin-bottom: 4rem;
+    padding: 3.125rem 0;
   }
 }
 main .section-3-home .container .top {
   text-align: center;
   margin-bottom: 3.125rem;
+}
+@media only screen and (max-width: 767px) {
+  main .section-3-home .container .top {
+    margin-bottom: 2rem;
+  }
 }
 main .section-3-home .container .top h2.title {
   margin-bottom: 1rem;
@@ -1102,6 +1181,11 @@ main .section-3-home .container .top h2.title {
 @media only screen and (max-width: 1280px) {
   main .section-3-home .container .top h2.title {
     font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-3-home .container .top h2.title {
+    font-size: 1.375rem;
   }
 }
 main .section-3-home .container .top h2.title span {
@@ -1279,27 +1363,38 @@ main .section-3-home .container .bottom .child.active .left .download ul {
   gap: 1rem;
 }
 main .section-3-home .container .bottom .child.active .left .download ul li {
+  position: relative;
   background: #EDF9EC;
   border-radius: 0.4375rem;
   width: 30.125rem;
   height: 3.5rem;
-  box-sizing: border-box;
-  padding: 1rem 1.25rem;
-  display: flex;
-  justify-content: space-between;
+  cursor: pointer;
 }
 @media only screen and (max-width: 1060px) {
   main .section-3-home .container .bottom .child.active .left .download ul li {
     width: 100%;
+  }
+}
+main .section-3-home .container .bottom .child.active .left .download ul li a {
+  box-sizing: border-box;
+  display: block;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+}
+@media only screen and (max-width: 767px) {
+  main .section-3-home .container .bottom .child.active .left .download ul li a {
     padding: 0.75rem 1rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-3-home .container .bottom .child.active .left .download ul li {
+  main .section-3-home .container .bottom .child.active .left .download ul li a {
     padding: 0 0.75rem;
   }
 }
-main .section-3-home .container .bottom .child.active .left .download ul li span {
+main .section-3-home .container .bottom .child.active .left .download ul li a span {
   display: flex;
   align-items: center;
   color: #414141;
@@ -1308,13 +1403,9 @@ main .section-3-home .container .bottom .child.active .left .download ul li span
   line-height: 150%;
 }
 @media only screen and (max-width: 767px) {
-  main .section-3-home .container .bottom .child.active .left .download ul li span {
+  main .section-3-home .container .bottom .child.active .left .download ul li a span {
     font-size: 0.75rem;
   }
-}
-main .section-3-home .container .bottom .child.active .left .download ul li a {
-  display: flex;
-  align-items: center;
 }
 @media only screen and (max-width: 767px) {
   main .section-3-home .container .bottom .child.active .left .download ul li a svg {
@@ -1468,6 +1559,12 @@ main .section-4-home .container h2.title {
 @media only screen and (max-width: 1060px) {
   main .section-4-home .container h2.title {
     font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-4-home .container h2.title {
+    font-size: 1.375rem;
+    margin-bottom: 0.5rem;
   }
 }
 main .section-4-home .container > .description {
@@ -1686,6 +1783,11 @@ main .section-5-home {
   justify-content: center;
   background: #EDF9EC;
 }
+@media only screen and (max-width: 767px) {
+  main .section-5-home {
+    padding: 3.125rem 0;
+  }
+}
 main .section-5-home .container .top {
   text-align: center;
   margin-bottom: 2.625rem;
@@ -1700,6 +1802,11 @@ main .section-5-home .container .top h2.title {
 @media only screen and (max-width: 1280px) {
   main .section-5-home .container .top h2.title {
     font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-5-home .container .top h2.title {
+    font-size: 1.375rem;
   }
 }
 main .section-5-home .container .top .description {
@@ -1772,13 +1879,12 @@ main .section-5-home .container .bottom .wrap span {
 @media only screen and (max-width: 767px) {
   main .section-5-home .container .bottom .wrap span {
     width: 10rem;
-    height: 4rem;
   }
 }
 @media only screen and (max-width: 480px) {
   main .section-5-home .container .bottom .wrap span {
     width: 8rem;
-    height: 3.5rem;
+    height: 4.5rem;
   }
 }
 main .section-5-home .container .bottom .wrap span img {
@@ -1796,6 +1902,11 @@ main .section-6-home {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+@media only screen and (max-width: 767px) {
+  main .section-6-home {
+    padding: 3.125rem 0;
+  }
 }
 main .section-6-home .container .top {
   margin-bottom: 3.125rem;
@@ -1831,6 +1942,11 @@ main .section-6-home .container .top h2.title {
 @media only screen and (max-width: 1280px) {
   main .section-6-home .container .top h2.title {
     font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-6-home .container .top h2.title {
+    font-size: 1.375rem;
   }
 }
 main .section-6-home .container .top nav.tab ul {
@@ -2044,9 +2160,10 @@ main .section-6-home .container .bottom .right {
 }
 main .section-6-home .container .bottom .right .child {
   padding-bottom: 2rem;
-}
-main .section-6-home .container .bottom .right .child:nth-child(1), main .section-6-home .container .bottom .right .child:nth-child(2) {
   border-bottom: 1px solid #D9D9D9;
+}
+main .section-6-home .container .bottom .right .child:last-child {
+  border-bottom: none;
 }
 main .section-6-home .container .bottom .right .child h3 {
   color: var(--black);
@@ -2089,6 +2206,11 @@ main .section-7-home {
   justify-content: center;
   position: relative;
 }
+@media only screen and (max-width: 767px) {
+  main .section-7-home {
+    padding-top: 3.125rem;
+  }
+}
 main .section-7-home .image {
   position: absolute;
   top: 0;
@@ -2128,6 +2250,12 @@ main .section-7-home .container .top h2.title {
   main .section-7-home .container .top h2.title {
     font-size: 2rem;
     margin-bottom: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-7-home .container .top h2.title {
+    font-size: 1.375rem;
+    margin-bottom: 1rem;
   }
 }
 @media only screen and (max-width: 1280px) {
@@ -2470,6 +2598,12 @@ main .section-banner .container h2.title {
     margin-bottom: 1.25rem;
   }
 }
+@media only screen and (max-width: 480px) {
+  main .section-banner .container h2.title {
+    font-size: 1.375rem;
+    margin-bottom: 1rem;
+  }
+}
 main .section-banner .container > span {
   font-size: 1rem;
   font-weight: 400;
@@ -2549,6 +2683,11 @@ main .section-1-about .container h2.title {
 @media only screen and (max-width: 767px) {
   main .section-1-about .container h2.title {
     margin-bottom: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-1-about .container h2.title {
+    font-size: 1.375rem;
   }
 }
 main .section-1-about .container .content {
@@ -2685,11 +2824,21 @@ main .section-1-about .container .content .right {
   line-height: 160%;
   letter-spacing: 0.01rem;
 }
+@media only screen and (max-width: 767px) {
+  main .section-1-about .container .content .right {
+    gap: 1.5rem;
+  }
+}
 main .section-1-about .container .content .right ul {
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
   justify-content: center;
+}
+@media only screen and (max-width: 767px) {
+  main .section-1-about .container .content .right ul {
+    gap: 1.25rem;
+  }
 }
 main .section-1-about .container .content .right ul li {
   display: flex;
@@ -2736,6 +2885,11 @@ main .section-2-about .container .top h2.title {
 @media only screen and (max-width: 1280px) {
   main .section-2-about .container .top h2.title {
     font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-2-about .container .top h2.title {
+    font-size: 1.375rem;
   }
 }
 main .section-2-about .container .top .description {
@@ -2808,6 +2962,11 @@ main .section-3-about .container .top h2.title {
 @media only screen and (max-width: 1280px) {
   main .section-3-about .container .top h2.title {
     font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-3-about .container .top h2.title {
+    font-size: 1.375rem;
   }
 }
 main .section-3-about .container .top .description {
@@ -2916,6 +3075,12 @@ main .section-4-about {
   justify-content: center;
   background: #EDF9EC;
 }
+@media only screen and (max-width: 767px) {
+  main .section-4-about {
+    padding: 3rem 0;
+    margin-bottom: 10rem;
+  }
+}
 main .section-4-about .container .top {
   text-align: center;
   margin-bottom: 2.625rem;
@@ -2930,6 +3095,11 @@ main .section-4-about .container .top h2.title {
 @media only screen and (max-width: 1280px) {
   main .section-4-about .container .top h2.title {
     font-size: 2rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  main .section-4-about .container .top h2.title {
+    font-size: 1.375rem;
   }
 }
 main .section-4-about .container .top .description {
@@ -3002,13 +3172,12 @@ main .section-4-about .container .bottom .wrap span {
 @media only screen and (max-width: 767px) {
   main .section-4-about .container .bottom .wrap span {
     width: 10rem;
-    height: 4rem;
   }
 }
 @media only screen and (max-width: 480px) {
   main .section-4-about .container .bottom .wrap span {
     width: 8rem;
-    height: 3.5rem;
+    height: 4.5rem;
   }
 }
 main .section-4-about .container .bottom .wrap span img {
@@ -4090,30 +4259,35 @@ main .section-detail-news-and-event .container .right {
     flex-direction: column-reverse;
   }
 }
-main .section-detail-news-and-event .container .right .top h2.title, main .section-detail-news-and-event .container .right .bottom h2.title {
+main .section-detail-news-and-event .container .right .top h2.title,
+main .section-detail-news-and-event .container .right .bottom h2.title {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 140%;
   color: var(--black);
   margin-bottom: 1.75rem;
 }
-main .section-detail-news-and-event .container .right .top .list:nth-child(n+4), main .section-detail-news-and-event .container .right .bottom .list:nth-child(n+4) {
+main .section-detail-news-and-event .container .right .top .list:nth-child(n+4),
+main .section-detail-news-and-event .container .right .bottom .list:nth-child(n+4) {
   display: none;
 }
-main .section-detail-news-and-event .container .right .top .list::-webkit-scrollbar, main .section-detail-news-and-event .container .right .bottom .list::-webkit-scrollbar {
+main .section-detail-news-and-event .container .right .top .list::-webkit-scrollbar,
+main .section-detail-news-and-event .container .right .bottom .list::-webkit-scrollbar {
   width: 0;
   /* Chiều rộng của thanh cuộn */
   background: transparent;
   /* Làm thanh cuộn trong suốt */
 }
-main .section-detail-news-and-event .container .right .top .list, main .section-detail-news-and-event .container .right .bottom .list {
+main .section-detail-news-and-event .container .right .top .list,
+main .section-detail-news-and-event .container .right .bottom .list {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-detail-news-and-event .container .right .top .list, main .section-detail-news-and-event .container .right .bottom .list {
+  main .section-detail-news-and-event .container .right .top .list,
+  main .section-detail-news-and-event .container .right .bottom .list {
     justify-content: center;
     flex-direction: row;
     gap: 1.25rem;
@@ -4122,11 +4296,13 @@ main .section-detail-news-and-event .container .right .top .list, main .section-
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-detail-news-and-event .container .right .top .list, main .section-detail-news-and-event .container .right .bottom .list {
+  main .section-detail-news-and-event .container .right .top .list,
+  main .section-detail-news-and-event .container .right .bottom .list {
     gap: 1rem;
   }
 }
-main .section-detail-news-and-event .container .right .top .list .child, main .section-detail-news-and-event .container .right .bottom .list .child {
+main .section-detail-news-and-event .container .right .top .list .child,
+main .section-detail-news-and-event .container .right .bottom .list .child {
   display: flex;
   gap: 1rem;
   border-radius: 1rem;
@@ -4134,7 +4310,8 @@ main .section-detail-news-and-event .container .right .top .list .child, main .s
   overflow: hidden;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-detail-news-and-event .container .right .top .list .child, main .section-detail-news-and-event .container .right .bottom .list .child {
+  main .section-detail-news-and-event .container .right .top .list .child,
+  main .section-detail-news-and-event .container .right .bottom .list .child {
     width: 18.75rem;
     flex-direction: column;
     flex: none;
@@ -4142,53 +4319,63 @@ main .section-detail-news-and-event .container .right .top .list .child, main .s
     gap: 1.25rem;
     border: 1px solid #ABABAB;
   }
-  main .section-detail-news-and-event .container .right .top .list .child:nth-child(n+5), main .section-detail-news-and-event .container .right .bottom .list .child:nth-child(n+5) {
+  main .section-detail-news-and-event .container .right .top .list .child:nth-child(n+5),
+  main .section-detail-news-and-event .container .right .bottom .list .child:nth-child(n+5) {
     display: none;
   }
 }
-main .section-detail-news-and-event .container .right .top .list .child a, main .section-detail-news-and-event .container .right .bottom .list .child a {
+main .section-detail-news-and-event .container .right .top .list .child a,
+main .section-detail-news-and-event .container .right .bottom .list .child a {
   width: 100%;
   height: 6.25rem;
   border-radius: 0.4375rem;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-detail-news-and-event .container .right .top .list .child a, main .section-detail-news-and-event .container .right .bottom .list .child a {
+  main .section-detail-news-and-event .container .right .top .list .child a,
+  main .section-detail-news-and-event .container .right .bottom .list .child a {
     height: 9.5rem;
     border-radius: initial;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-detail-news-and-event .container .right .top .list .child a, main .section-detail-news-and-event .container .right .bottom .list .child a {
+  main .section-detail-news-and-event .container .right .top .list .child a,
+  main .section-detail-news-and-event .container .right .bottom .list .child a {
     height: 12rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-detail-news-and-event .container .right .top .list .child a, main .section-detail-news-and-event .container .right .bottom .list .child a {
+  main .section-detail-news-and-event .container .right .top .list .child a,
+  main .section-detail-news-and-event .container .right .bottom .list .child a {
     height: 9rem;
   }
 }
 @media only screen and (max-width: 480px) {
-  main .section-detail-news-and-event .container .right .top .list .child a, main .section-detail-news-and-event .container .right .bottom .list .child a {
+  main .section-detail-news-and-event .container .right .top .list .child a,
+  main .section-detail-news-and-event .container .right .bottom .list .child a {
     height: 7rem;
   }
 }
-main .section-detail-news-and-event .container .right .top .list .child a img, main .section-detail-news-and-event .container .right .bottom .list .child a img {
+main .section-detail-news-and-event .container .right .top .list .child a img,
+main .section-detail-news-and-event .container .right .bottom .list .child a img {
   width: 100%;
   height: 100%;
   border-radius: inherit;
 }
-main .section-detail-news-and-event .container .right .top .list .child .infor, main .section-detail-news-and-event .container .right .bottom .list .child .infor {
+main .section-detail-news-and-event .container .right .top .list .child .infor,
+main .section-detail-news-and-event .container .right .bottom .list .child .infor {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.625rem;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-detail-news-and-event .container .right .top .list .child .infor, main .section-detail-news-and-event .container .right .bottom .list .child .infor {
+  main .section-detail-news-and-event .container .right .top .list .child .infor,
+  main .section-detail-news-and-event .container .right .bottom .list .child .infor {
     padding: 0 1rem 1rem;
   }
 }
-main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour, main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour {
+main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour,
+main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour {
   color: var(--black);
   font-size: 0.875rem;
   font-weight: 300;
@@ -4199,13 +4386,15 @@ main .section-detail-news-and-event .container .right .top .list .child .infor .
   gap: 0.625rem;
 }
 @media only screen and (max-width: 480px) {
-  main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour, main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour {
+  main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour,
+  main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour {
     font-size: 0.625rem;
     gap: 0.25rem;
   }
 }
 main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour .date,
-main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour .time, main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour .date,
+main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour .time,
+main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour .date,
 main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour .time {
   display: flex;
   align-items: center;
@@ -4213,11 +4402,13 @@ main .section-detail-news-and-event .container .right .bottom .list .child .info
   gap: 0.3125rem;
 }
 main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour .date .icon,
-main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour .time .icon, main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour .date .icon,
+main .section-detail-news-and-event .container .right .top .list .child .infor .date-and-hour .time .icon,
+main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour .date .icon,
 main .section-detail-news-and-event .container .right .bottom .list .child .infor .date-and-hour .time .icon {
   display: flex;
 }
-main .section-detail-news-and-event .container .right .top .list .child .infor h3, main .section-detail-news-and-event .container .right .bottom .list .child .infor h3 {
+main .section-detail-news-and-event .container .right .top .list .child .infor h3,
+main .section-detail-news-and-event .container .right .bottom .list .child .infor h3 {
   width: 12.625rem;
   color: var(--black);
   font-size: 0.875rem;
@@ -4231,17 +4422,20 @@ main .section-detail-news-and-event .container .right .top .list .child .infor h
   -webkit-line-clamp: 2;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-detail-news-and-event .container .right .top .list .child .infor h3, main .section-detail-news-and-event .container .right .bottom .list .child .infor h3 {
+  main .section-detail-news-and-event .container .right .top .list .child .infor h3,
+  main .section-detail-news-and-event .container .right .bottom .list .child .infor h3 {
     width: 100%;
     font-size: 1rem;
   }
 }
 @media only screen and (max-width: 480px) {
-  main .section-detail-news-and-event .container .right .top .list .child .infor h3, main .section-detail-news-and-event .container .right .bottom .list .child .infor h3 {
+  main .section-detail-news-and-event .container .right .top .list .child .infor h3,
+  main .section-detail-news-and-event .container .right .bottom .list .child .infor h3 {
     font-size: 0.875rem;
   }
 }
-main .section-detail-news-and-event .container .right .top .list .child .infor h3:hover, main .section-detail-news-and-event .container .right .bottom .list .child .infor h3:hover {
+main .section-detail-news-and-event .container .right .top .list .child .infor h3:hover,
+main .section-detail-news-and-event .container .right .bottom .list .child .infor h3:hover {
   color: var(--green);
 }
 main .section-detail-news-and-event .relate {
@@ -4757,6 +4951,7 @@ main .section-customer .list-modal-customer {
 }
 main .section-customer .list-modal-customer .modal {
   border-radius: 1rem;
+  overflow: hidden;
 }
 main .section-customer .list-modal-customer .modal > .child.active {
   display: flex;
@@ -4779,6 +4974,7 @@ main .section-customer .list-modal-customer .modal > .child {
 }
 @media only screen and (max-width: 1280px) {
   main .section-customer .list-modal-customer .modal > .child {
+    height: 20.625rem;
     top: 14rem;
   }
 }
@@ -4795,11 +4991,13 @@ main .section-customer .list-modal-customer .modal > .child {
     gap: 1rem;
     width: 28rem;
     top: 10rem;
+    height: 16rem;
   }
 }
 @media only screen and (max-width: 480px) {
   main .section-customer .list-modal-customer .modal > .child {
     width: 22rem;
+    height: 14rem;
   }
 }
 main .section-customer .list-modal-customer .modal > .child .image {
@@ -4849,6 +5047,12 @@ main .section-customer .list-modal-customer .modal > .child .infor h3.name {
     margin-bottom: 1rem;
   }
 }
+main .section-customer .list-modal-customer .modal > .child .infor .bottom::-webkit-scrollbar {
+  width: 0;
+  /* Chiều rộng của thanh cuộn */
+  background: transparent;
+  /* Làm thanh cuộn trong suốt */
+}
 main .section-customer .list-modal-customer .modal > .child .infor .bottom {
   display: flex;
   flex-direction: column;
@@ -4859,11 +5063,22 @@ main .section-customer .list-modal-customer .modal > .child .infor .bottom {
     gap: 1rem;
   }
 }
+@media only screen and (max-width: 767px) {
+  main .section-customer .list-modal-customer .modal > .child .infor .bottom {
+    overflow: scroll;
+    max-height: 100%;
+  }
+}
 main .section-customer .list-modal-customer .modal > .child .infor .bottom > .child {
   width: 100%;
   display: flex;
   align-items: start;
   gap: 2.5rem;
+}
+@media only screen and (max-width: 767px) {
+  main .section-customer .list-modal-customer .modal > .child .infor .bottom > .child:last-child {
+    padding-bottom: 2rem;
+  }
 }
 @media only screen and (max-width: 1060px) {
   main .section-customer .list-modal-customer .modal > .child .infor .bottom > .child {
@@ -5637,7 +5852,8 @@ main .section-detail-training .container .right .news .list-news .child .infor h
 main .section-detail-training .container .right .news .list-news .child .infor h3:hover {
   color: var(--green);
 }
-main .section-detail-training .relate::-webkit-scrollbar, main .section-detail-training .latest::-webkit-scrollbar {
+main .section-detail-training .relate::-webkit-scrollbar,
+main .section-detail-training .latest::-webkit-scrollbar {
   width: 0;
   /* Chiều rộng của thanh cuộn */
   background: transparent;
@@ -5651,36 +5867,43 @@ main .section-detail-training .latest {
     display: block;
   }
 }
-main .section-detail-training .relate, main .section-detail-training .latest {
+main .section-detail-training .relate,
+main .section-detail-training .latest {
   overflow: auto;
   width: 80rem;
 }
 @media only screen and (max-width: 1480px) {
-  main .section-detail-training .relate, main .section-detail-training .latest {
+  main .section-detail-training .relate,
+  main .section-detail-training .latest {
     width: 72rem;
   }
 }
 @media only screen and (max-width: 1280px) {
-  main .section-detail-training .relate, main .section-detail-training .latest {
+  main .section-detail-training .relate,
+  main .section-detail-training .latest {
     width: 60rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-detail-training .relate, main .section-detail-training .latest {
+  main .section-detail-training .relate,
+  main .section-detail-training .latest {
     width: 44rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-detail-training .relate, main .section-detail-training .latest {
+  main .section-detail-training .relate,
+  main .section-detail-training .latest {
     width: 28rem;
   }
 }
 @media only screen and (max-width: 480px) {
-  main .section-detail-training .relate, main .section-detail-training .latest {
+  main .section-detail-training .relate,
+  main .section-detail-training .latest {
     width: 22rem;
   }
 }
-main .section-detail-training .relate h3.title, main .section-detail-training .latest h3.title {
+main .section-detail-training .relate h3.title,
+main .section-detail-training .latest h3.title {
   color: var(--black);
   font-size: 1.5rem;
   font-weight: 500;
@@ -5688,39 +5911,47 @@ main .section-detail-training .relate h3.title, main .section-detail-training .l
   margin-bottom: 3.125rem;
 }
 @media only screen and (max-width: 767px) {
-  main .section-detail-training .relate h3.title, main .section-detail-training .latest h3.title {
+  main .section-detail-training .relate h3.title,
+  main .section-detail-training .latest h3.title {
     margin-bottom: 1.25rem;
   }
 }
-main .section-detail-training .relate table, main .section-detail-training .latest table {
+main .section-detail-training .relate table,
+main .section-detail-training .latest table {
   width: 100%;
   margin-bottom: 2.5rem;
 }
 @media only screen and (max-width: 1280px) {
-  main .section-detail-training .relate table, main .section-detail-training .latest table {
+  main .section-detail-training .relate table,
+  main .section-detail-training .latest table {
     width: 60rem;
     overflow: scroll;
   }
 }
-main .section-detail-training .relate table tr, main .section-detail-training .latest table tr {
+main .section-detail-training .relate table tr,
+main .section-detail-training .latest table tr {
   color: #2A2B2E;
   font-size: 1rem;
 }
 main .section-detail-training .relate table tr th:nth-child(1),
-main .section-detail-training .relate table tr td:nth-child(1), main .section-detail-training .latest table tr th:nth-child(1),
+main .section-detail-training .relate table tr td:nth-child(1),
+main .section-detail-training .latest table tr th:nth-child(1),
 main .section-detail-training .latest table tr td:nth-child(1) {
   width: 18rem;
 }
 @media only screen and (max-width: 767px) {
   main .section-detail-training .relate table tr th:nth-child(1),
-  main .section-detail-training .relate table tr td:nth-child(1), main .section-detail-training .latest table tr th:nth-child(1),
+  main .section-detail-training .relate table tr td:nth-child(1),
+  main .section-detail-training .latest table tr th:nth-child(1),
   main .section-detail-training .latest table tr td:nth-child(1) {
     width: 16rem;
   }
 }
 main .section-detail-training .relate table tr th:nth-child(2), main .section-detail-training .relate table tr th:nth-child(3),
 main .section-detail-training .relate table tr td:nth-child(2),
-main .section-detail-training .relate table tr td:nth-child(3), main .section-detail-training .latest table tr th:nth-child(2), main .section-detail-training .latest table tr th:nth-child(3),
+main .section-detail-training .relate table tr td:nth-child(3),
+main .section-detail-training .latest table tr th:nth-child(2),
+main .section-detail-training .latest table tr th:nth-child(3),
 main .section-detail-training .latest table tr td:nth-child(2),
 main .section-detail-training .latest table tr td:nth-child(3) {
   width: 14rem;
@@ -5728,44 +5959,53 @@ main .section-detail-training .latest table tr td:nth-child(3) {
 @media only screen and (max-width: 1060px) {
   main .section-detail-training .relate table tr th:nth-child(2), main .section-detail-training .relate table tr th:nth-child(3),
   main .section-detail-training .relate table tr td:nth-child(2),
-  main .section-detail-training .relate table tr td:nth-child(3), main .section-detail-training .latest table tr th:nth-child(2), main .section-detail-training .latest table tr th:nth-child(3),
+  main .section-detail-training .relate table tr td:nth-child(3),
+  main .section-detail-training .latest table tr th:nth-child(2),
+  main .section-detail-training .latest table tr th:nth-child(3),
   main .section-detail-training .latest table tr td:nth-child(2),
   main .section-detail-training .latest table tr td:nth-child(3) {
     width: 11rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-detail-training .relate table tr, main .section-detail-training .latest table tr {
+  main .section-detail-training .relate table tr,
+  main .section-detail-training .latest table tr {
     font-size: 0.75rem;
   }
 }
-main .section-detail-training .relate table tr th, main .section-detail-training .latest table tr th {
+main .section-detail-training .relate table tr th,
+main .section-detail-training .latest table tr th {
   text-align: start;
   font-weight: 500;
   line-height: 125%;
   padding-bottom: 1.5625rem;
 }
-main .section-detail-training .relate table tr td, main .section-detail-training .latest table tr td {
+main .section-detail-training .relate table tr td,
+main .section-detail-training .latest table tr td {
   width: 13.75rem;
   font-weight: 500;
   line-height: 180%;
   padding: 1.5625rem 0;
   border-top: 1px solid #D3D3D3;
 }
-main .section-detail-training .relate table tr td:nth-child(1), main .section-detail-training .latest table tr td:nth-child(1) {
+main .section-detail-training .relate table tr td:nth-child(1),
+main .section-detail-training .latest table tr td:nth-child(1) {
   font-weight: 600;
   color: #136451;
 }
-main .section-detail-training .relate table tr td:nth-child(1):hover, main .section-detail-training .latest table tr td:nth-child(1):hover {
+main .section-detail-training .relate table tr td:nth-child(1):hover,
+main .section-detail-training .latest table tr td:nth-child(1):hover {
   color: var(--black);
 }
-main .section-detail-training .relate table tr td span, main .section-detail-training .latest table tr td span {
+main .section-detail-training .relate table tr td span,
+main .section-detail-training .latest table tr td span {
   color: #ABABAB;
   font-size: 0.75rem;
   line-height: 130%;
 }
 @media only screen and (max-width: 767px) {
-  main .section-detail-training .relate table tr td span, main .section-detail-training .latest table tr td span {
+  main .section-detail-training .relate table tr td span,
+  main .section-detail-training .latest table tr td span {
     font-size: 0.5rem;
   }
 }
@@ -5789,7 +6029,7 @@ main .section-halal-nqi .container {
   main .section-halal-nqi .container {
     gap: 1rem;
     padding-top: 3rem;
-    padding-bottom: 8rem;
+    padding-bottom: 10rem;
   }
 }
 @media only screen and (max-width: 480px) {
@@ -5836,7 +6076,12 @@ main .section-halal-nqi .container .left nav ul {
   }
 }
 main .section-halal-nqi .container .left nav ul li {
+  position: relative;
   border-radius: 0.4375rem;
+}
+main .section-halal-nqi .container .left nav ul li a {
+  display: block;
+  border-radius: inherit;
   padding: 1rem 1.5rem;
   background: #EDF9EC;
   color: #515151;
@@ -5845,25 +6090,25 @@ main .section-halal-nqi .container .left nav ul li {
   line-height: 150%;
 }
 @media only screen and (max-width: 1480px) {
-  main .section-halal-nqi .container .left nav ul li {
+  main .section-halal-nqi .container .left nav ul li a {
     font-size: 1.125rem;
     padding: 0.875rem 1.25rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-halal-nqi .container .left nav ul li {
+  main .section-halal-nqi .container .left nav ul li a {
     font-size: 1rem;
     padding: 0.75rem 1rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-halal-nqi .container .left nav ul li {
+  main .section-halal-nqi .container .left nav ul li a {
     font-size: 0.75rem;
     padding: 0.5rem 0.75rem;
   }
 }
-main .section-halal-nqi .container .left nav ul li.active,
-main .section-halal-nqi .container .left nav ul li:hover {
+main .section-halal-nqi .container .left nav ul li.active a,
+main .section-halal-nqi .container .left nav ul li:hover a {
   background: #136451;
   color: var(--white);
 }
@@ -5924,14 +6169,12 @@ main .section-halal-nqi .container .right .child ul {
   }
 }
 main .section-halal-nqi .container .right .child ul li {
+  position: relative;
   background: #EDF9EC;
   border-radius: 0.4375rem;
   width: 30.125rem;
   height: 3.5rem;
-  box-sizing: border-box;
-  padding: 1rem 1.25rem;
-  display: flex;
-  justify-content: space-between;
+  cursor: pointer;
 }
 @media only screen and (max-width: 1060px) {
   main .section-halal-nqi .container .right .child ul li {
@@ -5944,7 +6187,26 @@ main .section-halal-nqi .container .right .child ul li {
     padding: 0 0.75rem;
   }
 }
-main .section-halal-nqi .container .right .child ul li span {
+main .section-halal-nqi .container .right .child ul li a {
+  box-sizing: border-box;
+  display: block;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+}
+@media only screen and (max-width: 767px) {
+  main .section-halal-nqi .container .right .child ul li a {
+    padding: 0.75rem 1rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  main .section-halal-nqi .container .right .child ul li a {
+    padding: 0 0.75rem;
+  }
+}
+main .section-halal-nqi .container .right .child ul li a span {
   display: flex;
   align-items: center;
   color: #414141;
@@ -5953,13 +6215,9 @@ main .section-halal-nqi .container .right .child ul li span {
   line-height: 150%;
 }
 @media only screen and (max-width: 767px) {
-  main .section-halal-nqi .container .right .child ul li span {
+  main .section-halal-nqi .container .right .child ul li a span {
     font-size: 0.75rem;
   }
-}
-main .section-halal-nqi .container .right .child ul li a {
-  display: flex;
-  align-items: center;
 }
 @media only screen and (max-width: 767px) {
   main .section-halal-nqi .container .right .child ul li a svg {
@@ -6052,7 +6310,12 @@ main .section-cretify .container .left nav ul {
   }
 }
 main .section-cretify .container .left nav ul li {
+  position: relative;
   border-radius: 0.4375rem;
+}
+main .section-cretify .container .left nav ul li a {
+  display: block;
+  border-radius: inherit;
   padding: 1rem 1.5rem;
   background: #EDF9EC;
   color: #515151;
@@ -6061,25 +6324,25 @@ main .section-cretify .container .left nav ul li {
   line-height: 150%;
 }
 @media only screen and (max-width: 1480px) {
-  main .section-cretify .container .left nav ul li {
+  main .section-cretify .container .left nav ul li a {
     font-size: 1.125rem;
     padding: 0.875rem 1.25rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  main .section-cretify .container .left nav ul li {
+  main .section-cretify .container .left nav ul li a {
     font-size: 1rem;
     padding: 0.75rem 1rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-cretify .container .left nav ul li {
+  main .section-cretify .container .left nav ul li a {
     font-size: 0.75rem;
     padding: 0.5rem 0.75rem;
   }
 }
-main .section-cretify .container .left nav ul li.active,
-main .section-cretify .container .left nav ul li:hover {
+main .section-cretify .container .left nav ul li.active a,
+main .section-cretify .container .left nav ul li:hover a {
   background: #136451;
   color: var(--white);
 }
@@ -6138,33 +6401,35 @@ main .section-cretify .container .right .child ul li h4 {
   }
 }
 main .section-cretify .container .right .child ul li span {
+  position: relative;
+  background: #EDF9EC;
+  border-radius: 0.4375rem;
+  cursor: pointer;
+}
+main .section-cretify .container .right .child ul li span a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #EDF9EC;
-  border-radius: 0.4375rem;
+  display: flex;
+  align-items: center;
   padding: 1rem 1.25rem;
 }
 @media only screen and (max-width: 1060px) {
-  main .section-cretify .container .right .child ul li span {
+  main .section-cretify .container .right .child ul li span a {
     padding: 0.75rem 1rem;
   }
 }
 @media only screen and (max-width: 767px) {
-  main .section-cretify .container .right .child ul li span {
+  main .section-cretify .container .right .child ul li span a {
     padding: 0.5rem 0.5rem;
   }
-  main .section-cretify .container .right .child ul li span p {
-    font-size: 0.875rem;
-  }
-  main .section-cretify .container .right .child ul li span a {
-    display: flex;
-    align-items: center;
-  }
-  main .section-cretify .container .right .child ul li span a svg {
-    width: 1rem;
-    height: 1rem;
-  }
+}
+main .section-cretify .container .right .child ul li span a p {
+  font-size: 0.875rem;
+}
+main .section-cretify .container .right .child ul li span a svg {
+  width: 1rem;
+  height: 1rem;
 }
 main .section-register-cretify {
   position: relative;
@@ -6326,31 +6591,34 @@ main .section-register-cretify .container .form form .line-9 {
   gap: 1.375rem;
 }
 main .section-register-cretify .container .form form .form-register {
+  position: relative;
   box-sizing: border-box;
   background: #EDF9EC;
-  padding: 1rem 1.25rem;
   border-radius: 0.4375rem;
+  margin-bottom: 1.25rem;
+}
+main .section-register-cretify .container .form form .form-register a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
 }
 @media only screen and (max-width: 767px) {
-  main .section-register-cretify .container .form form .form-register {
+  main .section-register-cretify .container .form form .form-register a {
     padding: 0.5rem 0.75rem;
   }
 }
-main .section-register-cretify .container .form form .form-register span {
+main .section-register-cretify .container .form form .form-register a span {
   color: #414141;
   font-size: 1rem;
   font-weight: 500;
   line-height: 150%;
 }
 @media only screen and (max-width: 767px) {
-  main .section-register-cretify .container .form form .form-register span {
+  main .section-register-cretify .container .form form .form-register a span {
     font-size: 0.875rem;
   }
-  main .section-register-cretify .container .form form .form-register span svg {
+  main .section-register-cretify .container .form form .form-register a span svg {
     width: 1rem;
     height: 1rem;
   }
@@ -6542,7 +6810,8 @@ main .section-faqs .container .left .child-faq .question .icon {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-main .section-faqs .container .left .child-faq .question .icon .plus-icon, main .section-faqs .container .left .child-faq .question .icon .minus-icon {
+main .section-faqs .container .left .child-faq .question .icon .plus-icon,
+main .section-faqs .container .left .child-faq .question .icon .minus-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6631,7 +6900,9 @@ main .section-faqs .container .right form .line .form-group label {
     left: 0.5rem;
   }
 }
-main .section-faqs .container .right form .line .form-group input, main .section-faqs .container .right form .line .form-group select, main .section-faqs .container .right form .line .form-group textarea {
+main .section-faqs .container .right form .line .form-group input,
+main .section-faqs .container .right form .line .form-group select,
+main .section-faqs .container .right form .line .form-group textarea {
   box-sizing: border-box;
   width: 100%;
   padding: 0.875rem 1.25rem;
@@ -6642,7 +6913,9 @@ main .section-faqs .container .right form .line .form-group input, main .section
   line-height: 160%;
 }
 @media only screen and (max-width: 767px) {
-  main .section-faqs .container .right form .line .form-group input, main .section-faqs .container .right form .line .form-group select, main .section-faqs .container .right form .line .form-group textarea {
+  main .section-faqs .container .right form .line .form-group input,
+  main .section-faqs .container .right form .line .form-group select,
+  main .section-faqs .container .right form .line .form-group textarea {
     font-size: 0.875rem;
     padding: 0.5rem 0.75rem;
   }
@@ -6656,7 +6929,8 @@ main .section-faqs .container .right form .line .form-group input::-moz-placehol
   font-size: 1rem;
   color: #BDBDBD;
 }
-main .section-faqs .container .right form .line .form-group input::placeholder, main .section-faqs .container .right form .line .form-group textarea::placeholder {
+main .section-faqs .container .right form .line .form-group input::placeholder,
+main .section-faqs .container .right form .line .form-group textarea::placeholder {
   font-size: 1rem;
   color: #BDBDBD;
 }
@@ -6664,7 +6938,8 @@ main .section-faqs .container .right form .line .form-group input::placeholder, 
   main .section-faqs .container .right form .line .form-group input::-moz-placeholder, main .section-faqs .container .right form .line .form-group textarea::-moz-placeholder {
     font-size: 0.75rem;
   }
-  main .section-faqs .container .right form .line .form-group input::placeholder, main .section-faqs .container .right form .line .form-group textarea::placeholder {
+  main .section-faqs .container .right form .line .form-group input::placeholder,
+  main .section-faqs .container .right form .line .form-group textarea::placeholder {
     font-size: 0.75rem;
   }
 }

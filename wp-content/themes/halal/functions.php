@@ -361,6 +361,44 @@ function handle_contact_form_submission() {
 }
 add_action('admin_post_submit_contact_form', 'handle_contact_form_submission');
 add_action('admin_post_nopriv_submit_contact_form', 'handle_contact_form_submission');
+// Gửi form faq
+function handle_faq_form_submission() {
+    if (isset($_POST['action']) && $_POST['action'] == 'submit_faq_form') {
+        if (!wp_verify_nonce($_POST['faq_form_nonce'], 'submit_faq_form')) {
+            wp_die('Nonce verification failed');
+        }
+
+        $email = sanitize_email($_POST['your-email']);
+        $phone = sanitize_text_field($_POST['your-phone']);
+        $demand = sanitize_text_field($_POST['your-demand']);
+        $content = sanitize_textarea_field($_POST['content']);
+
+        $faq_form = WPCF7_ContactForm::get_instance(823);
+        $submission = WPCF7_Submission::get_instance();
+
+        if ($faq_form && !$submission) {
+            $submission = WPCF7_Submission::get_instance(
+                array(
+                    'faq_form' => $faq_form,
+                    'posted_data' => array(
+                        'your-email' => $email,
+                        'your-phone' => $phone,
+                        'your-demand' => $demand,
+                        'content' => $content,
+                    ),
+                )
+            );
+
+            $faq_form->submit();
+        }
+        // Redirect back to the current page
+        $redirect_url = wp_get_referer();
+        wp_redirect($redirect_url ? $redirect_url : home_url());
+        exit;
+    }
+}
+add_action('admin_post_submit_faq_form', 'handle_faq_form_submission');
+add_action('admin_post_nopriv_submit_faq_form', 'handle_faq_form_submission');
 
 // Gửi form đăng ký nhận thông tin(footer)
 function handle_register_form_submission() {

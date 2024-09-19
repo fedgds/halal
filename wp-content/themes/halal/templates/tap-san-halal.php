@@ -81,7 +81,7 @@ get_header(); ?>
                                 <p><?= (pll_current_language() == 'en-us') ? "There are no journals." : "Không có tập san nào." ?></p>
                             <?php endif; ?>
                         </div>
-                        <?php if ($posts->found_posts > 1) : ?>
+                        <?php if ($posts->found_posts > 6) : ?>
                             <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>" class="view-more"><?= (pll_current_language() == 'en-us') ? "VIEW MORE" : "XEM THÊM" ?></a>
                         <?php endif; ?>
                     </div>

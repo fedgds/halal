@@ -22,7 +22,15 @@ $url = get_template_directory_uri();
 	<meta property="og:description" content="" />
 	<meta property="og:url" content="" />
 	<link rel="shortcut icon" href="#" type="image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="<?= $url ?>/dist/assets/jquery-ui.css">
+
 	<link rel="stylesheet" type="text/css" href="<?= $url ?>/dist/assets/custom.css">
+	
+	<!-- <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>  -->
+     
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script> 
+	
+	<script src= "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script>
 </head>
 
 <body>
@@ -181,7 +189,7 @@ $url = get_template_directory_uri();
 							</nav>
 						</li>
 						<li><a href="<?= home_url() ?>/en-us/contact">Contact</a></li>
-						<li><a href="<?= home_url() ?>/en-us/register-cretify">Register cretify</a></li>
+						<li class="register"><a href="<?= home_url() ?>/en-us/register-cretify">Register cretify</a></li>
 					</ul>
 				</nav>
 			<?php else: ?>
@@ -213,67 +221,13 @@ $url = get_template_directory_uri();
 							</nav>
 						</li>
 						<li><a href="<?= home_url() ?>/lien-he">Liên hệ</a></li>
-						<li><a href="<?= home_url() ?>/dang-ky-chung-nhan">Đăng ký chứng nhận</a></li>
+						<li class="register"><a href="<?= home_url() ?>/dang-ky-chung-nhan">Đăng ký chứng nhận</a></li>
 					</ul>
 				</nav>
 			<?php endif ?>
         </div>
 	</header>
 	<script>
-		// Drop sub menu account
-		document.addEventListener('DOMContentLoaded', function () {
-			const downMenu = document.querySelector('#down-menu-header');
-			const dropMenu = document.querySelector('#drop-menu-header');
-			const subMenu = document.getElementById('sub-menu');
-
-			function showMenu() {
-				subMenu.classList.add('show');
-				downMenu.classList.add('show');
-				dropMenu.classList.add('show');
-			}
-
-			function hideMenu() {
-				subMenu.classList.remove('show');
-				dropMenu.classList.remove('show');
-				downMenu.classList.remove('show');
-			}
-
-			downMenu.addEventListener('click', showMenu);
-
-			dropMenu.addEventListener('click', hideMenu);
-
-			document.addEventListener('click', function (event) {
-				if (!subMenu.contains(event.target) && !downMenu.contains(event.target)) {
-					hideMenu();
-				}
-			});
-		});
-		document.addEventListener('DOMContentLoaded', function () {
-			const downMenu = document.querySelector('#down-menu-mobile');
-			const dropMenu = document.querySelector('#drop-menu-mobile');
-			const subMenu = document.getElementById('sub-menu-mobile');
-
-			function showMenu() {
-				subMenu.classList.add('show');
-				downMenu.classList.add('show');
-				dropMenu.classList.add('show');
-			}
-
-			function hideMenu() {
-				subMenu.classList.remove('show');
-				dropMenu.classList.remove('show');
-				downMenu.classList.remove('show');
-			}
-
-			downMenu.addEventListener('click', showMenu);
-
-			dropMenu.addEventListener('click', hideMenu);
-
-			document.addEventListener('click', function (event) {
-				if (!subMenu.contains(event.target) && !downMenu.contains(event.target)) {
-					hideMenu();
-				}
-			});
-		});
+		
 	</script>
 	

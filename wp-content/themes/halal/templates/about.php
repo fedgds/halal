@@ -108,7 +108,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p>Không có khách hàng.</p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no customer." : "Không có khách hàng nào." ?></p>
                     <?php endif; ?>
                 </div>
             </div>
