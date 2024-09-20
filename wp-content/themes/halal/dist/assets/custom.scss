@@ -212,6 +212,9 @@ body {
     background: var(--white) !important;
     color: #136451 !important;
 }
+.ui-state-highlight{
+    border: 1px solid var(--green) !important;
+}
 
 .ui-state-default:hover,
 .ui-state-default:focus,
@@ -409,6 +412,16 @@ header {
                                     font-weight: 500;
                                     color: #136451;
                                     background: #F2F2F2;
+                                }
+                            }
+                        }
+                        .sub-menu-1{
+                            ul{
+                                li{
+                                    width: 12rem;
+                                    @include Responsive(m-12) {
+                                        width: 10rem;
+                                    }
                                 }
                             }
                         }
@@ -6436,7 +6449,7 @@ main {
                 @include Responsive(m-12) {
                     font-size: 1.5rem;
                 }
-                
+
                 @include Responsive(m-7) {
                     font-size: 1.375rem;
                 }

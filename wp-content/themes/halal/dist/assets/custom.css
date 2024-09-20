@@ -112,6 +112,10 @@ body {
   color: #136451 !important;
 }
 
+.ui-state-highlight {
+  border: 1px solid var(--green) !important;
+}
+
 .ui-state-default:hover,
 .ui-state-default:focus,
 .ui-state-hover,
@@ -307,6 +311,14 @@ header .header-wrapper .container .mega-menu ul .child .sub-menu ul li:hover {
   font-weight: 500;
   color: #136451;
   background: #F2F2F2;
+}
+header .header-wrapper .container .mega-menu ul .child .sub-menu-1 ul li {
+  width: 12rem;
+}
+@media only screen and (max-width: 1280px) {
+  header .header-wrapper .container .mega-menu ul .child .sub-menu-1 ul li {
+    width: 10rem;
+  }
 }
 header .header-wrapper .container .mega-menu ul .child:hover {
   color: var(--black);
