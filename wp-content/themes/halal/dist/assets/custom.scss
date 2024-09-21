@@ -185,8 +185,9 @@ body {
 }
 
 // Date picker
-.ui-datepicker-div {
+#ui-datepicker-div {
     font-family: var(--f-body) !important;
+    z-index: 999 !important;
 }
 
 .ui-widget-header {
@@ -798,6 +799,7 @@ main {
                     }
 
                     video {
+                        pointer-events: none;
                         width: 100%;
                         height: 100%;
 
@@ -7221,6 +7223,10 @@ main {
         .container {
             padding-top: 6.25rem;
             padding-bottom: 12.5rem;
+            @include Responsive(m-4) {
+                padding-top: 3.125rem;
+                padding-bottom: 0;
+            }
 
             h2.title {
                 color: var(--black);
@@ -7367,6 +7373,9 @@ main {
                         font-weight: 400;
                         line-height: 150%;
                         align-self: end;
+                        @include Responsive(m-4) {
+                            padding: .5rem 1.5rem;
+                        }
                     }
 
                     button:hover {

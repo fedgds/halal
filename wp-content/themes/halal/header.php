@@ -105,7 +105,7 @@ $url = get_template_directory_uri();
 								<a href="<?= home_url() ?>/ve-halcert">Về HALCERT</a>
 							</li>
 							<li class="child">
-								<a href="<?= home_url() ?>/dich-vu">Dịch vụ</a>
+								<a href="">Dịch vụ</a>
 								<div class="up" id="drop-menu-header-1">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 20" fill="none">
 										<path fill-rule="evenodd" clip-rule="evenodd" d="M4.22603 12.7337C4.4701 12.9778 4.86583 12.9778 5.10991 12.7337L9.9373 7.90618C10.0187 7.82491 10.1505 7.82491 10.232 7.90618L15.0594 12.7337C15.3035 12.9778 15.6991 12.9778 15.9432 12.7337C16.1873 12.4896 16.1873 12.0939 15.9432 11.8498L11.1158 7.02236C10.5463 6.45286 9.62297 6.45286 9.05347 7.02236L4.22603 11.8498C3.98195 12.0939 3.98195 12.4896 4.22603 12.7337Z" fill="black"/>
@@ -241,7 +241,7 @@ $url = get_template_directory_uri();
 					<ul>
 						<li><a href="<?= home_url() ?>/ve-halcert">Về HALCERT</a></li>
 						<li>
-							<a href="<?= home_url() ?>/dich-vu">Dịch vụ</a>
+							<a>Dịch vụ</a>
 							<div class="up" id="drop-menu-mobile-1">
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 21 20" fill="none">
 									<path fill-rule="evenodd" clip-rule="evenodd" d="M4.22603 12.7337C4.4701 12.9778 4.86583 12.9778 5.10991 12.7337L9.9373 7.90618C10.0187 7.82491 10.1505 7.82491 10.232 7.90618L15.0594 12.7337C15.3035 12.9778 15.6991 12.9778 15.9432 12.7337C16.1873 12.4896 16.1873 12.0939 15.9432 11.8498L11.1158 7.02236C10.5463 6.45286 9.62297 6.45286 9.05347 7.02236L4.22603 11.8498C3.98195 12.0939 3.98195 12.4896 4.22603 12.7337Z" fill="black"/>
@@ -288,5 +288,5 @@ $url = get_template_directory_uri();
 				</nav>
 			<?php endif ?>
         </div>
-	</header>\
+	</header>
 	

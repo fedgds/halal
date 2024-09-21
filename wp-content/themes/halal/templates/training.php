@@ -138,36 +138,49 @@ var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
 document.addEventListener('DOMContentLoaded', function () {
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
+    const fromDatePicker = document.getElementById('from_date_picker');
+    const toDatePicker = document.getElementById('to_date_picker');
     const tableBody = document.querySelector('table tbody');
     const pagination = document.querySelector('.search-pagination');
 
-    searchForm.addEventListener('submit', function (e) {
-        e.preventDefault();
+    // Initialize datepickers
+    $(function() { 
+        $("#from_date_picker, #to_date_picker").datepicker({ 
+            dateFormat: "dd/mm/yy"
+        }); 
+    });
+
+    // Function to perform search
+    function performSearch() {
         const searchTerm = searchInput.value;
+        const fromDate = fromDatePicker.value;
+        const toDate = toDatePicker.value;
 
         fetch(ajaxurl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: 'action=training_search&search=' + encodeURIComponent(searchTerm),
+            body: 'action=training_search&search=' + encodeURIComponent(searchTerm) +
+                  '&from_date=' + encodeURIComponent(fromDate) +
+                  '&to_date=' + encodeURIComponent(toDate),
         })
         .then(response => response.json())
         .then(data => {
             tableBody.innerHTML = '';
-            let count = 1; // Biến đếm bắt đầu từ 1
+            let count = 1;
             data.forEach(training => {
                 const row = `
                     <tr>
-                        <td>${count++}</td> <!-- Số tự tăng -->
-                        <td>${training.title}</td>
+                        <td>${count++}</td>
+                        <td><a href="${training.permalink}">${training.title}</a></td>
                         <td>
                             <p>${training.start_date}</p>
-                            ${training.start_date ? `<span>${training.start_time}</span>` : ''} 
+                            <span>${training.start_time}</span>
                         </td>
                         <td>
                             <p>${training.end_date}</p>
-                            ${training.endt_date ? `<span>${training.endt_time}</span>` : ''} 
+                            <span>${training.end_time}</span>
                         </td>
                         <td>${training.address}</td>
                     </tr>
@@ -175,65 +188,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 tableBody.innerHTML += row;
             });
 
-            // Ẩn pagination khi có kết quả tìm kiếm
-            if (searchTerm) {
-                pagination.style.display = 'none';
-            } else {
-                pagination.style.display = 'flex';
-            }
+            // Show/hide pagination based on search
+            pagination.style.display = (searchTerm || fromDate || toDate) ? 'none' : 'flex';
         })
         .catch(error => console.error('Error:', error));
+    }
+
+    // Event listener for form submission
+    searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        performSearch();
     });
 
-    // Thêm event listener cho searchInput để hiển thị lại pagination khi xóa tìm kiếm
-    searchInput.addEventListener('input', function() {
-        if (this.value === '') {
-            pagination.style.display = 'flex';
-            // Tải lại dữ liệu ban đầu (không có tìm kiếm)
-            fetch(ajaxurl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'action=training_search&search=',
-            })
-            .then(response => response.json())
-            .then(data => {
-                tableBody.innerHTML = '';
-                let count = 1; // Biến đếm bắt đầu từ 1
-                data.forEach(training => {
-                    const row = `
-                        <tr>
-                            <td>${count++}</td> <!-- Số tự tăng -->
-                            <td>${training.title}</td>
-                            <td>
-                                <p>${training.start_date}</p>
-                                ${training.start_date ? `<span>${training.start_time}</span>` : ''} <!-- Hiển thị time nếu tồn tại start_date -->
-                            </td>
-                            <td>
-                                <p>${training.end_date}</p>
-                                ${training.endt_date ? `<span>${training.endt_time}</span>` : ''} 
-                            </td>
-                            <td>${training.address}</td>
-                        </tr>
-                    `;
-                    tableBody.innerHTML += row;
-                });
-            })
-            .catch(error => console.error('Error:', error));
-        }
+    // Event listeners for input changes
+    [searchInput, fromDatePicker, toDatePicker].forEach(input => {
+        input.addEventListener('input', function() {
+            if (searchInput.value === '' && fromDatePicker.value === '' && toDatePicker.value === '') {
+                pagination.style.display = 'flex';
+                performSearch(); // Reload initial data
+            }
+        });
     });
-});
-$(function() { 
-    $( "#from_date_picker" ).datepicker({ 
-        defaultDate: new Date(), 
-        dateFormat: "dd/mm/yy"
-    }); 
-});
-$(function() { 
-    $( "#to_date_picker" ).datepicker({ 
-        defaultDate: new Date(), 
-        dateFormat: "dd/mm/yy"
-    }); 
+
+    // Initial search to load data
+    performSearch();
 });
 </script>

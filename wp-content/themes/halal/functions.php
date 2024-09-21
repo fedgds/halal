@@ -232,26 +232,54 @@ add_filter('query_vars', 'custom_query_vars');
 // Tìm kiếm khóa đào tạo
 function training_search_ajax() {
     $search = $_POST['search'];
+    $from_date = $_POST['from_date'];
+    $to_date = $_POST['to_date'];
+
     $args = array(
         'post_type' => 'dao-tao',
         'post_status' => 'publish',
-        's' => $search,
         'posts_per_page' => -1
     );
+
+    if (!empty($search)) {
+        $args['s'] = $search;
+    }
+
     $query = new WP_Query($args);
     $results = array();
+
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
             $training = get_field('training', get_the_ID());
-            $results[] = array(
-                'title' => get_the_title(),
-                'address' => $training['address'],
-                'start_date' => $training['start_time']['date'],
-                'start_time' => date('h:i:s A', strtotime($training['start_time']['time'])),
-                'end_date' => $training['end_time']['date'],
-                'end_time' => date('h:i:s A', strtotime($training['end_time']['time']))
-            );
+            $start_date = strtotime($training['start_time']['date']);
+            $end_date = strtotime($training['end_time']['date']);
+
+            // Convert input dates to timestamp for comparison
+            $from_timestamp = !empty($from_date) ? strtotime(str_replace('/', '-', $from_date)) : null;
+            $to_timestamp = !empty($to_date) ? strtotime(str_replace('/', '-', $to_date)) : null;
+
+            // Check if the training overlaps with the selected date range
+            $is_in_range = true;
+            if ($from_timestamp && $to_timestamp) {
+                $is_in_range = ($start_date <= $to_timestamp && $end_date >= $from_timestamp);
+            } elseif ($from_timestamp) {
+                $is_in_range = ($end_date >= $from_timestamp);
+            } elseif ($to_timestamp) {
+                $is_in_range = ($start_date <= $to_timestamp);
+            }
+
+            if ($is_in_range) {
+                $results[] = array(
+                    'title' => get_the_title(),
+                    'permalink' => get_permalink(),
+                    'address' => $training['address'],
+                    'start_date' => date('d/m/Y', $start_date),
+                    'start_time' => date('H:i:s', strtotime($training['start_time']['time'])),
+                    'end_date' => date('d/m/Y', $end_date),
+                    'end_time' => date('H:i:s', strtotime($training['end_time']['time']))
+                );
+            }
         }
     }
     wp_reset_postdata();
@@ -260,7 +288,6 @@ function training_search_ajax() {
 }
 add_action('wp_ajax_training_search', 'training_search_ajax');
 add_action('wp_ajax_nopriv_training_search', 'training_search_ajax');
-
 // Phân trang đào tạo
 function training_rewrite_rules() {
     add_rewrite_rule(
@@ -312,7 +339,7 @@ add_filter('query_vars', 'event_query_vars');
 function modify_tapsan_query($query) {
     if (!is_admin() && $query->is_main_query() && is_tax('danh_muc_tap_san')) {
         $query->set('post_type', 'tap-san');
-        $query->set('posts_per_page', 3);
+        $query->set('posts_per_page', 6);
     }
 }
 add_action('pre_get_posts', 'modify_tapsan_query');
