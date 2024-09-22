@@ -110,10 +110,34 @@ get_header(); ?>
                 <div class="content">
                     <?php the_content(); ?>
                 </div>
-                <div class="social-media">
-                    <a href=""><img src="<?= $url ?>/dist/images/facebook.png" alt=""></a>
-                    <a href=""><img src="<?= $url ?>/dist/images/twitter.png" alt=""></a>
-                    <a href=""><img src="<?= $url ?>/dist/images/telegram.png" alt=""></a>
+                <div class="share">
+                    <?php
+                    $current_url = esc_url(get_permalink());
+                    $title = get_the_title();
+                    $facebook_share_url = 'https://www.facebook.com/sharer.php?u=' . urlencode($current_url);
+                    $twitter_share_url = 'https://twitter.com/intent/tweet?url=' . urlencode($current_url) . '&text=' . urlencode($title);
+                    $telegram_share_url = 'https://t.me/share/url?url=' . urlencode($current_url) . '&text=' . urlencode($title);
+                    ?>
+                    <a href="<?php echo $facebook_share_url; ?>" target="_blank" rel="noopener noreferrer" class="facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+                            <circle cx="16.7708" cy="16.0013" r="13.3333" fill="#3B5998"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.3142 11.3065C19.8986 11.2234 19.3374 11.1613 18.9844 11.1613C18.0286 11.1613 17.9666 11.5769 17.9666 12.2417V13.4253H20.3557L20.1475 15.8771H17.9666V23.3346H14.975V15.8771H13.4375V13.4253H14.975V11.9088C14.975 9.83152 15.9514 8.66797 18.4026 8.66797C19.2543 8.66797 19.8776 8.79264 20.6877 8.95886L20.3142 11.3065Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <a href="<?php echo $twitter_share_url; ?>" target="_blank" rel="noopener noreferrer" class="twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+                            <circle cx="16.7708" cy="16" r="13.3333" fill="#1DA1F2"/>
+                            <path d="M24.2708 11.0005C23.7308 11.2505 23.1508 11.4205 22.5408 11.5005C23.1608 11.1305 23.6408 10.5405 23.8708 9.85047C23.2908 10.1905 22.6508 10.4305 21.9708 10.5605C21.4308 9.97047 20.6608 9.60047 19.8108 9.60047C18.1908 9.60047 16.8808 10.9105 16.8808 12.5305C16.8808 12.7705 16.9108 13.0005 16.9608 13.2205C14.5408 13.0905 12.3808 11.9305 10.9108 10.1605C10.6508 10.6005 10.5008 11.1305 10.5008 11.6905C10.5008 12.7505 11.0308 13.6905 11.8408 14.2505C11.3508 14.2305 10.8908 14.1105 10.4808 13.9105V13.9505C10.4808 15.3705 11.4808 16.5705 12.8108 16.8505C12.5508 16.9205 12.2808 16.9605 12.0008 16.9605C11.8008 16.9605 11.6108 16.9405 11.4208 16.9005C11.8108 18.0805 12.9108 18.9305 14.2108 18.9605C13.1908 19.7405 11.9108 20.2105 10.5308 20.2105C10.2808 20.2105 10.0408 20.1905 9.80078 20.1605C11.1208 20.9905 12.6908 21.4805 14.3708 21.4805C19.8008 21.4805 22.7708 16.9905 22.7708 13.0805C22.7708 12.9405 22.7708 12.8005 22.7608 12.6605C23.3508 12.2405 23.8708 11.7105 24.2708 11.0005Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <a href="<?php echo $telegram_share_url; ?>" target="_blank" rel="noopener noreferrer" class="telegram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32" fill="none">
+                            <circle cx="16.7708" cy="16" r="13.3333" fill="#0088cc"/>
+                            <path d="M22.7708 10.4134L20.2906 22.3509C20.2906 22.3509 19.9973 23.0946 19.1666 22.7321L14.4791 19.1946L12.2291 18.1134L8.20831 16.8634C8.20831 16.8634 7.72915 16.6946 7.68748 16.3321C7.64581 15.9696 8.22915 15.7717 8.22915 15.7717L21.8333 10.2446C21.8333 10.2446 22.7708 9.84464 22.7708 10.4134Z" fill="white"/>
+                            <path d="M14.2292 22.4134C14.2292 22.4134 14.1042 22.4009 13.9583 21.7509C13.8125 21.1009 12.2292 18.1134 12.2292 18.1134L20.0625 13.1134C20.0625 13.1134 20.4583 12.8821 20.4375 13.1134C20.4375 13.1134 20.5208 13.1634 20.3125 13.3634C20.1042 13.5634 14.5 18.6509 14.5 18.6509" fill="#d2e5f1"/>
+                            <path d="M16.5208 20.3509L14.3958 22.3717C14.3958 22.3717 14.2562 22.4769 14.1042 22.4134L14.4166 18.7717" fill="#b5cfe4"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
             <div class="right">

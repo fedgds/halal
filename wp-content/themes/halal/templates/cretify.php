@@ -44,7 +44,7 @@ get_header(); ?>
                                         <li>
                                             <h4><?= $item['title'] ?></h4>
                                             <span>
-                                                <a href="<?= $item['link'] ?>">
+                                                <a href="<?= $item['link'] ?>" target="_blank">
                                                     <p><?= $item['text'] ?></p>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                         <path d="M12.8 11.2002L20 4.0002M20 4.0002H15.725M20 4.0002V8.2752" stroke="#414141" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
