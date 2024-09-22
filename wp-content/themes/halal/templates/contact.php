@@ -39,7 +39,7 @@ get_header(); ?>
                 </form>
                 <div class="infor">
                     <h3 class="title">
-                        <?= (pll_current_language() == 'en-us') ? "Vietnam Chef Association VICA" : "Hiệp hội đầu bếp Việt Nam VICA" ?>
+                        <?= (pll_current_language() == 'en-us') ? "HALAL CERTIFICATION CENTER" : "TRUNG TÂM CHỨNG NHẬN HALAL" ?>
                     </h3>
                     <div class="infor-detail">
                         <div class="phone-number">

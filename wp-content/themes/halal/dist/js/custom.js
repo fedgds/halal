@@ -1,3 +1,46 @@
+// Tab slider
+document.addEventListener('DOMContentLoaded', function () {
+    const dot = document.querySelectorAll('#list-dot li');
+    const section = document.querySelectorAll('#list-slide .child');
+    let activeIndex = 0;
+
+    // Initially activate the first element
+    dot[0].classList.add('active');
+    section[0].classList.add('active');
+
+    // Click event for dots
+    dot.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+            setActiveTab(index);
+            resetAutoSlide(); // Reset the auto slide when manually changing tabs
+        });
+    });
+
+    // Function to set the active tab
+    function setActiveTab(index) {
+        dot.forEach(t => t.classList.remove('active'));
+        section.forEach(p => p.classList.remove('active'));
+        dot[index].classList.add('active');
+        section[index].classList.add('active');
+        activeIndex = index; // Update the active index
+    }
+
+    // Automatically move to the next tab every 5 seconds
+    const autoSlide = setInterval(() => {
+        activeIndex = (activeIndex + 1) % dot.length; // Increment index and loop back to start if at the end
+        setActiveTab(activeIndex);
+    }, 5000);
+
+    // Reset the auto slide interval
+    function resetAutoSlide() {
+        clearInterval(autoSlide);
+        setInterval(() => {
+            activeIndex = (activeIndex + 1) % dot.length;
+            setActiveTab(activeIndex);
+        }, 5000);
+    }
+});
+
 // Modal menu header
 document.addEventListener('DOMContentLoaded', function () {
     const openMenu = document.querySelector('#open-menu-header');

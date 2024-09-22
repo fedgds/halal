@@ -167,9 +167,6 @@ get_header(); ?>
                 <div class="content">
                     <?php the_content() ?>
                 </div>
-                <div class="thumbnail">
-                    <img src="<?= esc_url($thumbnail) ?>" alt="">
-                </div>
             </div>
             <div class="right">
                 <div class="training">
