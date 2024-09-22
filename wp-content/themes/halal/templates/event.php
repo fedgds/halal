@@ -15,15 +15,24 @@ if ( get_query_var('paged') ) {
     $paged = 1;
 }
 
-$list_events_query = new WP_Query(array(
-    'post_type' => 'su-kien',
+// Tạo meta query để lọc chỉ lấy bài viết loại "Sự kiện"
+$meta_query = array(
+    array(
+        'key' => 'news-and-event_type',
+        'value' => 'Sự kiện',
+        'compare' => '='
+    )
+);
+
+$list_event_query = new WP_Query(array(
+    'post_type' => 'tin-tuc-va-su-kien',
     'post_status' => 'publish',
     'orderby' => 'date',
+    'order' => 'DESC',
     'posts_per_page' => $event_per_page,
     'paged' => $paged,
-    'lang' => 'en-us'
+    'meta_query' => $meta_query
 ));
-
 
 $url = get_template_directory_uri();
 get_header(); ?>
@@ -34,13 +43,11 @@ get_header(); ?>
             <div class="list-menu">
                 <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Event" : "Sự kiện" ?></h2>
                 <div class="list">
-                    <?php if ($list_events_query->have_posts()) : ?>
-                        <?php while ($list_events_query->have_posts()) : $list_events_query->the_post(); ?>
+                    <?php if ($list_event_query->have_posts()) : ?>
+                        <?php while ($list_event_query->have_posts()) : $list_event_query->the_post(); ?>
                             <?php
-                                $event_id = get_the_ID();
-                                $event = get_field('event', $event_id);
+                                $news_id = get_the_ID();
                                 $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-
                             ?>
                             <div class="child">
                                 <a href="<?php the_permalink(); ?>">
@@ -77,7 +84,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?></p>
+                        <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?></p>
                     <?php endif; ?>
                 </div>
                 <nav class="pagination search-pagination">
@@ -87,7 +94,7 @@ get_header(); ?>
                             'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
                             'format' => '?paged=%#%',
                             'current' => max(1, $paged),
-                            'total' => $list_events_query->max_num_pages,
+                            'total' => $list_event_query->max_num_pages,
                             'prev_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M14 7.33301L9 12.333L14 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
                             'next_text' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none"><path d="M10 7.33301L15 12.333L10 17.333" stroke="#136451" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
                         ));

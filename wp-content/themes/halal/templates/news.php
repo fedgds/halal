@@ -15,14 +15,24 @@ if ( get_query_var('paged') ) {
     $paged = 1;
 }
 
+// Tạo meta query để lọc chỉ lấy bài viết loại "Tin tức"
+$meta_query = array(
+    array(
+        'key' => 'news-and-event_type',
+        'value' => 'Tin tức',
+        'compare' => '='
+    )
+);
+
 $list_news_query = new WP_Query(array(
-    'post_type' => 'tin-tuc',
+    'post_type' => 'tin-tuc-va-su-kien',
     'post_status' => 'publish',
     'orderby' => 'date',
+    'order' => 'DESC',
     'posts_per_page' => $news_per_page,
-    'paged' => $paged
+    'paged' => $paged,
+    'meta_query' => $meta_query
 ));
-
 
 $url = get_template_directory_uri();
 get_header(); ?>
@@ -31,15 +41,13 @@ get_header(); ?>
     <div class="section-news-and-event fade-in">
         <div class="container">
             <div class="list-menu">
-                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "There are no news." : "Tin tức" ?></h2>
+                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "News" : "Tin tức" ?></h2>
                 <div class="list">
                     <?php if ($list_news_query->have_posts()) : ?>
                         <?php while ($list_news_query->have_posts()) : $list_news_query->the_post(); ?>
                             <?php
                                 $news_id = get_the_ID();
-                                $news = get_field('news', $news_id);
                                 $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-
                             ?>
                             <div class="child">
                                 <a href="<?php the_permalink(); ?>">
