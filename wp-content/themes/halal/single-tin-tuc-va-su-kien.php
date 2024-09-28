@@ -19,11 +19,11 @@ $latest_news_query = new WP_Query(array(
     'posts_per_page' => 5,
     'orderby' => 'date',
     'post__not_in' => array($news_and_event_id),
-    'meta_query' => array(
+    'tax_query' => array(
         array(
-            'key' => 'news-and-event_type',
-            'value' => 'Tin tức',
-            'compare' => '='
+            'taxonomy' => 'danh_muc_tin_tuc_su_kien',
+            'field' => 'slug',
+            'terms' => 'tin-tuc'
         )
     )
 ));
@@ -35,16 +35,17 @@ $latest_events_query = new WP_Query(array(
     'posts_per_page' => 5,
     'orderby' => 'date',
     'post__not_in' => array($news_and_event_id),
-    'meta_query' => array(
+    'tax_query' => array(
         array(
-            'key' => 'news-and-event_type',
-            'value' => 'Sự kiện',
-            'compare' => '='
+            'taxonomy' => 'danh_muc_tin_tuc_su_kien',
+            'field' => 'slug',
+            'terms' => 'su-kien'
         )
     )
 ));
 
 // Tin tức liên quan
+
 // Lấy ra danh mục
 $categories = wp_get_post_terms($news_and_event_id, 'danh_muc_tin_tuc_su_kien', array('fields' => 'ids'));
 
@@ -58,16 +59,14 @@ $related_news_query = new WP_Query(array(
             'taxonomy' => 'danh_muc_tin_tuc_su_kien',
             'field' => 'id',
             'terms' => $categories,
+        ),
+        array(
+            'taxonomy' => 'danh_muc_tin_tuc_su_kien',
+            'field' => 'slug',
+            'terms' => 'tin-tuc'
         )
     ),
-    'post__not_in' => array($news_and_event_id),
-    'meta_query' => array(
-        array(
-            'key' => 'news-and-event_type',
-            'value' => 'Tin tức',
-            'compare' => '='
-        )
-    )
+    'post__not_in' => array($news_and_event_id)
 ));
 
 $url = get_template_directory_uri();
@@ -86,7 +85,7 @@ get_header(); ?>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
                     </svg>
                 </span>
-                <?php if(pll_current_language() == 'en-us'): ?>
+                <?php if(pll_current_language() == 'en'): ?>
                     <a href="<?= home_url() ?>/news-and-event">
                         News & Event
                     </a>
@@ -120,7 +119,7 @@ get_header(); ?>
                     <?php the_content(); ?>
                 </div>
                 <div class="share">
-                    <span><?= (pll_current_language() == 'en-us') ? "Share:" : "Chia sẻ:" ?></span>
+                    <span><?= (pll_current_language() == 'en') ? "Share:" : "Chia sẻ:" ?></span>
                     <?php
                     $current_url = urlencode(get_permalink());
                     $title = urlencode(get_the_title());
@@ -141,7 +140,7 @@ get_header(); ?>
             </div>
             <div class="right">
                 <div class="top">
-                    <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Latest news" : "Tin tức mới nhất" ?></h2>
+                    <h2 class="title"><?= (pll_current_language() == 'en') ? "Latest news" : "Tin tức mới nhất" ?></h2>
                     <div class="list">
                         <?php if ($latest_news_query->have_posts()) : ?>
                             <?php while ($latest_news_query->have_posts()) : $latest_news_query->the_post(); ?>
@@ -185,12 +184,12 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?></p>
+                            <p><?= (pll_current_language() == 'en') ? "There are no news." : "Không có tin tức nào." ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="bottom">
-                    <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Latest event" : "Sự kiện mới nhất" ?></h2>
+                    <h2 class="title"><?= (pll_current_language() == 'en') ? "Latest event" : "Sự kiện mới nhất" ?></h2>
                     <div class="list">
                         <?php if ($latest_events_query->have_posts()) : ?>
                             <?php while ($latest_events_query->have_posts()) : $latest_events_query->the_post(); ?>
@@ -234,14 +233,14 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                         <?php else : ?>
-                            <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?></p>
+                            <p><?= (pll_current_language() == 'en') ? "There are no event." : "Không có sự kiện nào." ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
         <div class="relate fade-in">
-            <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Relevant news" : "Tin tức liên quan" ?></h2>
+            <h2 class="title"><?= (pll_current_language() == 'en') ? "Relevant news" : "Tin tức liên quan" ?></h2>
             <div class="list">
             <?php if ($related_news_query->have_posts()) : ?>
                 <?php while ($related_news_query->have_posts()) : $related_news_query->the_post(); ?>
@@ -285,7 +284,7 @@ get_header(); ?>
                 <?php endwhile; ?>
                 <?php wp_reset_postdata(); ?>
             <?php else : ?>
-                <p><?= (pll_current_language() == 'en-us') ? "There is no related news." : "Không có tin tức liên quan nào." ?></p>
+                <p><?= (pll_current_language() == 'en') ? "There is no related news." : "Không có tin tức liên quan nào." ?></p>
             <?php endif; ?>
             </div>
         </div>

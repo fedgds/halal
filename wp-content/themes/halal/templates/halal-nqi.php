@@ -25,7 +25,7 @@ get_header(); ?>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else: ?>
-                            <p><?= (pll_current_language() == 'en-us') ? "There are not nqi." : "Không có nqi nào." ?></p>
+                            <p><?= (pll_current_language() == 'en') ? "There are not nqi." : "Không có nqi nào." ?></p>
                         <?php endif; ?>
                     </ul>
                 </nav>

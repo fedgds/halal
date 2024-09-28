@@ -67,7 +67,7 @@ get_header(); ?>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M5.47994 12.6869C5.28468 12.4917 5.28468 12.1751 5.47994 11.9799L9.34189 8.11795C9.40696 8.05281 9.40696 7.94735 9.34189 7.88221L5.47994 4.0203C5.28468 3.82504 5.28468 3.50845 5.47994 3.31319C5.6752 3.11793 5.99179 3.11793 6.18705 3.31319L10.049 7.17515C10.5046 7.63075 10.5046 8.36941 10.049 8.82501L6.18705 12.6869C5.99179 12.8822 5.6752 12.8822 5.47994 12.6869Z" fill="#414141"/>
                     </svg>
                 </span>
-                <?php if(pll_current_language() == 'en-us'): ?>
+                <?php if(pll_current_language() == 'en'): ?>
                     <a href="<?= home_url() ?>/halal-journal">
                         Halal Journal
                     </a>
@@ -141,7 +141,7 @@ get_header(); ?>
                 </div>
             </div>
             <div class="right">
-                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Latest journal" : "Tập san mới nhất" ?></h2>
+                <h2 class="title"><?= (pll_current_language() == 'en') ? "Latest journal" : "Tập san mới nhất" ?></h2>
                 <div class="list">
                     <?php if ($latest_posts_query->have_posts()) : ?>
                         <?php while ($latest_posts_query->have_posts()) : $latest_posts_query->the_post(); ?>
@@ -185,13 +185,13 @@ get_header(); ?>
                     <?php endwhile; ?>
                     <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p><?= (pll_current_language() == 'en-us') ? "There are no journals." : "Không có tập san nào." ?></p>
+                        <p><?= (pll_current_language() == 'en') ? "There are no journals." : "Không có tập san nào." ?></p>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
         <div class="relate fade-in">
-            <h2 class="title"><?= (pll_current_language() == 'en-us') ? "Relevant journal" : "Tập san liên quan" ?></h2>
+            <h2 class="title"><?= (pll_current_language() == 'en') ? "Relevant journal" : "Tập san liên quan" ?></h2>
             <div class="list">
             <?php if ($related_posts_query->have_posts()) : ?>
                 <?php while ($related_posts_query->have_posts()) : $related_posts_query->the_post(); ?>
@@ -235,7 +235,7 @@ get_header(); ?>
                 <?php endwhile; ?>
                 <?php wp_reset_postdata(); ?>
                 <?php else : ?>
-                    <p><?= (pll_current_language() == 'en-us') ? "There are no relevant journals." : "Không có tập san liên quan nào." ?></p>
+                    <p><?= (pll_current_language() == 'en') ? "There are no relevant journals." : "Không có tập san liên quan nào." ?></p>
                 <?php endif; ?>
             </div>
         </div>

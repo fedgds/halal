@@ -102,6 +102,13 @@ function halal_setup() {
 }
 add_action( 'after_setup_theme', 'halal_setup' );
 
+if( function_exists('acf_add_options_page') ) {
+
+    acf_add_options_page();
+
+}
+add_action( 'after_setup_theme', 'halal_setup' );
+
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
@@ -361,6 +368,17 @@ function handle_contact_form_submission() {
         $phone = sanitize_text_field($_POST['your-phone']);
         $message = sanitize_textarea_field($_POST['your-message']);
 
+        // Lấy danh sách email đã gửi
+        $contact_emails = get_option('contact_emails', array());
+
+        // Kiểm tra xem email đã tồn tại chưa
+        if (in_array($email, $contact_emails)) {
+            // Email đã tồn tại, set cookie để hiển thị thông báo
+            setcookie('registration_error', 'email_exists', time() + 30, '/');
+            wp_safe_redirect(wp_get_referer());
+            exit;
+        }
+
         $contact_form = WPCF7_ContactForm::get_instance(6);
         $submission = WPCF7_Submission::get_instance();
 
@@ -378,7 +396,23 @@ function handle_contact_form_submission() {
                 )
             );
 
-            $contact_form->submit();
+            $result = $contact_form->submit();
+            
+            if ($result['status'] == 'mail_sent') {
+                // Thêm email vào danh sách đã liên hệ
+                $contact_emails[] = $email;
+                update_option('contact_emails', $contact_emails);
+
+                // // Set a cookie to indicate successful submission
+                setcookie('contact_success', 'true', time() + 30, '/');
+
+                // Gửi email cho người liên hệ
+                $to_subscriber = $email;
+                $subject_subscriber = 'Để lại lời nhắn thành công!';
+                $message_subscriber = "Cảm ơn bạn đã để lại lời nhắn cho chúng tôi.";
+                wp_mail($to_subscriber, $subject_subscriber, $message_subscriber);
+
+            }
         }
         // Redirect back to the current page
         $redirect_url = wp_get_referer();
@@ -388,6 +422,11 @@ function handle_contact_form_submission() {
 }
 add_action('admin_post_submit_contact_form', 'handle_contact_form_submission');
 add_action('admin_post_nopriv_submit_contact_form', 'handle_contact_form_submission');
+function cleanup_contact_option() {
+    delete_option('contact_emails');
+}
+register_uninstall_hook(__FILE__, 'cleanup_contact_option');
+
 // Gửi form faq
 function handle_faq_form_submission() {
     if (isset($_POST['action']) && $_POST['action'] == 'submit_faq_form') {
@@ -416,8 +455,26 @@ function handle_faq_form_submission() {
                 )
             );
 
-            $faq_form->submit();
+            $result = $faq_form->submit();
+            
+            if ($result['status'] == 'mail_sent') {
+                // Set a cookie to indicate successful submission
+                setcookie('faq_status', 'success', time() + 30, '/');
+
+                // Gửi email cho người liên hệ
+                $to_subscriber = $email;
+                $subject_subscriber = 'Đặt câu hỏi thành công!';
+                $message_subscriber = "Cảm ơn bạn đã đặt câu hỏi cho chúng tôi.";
+                wp_mail($to_subscriber, $subject_subscriber, $message_subscriber);
+            } else {
+                // Set a cookie to indicate failed submission
+                setcookie('faq_status', 'failed', time() + 30, '/');
+            }
+        } else {
+            // Set a cookie to indicate failed submission if form or submission is not found
+            setcookie('faq_status', 'failed', time() + 30, '/');
         }
+        
         // Redirect back to the current page
         $redirect_url = wp_get_referer();
         wp_redirect($redirect_url ? $redirect_url : home_url());
@@ -426,8 +483,28 @@ function handle_faq_form_submission() {
 }
 add_action('admin_post_submit_faq_form', 'handle_faq_form_submission');
 add_action('admin_post_nopriv_submit_faq_form', 'handle_faq_form_submission');
-
 // Gửi form đăng ký nhận thông tin(footer)
+function email_exists_in_cf7_submissions($email, $form_id) {
+    global $wpdb;
+    $submissions_table = $wpdb->prefix . 'cf7_submissions';
+    
+    // Kiểm tra xem bảng có tồn tại không
+    if($wpdb->get_var("SHOW TABLES LIKE '$submissions_table'") != $submissions_table) {
+        return false; // Bảng không tồn tại, trả về false
+    }
+
+    $query = $wpdb->prepare(
+        "SELECT COUNT(*) FROM $submissions_table 
+        WHERE form_id = %d 
+        AND data LIKE %s",
+        $form_id,
+        '%' . $wpdb->esc_like($email) . '%'
+    );
+
+    $count = $wpdb->get_var($query);
+
+    return $count > 0;
+}
 function handle_register_form_submission() {
     if (isset($_POST['action']) && $_POST['action'] == 'submit_register_form') {
         if (!wp_verify_nonce($_POST['register_form_nonce'], 'submit_register_form')) {
@@ -436,7 +513,19 @@ function handle_register_form_submission() {
 
         $email = sanitize_email($_POST['your-email']);
 
-        $register_form = WPCF7_ContactForm::get_instance(406);
+        // Lấy danh sách email đã đăng ký
+        $registered_emails = get_option('newsletter_registered_emails', array());
+
+        // Kiểm tra xem email đã tồn tại chưa
+        if (in_array($email, $registered_emails)) {
+            // Email đã tồn tại, set cookie để hiển thị thông báo
+            setcookie('registration_error', 'email_exists', time() + 30, '/');
+            wp_safe_redirect(wp_get_referer());
+            exit;
+        }
+
+        $form_id = 406; // ID của form Contact Form 7
+        $register_form = WPCF7_ContactForm::get_instance($form_id);
         $submission = WPCF7_Submission::get_instance();
 
         if ($register_form && !$submission) {
@@ -449,92 +538,37 @@ function handle_register_form_submission() {
                 )
             );
 
-            $register_form->submit();
+            $result = $register_form->submit();
+
+            if ($result['status'] == 'mail_sent') {
+                // Thêm email vào danh sách đã đăng ký
+                $registered_emails[] = $email;
+                update_option('newsletter_registered_emails', $registered_emails);
+
+                // Set a cookie to indicate successful submission
+                setcookie('registration_success', 'true', time() + 30, '/');
+
+                // Gửi email cho người đăng ký
+                $to_subscriber = $email;
+                $subject_subscriber = 'Đăng ký nhận tin mới thành công';
+                $message_subscriber = "Cảm ơn bạn đã đăng ký nhận tin mới.";
+                wp_mail($to_subscriber, $subject_subscriber, $message_subscriber);
+
+            }
         }
-        // Redirect back to the current page
+
+        // Chuyển hướng trở lại trang hiện tại
         $redirect_url = wp_get_referer();
-        wp_redirect($redirect_url ? $redirect_url : home_url());
+        wp_safe_redirect($redirect_url ? $redirect_url : home_url());
         exit;
     }
 }
 add_action('admin_post_submit_register_form', 'handle_register_form_submission');
 add_action('admin_post_nopriv_submit_register_form', 'handle_register_form_submission');
-
-// Gửi form đăng ký chứng nhận
-function handle_certify_form_submission() {
-    if (isset($_POST['action']) && $_POST['action'] == 'submit_cretify_form') {
-        if (!wp_verify_nonce($_POST['cretify_form_nonce'], 'submit_cretify_form')) {
-            wp_die('Nonce verification failed');
-        }
-
-        // Sanitize and collect form data
-        $org_name = sanitize_text_field($_POST['org-name']);
-        $org_address = sanitize_text_field($_POST['org-address']);
-        $org_rep_name = sanitize_text_field($_POST['org-rep-name']);
-        $org_rep_address = sanitize_text_field($_POST['org-rep-address']);
-        $org_rep_position = sanitize_text_field($_POST['org-rep-position']);
-        $org_rep_phone = sanitize_text_field($_POST['org-rep-phone']);
-        $org_rep_email = sanitize_email($_POST['org-rep-email']);
-        $org_rep_fax = sanitize_text_field($_POST['org-rep-fax']);
-        $contact_name = sanitize_text_field($_POST['contact-name']);
-        $contact_address = sanitize_text_field($_POST['contact-address']);
-        $contact_position = sanitize_text_field($_POST['contact-position']);
-        $contact_phone = sanitize_text_field($_POST['contact-phone']);
-        $contact_email = sanitize_email($_POST['contact-email']);
-        $contact_fax = sanitize_text_field($_POST['contact-fax']);
-
-        // Handle file upload
-        $uploaded_file = $_FILES['file-upload'];
-        $upload_overrides = array('test_form' => false);
-        $movefile = wp_handle_upload($uploaded_file, $upload_overrides);
-
-        if ($movefile && !isset($movefile['error'])) {
-            $file_url = $movefile['url'];
-        } else {
-            $file_url = '';
-            // Handle error if needed
-        }
-
-        // Prepare data for Contact Form 7
-        $submission_data = array(
-            'org-name' => $org_name,
-            'org-address' => $org_address,
-            'org-rep-name' => $org_rep_name,
-            'org-rep-address' => $org_rep_address,
-            'org-rep-position' => $org_rep_position,
-            'org-rep-phone' => $org_rep_phone,
-            'org-rep-email' => $org_rep_email,
-            'org-rep-fax' => $org_rep_fax,
-            'contact-name' => $contact_name,
-            'contact-address' => $contact_address,
-            'contact-position' => $contact_position,
-            'contact-phone' => $contact_phone,
-            'contact-email' => $contact_email,
-            'contact-fax' => $contact_fax,
-            'file-upload' => $file_url
-        );
-
-        $certify_form = WPCF7_ContactForm::get_instance(403);
-        $submission = WPCF7_Submission::get_instance();
-
-        if ($certify_form && !$submission) {
-            $submission = WPCF7_Submission::get_instance(
-                array(
-                    'certify_form' => $certify_form,
-                    'posted_data' => $submission_data
-                )
-            );
-
-            $certify_form->submit();
-        }
-        // Redirect back to the current page
-        $redirect_url = wp_get_referer();
-        wp_redirect($redirect_url ? $redirect_url : home_url());
-        exit;
-    }
+function cleanup_newsletter_option() {
+    delete_option('newsletter_registered_emails');
 }
-add_action('admin_post_submit_cretify_form', 'handle_certify_form_submission');
-add_action('admin_post_nopriv_submit_cretify_form', 'handle_certify_form_submission');
+register_uninstall_hook(__FILE__, 'cleanup_newsletter_option');
 
 // Tăng lượt xem khi ấn vào trang trang chi tiết tin tức
 function update_news_views() {
@@ -649,3 +683,58 @@ function formatDateEn($dateString) {
         return "Invalid date format";
     }
 }
+
+function filter_content_to_text($content) {
+    // Loại bỏ tất cả các thẻ HTML, giữ lại text
+    $text_content = wp_strip_all_tags($content, true);
+    
+    // Loại bỏ shortcodes
+    $text_content = strip_shortcodes($text_content);
+    
+    // Loại bỏ khoảng trắng dư thừa
+    $text_content = preg_replace('/\s+/', ' ', $text_content);
+    
+    // Chuyển đổi các ký tự đặc biệt HTML thành dạng có thể đọc được
+    $text_content = htmlspecialchars_decode($text_content);
+    
+    return $text_content;
+}
+function custom_language_menu_items($items, $args) {
+    foreach ($items as $item) {
+        // Kiểm tra xem item có phải là item ngôn ngữ không
+        if (strpos($item->title, 'Tiếng Việt') !== false || strpos($item->title, 'English') !== false) {
+            // Tìm thẻ <span> trong title
+            $span_pos = strpos($item->title, '<span');
+            if ($span_pos !== false) {
+                // Lấy phần HTML trước thẻ <span>
+                $before_span = substr($item->title, 0, $span_pos);
+                // Lấy thẻ <span> và nội dung bên trong
+                $span_content = substr($item->title, $span_pos);
+                
+                // Thay đổi nội dung trong thẻ <span>
+                if (strpos($item->title, 'Tiếng Việt') !== false) {
+                    $span_content = str_replace('Tiếng Việt', 'VIE', $span_content);
+                } elseif (strpos($item->title, 'English') !== false) {
+                    $span_content = str_replace('English', 'EN', $span_content);
+                }
+                
+                // Kết hợp lại
+                $item->title = $before_span . $span_content;
+            }
+        }
+    }
+    return $items;
+}
+add_filter('wp_nav_menu_objects', 'custom_language_menu_items', 10, 2);
+
+// Thêm logo vào menu (giữ nguyên như cũ)
+function add_logo_to_menu($items, $args) {
+    if ($args->theme_location == 'primary') {
+        $logo = get_custom_logo();
+        if ($logo) {
+            $items = $logo . $items;
+        }
+    }
+    return $items;
+}
+add_filter('wp_nav_menu_items', 'add_logo_to_menu', 10, 2);

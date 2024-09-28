@@ -16,11 +16,11 @@ if ( get_query_var('paged') ) {
 }
 
 // Tạo meta query để lọc chỉ lấy bài viết loại "Tin tức"
-$meta_query = array(
+$tax_query = array(
     array(
-        'key' => 'news-and-event_type',
-        'value' => 'Tin tức',
-        'compare' => '='
+        'taxonomy' => 'danh_muc_tin_tuc_su_kien',
+        'field' => 'slug',
+        'terms' => 'tin-tuc'
     )
 );
 
@@ -31,7 +31,7 @@ $list_news_query = new WP_Query(array(
     'order' => 'DESC',
     'posts_per_page' => $news_per_page,
     'paged' => $paged,
-    'meta_query' => $meta_query
+    'tax_query' => $tax_query
 ));
 
 $url = get_template_directory_uri();
@@ -41,7 +41,7 @@ get_header(); ?>
     <div class="section-news-and-event fade-in">
         <div class="container">
             <div class="list-menu">
-                <h2 class="title"><?= (pll_current_language() == 'en-us') ? "News" : "Tin tức" ?></h2>
+                <h2 class="title"><?= (pll_current_language() == 'en') ? "News" : "Tin tức" ?></h2>
                 <div class="list">
                     <?php if ($list_news_query->have_posts()) : ?>
                         <?php while ($list_news_query->have_posts()) : $list_news_query->the_post(); ?>
@@ -84,7 +84,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?></p>
+                        <p><?= (pll_current_language() == 'en') ? "There are no news." : "Không có tin tức nào." ?></p>
                     <?php endif; ?>
                 </div>
                 <nav class="pagination search-pagination">

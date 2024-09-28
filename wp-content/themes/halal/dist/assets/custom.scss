@@ -262,35 +262,42 @@ header {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4.5rem;
+            // gap: 4.5rem;
             padding: 1rem;
 
             @include Responsive(m-16) {
-                gap: 3rem;
+                // gap: 3rem;
             }
 
             @include Responsive(m-14) {
-                gap: 1.25rem;
+                // gap: 1.25rem;
                 padding: 1.25rem;
             }
 
             @include Responsive(m-12) {
-                gap: .625rem;
+                // gap: .625rem;
                 padding: .75rem;
             }
 
             .logo {
-                width: 16.375rem;
+                width: 3.25rem;
                 height: 3.25rem;
+                margin-right: 4.5rem;
+
+                @include Responsive(m-16) {
+                    margin-right: 3rem;
+                }
 
                 @include Responsive(m-14) {
-                    width: 11.5rem;
+                    width: 2.5rem;
                     height: 2.5rem;
+                    margin-right: 1.25rem;
                 }
 
                 @include Responsive(m-12) {
-                    width: 7.5rem;
+                    width: 1.75rem;
                     height: 1.75rem;
+                    margin-right: .625rem;
                 }
 
                 img {
@@ -300,203 +307,374 @@ header {
                 }
             }
 
-            .mega-menu {
+            .wrap{
                 display: flex;
-                justify-content: center;
                 align-items: center;
-
-                ul {
-                    list-style: none;
-                    display: flex;
-                    gap: 2.5rem;
-
-                    @include Responsive(m-16) {
-                        gap: 2rem;
-                    }
-
-                    @include Responsive(m-14) {
-                        gap: 1.25rem;
-                    }
-                    @include Responsive(m-14) {
-                        gap: 1rem;
-                    }
-
-                    .child {
-                        position: relative;
-                        display: flex;
-                        gap: .4375rem;
-                        justify-content: center;
-                        align-items: center;
-                        font-size: 1rem;
-                        color: #136451;
-                        font-weight: 500;
-                        line-height: normal;
-
-                        @include Responsive(m-12) {
-                            font-size: .875rem;
-                        }
-
-                        .icon{
-                            position: relative;
-                            width: 1.25rem;
-                            height: 1.25rem;
-                            .up,
-                            .down {
-                                display: flex;
-                                position: absolute;
-                                top: 0;
-                                right: 0;
-                                @include Responsive(m-14) {
-                                    // right: -1.25rem;
-                                }
+                justify-content: center;
+                gap: 4.5rem;
+                margin-right: 1.5rem;
     
-                                svg {
-                                    path {
-                                        fill: #136451;
+                @include Responsive(m-16) {
+                    gap: 3rem;
+                    margin-right: 1.25rem;
+                }
+    
+                @include Responsive(m-14) {
+                    gap: 1.25rem;
+                    margin-right: 1rem;
+                }
+    
+                @include Responsive(m-12) {
+                    gap: .625rem;
+                    margin-right: .625rem;
+                }
+                .main-navigation {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                
+                    >.menu-items {
+                        list-style: none;
+                        display: flex;
+                        gap: 2.5rem;
+                
+                        @include Responsive(m-16) {
+                            gap: 2rem;
+                        }
+                
+                        @include Responsive(m-14) {
+                            gap: 1.25rem;
+                        }
+                
+                        @include Responsive(m-14) {
+                            gap: 1rem;
+                        }
+                
+                        > li.menu-item {
+                            position: relative;
+                            display: flex;
+                            gap: .4375rem;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 1rem;
+                            color: #136451;
+                            font-weight: 500;
+                            line-height: normal;
+                
+                            @include Responsive(m-12) {
+                                font-size: .875rem;
+                            }
+                
+                            > a {
+                                color: inherit;
+                                text-decoration: none;
+                            }
+                
+                            &.menu-item-has-children {
+                                > a {
+                                    position: relative;
+                
+                                    &::after {
+                                        content: '';
+                                        position: absolute;
+                                        right: 0;
+                                        top: 50%;
+                                        transform: translateY(-50%);
+                                        width: 1.25rem;
+                                        height: 1.25rem;
+                                        background-image: url('path/to/your/down-arrow.svg');
+                                        background-repeat: no-repeat;
+                                        background-position: center;
+                                        transition: transform 0.3s ease;
+                                    }
+                
+                                    &.active::after {
+                                        transform: translateY(-50%) rotate(180deg);
+                                    }
+                                }
+                                .icon {
+                                    position: relative;
+                                    width: 1.25rem;
+                                    height: 1.25rem;
+                    
+                                    .up,
+                                    .down {
+                                        display: flex;
+                                        position: absolute;
+                                        top: 0;
+                                        right: 0;
+                    
+                                        svg {
+                                            path {
+                                                fill: #136451;
+                                            }
+                                        }
+                                    }
+                    
+                                    .up {
+                                        opacity: 0;
+                                        visibility: hidden;
+                                        transition: 0.3s all ease-in-out;
+                    
+                                        &.show {
+                                            visibility: visible;
+                                            opacity: 1;
+                                        }
+                                    }
+                    
+                                    .down {
+                                        visibility: visible;
+                                        opacity: 1;
+                    
+                                        &.show {
+                                            opacity: 0;
+                                            visibility: hidden;
+                                            transition: 0.3s all ease-in-out;
+                                        }
+                                    }
+                                }
+                    
+                                &:hover {
+                                    .icon {
+                                        .up,
+                                        .down {
+                                            svg {
+                                                path {
+                                                    fill: var(--black);
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
-    
-                            .up {
+                
+                            > .sub-menu {
+                                width: max-content;
+                                border-radius: 1rem;
+                                overflow: hidden;
+                                box-sizing: border-box;
+                                position: absolute;
+                                top: 3.75rem;
+                                left: -2rem;
                                 opacity: 0;
                                 visibility: hidden;
-                                transition: 0.3s all ease-in-out;
-    
-                                &.show {
-                                    visibility: visible;
-                                    opacity: 1;
-                                }
-                            }
-    
-                            .down {
-                                visibility: visible;
-                                opacity: 1;
-    
-                                &.show {
-                                    opacity: 0;
-                                    visibility: hidden;
-                                    transition: 0.3s all ease-in-out;
-                                }
-                            }
-                        }
-                        .sub-menu {
-                            border-radius: 1rem;
-                            overflow: hidden;
-                            box-sizing: border-box;
-                            position: absolute;
-                            top: 3.75rem;
-                            left: -2rem;
-                            opacity: 0;
-                            visibility: hidden;
-                            transition: all 0.5s ease;
-                            transform: translateY(-10px);
-                            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    
-                            &.show {
-                                opacity: 1;
-                                visibility: visible;
-                                transform: translateY(0);
-                            }
-    
-                            ul {
+                                transition: all 0.5s ease;
+                                transform: translateY(-10px);
+                                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                                 list-style: none;
-                                display: flex;
-                                flex-direction: column;
-                                gap: 0;
-                                border-radius: .625rem;
-    
-                                li {
+                                padding: 0;
+                                margin: 0;
+                
+                                &.show {
+                                    opacity: 1;
+                                    visibility: visible;
+                                    transform: translateY(0);
+                                }
+                
+                                > li {
                                     box-sizing: border-box;
-                                    width: 23.75rem;
-                                    height: 3.625rem;
+                                    width: auto;
                                     padding: 1rem 2.25rem;
                                     font-weight: 400;
                                     line-height: 150%;
                                     color: var(--black);
                                     background: var(--white);
-    
+                
                                     @include Responsive(m-12) {
-                                        width: 18rem;
-                                        height: 3rem;
                                         padding: .5rem 1.5rem;
                                         display: flex;
                                         align-items: center;
                                     }
-                                }
-    
-                                li:hover {
-                                    font-weight: 500;
-                                    color: #136451;
-                                    background: #F2F2F2;
-                                }
-                            }
-                        }
-                        .sub-menu-1{
-                            ul{
-                                list-style: none;
-                                li{
-                                    width: 12rem;
-                                    @include Responsive(m-12) {
-                                        width: 10rem;
+                
+                                    &:hover, &.current-menu-item {
+                                        font-weight: 500;
+                                        color: #136451;
+                                        background: #F2F2F2;
+                                    }
+                
+                                    > a {
+                                        color: inherit;
+                                        text-decoration: none;
+                                        display: flex;
+                                        align-items: center;
+                                        width: 100%;
+                                        height: 100%;
                                     }
                                 }
                             }
                         }
+                
+                        > li.menu-item:hover {
+                            color: var(--black);
+                        }
                     }
-
-                    .child:hover {
-                        color: var(--black);
-
-                        .up,
-                        .down {
-                            display: flex;
+                    >.menu-items {
+                        >li:nth-last-child(2){
+                            color: var(--white);
+                            background-color: var(--red);
+                            border: 1px solid var(--red);
+                            box-sizing: border-box;
+                            padding: 1rem 2rem;
+                            border-radius: .625rem;
+                            font-size: 1rem;
+                            font-weight: 400;
+                            line-height: 150%;
+                            margin-right: -1rem;
+                            @include Responsive(m-14) {
+                                padding: .75rem 1.5rem;
+                                margin-right: 0;
+                            }
+                            @include Responsive(m-12) {
+                                font-size: .875rem;
+                                padding: .5rem 1rem;
+                            }
+                        }
+                        >li:nth-last-child(2):hover{
+                            color: red;
+                            background-color: var(--white);
+                        }
+                        >li:nth-last-child(1) {
+                            position: relative;
+                            padding-left: 1.5rem;
+                            color: #19786F;
+                            font-size: 1.25rem;
+                            font-weight: 500;
+                            line-height: 140%;
+                            @include Responsive(m-16) {
+                                padding-left: 1rem;
+                            }
+                            @include Responsive(m-12) {
+                                font-size: 1rem;
+                            }
+                        }
+                        
+                        >li:nth-last-child(1)::before {
+                            content: "";
                             position: absolute;
-                            // right: -1.25rem;
-
-                            svg {
-                                path {
-                                    fill: var(--black);
-                                }
+                            left: 0;
+                            top: 25%; /* Bắt đầu từ 25% */
+                            height: 50%; /* Chiều dài 50% */
+                            width: 0;
+                            border-left: 1px solid #999;
+                        }
+                    }
+                }
+                
+                .menu-items {
+                    > .sub-menu {
+                        > li {
+                            width: 12rem;
+                            @include Responsive(m-12) {
+                                width: 10rem;
                             }
                         }
                     }
                 }
+    
+                .button {
+                    box-sizing: border-box;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 1rem 2rem;
+                    border-radius: .625rem;
+                    border: 1px solid var(--red);
+                    background: var(--red);
+                    color: var(--white);
+    
+                    @include Responsive(m-14) {
+                        padding: .75rem 1rem;
+                    }
+    
+                    @include Responsive(m-12) {
+                        padding: .5rem .625rem;
+                    }
+    
+                    a {
+                        font-size: 1rem;
+                        font-weight: 400;
+                        line-height: 150%;
+    
+                        @include Responsive(m-12) {
+                            font-size: .875rem;
+                        }
+                    }
+                }
+    
+                .button:hover {
+                    background: var(--white);
+                    color: var(--red);
+                }
             }
 
-            .button {
-                box-sizing: border-box;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem 2rem;
-                border-radius: .625rem;
-                border: 1px solid var(--red);
-                background: var(--red);
-                color: var(--white);
+            .language{
+                list-style: none;
+                position: relative;
+                padding-left: 1.5rem;
+                border-left: 1px solid #999;
+                
+                @include Responsive(m-16) {
+                    padding-left: 1.25rem;
+                }
 
                 @include Responsive(m-14) {
-                    padding: .75rem 1rem;
+                    padding-left: 1rem;
                 }
 
                 @include Responsive(m-12) {
-                    padding: .5rem .625rem;
+                    padding-left: .625rem;
                 }
 
-                a {
-                    font-size: 1rem;
-                    font-weight: 400;
-                    line-height: 150%;
-
-                    @include Responsive(m-12) {
-                        font-size: .875rem;
+                li{
+                    position: absolute;
+                    top: .5rem;
+                    left: 0;
+                    cursor: pointer;
+                    display: none;
+                    a{
+                        display: flex;
+                        gap: .375rem;
+                        align-items: center;
+                        @include Responsive(m-12) {
+                            gap: .25rem;
+                        }
+                        img{
+                            width: 1.4375rem;
+                            height: 1rem;
+                            @include Responsive(m-12) {
+                                width: 1.25rem;
+                                height: .875rem;
+                            }
+                        }
+                        span{
+                            font-size: 1.25rem;
+                            font-weight: 500;
+                            line-height: 140%;
+                            color: #19786F;
+                            @include Responsive(m-12) {
+                                font-size: 1.125rem;
+                            }
+                        }
+                        .icon{
+                            display: none;
+                            svg{
+                                width: 1.125rem;
+                                height: 1.125rem;
+                            }
+                        }
                     }
                 }
-            }
-
-            .button:hover {
-                background: var(--white);
-                color: var(--red);
-            }
+                li.active{
+                    top: -.875rem;
+                    display: block;
+                    a{
+                        .icon{
+                            display: block;
+                        }
+                    }
+                }
+            }    
+    
         }
     }
 
@@ -905,6 +1083,7 @@ main {
                 }
             }
             .list-dot {
+                list-style: none;
                 position: absolute;
                 top: 60%;
                 right: 1.5rem;
@@ -997,6 +1176,10 @@ main {
                 height: 25rem;
             }
 
+            @include Responsive(m-7) {
+                display: none;
+            }
+
             @include Responsive(m-4) {
                 width: 24rem;
                 height: 18rem;
@@ -1025,96 +1208,116 @@ main {
             }
 
             @include Responsive(m-7) {
-                grid-template-columns: 1fr;
+                // grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column-reverse;
+                gap: 2rem;
             }
 
             .left {
-                position: relative;
-                height: 36.875rem;
-
-                @include Responsive(m-12) {
-                    column-gap: 5rem;
-                    height: 30rem;
-                }
-
-                @include Responsive(m-10) {
-                    column-gap: 3rem;
-                    height: 28.25rem;
-                }
-
-                @include Responsive(m-7) {
-                    display: none;
-                }
-
-                .image-1 {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 27rem;
-                    height: 33.5rem;
-                    border-radius: .75rem;
-
-                    @include Responsive(m-14) {
-                        width: 24rem;
-                        height: 32rem;
-                    }
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                .wrap{
+                    position: relative;
+                    width: 100%;
+                    height: 36.875rem;
 
                     @include Responsive(m-12) {
-                        width: 18rem;
-                        height: 26rem;
+                        column-gap: 5rem;
+                        height: 30rem;
                     }
 
                     @include Responsive(m-10) {
-                        border-radius: .5rem;
-                        width: 16rem;
-                        height: 23rem;
+                        column-gap: 3rem;
+                        height: 28.25rem;
                     }
 
-                    img {
-                        width: inherit;
-                        height: inherit;
-                        border-radius: inherit;
-                    }
-                }
-
-                .image-2 {
-                    position: absolute;
-                    bottom: 0;
-                    right: 0;
-                    width: 23.25rem;
-                    height: 17.625rem;
-                    padding-left: 1.125rem;
-                    padding-top: 1.125rem;
-                    border-radius: 1.125rem;
-                    background-color: var(--white);
-
-                    @include Responsive(m-14) {
-                        width: 20rem;
-                        height: 16rem;
+                    @include Responsive(m-7) {
+                        // display: none;
                     }
 
-                    @include Responsive(m-12) {
-                        padding-left: 1rem;
-                        padding-top: 1rem;
-                        border-radius: 1rem;
-                        width: 18rem;
-                        height: 12rem;
-                    }
+                    .image-1 {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 27rem;
+                        height: 33.5rem;
+                        border-radius: .75rem;
 
-                    @include Responsive(m-10) {
-                        padding-left: .5rem;
-                        padding-top: .5rem;
-                        border-radius: .5rem;
-                        width: 13rem;
-                        height: 10rem;
-                    }
+                        @include Responsive(m-14) {
+                            width: 24rem;
+                            height: 32rem;
+                        }
 
-                    img {
-                        border-radius: 1rem;
-                        height: inherit;
+                        @include Responsive(m-12) {
+                            width: 18rem;
+                            height: 26rem;
+                        }
 
                         @include Responsive(m-10) {
                             border-radius: .5rem;
+                            width: 16rem;
+                            height: 23rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            width: 18rem;
+                            height: 24rem;
+                        }
+
+                        img {
+                            width: inherit;
+                            height: inherit;
+                            border-radius: inherit;
+                        }
+                    }
+
+                    .image-2 {
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        width: 23.25rem;
+                        height: 17.625rem;
+                        padding-left: 1.125rem;
+                        padding-top: 1.125rem;
+                        border-radius: 1.125rem;
+                        background-color: var(--white);
+
+                        @include Responsive(m-14) {
+                            width: 20rem;
+                            height: 16rem;
+                        }
+
+                        @include Responsive(m-12) {
+                            padding-left: 1rem;
+                            padding-top: 1rem;
+                            border-radius: 1rem;
+                            width: 18rem;
+                            height: 12rem;
+                        }
+
+                        @include Responsive(m-10) {
+                            padding-left: .5rem;
+                            padding-top: .5rem;
+                            border-radius: .5rem;
+                            width: 13rem;
+                            height: 10rem;
+                        }
+
+                        @include Responsive(m-7) {
+                            width: 14rem;
+                            height: 10rem;
+                        }
+
+                        img {
+                            border-radius: 1rem;
+                            height: inherit;
+
+                            @include Responsive(m-10) {
+                                border-radius: .5rem;
+                            }
                         }
                     }
                 }
@@ -1407,6 +1610,7 @@ main {
 
                 nav.tab::-webkit-scrollbar {
                     width: 0;
+                    height: 0;
                     /* Chiều rộng của thanh cuộn */
                     background: transparent;
                     /* Làm thanh cuộn trong suốt */
@@ -1487,7 +1691,10 @@ main {
                     }
 
                     @include Responsive(m-7) {
-                        grid-template-columns: 1fr;
+                        // grid-template-columns: 1fr;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2rem;
                     }
 
                     .left {
@@ -1621,87 +1828,104 @@ main {
                     }
 
                     .right {
-                        position: relative;
-                        height: 36.875rem;
-
-                        @include Responsive(m-12) {
-                            height: 30rem;
-                        }
-
-                        @include Responsive(m-10) {
-                            height: 28.25rem;
-                        }
-
-                        @include Responsive(m-7) {
-                            display: none;
-                        }
-
-                        .image-1 {
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                            width: 27rem;
-                            height: 33.5rem;
-                            border-radius: .75rem;
-
-                            @include Responsive(m-14) {
-                                width: 24rem;
-                                height: 32rem;
-                            }
-
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        .wrap{
+                            position: relative;
+                            width: 100%;
+                            height: 36.875rem;
+    
                             @include Responsive(m-12) {
-                                width: 18rem;
-                                height: 26rem;
+                                height: 30rem;
                             }
-
+    
                             @include Responsive(m-10) {
-                                border-radius: .5rem;
-                                width: 16rem;
-                                height: 23rem;
+                                height: 28.25rem;
                             }
-
-                            img {
-                                width: inherit;
-                                height: inherit;
-                                border-radius: inherit;
+    
+                            @include Responsive(m-7) {
+                                // display: none;
                             }
-                        }
+    
+                            .image-1 {
+                                position: absolute;
+                                top: 0;
+                                right: 0;
+                                width: 27rem;
+                                height: 33.5rem;
+                                border-radius: .75rem;
+    
+                                @include Responsive(m-14) {
+                                    width: 24rem;
+                                    height: 32rem;
+                                }
+    
+                                @include Responsive(m-12) {
+                                    width: 18rem;
+                                    height: 26rem;
+                                }
+    
+                                @include Responsive(m-10) {
+                                    border-radius: .5rem;
+                                    width: 16rem;
+                                    height: 23rem;
+                                }
 
-                        .image-2 {
-                            position: absolute;
-                            bottom: 0;
-                            left: 0;
-                            width: 23.25rem;
-                            height: 17.625rem;
-                            padding-right: 1.125rem;
-                            padding-top: 1.125rem;
-                            border-radius: 1.125rem;
-                            background-color: var(--white);
-
-                            @include Responsive(m-14) {
-                                width: 20rem;
-                                height: 16rem;
+                                @include Responsive(m-7) {
+                                    width: 18rem;
+                                    height: 24rem;
+                                }
+    
+                                img {
+                                    width: inherit;
+                                    height: inherit;
+                                    border-radius: inherit;
+                                }
                             }
+    
+                            .image-2 {
+                                position: absolute;
+                                bottom: 0;
+                                left: 0;
+                                width: 23.25rem;
+                                height: 17.625rem;
+                                padding-right: 1.125rem;
+                                padding-top: 1.125rem;
+                                border-radius: 1.125rem;
+                                background-color: var(--white);
+    
+                                @include Responsive(m-14) {
+                                    width: 20rem;
+                                    height: 16rem;
+                                }
+    
+                                @include Responsive(m-12) {
+                                    padding-right: 1rem;
+                                    padding-top: 1rem;
+                                    border-radius: 1rem;
+                                    width: 18rem;
+                                    height: 12rem;
+                                }
+    
+                                @include Responsive(m-10) {
+                                    padding-right: .5rem;
+                                    padding-top: .5rem;
+                                    border-radius: .5rem;
+                                    width: 13rem;
+                                    height: 10rem;
+                                }
 
-                            @include Responsive(m-12) {
-                                padding-right: 1rem;
-                                padding-top: 1rem;
-                                border-radius: 1rem;
-                                width: 18rem;
-                                height: 12rem;
-                            }
-
-                            @include Responsive(m-10) {
-                                padding-right: .5rem;
-                                padding-top: .5rem;
-                                border-radius: .5rem;
-                                width: 13rem;
-                                height: 10rem;
-                            }
-
-                            img {
-                                border-radius: 1rem;
-                                height: inherit;
+                                @include Responsive(m-7) {
+                                    width: 14rem;
+                                    height: 10rem;
+                                }
+    
+                                img {
+                                    border-radius: 1rem;
+                                    height: inherit;
+                                }
                             }
                         }
                     }
@@ -1786,182 +2010,193 @@ main {
                     margin-bottom: 1rem;
                 }
             }
+            .wrap-list::-webkit-scrollbar {
+                width: 0;
+                height: 0;
+                /* Chiều rộng của thanh cuộn */
+                background: transparent;
+                /* Làm thanh cuộn trong suốt */
+            }
 
-            .list-training {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                gap: 1.25rem;
-                justify-content: space-between;
+            .wrap-list{
+                display: flex;
+                justify-content: space-evenly;
+                overflow: scroll;
+                width: 100%;
 
-                @include Responsive(m-10) {
-                    gap: 1rem;
-                }
-
-                @include Responsive(m-7) {
-                    grid-template-columns: 1fr 1fr;
-                }
-
-                @include Responsive(m-4) {
-                    gap: .5rem;
-                }
-
-                .child {
-                    background: var(--white);
-                    padding: 1.875rem 1.5625rem;
-                    border-radius: .75rem;
-
+                .list-training {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    gap: 1.25rem;
+                    justify-content: space-evenly;
+                    width: fit-content;
+    
                     @include Responsive(m-10) {
-                        padding: 1.5rem 1rem;
+                        gap: 1rem;
                     }
-
+    
                     @include Responsive(m-7) {
-                        &:nth-child(n+3) {
-                            display: none;
-                        }
+                        display: grid;
+                        grid-template-columns: 15rem 15rem 15rem;
                     }
-
+    
                     @include Responsive(m-4) {
-                        padding: 1rem .625rem;
+                        grid-template-columns: 13.5rem 13.5rem 13.5rem;
+                        gap: .5rem;
                     }
-
-                    h4 {
-                        color: #136451;
-                        font-size: 1.25rem;
-                        font-weight: 500;
-                        line-height: 140%;
-                        margin-bottom: .9375rem;
-
+    
+                    .child {
+                        background: var(--white);
+                        padding: 1.875rem 1.5625rem;
+                        border-radius: .75rem;
+    
                         @include Responsive(m-10) {
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-line-clamp: 2;
-                            font-size: 1.125rem;
-                            margin-bottom: .75rem;
+                            padding: 1.5rem 1rem;
                         }
-
+    
                         @include Responsive(m-4) {
-                            font-size: 1rem;
+                            padding: 1rem .625rem;
                         }
-                    }
-
-                    h4:hover {
-                        color: var(--black);
-                    }
-
-                    .description {
-                        display: -webkit-box;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        -webkit-line-clamp: 2;
-                        color: var(--black);
-                        font-size: 1rem;
-                        font-weight: 400;
-                        line-height: 150%;
-                        margin-bottom: .9375rem;
-
-                        @include Responsive(m-10) {
-                            display: -webkit-box;
-                            -webkit-box-orient: vertical;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            -webkit-line-clamp: 3;
-                            font-size: .875rem;
-                            margin-bottom: .75rem;
-                        }
-
-                        @include Responsive(m-4) {
-                            font-size: .75rem;
-                            -webkit-line-clamp: 2;
-                        }
-                    }
-
-                    .time {
-                        display: flex;
-                        align-items: center;
-                        gap: .9375rem;
-                        margin-bottom: .625rem;
-
-                        @include Responsive(m-4) {
-                            gap: .5rem;
-                        }
-
-                        >div {
-                            display: flex;
-                            flex-direction: column;
-                            gap: .3125rem;
-
-                            p {
-                                color: var(--black);
-                                font-size: .875rem;
-                                font-weight: 500;
-                                line-height: 150%;
-
-                                @include Responsive(m-4) {
-                                    font-size: .75rem;
-                                }
-                            }
-
-                            span {
-                                color: #ABABAB;
-                                font-size: .75rem;
-                                font-weight: 500;
-                                line-height: 130%;
-
-                                @include Responsive(m-4) {
-                                    font-size: .625rem;
-                                }
-                            }
-                        }
-                    }
-
-                    .address {
-                        display: flex;
-                        align-items: center;
-                        gap: .9375rem;
-                        margin-bottom: 1.25rem;
-
-                        @include Responsive(m-4) {
-                            gap: .5rem;
-                        }
-
-                        @include Responsive(m-12) {
-                            font-size: .875rem;
-                        }
-
-                        @include Responsive(m-10) {
-                            margin-bottom: .875rem;
-
-                            span {
+    
+                        h4 {
+                            color: #136451;
+                            font-size: 1.25rem;
+                            font-weight: 500;
+                            line-height: 140%;
+                            margin-bottom: .9375rem;
+    
+                            @include Responsive(m-10) {
                                 display: -webkit-box;
                                 -webkit-box-orient: vertical;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 -webkit-line-clamp: 2;
+                                font-size: 1.125rem;
+                                margin-bottom: .75rem;
+                            }
+    
+                            @include Responsive(m-4) {
+                                font-size: 1rem;
                             }
                         }
-
-                        @include Responsive(m-4) {
-                            span {
+    
+                        h4:hover {
+                            color: var(--black);
+                        }
+    
+                        .description {
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            -webkit-line-clamp: 2;
+                            color: var(--black);
+                            font-size: 1rem;
+                            font-weight: 400;
+                            line-height: 150%;
+                            margin-bottom: .9375rem;
+    
+                            @include Responsive(m-10) {
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                -webkit-line-clamp: 3;
+                                font-size: .875rem;
+                                margin-bottom: .75rem;
+                            }
+    
+                            @include Responsive(m-4) {
                                 font-size: .75rem;
+                                -webkit-line-clamp: 2;
                             }
                         }
-                    }
-
-                    .view-more {
-                        color: var(--red);
-                        font-size: .875rem;
-                        font-size: 400;
-                        line-height: normal;
-                        display: flex;
-                        gap: .3125rem;
-                        align-items: center;
-
-                        .icon {
+    
+                        .time {
                             display: flex;
                             align-items: center;
+                            gap: .9375rem;
+                            margin-bottom: .625rem;
+    
+                            @include Responsive(m-4) {
+                                gap: .5rem;
+                            }
+    
+                            >div {
+                                display: flex;
+                                flex-direction: column;
+                                gap: .3125rem;
+    
+                                p {
+                                    color: var(--black);
+                                    font-size: .875rem;
+                                    font-weight: 500;
+                                    line-height: 150%;
+    
+                                    @include Responsive(m-4) {
+                                        font-size: .75rem;
+                                    }
+                                }
+    
+                                span {
+                                    color: #ABABAB;
+                                    font-size: .75rem;
+                                    font-weight: 500;
+                                    line-height: 130%;
+    
+                                    @include Responsive(m-4) {
+                                        font-size: .625rem;
+                                    }
+                                }
+                            }
+                        }
+    
+                        .address {
+                            display: flex;
+                            align-items: center;
+                            gap: .9375rem;
+                            margin-bottom: 1.25rem;
+    
+                            @include Responsive(m-4) {
+                                gap: .5rem;
+                            }
+    
+                            @include Responsive(m-12) {
+                                font-size: .875rem;
+                            }
+    
+                            @include Responsive(m-10) {
+                                margin-bottom: .875rem;
+    
+                                span {
+                                    display: -webkit-box;
+                                    -webkit-box-orient: vertical;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    -webkit-line-clamp: 2;
+                                }
+                            }
+    
+                            @include Responsive(m-4) {
+                                span {
+                                    font-size: .75rem;
+                                }
+                            }
+                        }
+    
+                        .view-more {
+                            color: var(--red);
+                            font-size: .875rem;
+                            font-size: 400;
+                            line-height: normal;
+                            display: flex;
+                            gap: .3125rem;
+                            align-items: center;
+    
+                            .icon {
+                                display: flex;
+                                align-items: center;
+                            }
                         }
                     }
                 }
@@ -2028,6 +2263,7 @@ main {
 
             .bottom::-webkit-scrollbar {
                 width: 0;
+                height: 0;
                 /* Chiều rộng của thanh cuộn */
                 background: transparent;
                 /* Làm thanh cuộn trong suốt */
@@ -2204,6 +2440,7 @@ main {
                 .left {
                     .list-news::-webkit-scrollbar {
                         width: 0;
+                        height: 0;
                         /* Chiều rộng của thanh cuộn */
                         background: transparent;
                         /* Làm thanh cuộn trong suốt */
@@ -2346,7 +2583,11 @@ main {
                     }
                 }
 
-                .right {
+                .right{
+                    display: none;
+                }
+
+                .right.active {
                     display: flex;
                     flex-direction: column;
                     gap: 2rem;
@@ -2467,6 +2708,7 @@ main {
 
                     ul::-webkit-scrollbar {
                         width: 0;
+                        height: 0;
                         /* Chiều rộng của thanh cuộn */
                         background: transparent;
                         /* Làm thanh cuộn trong suốt */
@@ -2474,7 +2716,8 @@ main {
 
                     ul {
                         display: flex;
-                        justify-content: space-between;
+                        gap: 3rem;
+                        // justify-content: space-between;
 
                         @include Responsive(m-12) {
                             gap: 2rem;
@@ -2677,7 +2920,6 @@ main {
                     }
 
                     .view-more {
-                        width: 5.375rem;
                         padding: .75rem 2rem !important;
                         background: var(--red);
                         color: var(--white);
@@ -2925,92 +3167,99 @@ main {
                 }
 
                 .left {
-                    position: relative;
-                    height: 36.875rem;
-
-                    @include Responsive(m-12) {
-                        column-gap: 5rem;
-                        height: 30rem;
-                    }
-
-                    @include Responsive(m-10) {
-                        column-gap: 3rem;
-                        height: 28.25rem;
-                    }
-
-                    @include Responsive(m-7) {
-                        display: none;
-                    }
-
-                    .image-1 {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 27rem;
-                        height: 33.5rem;
-                        border-radius: .75rem;
-
-                        @include Responsive(m-14) {
-                            width: 24rem;
-                            height: 32rem;
-                        }
-
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    .wrap{
+                        position: relative;
+                        width: 100%;
+                        height: 36.875rem;
+    
                         @include Responsive(m-12) {
-                            width: 18rem;
-                            height: 26rem;
+                            column-gap: 5rem;
+                            height: 30rem;
                         }
-
+    
                         @include Responsive(m-10) {
-                            border-radius: .5rem;
-                            width: 16rem;
-                            height: 23rem;
+                            column-gap: 3rem;
+                            height: 28.25rem;
                         }
-
-                        img {
-                            width: inherit;
-                            height: inherit;
-                            border-radius: inherit;
+    
+                        @include Responsive(m-7) {
+                            display: none;
                         }
-                    }
-
-                    .image-2 {
-                        position: absolute;
-                        bottom: 0;
-                        right: 0;
-                        width: 23.25rem;
-                        height: 17.625rem;
-                        padding-left: 1.125rem;
-                        padding-top: 1.125rem;
-                        border-radius: 1.125rem;
-                        background-color: var(--white);
-
-                        @include Responsive(m-14) {
-                            width: 20rem;
-                            height: 16rem;
-                        }
-
-                        @include Responsive(m-12) {
-                            padding-left: 1rem;
-                            padding-top: 1rem;
-                            border-radius: 1rem;
-                            width: 18rem;
-                            height: 12rem;
-                        }
-
-                        @include Responsive(m-10) {
-                            padding-left: .5rem;
-                            padding-top: .5rem;
-                            border-radius: .5rem;
-                            width: 13rem;
-                            height: 10rem;
-                        }
-
-                        img {
-                            border-radius: 1rem;
-                            height: inherit;
-
+    
+                        .image-1 {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 27rem;
+                            height: 33.5rem;
+                            border-radius: .75rem;
+    
+                            @include Responsive(m-14) {
+                                width: 24rem;
+                                height: 32rem;
+                            }
+    
+                            @include Responsive(m-12) {
+                                width: 18rem;
+                                height: 26rem;
+                            }
+    
                             @include Responsive(m-10) {
                                 border-radius: .5rem;
+                                width: 16rem;
+                                height: 23rem;
+                            }
+    
+                            img {
+                                width: inherit;
+                                height: inherit;
+                                border-radius: inherit;
+                            }
+                        }
+    
+                        .image-2 {
+                            position: absolute;
+                            bottom: 0;
+                            right: 0;
+                            width: 23.25rem;
+                            height: 17.625rem;
+                            padding-left: 1.125rem;
+                            padding-top: 1.125rem;
+                            border-radius: 1.125rem;
+                            background-color: var(--white);
+    
+                            @include Responsive(m-14) {
+                                width: 20rem;
+                                height: 16rem;
+                            }
+    
+                            @include Responsive(m-12) {
+                                padding-left: 1rem;
+                                padding-top: 1rem;
+                                border-radius: 1rem;
+                                width: 18rem;
+                                height: 12rem;
+                            }
+    
+                            @include Responsive(m-10) {
+                                padding-left: .5rem;
+                                padding-top: .5rem;
+                                border-radius: .5rem;
+                                width: 13rem;
+                                height: 10rem;
+                            }
+    
+                            img {
+                                border-radius: 1rem;
+                                height: inherit;
+    
+                                @include Responsive(m-10) {
+                                    border-radius: .5rem;
+                                }
                             }
                         }
                     }
@@ -3205,7 +3454,7 @@ main {
                 @include Responsive(m-10) {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
-                    column-gap: 5rem;
+                    column-gap: 2rem;
                     row-gap: 1rem;
                 }
 
@@ -3335,6 +3584,7 @@ main {
 
             .bottom::-webkit-scrollbar {
                 width: 0;
+                height: 0;
                 /* Chiều rộng của thanh cuộn */
                 background: transparent;
                 /* Làm thanh cuộn trong suốt */
@@ -3636,7 +3886,6 @@ main {
                 top: 0;
                 left: 0;
                 display: flex;
-                flex-flow: wrap;
                 align-items: center;
                 column-gap: .4375rem;
                 row-gap: .25rem;
@@ -3644,13 +3893,12 @@ main {
                 font-size: 1rem;
                 font-weight: 400;
                 line-height: 160%;
-                letter-spacing: .01rem;
                 width: 52.875rem;
 
                 @include Responsive(m-14) {
                     width: 47rem;
                 }
-
+                
                 @include Responsive(m-12) {
                     width: 100%;
                 }
@@ -3665,6 +3913,14 @@ main {
 
                 @include Responsive(m-4) {
                     font-size: .75rem;
+                }
+                >*{
+                    white-space: nowrap;
+                }
+                >a:last-child {
+                    white-space: normal;
+                    min-width: 0;
+                    flex: 1;
                 }
 
                 a,
@@ -3775,7 +4031,7 @@ main {
                     flex-direction: column;
                     gap: 1.875rem;
                     font-size: 1rem;
-                    line-height: 150%;
+                    line-height: 1.625rem;
 
                     @include Responsive(m-7) {
                         gap: 1.25rem;
@@ -3818,6 +4074,7 @@ main {
 
                 .list::-webkit-scrollbar {
                     width: 0;
+                    height: 0;
                     /* Chiều rộng của thanh cuộn */
                     background: transparent;
                     /* Làm thanh cuộn trong suốt */
@@ -3961,6 +4218,7 @@ main {
 
         .relate::-webkit-scrollbar {
             width: 0;
+            height: 0;
             /* Chiều rộng của thanh cuộn */
             background: transparent;
             /* Làm thanh cuộn trong suốt */
@@ -4001,6 +4259,7 @@ main {
 
             .list::-webkit-scrollbar {
                 width: 0;
+                height: 0;
                 /* Chiều rộng của thanh cuộn */
                 background: transparent;
                 /* Làm thanh cuộn trong suốt */
@@ -4176,7 +4435,8 @@ main {
                 .list {
                     display: grid;
                     grid-template-columns: 1fr 1fr 1fr;
-                    gap: 1.25rem;
+                    row-gap: 3.125rem;
+                    column-gap: 1.25rem;
                     width: 100%;
 
                     @include Responsive(m-7) {
@@ -4272,7 +4532,6 @@ main {
                 }
 
                 .view-more {
-                    width: 5.375rem;
                     padding: .75rem 2rem !important;
                     background: var(--white);
                     color: var(--red);
@@ -4285,7 +4544,6 @@ main {
                     border-radius: .625rem;
 
                     @include Responsive(m-7) {
-                        width: 4.0625rem;
                         font-size: .75rem;
                     }
                 }
@@ -4333,7 +4591,6 @@ main {
                 top: 0;
                 left: 0;
                 display: flex;
-                flex-flow: wrap;
                 align-items: center;
                 column-gap: .4375rem;
                 row-gap: .25rem;
@@ -4341,7 +4598,6 @@ main {
                 font-size: 1rem;
                 font-weight: 400;
                 line-height: 160%;
-                letter-spacing: .01rem;
                 width: 52.875rem;
 
                 @include Responsive(m-14) {
@@ -4362,6 +4618,14 @@ main {
 
                 @include Responsive(m-4) {
                     font-size: .75rem;
+                }
+                >*{
+                    white-space: nowrap;
+                }
+                >a:last-child {
+                    white-space: normal;
+                    min-width: 0;
+                    flex: 1;
                 }
 
                 a,
@@ -4477,6 +4741,18 @@ main {
                     @include Responsive(m-7) {
                         gap: 1.25rem;
                     }
+                    *{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.875rem;
+                        font-size: 1rem;
+                        line-height: 150%;
+    
+                        @include Responsive(m-7) {
+                            gap: 1.25rem;
+                        }
+                    }
+
 
                     img {
                         border-radius: .625rem;
@@ -4524,6 +4800,7 @@ main {
 
                     .list::-webkit-scrollbar {
                         width: 0;
+                        height: 0;
                         /* Chiều rộng của thanh cuộn */
                         background: transparent;
                         /* Làm thanh cuộn trong suốt */
@@ -4702,6 +4979,7 @@ main {
 
             .list::-webkit-scrollbar {
                 width: 0;
+                height: 0;
                 /* Chiều rộng của thanh cuộn */
                 background: transparent;
                 /* Làm thanh cuộn trong suốt */
@@ -4902,6 +5180,7 @@ main {
 
                 .list-customer::-webkit-scrollbar {
                     width: 0;
+                    height: 0;
                     /* Chiều rộng của thanh cuộn */
                     background: transparent;
                     /* Làm thanh cuộn trong suốt */
@@ -4911,6 +5190,7 @@ main {
                     margin-bottom: 6.25rem;
                     overflow: scroll;
                     display: flex;
+                    // justify-content: flex-start;
                     justify-content: space-evenly;
                     @include Responsive(m-7) {
                         margin-bottom: 3.125rem;
@@ -4975,15 +5255,22 @@ main {
                 form {
                     display: flex;
                     flex-flow: wrap;
-                    gap: 1.25rem;
+                    column-gap: 1.25rem;
                     margin-bottom: 2.5rem;
 
+                    @include Responsive(m-10) {
+                        display: grid;
+                        grid-template-columns: 1fr 1fr; 
+                        grid-template-rows: auto auto; /* Hai hàng tự động */
+                        row-gap: 10px; 
+                    }
+
                     @include Responsive(m-7) {
-                        gap: 1rem;
+                        column-gap: 1rem;
                     }
 
                     @include Responsive(m-4) {
-                        gap: .5rem;
+                        column-gap: .75rem;
                     }
 
                     input:focus {
@@ -5003,6 +5290,10 @@ main {
                     }
 
                     .search {
+                        @include Responsive(m-10) {
+                            width: 100%;
+                            grid-column: 1 / -1;
+                        }
                         input{
                             box-sizing: border-box;
                             padding: .9375rem .9375rem .9375rem 2.8125rem;
@@ -5021,13 +5312,9 @@ main {
                         input {
                             width: 19.0625rem;
 
-                            @include Responsive(m-7) {
-                                width: 28rem;
-                            }
-
-                            @include Responsive(m-4) {
-                                width: 22rem;
-                            }
+                            @include Responsive(m-10) {
+                                width: 100%;
+                            }   
                         }
                         button {
                             position: absolute;
@@ -5052,6 +5339,8 @@ main {
                     }
 
                     .filter {
+                        grid-column: span 1; /* Mỗi phần tử chiếm nửa hàng sau */
+                        grid-row: 2;
                         input{
                             box-sizing: border-box;
                             padding: .9375rem .9375rem .9375rem 5.75rem;
@@ -5070,13 +5359,12 @@ main {
                         input {
                             width: 14rem;
 
-                            @include Responsive(m-7) {
-                                width: 12rem;
+                            @include Responsive(m-10) {
+                                width: 100%;
                             }
 
                             @include Responsive(m-4) {
                                 font-size: .875rem;
-                                width: 10.75rem;
                             }
                         }
                         label {
@@ -5109,10 +5397,20 @@ main {
                 }
 
                 .table-wrapper::-webkit-scrollbar {
-                    width: 0;
-                    /* Chiều rộng của thanh cuộn */
-                    background: transparent;
-                    /* Làm thanh cuộn trong suốt */
+                    height: 2px;  /* Điều chỉnh chiều rộng của thanh cuộn */
+                }
+                    
+                .table-wrapper::-webkit-scrollbar-track {
+                    background: #f1f1f1;  
+                }
+                    
+                .table-wrapper::-webkit-scrollbar-thumb {
+                    background: #888; 
+                    border-radius: 5px; 
+                }
+                    
+                .table-wrapper::-webkit-scrollbar-thumb:hover {
+                    background: #555;  /* Màu của thumb khi hover */
                 }
 
                 .table-wrapper {
@@ -5122,7 +5420,7 @@ main {
                         width: 100%;
                         border-radius: .75rem .75rem 0 0;
                         overflow: hidden;
-                        margin-bottom: 2.5rem;
+                        margin-bottom: .125rem;
 
                         @include Responsive(m-12) {
                             width: 72rem;
@@ -5183,6 +5481,7 @@ main {
                 }
 
                 .pagination {
+                    margin-top: 2.5rem;
                     justify-content: end;
                 }
             }
@@ -5295,6 +5594,7 @@ main {
                         }
                         .bottom::-webkit-scrollbar {
                             width: 0;
+                            height: 0;
                             /* Chiều rộng của thanh cuộn */
                             background: transparent;
                             /* Làm thanh cuộn trong suốt */
@@ -5393,15 +5693,22 @@ main {
             form {
                 display: flex;
                 flex-flow: wrap;
-                gap: 1.25rem;
+                column-gap: 1.25rem;
                 margin-bottom: 2.5rem;
 
+                @include Responsive(m-10) {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr; 
+                    grid-template-rows: auto auto; /* Hai hàng tự động */
+                    row-gap: 10px; 
+                }
+
                 @include Responsive(m-7) {
-                    gap: 1rem;
+                    column-gap: 1rem;
                 }
 
                 @include Responsive(m-4) {
-                    gap: .5rem;
+                    column-gap: .75rem;
                 }
 
                 input:focus {
@@ -5421,6 +5728,10 @@ main {
                 }
 
                 .search {
+                    @include Responsive(m-10) {
+                        width: 100%;
+                        grid-column: 1 / -1;
+                    }
                     input{
                         box-sizing: border-box;
                         padding: .9375rem .9375rem .9375rem 2.8125rem;
@@ -5439,13 +5750,9 @@ main {
                     input {
                         width: 19.0625rem;
 
-                        @include Responsive(m-7) {
-                            width: 28rem;
-                        }
-
-                        @include Responsive(m-4) {
-                            width: 22rem;
-                        }
+                        @include Responsive(m-10) {
+                            width: 100%;
+                        }   
                     }
                     button {
                         position: absolute;
@@ -5470,6 +5777,8 @@ main {
                 }
 
                 .filter {
+                    grid-column: span 1; /* Mỗi phần tử chiếm nửa hàng sau */
+                    grid-row: 2;
                     input{
                         box-sizing: border-box;
                         padding: .9375rem .9375rem .9375rem 5.75rem;
@@ -5488,13 +5797,12 @@ main {
                     input {
                         width: 14rem;
 
-                        @include Responsive(m-7) {
-                            width: 12rem;
+                        @include Responsive(m-10) {
+                            width: 100%;
                         }
 
                         @include Responsive(m-4) {
                             font-size: .875rem;
-                            width: 10.75rem;
                         }
                     }
                     label {
@@ -5528,6 +5836,7 @@ main {
 
             .table-wrapper::-webkit-scrollbar {
                 width: 0;
+                height: 0;
                 /* Chiều rộng của thanh cuộn */
                 background: transparent;
                 /* Làm thanh cuộn trong suốt */
@@ -5642,6 +5951,9 @@ main {
         @include Responsive(m-10) {
             padding-top: 6.25rem;
         }
+        @include Responsive(m-7) {
+            padding-bottom: 13.75rem;
+        }
 
         .container {
             position: relative;
@@ -5655,13 +5967,15 @@ main {
             @include Responsive(m-12) {
                 flex-direction: column;
             }
+            @include Responsive(m-7) {
+                gap: 6.25rem;
+            }
 
             .bot {
                 position: absolute;
                 top: 0;
                 left: 0;
                 display: flex;
-                flex-flow: wrap;
                 align-items: center;
                 column-gap: .4375rem;
                 row-gap: .25rem;
@@ -5669,7 +5983,6 @@ main {
                 font-size: 1rem;
                 font-weight: 400;
                 line-height: 160%;
-                letter-spacing: .01rem;
                 width: 52.875rem;
 
                 @include Responsive(m-14) {
@@ -5690,6 +6003,14 @@ main {
 
                 @include Responsive(m-4) {
                     font-size: .75rem;
+                }
+                >*{
+                    white-space: nowrap;
+                }
+                >a:last-child {
+                    white-space: normal;
+                    min-width: 0;
+                    flex: 1;
                 }
 
                 a,
@@ -5862,11 +6183,12 @@ main {
 
                     @include Responsive(m-7) {
                         gap: 1.25rem;
-                        margin-bottom: 1.25rem;
+                        margin-bottom: 0;
                     }
 
                     img {
                         border-radius: .625rem;
+                        margin: 1rem 0;
                     }
                 }
 
@@ -5912,6 +6234,9 @@ main {
                 gap: 1.875rem;
                 margin-top: 4.875rem;
                 width: 100%;
+                @include Responsive(m-7) {
+                    margin-top: 0;
+                }
 
                 h2.title {
                     font-size: 1.5rem;
@@ -5998,6 +6323,7 @@ main {
                 .news {
                     .list-news::-webkit-scrollbar {
                         width: 0;
+                        height: 0;
                         /* Chiều rộng của thanh cuộn */
                         background: transparent;
                         /* Làm thanh cuộn trong suốt */
@@ -6021,6 +6347,7 @@ main {
 
                         @include Responsive(m-7) {
                             gap: 1rem;
+                            padding-bottom: 0;
                         }
 
                         .child {
@@ -6150,6 +6477,7 @@ main {
         .relate::-webkit-scrollbar,
         .latest::-webkit-scrollbar {
             width: 0;
+            height: 0;
             /* Chiều rộng của thanh cuộn */
             background: transparent;
             /* Làm thanh cuộn trong suốt */
@@ -6209,12 +6537,15 @@ main {
                     width: 60rem;
                     overflow: scroll;
                 }
+                @include Responsive(m-7) {
+                    margin-bottom: 0;
+                }
 
                 tr {
-
                     th,
                     td {
                         &:nth-child(1) {
+                            padding-right: .625rem;
                             width: 18rem;
 
                             @include Responsive(m-7) {
@@ -6423,6 +6754,27 @@ main {
                             gap: 1rem;
                             font-size: .75rem;
                         }
+                        >*{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 2.5rem;
+
+                            @include Responsive(m-12) {
+                                gap: 2rem;
+                            }
+    
+                            @include Responsive(m-10) {
+                                gap: 1.5rem;
+                            }
+    
+                            @include Responsive(m-7) {
+                                gap: 1rem;
+                            }
+                        }
+                        img{
+                            width: 100%;
+                            border-radius: .625rem;
+                        }
                     }
 
                     ul {
@@ -6441,6 +6793,7 @@ main {
                             border-radius: .4375rem;
                             width: 30.125rem;
                             height: 3.5rem;
+                            box-sizing: border-box;
                             cursor: pointer;
 
                             @include Responsive(m-10) {
@@ -6616,20 +6969,35 @@ main {
             }
 
             .right {
-                @include Responsive(m-10) {
+                @include Responsive(m-12) {
                     width: 100%;
                 }
 
                 .child.active {
-                    display: block;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2rem;
                 }
 
                 .child {
                     display: none;
-                    width: 36.875rem;
-
-                    @include Responsive(m-10) {
-                        width: inherit;
+                    width: 100%;
+                    .content{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1rem;
+                        font-size: 1rem;
+                        line-height: 150%;
+                        font-weight: 400;
+                        >*{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 1rem;
+                        }
+                        img{
+                            width: 100%;
+                            border-radius: .625rem;
+                        }
                     }
 
                     ul {
@@ -6638,6 +7006,11 @@ main {
                         display: flex;
                         flex-direction: column;
                         gap: 1.875rem;
+                        width: 36.875rem;
+    
+                        @include Responsive(m-12) {
+                            width: inherit;
+                        }
 
                         @include Responsive(m-7) {
                             gap: 1.5rem;
@@ -6690,12 +7063,15 @@ main {
                                     }
 
                                     p {
-                                        font-size: .875rem;
+                                        color: var(--black);
+                                        font-size: 1rem;
+                                        font-weight: 500;
+                                        line-height: 150%;
                                     }
                                     
                                     svg {
-                                        width: 1rem;
-                                        height: 1rem;
+                                        width: 1.5rem;
+                                        height: 1.5rem;
                                     }
                                 }
                                 
@@ -7059,6 +7435,7 @@ main {
             display: grid;
             grid-template-columns: 39.375rem auto;
             gap: 4.375rem;
+            align-items: center;
 
             @include Responsive(m-14) {
                 grid-template-columns: 34rem auto;
@@ -7072,6 +7449,9 @@ main {
                 display: flex;
                 flex-direction: column;
                 gap: 3rem;
+            }
+            @include Responsive(m-7) {
+                padding-top: 1.625rem;
             }
 
             .left {
@@ -7092,6 +7472,7 @@ main {
                         justify-content: space-between;
 
                         .title {
+                            padding-right: 2rem;
                             color: var(--black);
                             font-size: 1.125rem;
                             font-weight: 500;
@@ -7152,15 +7533,6 @@ main {
             }
 
             .right {
-                padding-top: 3.125rem;
-
-                @include Responsive(m-12) {
-                    padding-top: 1.875rem;
-                }
-
-                @include Responsive(m-10) {
-                    padding-top: 0;
-                }
 
                 h2.title {
                     color: #136451;
@@ -7217,7 +7589,6 @@ main {
                                 border-radius: .625rem;
                                 font-size: .875rem;
                                 font-weight: 400;
-                                line-height: 160%;
 
                                 @include Responsive(m-7) {
                                     font-size: .875rem;
@@ -7235,6 +7606,14 @@ main {
                             textarea::placeholder {
                                 font-size: 1rem;
                                 color: #BDBDBD;
+
+                                @include Responsive(m-7) {
+                                    font-size: .75rem;
+                                }
+                            }
+                            .select{
+                                font-size: 1rem;
+                                color: var(--black);
 
                                 @include Responsive(m-7) {
                                     font-size: .75rem;
@@ -7592,11 +7971,7 @@ footer {
     position: relative;
     display: flex;
     justify-content: center;
-    height: 46.25rem;
-
-    @include Responsive(m-10) {
-        height: auto;
-    }
+    height: auto;
 
     >.background {
         position: absolute;
@@ -7755,8 +8130,11 @@ footer {
 
                     label {
                         position: absolute;
-                        top: 35%;
+                        top: 33%;
                         left: 1.375rem;
+                        @include Responsive(m-10) {
+                            top: 35%;
+                        }
 
                         @include Responsive(m-4) {
                             left: 1rem;
@@ -7790,7 +8168,7 @@ footer {
                         }
 
                         @include Responsive(m-4) {
-                            padding-left: 2rem;
+                            padding-left: 2.25rem;
                             width: 16rem;
                             height: 2.75rem;
                             padding-right: 5rem;
@@ -7798,8 +8176,12 @@ footer {
                     }
 
                     input::placeholder {
-                        color: #999;
-                        font-size: .75rem;
+                        color: #8C8C8C;
+                        font-size: 1rem;
+                        font-weight: 400;
+                        @include Responsive(m-10) {
+                            font-size: .75rem;
+                        }
                     }
 
                     button {
@@ -7833,13 +8215,14 @@ footer {
         .bottom {
             width: 100%;
             display: grid;
-            grid-template-columns: 25.75rem 32.5rem 19rem;
-            gap: 1.375rem;
+            grid-template-columns: 23.5rem 32.5rem 19rem;
+            gap: 2.5rem;
             padding-top: 11.875rem;
             padding-bottom: 5rem;
-            border-bottom: 1px solid var(--white);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.7);
 
             @include Responsive(m-14) {
+                gap: 1.375rem;
                 grid-template-columns: 20.25rem 30rem 19rem;
             }
 
@@ -7870,8 +8253,9 @@ footer {
                 }
 
                 .logo {
-                    width: 16.375rem;
-                    height: 3.25rem;
+                    align-self: center;
+                    width: 4rem;
+                    height: 4rem;
 
                     img {
                         width: 100%;
@@ -7880,7 +8264,8 @@ footer {
                 }
 
                 span {
-                    width: 20.375rem;
+                    text-align: justify;
+                    width: 100%;
                     font-size: 1rem;
                     font-weight: 400;
                     line-height: 150%;
@@ -7897,19 +8282,27 @@ footer {
                     @include Responsive(m-10) {
                         text-align: center;
                         width: 100%;
-                    }
-
-                    @include Responsive(m-4) {
                         font-size: .875rem;
                     }
                 }
 
                 .social-media {
                     display: flex;
+                    align-self: center;
                     gap: 1rem;
+                    .child{
+                        width: 2.75rem;
+                        height: 2.75rem;
+                        border-radius: 22px;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            border-radius: inherit;
+                        }
+                    }
 
                     @include Responsive(m-4) {
-                        svg {
+                        .child {
                             width: 2rem;
                             height: 2rem;
                         }
@@ -7924,6 +8317,9 @@ footer {
                     font-size: 1rem;
                     font-weight: 400;
                     line-height: 150%;
+                    @include Responsive(m-10) {
+                        font-size: .875rem;
+                    }
 
                     .icon {
                         display: flex;
@@ -7959,33 +8355,110 @@ footer {
                         font-weight: 500;
                         line-height: normal;
                         margin-bottom: 1.5rem;
+                        @include Responsive(m-10) {
+                            font-size: 1.125rem;
+                        }
                     }
 
-                    ul {
-                        width: 26.5rem;
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        column-gap: 2rem;
-                        row-gap: 1.5rem;
-                        list-style: disc;
-                        color: var(--white);
-                        padding-left: 2rem;
-                        font-weight: 300;
-
-                        @include Responsive(m-14) {
-                            box-sizing: border-box;
-                            width: 100%;
+                    .wrap{
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 1.5rem;
+                        @include Responsive(m-7) {
+                            flex-direction: column;
+                            gap: 1.5rem;
                         }
+                        ul {
+                            width: 26.5rem;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            column-gap: 1.5rem;
+                            row-gap: 1.5rem;
+                            list-style: disc;
+                            color: var(--white);
+                            padding-left: 2rem;
+                            font-weight: 300;
 
-                        @include Responsive(m-10) {
-                            align-items: center;
-                            justify-content: center;
+                            @include Responsive(m-10) {
+                                font-size: .875rem;
+                                align-items: center;
+                                justify-content: center;
+                                column-gap: 3rem;
+                            }
+                            @include Responsive(m-7) {
+                                width: fit-content;
+                                column-gap: 2rem;
+                            }
+    
+                            @include Responsive(m-4) {
+                                column-gap: 1rem;
+                                row-gap: .75rem;
+                            }
                         }
-
-                        @include Responsive(m-4) {
-                            font-size: .875rem;
-                            column-gap: 1rem;
-                            row-gap: .75rem;
+                        .train{
+                            display: none;
+                            color: var(--white);
+                            width: 17rem;
+                            height: auto;
+                            display: none;
+                            @include Responsive(m-10) {
+                                display: block;
+                            }
+                            h3 {
+                                font-size: 1.125rem;
+                                font-weight: 500;
+                                line-height: normal;
+                                margin-bottom: 1rem;
+                            }
+            
+                            a {
+                                display: flex;
+                                width: 100%;
+                                max-height: 100%;
+                                border-radius: .625rem;
+                                margin-bottom: .5rem;
+        
+                                @include Responsive(m-7) {
+                                    height: 10rem;
+                                }
+            
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: inherit;
+                                }
+                            }
+            
+                            .date {
+                                display: flex;
+                                align-items: center;
+                                gap: .5rem;
+                                font-size: .75rem;
+                                font-weight: 300;
+                                line-height: 170%;
+                                margin-bottom: .5rem;
+        
+                                .icon{
+                                    display: flex;
+                                    align-items: center;
+                                    svg{
+                                        width: 1rem;
+                                        height: 1rem;
+                                    }
+                                }
+                            }
+            
+                            span {
+                                font-size: .875rem;
+                                font-weight: 500;
+                                line-height: 170%;
+                                letter-spacing: .0088rem;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                -webkit-line-clamp: 3;
+                            }
                         }
                     }
                 }
@@ -8000,17 +8473,23 @@ footer {
                         font-weight: 500;
                         line-height: normal;
                         margin-bottom: 1.5rem;
+                        @include Responsive(m-10) {
+                            font-size: 1.125rem;
+                        }
                     }
 
                     ul {
-                        display: grid;
-                        grid-template-columns: 1fr 1fr;
-                        grid-template-rows: auto;
+                        display: flex;
+                        flex-flow: wrap;
                         column-gap: 2rem;
                         row-gap: 1.5rem;
 
                         @include Responsive(m-12) {
                             column-gap: 1rem;
+                        }
+
+                        @include Responsive(m-10) {
+                            column-gap: 5rem;
                         }
 
                         @include Responsive(m-4) {
@@ -8044,17 +8523,25 @@ footer {
                                     width: 100%;
                                 }
                             }
-
                             .icon {
-                                svg {
-                                    padding: 1rem;
-                                    border-radius: 12.5rem;
-                                    background: var(--white);
-
-                                    @include Responsive(m-4) {
-                                        padding: .75rem;
+                                width: 3.25rem;
+                                height: 3.25rem;
+                                border-radius: 12.5rem;
+                                @include Responsive(m-4) {
+                                    width: 2.5rem;
+                                    height: 2.5rem;
+                                }
+                                .wrap{
+                                    width: inherit;
+                                    height: inherit;
+                                    border-radius: inherit;
+                                    img {
+                                        width: inherit;
+                                        height: inherit;
+                                        border-radius: inherit;
                                     }
                                 }
+
                             }
 
                             .right {
@@ -8065,7 +8552,7 @@ footer {
                                     font-weight: 300;
                                     line-height: normal;
 
-                                    @include Responsive(m-4) {
+                                    @include Responsive(m-10) {
                                         font-size: .75rem;
                                     }
                                 }
@@ -8077,7 +8564,7 @@ footer {
                                     font-weight: 500;
                                     line-height: normal;
 
-                                    @include Responsive(m-4) {
+                                    @include Responsive(m-10) {
                                         font-size: .875rem;
                                     }
                                 }
@@ -8136,6 +8623,10 @@ footer {
                     @include Responsive(m-12) {
                         font-size: 11px;
                     }
+                    .icon{
+                        display: flex;
+                        align-items: center;
+                    }
                 }
 
                 span {
@@ -8160,6 +8651,9 @@ footer {
             line-height: normal;
             padding-top: 1.75rem;
             padding-bottom: 1.5rem;
+            @include Responsive(m-10) {
+                font-size: .875rem;
+            }
         }
     }
 }

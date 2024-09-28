@@ -25,7 +25,7 @@ get_header(); ?>
                                 <?php endwhile; ?>
                                 <?php wp_reset_postdata(); ?>
                             <?php else : ?>
-                                <p><?= (pll_current_language() == 'en-us') ? "There are not cretify." : "Không có chứng nhận nào." ?></p>
+                                <p><?= (pll_current_language() == 'en') ? "There are not cretify." : "Không có chứng nhận nào." ?></p>
                             <?php endif; ?>
                         </ul>
                     </nav>
@@ -39,21 +39,26 @@ get_header(); ?>
                                 $cretify_list = $cretify['cretify-list'];
                             ?>
                             <div class="child">
+                                <div class="content">
+                                    <?php the_content() ?>
+                                </div>
                                 <ul>
-                                    <?php foreach($cretify_list as $item): ?>
-                                        <li>
-                                            <h4><?= $item['title'] ?></h4>
-                                            <span>
-                                                <a href="<?= $item['link'] ?>" target="_blank">
-                                                    <p><?= $item['text'] ?></p>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                        <path d="M12.8 11.2002L20 4.0002M20 4.0002H15.725M20 4.0002V8.2752" stroke="#414141" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                        <path d="M20 12C20 15.7712 20 17.6569 18.8284 18.8284C17.6569 20 15.7712 20 12 20C8.22876 20 6.34315 20 5.17157 18.8284C4 17.6569 4 15.7712 4 12C4 8.22876 4 6.34315 5.17157 5.17157C6.34315 4 8.22876 4 12 4" stroke="#414141" stroke-width="1.5" stroke-linecap="round"/>
-                                                    </svg>
-                                                </a>
-                                            </span>
-                                        </li>
-                                    <?php endforeach ?>
+                                    <?php if($cretify_list): ?>
+                                        <?php foreach($cretify_list as $item): ?>
+                                            <li>
+                                                <h4><?= $item['title'] ?></h4>
+                                                <span>
+                                                    <a href="<?= $item['link'] ?>" target="_blank">
+                                                        <p><?= $item['text'] ?></p>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M12.8 11.2002L20 4.0002M20 4.0002H15.725M20 4.0002V8.2752" stroke="#414141" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M20 12C20 15.7712 20 17.6569 18.8284 18.8284C17.6569 20 15.7712 20 12 20C8.22876 20 6.34315 20 5.17157 18.8284C4 17.6569 4 15.7712 4 12C4 8.22876 4 6.34315 5.17157 5.17157C6.34315 4 8.22876 4 12 4" stroke="#414141" stroke-width="1.5" stroke-linecap="round"/>
+                                                        </svg>
+                                                    </a>
+                                                </span>
+                                            </li>
+                                        <?php endforeach ?>
+                                    <?php endif ?>
                                 </ul>
                             </div>
                         <?php endwhile; ?>

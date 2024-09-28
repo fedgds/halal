@@ -36,62 +36,31 @@ $list_training_query = new WP_Query(array(
     'orderby' => 'date',
 ));
 
-$list_latest_news_query = new WP_Query(array(
+$list_news_query = new WP_Query(array(
     'post_type' => 'tin-tuc-va-su-kien',
     'post_status' => 'publish',
     'posts_per_page' => 5,
     'orderby' => 'date',
-    'meta_query' => array(
-        'relation' => 'AND',
+    'tax_query' => array(
         array(
-            'key' => 'news-and-event_type',
-            'value' => 'Tin tức',
-            'compare' => '='
-        ),
-        array(
-            'key' => 'news-and-event_is_featured',
-            'value' => '0',
-            'compare' => '='
+            'taxonomy' => 'danh_muc_tin_tuc_su_kien',
+            'field' => 'slug',
+            'terms' => 'tin-tuc'
         )
     )
 ));
 
-$list_featured_news_query = new WP_Query(array(
-    'post_type' => 'tin-tuc-va-su-kien',
-    'post_status' => 'publish',
-    'posts_per_page' => 5,
-    'orderby' => 'date',
-    'meta_query' => array(
-        'relation' => 'AND',
-        array(
-            'key' => 'news-and-event_type',
-            'value' => 'Tin tức',
-            'compare' => '='
-        ),
-        array(
-            'key' => 'news-and-event_is_featured',
-            'value' => '1',
-            'compare' => '='
-        )
-    )
-));
 
 $list_events_query = new WP_Query(array(
     'post_type' => 'tin-tuc-va-su-kien',
     'post_status' => 'publish',
     'posts_per_page' => 5,
     'orderby' => 'date',
-    'meta_query' => array(
-        'relation' => 'AND',
+    'tax_query' => array(
         array(
-            'key' => 'news-and-event_type',
-            'value' => 'Sự kiện',
-            'compare' => '='
-        ),
-        array(
-            'key' => 'news-and-event_is_featured',
-            'value' => '1',
-            'compare' => '='
+            'taxonomy' => 'danh_muc_tin_tuc_su_kien',
+            'field' => 'slug',
+            'terms' => 'su-kien'
         )
     )
 ));
@@ -105,34 +74,36 @@ get_header(); ?>
     <div class="section-banner-home">
         <div class="layout"></div>
         <div class="list-slide" id="list-slide">
-            <?php foreach ($slider as $item): ?>
-                <div class="child">
-                    <div class="slider">
-                        <?php
-                        // Get the file extension of the image/video
-                        $fileExtension = pathinfo($item['image'], PATHINFO_EXTENSION);
-
-                        // Check if the file is an mp4
-                        if (strtolower($fileExtension) === 'mp4'): ?>
-                            <video autoplay muted loop src="<?= $item['image'] ?>"></video>
-                        <?php else: ?>
-                            <img src="<?= $item['image'] ?>" alt="">
-                        <?php endif; ?>
-                    </div>
-                    <div class="container">
-                        <div class="title">
-                            <h1 class="line-1"><?= $item['title'] ?></h1>
-                        </div>
-                        <div class="text">
-                            <?= $item['text'] ?>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach ?>
-            <ul class="list-dot" id="list-dot">
+            <?php if($slider): ?>
                 <?php foreach ($slider as $item): ?>
-                    <li><span></span></li>
+                    <div class="child">
+                        <div class="slider">
+                            <?php
+                            $fileExtension = pathinfo($item['image'], PATHINFO_EXTENSION);
+                            
+                            if (strtolower($fileExtension) === 'mp4'): ?>
+                                <video autoplay muted loop src="<?= $item['image'] ?>"></video>
+                            <?php else: ?>
+                                <img src="<?= $item['image'] ?>" alt="">
+                            <?php endif; ?>
+                        </div>
+                        <div class="container">
+                            <div class="title">
+                                <h1 class="line-1"><?= $item['title'] ?></h1>
+                            </div>
+                            <div class="text">
+                                <?= $item['text'] ?>
+                            </div>
+                        </div>
+                    </div>
                 <?php endforeach ?>
+            <?php endif ?>
+            <ul class="list-dot" id="list-dot">
+                <?php if($slider): ?>
+                    <?php foreach ($slider as $item): ?>
+                        <li><span></span></li>
+                    <?php endforeach ?>
+                <?php endif ?>
             </ul>
         </div>
     </div>
@@ -142,11 +113,13 @@ get_header(); ?>
         </div>
         <div class="container">
             <div class="left">
-                <div class="image-1">
-                    <img src="<?= $section_1['image-1'] ?>" alt="">
-                </div>
-                <div class="image-2">
-                    <img src="<?= $section_1['image-2'] ?>" alt="">
+                <div class="wrap">
+                    <div class="image-1">
+                        <img src="<?= $section_1['image-1'] ?>" alt="">
+                    </div>
+                    <div class="image-2">
+                        <img src="<?= $section_1['image-2'] ?>" alt="">
+                    </div>
                 </div>
             </div>
             <div class="right">
@@ -164,8 +137,8 @@ get_header(); ?>
                     </div>
                 </div>
                 <div class="button">
-                    <?php if (pll_current_language() == 'en-us'): ?>
-                        <a href="<?= home_url() ?>/en-us/about-halcert">
+                    <?php if (pll_current_language() == 'en'): ?>
+                        <a href="<?= home_url() ?>/en/about-halcert">
                             <span>View more</span>
                             <div class="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
@@ -203,8 +176,8 @@ get_header(); ?>
                 <?= $section_2['description'] ?>
             </div>
             <a
-                href="<?= home_url() ?><?= (pll_current_language() == 'en-us') ? "/en-us/register-cretify/" : "/dang-ky-chung-nhan" ?>">
-                <?= (pll_current_language() == 'en-us') ? "Register cretify" : "Đăng ký chứng nhận" ?>
+                href="<?= home_url() ?><?= (pll_current_language() == 'en') ? "/en/register-cretify/" : "/dang-ky-chung-nhan" ?>">
+                <?= (pll_current_language() == 'en') ? "Register cretify" : "Đăng ký chứng nhận" ?>
             </a>
         </div>
     </div>
@@ -244,38 +217,37 @@ get_header(); ?>
                             <div class="left">
                                 <h3><?php the_title(); ?></h3>
                                 <div class="content">
-                                    <?php the_content(); ?>
+                                    <?= filter_content_to_text(get_the_content()); ?>
                                 </div>
                                 <nav class="download">
                                     <ul>
-                                        <?php foreach ($policy_list as $item): ?>
-                                            <li>
-                                                <a href="<?= $item['link_download'] ?>" target="_blank">
-                                                    <span><?= $item['policy'] ?></span>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none">
-                                                        <path
-                                                            d="M12.442 15.6051C12.3284 15.7294 12.1677 15.8002 11.9992 15.8002C11.8308 15.8002 11.6701 15.7294 11.5564 15.6051L8.3564 12.1051C8.1328 11.8605 8.1498 11.481 8.39436 11.2574C8.63892 11.0338 9.01844 11.0508 9.24204 11.2953L11.3992 13.6548V4.8002C11.3992 4.46882 11.6679 4.2002 11.9992 4.2002C12.3306 4.2002 12.5992 4.46882 12.5992 4.8002V13.6548L14.7564 11.2953C14.98 11.0508 15.3595 11.0338 15.6041 11.2574C15.8486 11.481 15.8656 11.8605 15.642 12.1051L12.442 15.6051Z"
-                                                            fill="#414141" />
-                                                        <path
-                                                            d="M5.39922 14.4002C5.39922 14.0688 5.13059 13.8002 4.79922 13.8002C4.46785 13.8002 4.19922 14.0688 4.19922 14.4002V14.4441C4.1992 15.5382 4.19919 16.42 4.29244 17.1136C4.38925 17.8337 4.59637 18.44 5.0779 18.9215C5.55943 19.403 6.16573 19.6102 6.88582 19.707C7.57939 19.8002 8.46125 19.8002 9.55532 19.8002H14.4431C15.5372 19.8002 16.419 19.8002 17.1126 19.707C17.8327 19.6102 18.439 19.403 18.9205 18.9215C19.4021 18.44 19.6092 17.8337 19.706 17.1136C19.7993 16.42 19.7992 15.5382 19.7992 14.4441V14.4002C19.7992 14.0688 19.5306 13.8002 19.1992 13.8002C18.8679 13.8002 18.5992 14.0688 18.5992 14.4002C18.5992 15.5485 18.5979 16.3494 18.5167 16.9537C18.4378 17.5407 18.2934 17.8516 18.072 18.073C17.8506 18.2944 17.5397 18.4388 16.9527 18.5177C16.3484 18.5989 15.5476 18.6002 14.3992 18.6002H9.59922C8.45089 18.6002 7.65 18.5989 7.04572 18.5177C6.4587 18.4388 6.14784 18.2944 5.92643 18.073C5.70502 17.8516 5.56066 17.5407 5.48174 16.9537C5.40049 16.3494 5.39922 15.5485 5.39922 14.4002Z"
-                                                            fill="#414141" />
-                                                    </svg>
-                                                </a>
-                                            </li>
-                                        <?php endforeach ?>
+                                        <?php if($policy_list): ?>
+                                            <?php foreach ($policy_list as $item): ?>
+                                                <li>
+                                                    <a href="<?= $item['link_download'] ?>" target="_blank">
+                                                        <span><?= $item['policy'] ?></span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            viewBox="0 0 24 24" fill="none">
+                                                            <path
+                                                                d="M12.442 15.6051C12.3284 15.7294 12.1677 15.8002 11.9992 15.8002C11.8308 15.8002 11.6701 15.7294 11.5564 15.6051L8.3564 12.1051C8.1328 11.8605 8.1498 11.481 8.39436 11.2574C8.63892 11.0338 9.01844 11.0508 9.24204 11.2953L11.3992 13.6548V4.8002C11.3992 4.46882 11.6679 4.2002 11.9992 4.2002C12.3306 4.2002 12.5992 4.46882 12.5992 4.8002V13.6548L14.7564 11.2953C14.98 11.0508 15.3595 11.0338 15.6041 11.2574C15.8486 11.481 15.8656 11.8605 15.642 12.1051L12.442 15.6051Z"
+                                                                fill="#414141" />
+                                                            <path
+                                                                d="M5.39922 14.4002C5.39922 14.0688 5.13059 13.8002 4.79922 13.8002C4.46785 13.8002 4.19922 14.0688 4.19922 14.4002V14.4441C4.1992 15.5382 4.19919 16.42 4.29244 17.1136C4.38925 17.8337 4.59637 18.44 5.0779 18.9215C5.55943 19.403 6.16573 19.6102 6.88582 19.707C7.57939 19.8002 8.46125 19.8002 9.55532 19.8002H14.4431C15.5372 19.8002 16.419 19.8002 17.1126 19.707C17.8327 19.6102 18.439 19.403 18.9205 18.9215C19.4021 18.44 19.6092 17.8337 19.706 17.1136C19.7993 16.42 19.7992 15.5382 19.7992 14.4441V14.4002C19.7992 14.0688 19.5306 13.8002 19.1992 13.8002C18.8679 13.8002 18.5992 14.0688 18.5992 14.4002C18.5992 15.5485 18.5979 16.3494 18.5167 16.9537C18.4378 17.5407 18.2934 17.8516 18.072 18.073C17.8506 18.2944 17.5397 18.4388 16.9527 18.5177C16.3484 18.5989 15.5476 18.6002 14.3992 18.6002H9.59922C8.45089 18.6002 7.65 18.5989 7.04572 18.5177C6.4587 18.4388 6.14784 18.2944 5.92643 18.073C5.70502 17.8516 5.56066 17.5407 5.48174 16.9537C5.40049 16.3494 5.39922 15.5485 5.39922 14.4002Z"
+                                                                fill="#414141" />
+                                                        </svg>
+                                                    </a>
+                                                </li>
+                                            <?php endforeach ?>
+                                        <?php endif ?>
                                     </ul>
                                 </nav>
-                                <?php if (pll_current_language() == 'en-us'): ?>
-                                    <a href="<?= home_url() ?>/en-us/halal-nqi-en#<?= get_post_field('post_name', get_post()); ?>"
+                                <?php if (pll_current_language() == 'en'): ?>
+                                    <a href="<?= home_url() ?>/en/halal-nqi-en#<?= get_post_field('post_name', get_post()); ?>"
                                         class="view-more">
                                         <span>View more</span>
                                         <div class="icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                                fill="none">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M6 4.5C5.72386 4.5 5.5 4.27614 5.5 4C5.5 3.72386 5.72386 3.5 6 3.5H12C12.2761 3.5 12.5 3.72386 12.5 4V10C12.5 10.2761 12.2761 10.5 12 10.5C11.7239 10.5 11.5 10.2761 11.5 10V5.20711L4.35355 12.3536C4.15829 12.5488 3.84171 12.5488 3.64645 12.3536C3.45118 12.1583 3.45118 11.8417 3.64645 11.6464L10.7929 4.5H6Z"
-                                                    fill="#FE3131" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 5.99414C7.15482 5.99414 6.875 5.71432 6.875 5.36914C6.875 5.02396 7.15482 4.74414 7.5 4.74414H15C15.3452 4.74414 15.625 5.02396 15.625 5.36914V12.8691C15.625 13.2143 15.3452 13.4941 15 13.4941C14.6548 13.4941 14.375 13.2143 14.375 12.8691V6.87802L5.44194 15.8111C5.19786 16.0552 4.80214 16.0552 4.55806 15.8111C4.31398 15.567 4.31398 15.1713 4.55806 14.9272L13.4911 5.99414H7.5Z" fill="#FE3131" stroke="#FE3131"/>
                                             </svg>
                                         </div>
                                     </a>
@@ -284,22 +256,21 @@ get_header(); ?>
                                         class="view-more">
                                         <span>Tìm hiểu thêm</span>
                                         <div class="icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                                fill="none">
-                                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                                    d="M6 4.5C5.72386 4.5 5.5 4.27614 5.5 4C5.5 3.72386 5.72386 3.5 6 3.5H12C12.2761 3.5 12.5 3.72386 12.5 4V10C12.5 10.2761 12.2761 10.5 12 10.5C11.7239 10.5 11.5 10.2761 11.5 10V5.20711L4.35355 12.3536C4.15829 12.5488 3.84171 12.5488 3.64645 12.3536C3.45118 12.1583 3.45118 11.8417 3.64645 11.6464L10.7929 4.5H6Z"
-                                                    fill="#FE3131" />
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="21" viewBox="0 0 20 21" fill="none">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 5.99414C7.15482 5.99414 6.875 5.71432 6.875 5.36914C6.875 5.02396 7.15482 4.74414 7.5 4.74414H15C15.3452 4.74414 15.625 5.02396 15.625 5.36914V12.8691C15.625 13.2143 15.3452 13.4941 15 13.4941C14.6548 13.4941 14.375 13.2143 14.375 12.8691V6.87802L5.44194 15.8111C5.19786 16.0552 4.80214 16.0552 4.55806 15.8111C4.31398 15.567 4.31398 15.1713 4.55806 14.9272L13.4911 5.99414H7.5Z" fill="#FE3131" stroke="#FE3131"/>
                                             </svg>
                                         </div>
                                     </a>
                                 <?php endif ?>
                             </div>
                             <div class="right">
-                                <div class="image-1">
-                                    <img src="<?= $section_3['image-1'] ?>" alt="">
-                                </div>
-                                <div class="image-2">
-                                    <img src="<?= $section_3['image-2'] ?>" alt="">
+                                <div class="wrap">
+                                    <div class="image-1">
+                                        <img src="<?= $section_3['image-1'] ?>" alt="">
+                                    </div>
+                                    <div class="image-2">
+                                        <img src="<?= $section_3['image-2'] ?>" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -385,7 +356,7 @@ get_header(); ?>
                                     <?php endif ?>
                                 </div>
                                 <a class="view-more" href="<?php the_permalink(); ?>">
-                                    <span><?= (pll_current_language() == 'en-us') ? "View more" : "Tìm hiểu thêm" ?></span>
+                                    <span><?= (pll_current_language() == 'en') ? "View more" : "Tìm hiểu thêm" ?></span>
                                     <div class="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
                                             fill="none">
@@ -399,7 +370,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else: ?>
-                        <p><?= (pll_current_language() == 'en-us') ? "There are no training." : "Không có khóa đào tạo nào." ?>
+                        <p><?= (pll_current_language() == 'en') ? "There are no training." : "Không có khóa đào tạo nào." ?>
                         </p>
                     <?php endif; ?>
                 </div>
@@ -430,7 +401,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else: ?>
-                        <p><?= (pll_current_language() == 'en-us') ? "There are no customer." : "Không có khách hàng nào." ?>
+                        <p><?= (pll_current_language() == 'en') ? "There are no customer." : "Không có khách hàng nào." ?>
                         </p>
                     <?php endif; ?>
                 </div>
@@ -453,10 +424,10 @@ get_header(); ?>
             <div class="bottom">
                 <div class="left" id="tab-news">
                     <div class="list-news">
-                        <?php if ($list_latest_news_query->have_posts()): ?>
+                        <?php if ($list_news_query->have_posts()): ?>
                             <?php $featured_count = 0; ?>
-                            <?php while ($list_latest_news_query->have_posts()):
-                                $list_latest_news_query->the_post(); ?>
+                            <?php while ($list_news_query->have_posts()):
+                                $list_news_query->the_post(); ?>
                                 <?php
                                 $news_id = get_the_ID();
                                 $news = get_field('news-and-event', $news_id);
@@ -501,7 +472,7 @@ get_header(); ?>
                                             </div>
                                             <span class="minus">-</span>
                                             <span class="views"><?= $views ?>
-                                                <?= (pll_current_language() == 'en-us') ? "views" : "lượt xem" ?></span>
+                                                <?= (pll_current_language() == 'en') ? "views" : "lượt xem" ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -511,7 +482,7 @@ get_header(); ?>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else: ?>
-                            <p><?= (pll_current_language() == 'en-us') ? "There are no news." : "Không có tin tức nào." ?>
+                            <p><?= (pll_current_language() == 'en') ? "There are no news." : "Không có tin tức nào." ?>
                             </p>
                         <?php endif; ?>
                     </div>
@@ -564,7 +535,7 @@ get_header(); ?>
                                             </div>
                                             <span class="minus">-</span>
                                             <span class="views"><?= $views ?>
-                                                <?= (pll_current_language() == 'en-us') ? "views" : "lượt xem" ?></span>
+                                                <?= (pll_current_language() == 'en') ? "views" : "lượt xem" ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -574,16 +545,16 @@ get_header(); ?>
                             <?php endwhile; ?>
                             <?php wp_reset_postdata(); ?>
                         <?php else: ?>
-                            <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?>
+                            <p><?= (pll_current_language() == 'en') ? "There are no event." : "Không có sự kiện nào." ?>
                             </p>
                         <?php endif; ?>
                     </div>
                 </div>
-                <div class="right">
-                    <?php if ($list_featured_news_query->have_posts()): ?>
+                <div class="right tab-right">
+                    <?php if ($list_news_query->have_posts()): ?>
                         <?php $count = 0; ?>
-                        <?php while ($list_featured_news_query->have_posts()):
-                            $list_featured_news_query->the_post(); ?>
+                        <?php while ($list_news_query->have_posts()):
+                            $list_news_query->the_post(); ?>
                             <?php
                             $news_id = get_the_ID();
                             $news = get_field('news-and-event', $news_id);
@@ -624,7 +595,7 @@ get_header(); ?>
                                     </div>
                                     <span class="minus">-</span>
                                     <span class="views"><?= $views ?>
-                                        <?= (pll_current_language() == 'en-us') ? "views" : "lượt xem" ?></span>
+                                        <?= (pll_current_language() == 'en') ? "views" : "lượt xem" ?></span>
                                 </div>
                             </div>
                             <?php $count++; ?>
@@ -632,8 +603,61 @@ get_header(); ?>
                                 break; ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
-                    <?php else: ?>
-                        <p><?= (pll_current_language() == 'en-us') ? "There are no event." : "Không có sự kiện nào." ?></p>
+                    <?php endif; ?>
+                </div>
+                <div class="right tab-right">
+                    <?php if ($list_events_query->have_posts()): ?>
+                        <?php $count = 0; ?>
+                        <?php while ($list_events_query->have_posts()):
+                            $list_events_query->the_post(); ?>
+                            <?php
+                            $news_id = get_the_ID();
+                            $news = get_field('news-and-event', $news_id);
+                            $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+                            $views = $news['views'];
+                            ?>
+                            <div class="child">
+                                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+                                <div class="date-and-views">
+                                    <div class="date">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
+                                                fill="none">
+                                                <path
+                                                    d="M14.1667 11.6666C14.627 11.6666 15.0001 11.2935 15.0001 10.8333C15.0001 10.373 14.627 9.99992 14.1667 9.99992C13.7065 9.99992 13.3334 10.373 13.3334 10.8333C13.3334 11.2935 13.7065 11.6666 14.1667 11.6666Z"
+                                                    fill="#136451" />
+                                                <path
+                                                    d="M14.1667 14.9999C14.627 14.9999 15.0001 14.6268 15.0001 14.1666C15.0001 13.7063 14.627 13.3333 14.1667 13.3333C13.7065 13.3333 13.3334 13.7063 13.3334 14.1666C13.3334 14.6268 13.7065 14.9999 14.1667 14.9999Z"
+                                                    fill="#136451" />
+                                                <path
+                                                    d="M10.8334 10.8333C10.8334 11.2935 10.4603 11.6666 10.0001 11.6666C9.53984 11.6666 9.16675 11.2935 9.16675 10.8333C9.16675 10.373 9.53984 9.99992 10.0001 9.99992C10.4603 9.99992 10.8334 10.373 10.8334 10.8333Z"
+                                                    fill="#136451" />
+                                                <path
+                                                    d="M10.8334 14.1666C10.8334 14.6268 10.4603 14.9999 10.0001 14.9999C9.53984 14.9999 9.16675 14.6268 9.16675 14.1666C9.16675 13.7063 9.53984 13.3333 10.0001 13.3333C10.4603 13.3333 10.8334 13.7063 10.8334 14.1666Z"
+                                                    fill="#136451" />
+                                                <path
+                                                    d="M5.83342 11.6666C6.29365 11.6666 6.66675 11.2935 6.66675 10.8333C6.66675 10.373 6.29365 9.99992 5.83342 9.99992C5.37318 9.99992 5.00008 10.373 5.00008 10.8333C5.00008 11.2935 5.37318 11.6666 5.83342 11.6666Z"
+                                                    fill="#136451" />
+                                                <path
+                                                    d="M5.83342 14.9999C6.29365 14.9999 6.66675 14.6268 6.66675 14.1666C6.66675 13.7063 6.29365 13.3333 5.83342 13.3333C5.37318 13.3333 5.00008 13.7063 5.00008 14.1666C5.00008 14.6268 5.37318 14.9999 5.83342 14.9999Z"
+                                                    fill="#136451" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M5.83342 1.45825C6.17859 1.45825 6.45842 1.73807 6.45842 2.08325V2.71885C7.01008 2.70824 7.61785 2.70825 8.2863 2.70825H11.7138C12.3822 2.70825 12.9901 2.70824 13.5417 2.71885V2.08325C13.5417 1.73807 13.8216 1.45825 14.1667 1.45825C14.5119 1.45825 14.7917 1.73807 14.7917 2.08325V2.77249C15.0084 2.78901 15.2135 2.80977 15.4076 2.83586C16.3846 2.96722 17.1754 3.24398 17.799 3.86762C18.4227 4.49126 18.6994 5.28205 18.8308 6.25907C18.9584 7.2084 18.9584 8.42142 18.9584 9.95287V11.7136C18.9584 13.245 18.9584 14.4581 18.8308 15.4074C18.6994 16.3845 18.4227 17.1752 17.799 17.7989C17.1754 18.4225 16.3846 18.6993 15.4076 18.8306C14.4583 18.9583 13.2452 18.9583 11.7138 18.9583H8.28641C6.75496 18.9583 5.5419 18.9583 4.59256 18.8306C3.61554 18.6993 2.82475 18.4225 2.20112 17.7989C1.57748 17.1752 1.30072 16.3845 1.16936 15.4074C1.04172 14.4581 1.04174 13.2451 1.04175 11.7136V9.9529C1.04174 8.42144 1.04172 7.20841 1.16936 6.25907C1.30072 5.28205 1.57748 4.49126 2.20112 3.86762C2.82475 3.24398 3.61554 2.96722 4.59256 2.83586C4.78667 2.80977 4.9918 2.78901 5.20842 2.77249V2.08325C5.20842 1.73807 5.48824 1.45825 5.83342 1.45825ZM4.75912 4.07472C3.92071 4.18744 3.43768 4.39883 3.085 4.7515C2.73233 5.10418 2.52094 5.58722 2.40821 6.42562C2.38912 6.56761 2.37316 6.71709 2.35982 6.87492H17.6403C17.627 6.71709 17.611 6.56761 17.5919 6.42563C17.4792 5.58722 17.2678 5.10418 16.9152 4.7515C16.5625 4.39883 16.0794 4.18744 15.241 4.07472C14.3847 3.95958 13.2558 3.95825 11.6667 3.95825H8.33342C6.7444 3.95825 5.61551 3.95958 4.75912 4.07472ZM2.29175 9.99992C2.29175 9.28824 2.29201 8.66886 2.30265 8.12492H17.6975C17.7081 8.66886 17.7084 9.28824 17.7084 9.99992V11.6666C17.7084 13.2556 17.7071 14.3845 17.5919 15.2409C17.4792 16.0793 17.2678 16.5623 16.9152 16.915C16.5625 17.2677 16.0794 17.4791 15.241 17.5918C14.3847 17.7069 13.2558 17.7083 11.6667 17.7083H8.33342C6.7444 17.7083 5.61551 17.7069 4.75912 17.5918C3.92072 17.4791 3.43768 17.2677 3.085 16.915C2.73233 16.5623 2.52094 16.0793 2.40821 15.2409C2.29308 14.3845 2.29175 13.2556 2.29175 11.6666V9.99992Z"
+                                                    fill="#136451" />
+                                            </svg>
+                                        </div>
+                                        <span><?= get_the_date() ?></span>
+                                    </div>
+                                    <span class="minus">-</span>
+                                    <span class="views"><?= $views ?>
+                                        <?= (pll_current_language() == 'en') ? "views" : "lượt xem" ?></span>
+                                </div>
+                            </div>
+                            <?php $count++; ?>
+                            <?php if ($count >= 3)
+                                break; ?>
+                        <?php endwhile; ?>
+                        <?php wp_reset_postdata(); ?>
                     <?php endif; ?>
                 </div>
             </div>
@@ -726,7 +750,7 @@ get_header(); ?>
                                     <?php endwhile;
                                     wp_reset_postdata();
                                 else: ?>
-                                    <p><?= (pll_current_language() == 'en-us') ? "There are no journals." : "Không có tập san nào." ?>
+                                    <p><?= (pll_current_language() == 'en') ? "There are no journals." : "Không có tập san nào." ?>
                                     </p>
                                 <?php endif; ?>
                             </div>
@@ -747,7 +771,7 @@ get_header(); ?>
                         $all_projects = new WP_Query($all_project_args);
                         if ($all_projects->found_posts > 3): ?>
                             <a href="<?= home_url() ?>/danh_muc_tap_san/<?= $category->slug ?>"
-                                class="view-more"><?= (pll_current_language() == 'en-us') ? "VIEW MORE" : "XEM THÊM" ?></a>
+                                class="view-more"><?= (pll_current_language() == 'en') ? "VIEW MORE" : "XEM THÊM" ?></a>
                         <?php endif; ?>
                     </div>
                 <?php endforeach ?>

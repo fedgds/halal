@@ -25,11 +25,13 @@ get_header(); ?>
             <h2 class="title"><?= $section_1['title'] ?></h2>
             <div class="content">
                 <div class="left">
-                    <div class="image-1">
-                        <img src="<?= $section_1['image-1'] ?>" alt="">
-                    </div>
-                    <div class="image-2">
-                        <img src="<?= $section_1['image-2'] ?>" alt="">
+                    <div class="wrap">
+                        <div class="image-1">
+                            <img src="<?= $section_1['image-1'] ?>" alt="">
+                        </div>
+                        <div class="image-2">
+                            <img src="<?= $section_1['image-2'] ?>" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="right">
@@ -108,7 +110,7 @@ get_header(); ?>
                         <?php endwhile; ?>
                         <?php wp_reset_postdata(); ?>
                     <?php else : ?>
-                        <p><?= (pll_current_language() == 'en-us') ? "There are no customer." : "Không có khách hàng nào." ?></p>
+                        <p><?= (pll_current_language() == 'en') ? "There are no customer." : "Không có khách hàng nào." ?></p>
                     <?php endif; ?>
                 </div>
             </div>

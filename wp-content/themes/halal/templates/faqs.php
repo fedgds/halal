@@ -33,7 +33,7 @@ get_header() ?>
                     </div>
                 <?php endforeach ?>
             </div>
-            <?php if (pll_current_language() == 'en-us') : ?>
+            <?php if (pll_current_language() == 'en') : ?>
                 <div class="right fade-in">
                     <h2 class="title">Ask us questions</h2>
                     <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
@@ -45,7 +45,7 @@ get_header() ?>
                             </div>
                             <div class="form-group">
                                 <label for="">Phone number</label>
-                                <input type="text" name="your-phone" placeholder="Phone number" required>
+                                <input type="tel" name="your-phone" placeholder="Phone number" required>
                             </div>
                         </div>
                         <h4>Need for advice</h4>
@@ -54,8 +54,8 @@ get_header() ?>
                                 <label for="">Need</label>
                                 <select name="your-demand" id="">
                                     <option value="">Select your consulting needs</option>
-                                    <option value="">Option 1</option>
-                                    <option value="">Option 2</option>
+                                    <option value="Option 1">Option 1</option>
+                                    <option value="Option 2">Option 2</option>
                                 </select>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ get_header() ?>
                             </div>
                             <div class="form-group">
                                 <label for="">Số điện thoại</label>
-                                <input type="text" name="your-phone" placeholder="Số điện thoại" required>
+                                <input type="tel" name="your-phone" placeholder="Số điện thoại" required>
                             </div>
                         </div>
                         <h4>Nhu cầu muốn tư vấn</h4>
@@ -92,8 +92,8 @@ get_header() ?>
                                 <label for="">Nhu cầu</label>
                                 <select name="your-demand" id="">
                                     <option value="">Chọn nhu cầu tư vấn</option>
-                                    <option value="">Option 1</option>
-                                    <option value="">Option 2</option>
+                                    <option value="Option 1">Option 1</option>
+                                    <option value="Option 2">Option 2</option>
                                 </select>
                             </div>
                         </div>
@@ -114,3 +114,27 @@ get_header() ?>
     </div>
 </main>
 <?php get_footer() ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    var faqStatus = getCookie('faq_status');
+    if (faqStatus === 'success') {
+        alert('Để lại lời nhắn thành công!');
+    } else if (faqStatus === 'failed') {
+        alert('Gửi form không thành công. Vui lòng thử lại!');
+    }
+
+    // Delete the cookie after showing the alert
+    document.cookie = 'faq_status=; Max-Age=0; path=/;';
+});
+</script>
