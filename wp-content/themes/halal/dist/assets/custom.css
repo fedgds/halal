@@ -671,34 +671,21 @@ header .menu-mobile .top .close-menu svg {
   width: inherit;
   height: inherit;
 }
-header .menu-mobile .nav-menu {
+header .menu-mobile .main-navigation {
   margin-bottom: 1.5rem;
   border-bottom: 0.125rem solid var(--red);
 }
-header .menu-mobile .nav-menu ul {
+header .menu-mobile .main-navigation .menu-items {
   list-style: none;
   display: flex;
   flex-direction: column;
+  padding: 0;
+  margin: 0;
 }
-header .menu-mobile .nav-menu ul > li.register:last-child {
-  margin: 1rem 0;
-  display: flex;
-  justify-content: start;
+header .menu-mobile .main-navigation .menu-items .icon {
+  display: none;
 }
-header .menu-mobile .nav-menu ul > li.register:last-child a {
-  font-size: 0.875rem;
-  border-radius: 0.625rem;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--red);
-  color: var(--white);
-  background: var(--red);
-  box-sizing: border-box;
-}
-header .menu-mobile .nav-menu ul > li.register:last-child:hover a {
-  color: var(--red);
-  background: var(--white);
-}
-header .menu-mobile .nav-menu ul > li {
+header .menu-mobile .main-navigation .menu-items > li {
   position: relative;
   padding: 0.625rem 0.5rem;
   color: #136451;
@@ -707,62 +694,65 @@ header .menu-mobile .nav-menu ul > li {
   font-weight: 400;
   line-height: 150%;
 }
-header .menu-mobile .nav-menu ul > li .active {
+header .menu-mobile .main-navigation .menu-items > li:hover {
+  color: var(--black);
+}
+header .menu-mobile .main-navigation .menu-items > li.current-menu-item > a {
   color: var(--red);
   font-weight: 600;
 }
-header .menu-mobile .nav-menu ul > li .up,
-header .menu-mobile .nav-menu ul > li .down {
-  display: flex;
+header .menu-mobile .main-navigation .menu-items > li > a {
+  color: inherit;
+  text-decoration: none;
+}
+header .menu-mobile .main-navigation .menu-items > li.menu-item-has-children > a:after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 21 20' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.22603 7.26631C4.4701 7.02224 4.86583 7.02224 5.10991 7.26631L9.9373 12.0938C10.0187 12.1751 10.1505 12.1751 10.232 12.0938L15.0594 7.26631C15.3035 7.02223 15.6991 7.02223 15.9432 7.26631C16.1873 7.51039 16.1873 7.90611 15.9432 8.1502L11.1158 12.9776C10.5463 13.5471 9.62297 13.5471 9.05347 12.9776L4.22603 8.1502C3.98195 7.90612 3.98195 7.51039 4.22603 7.26631Z' fill='%23136451'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
   position: absolute;
   right: 0.5rem;
   top: 0.75rem;
-  cursor: pointer;
+  transition: transform 0.3s ease;
 }
-header .menu-mobile .nav-menu ul > li .up svg path,
-header .menu-mobile .nav-menu ul > li .down svg path {
-  fill: #136451;
+header .menu-mobile .main-navigation .menu-items > li.menu-item-has-children.active > a:after {
+  transform: rotate(180deg);
 }
-header .menu-mobile .nav-menu ul > li .up {
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s all ease-in-out;
-}
-header .menu-mobile .nav-menu ul > li .up.show {
-  visibility: visible;
-  opacity: 1;
-}
-header .menu-mobile .nav-menu ul > li .down {
-  visibility: visible;
-  opacity: 1;
-}
-header .menu-mobile .nav-menu ul > li .down.show {
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.3s all ease-in-out;
-}
-header .menu-mobile .nav-menu ul > li .sub-menu {
-  overflow: hidden;
+header .menu-mobile .main-navigation .menu-items > li .sub-menu {
   display: none;
-  transition: all 0.5s ease;
-  opacity: 0;
-  padding: 0.5rem 0 0 0.5rem;
-}
-header .menu-mobile .nav-menu ul > li .sub-menu.show {
-  opacity: 1;
-  display: block;
-  transform: translateY(0);
-}
-header .menu-mobile .nav-menu ul > li .sub-menu ul {
   list-style: none;
+  padding: 0.5rem 0 0 0.5rem;
+  margin: 0;
 }
-header .menu-mobile .nav-menu ul > li .sub-menu ul li {
+header .menu-mobile .main-navigation .menu-items > li .sub-menu.show {
+  display: block;
+}
+header .menu-mobile .main-navigation .menu-items > li .sub-menu li {
   font-size: 1rem;
   padding: 0.375rem 0;
-  text-decoration: underline !important;
 }
-header .menu-mobile .nav-menu ul li:hover {
-  color: var(--black);
+header .menu-mobile .main-navigation .menu-items > li .sub-menu li a {
+  color: inherit;
+  text-decoration: underline;
+}
+header .menu-mobile .main-navigation .menu-items > li:nth-last-child(2) {
+  margin: 1rem 0;
+}
+header .menu-mobile .main-navigation .menu-items > li:nth-last-child(2) a {
+  font-size: 0.875rem;
+  border-radius: 0.625rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--red);
+  color: var(--white);
+  background: var(--red);
+  box-sizing: border-box;
+}
+header .menu-mobile .main-navigation .menu-items > li:nth-last-child(2) a:hover {
+  color: var(--red);
+  background: var(--white);
 }
 
 main {
@@ -7423,40 +7413,29 @@ main .section-faqs .container .right h2.title {
     margin-bottom: 1.5rem;
   }
 }
-main .section-faqs .container .right form h4 {
+main .section-faqs .container .right .wpcf7 h4 {
   margin-bottom: 1.875rem;
   color: #3F3F3F;
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 160%;
 }
-@media only screen and (max-width: 767px) {
-  main .section-faqs .container .right form h4 {
-    font-size: 1rem;
-  }
-}
-main .section-faqs .container .right form .line {
+main .section-faqs .container .right .wpcf7 .line {
   width: 100%;
 }
-main .section-faqs .container .right form .line .form-group {
+main .section-faqs .container .right .wpcf7 .line .form-group {
   position: relative;
 }
-main .section-faqs .container .right form .line .form-group label {
+main .section-faqs .container .right .wpcf7 .line .form-group label {
   position: absolute;
-  top: -0.75rem;
+  top: 0.5rem;
   left: 0.75rem;
   padding: 0 0.5rem;
   background: var(--white);
 }
-@media only screen and (max-width: 767px) {
-  main .section-faqs .container .right form .line .form-group label {
-    font-size: 0.875rem;
-    left: 0.5rem;
-  }
-}
-main .section-faqs .container .right form .line .form-group input,
-main .section-faqs .container .right form .line .form-group select,
-main .section-faqs .container .right form .line .form-group textarea {
+main .section-faqs .container .right .wpcf7 .line .form-group input,
+main .section-faqs .container .right .wpcf7 .line .form-group select,
+main .section-faqs .container .right .wpcf7 .line .form-group textarea {
   box-sizing: border-box;
   width: 100%;
   padding: 0.875rem 1.25rem;
@@ -7465,59 +7444,36 @@ main .section-faqs .container .right form .line .form-group textarea {
   font-size: 0.875rem;
   font-weight: 400;
 }
-@media only screen and (max-width: 767px) {
-  main .section-faqs .container .right form .line .form-group input,
-  main .section-faqs .container .right form .line .form-group select,
-  main .section-faqs .container .right form .line .form-group textarea {
-    font-size: 0.875rem;
-    padding: 0.5rem 0.75rem;
-  }
-}
-main .section-faqs .container .right form .line .form-group textarea {
+main .section-faqs .container .right .wpcf7 .line .form-group textarea {
   height: 11.5rem;
-  box-sizing: border-box;
   resize: none;
 }
-main .section-faqs .container .right form .line .form-group input::-moz-placeholder, main .section-faqs .container .right form .line .form-group textarea::-moz-placeholder {
+main .section-faqs .container .right .wpcf7 .line .form-group input::-moz-placeholder, main .section-faqs .container .right .wpcf7 .line .form-group textarea::-moz-placeholder {
   font-size: 1rem;
   color: #BDBDBD;
 }
-main .section-faqs .container .right form .line .form-group input::placeholder,
-main .section-faqs .container .right form .line .form-group textarea::placeholder {
+main .section-faqs .container .right .wpcf7 .line .form-group input::placeholder,
+main .section-faqs .container .right .wpcf7 .line .form-group textarea::placeholder {
   font-size: 1rem;
   color: #BDBDBD;
 }
-@media only screen and (max-width: 767px) {
-  main .section-faqs .container .right form .line .form-group input::-moz-placeholder, main .section-faqs .container .right form .line .form-group textarea::-moz-placeholder {
-    font-size: 0.75rem;
-  }
-  main .section-faqs .container .right form .line .form-group input::placeholder,
-  main .section-faqs .container .right form .line .form-group textarea::placeholder {
-    font-size: 0.75rem;
-  }
-}
-main .section-faqs .container .right form .line .form-group .select {
+main .section-faqs .container .right .wpcf7 .line .form-group .select {
   font-size: 1rem;
   color: var(--black);
 }
-@media only screen and (max-width: 767px) {
-  main .section-faqs .container .right form .line .form-group .select {
-    font-size: 0.75rem;
-  }
-}
-main .section-faqs .container .right form .line-1 {
+main .section-faqs .container .right .wpcf7 .line-1 {
   margin-bottom: 1.875rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
 }
-main .section-faqs .container .right form .line-2 {
+main .section-faqs .container .right .wpcf7 .line-2 {
   margin-bottom: 2.25rem;
 }
-main .section-faqs .container .right form .line-3 {
+main .section-faqs .container .right .wpcf7 .line-3 {
   margin-bottom: 1.875rem;
 }
-main .section-faqs .container .right form button {
+main .section-faqs .container .right .wpcf7 input[type=submit] {
   padding: 1rem 2rem;
   box-sizing: border-box;
   border-radius: 0.625rem;
@@ -7527,15 +7483,36 @@ main .section-faqs .container .right form button {
   font-weight: 400;
   line-height: 150%;
 }
-@media only screen and (max-width: 767px) {
-  main .section-faqs .container .right form button {
+main .section-faqs .container .right .wpcf7 input[type=submit]:hover {
+  color: var(--red);
+  background: var(--white);
+}
+@media (max-width: 767px) {
+  main .section-faqs .container .right .wpcf7-form h4 {
+    font-size: 1rem;
+  }
+  main .section-faqs .container .right .wpcf7-form .line .form-group label {
+    font-size: 0.875rem;
+    left: 0.5rem;
+  }
+  main .section-faqs .container .right .wpcf7-form .line .form-group input,
+  main .section-faqs .container .right .wpcf7-form .line .form-group select,
+  main .section-faqs .container .right .wpcf7-form .line .form-group textarea {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+  main .section-faqs .container .right .wpcf7-form .line .form-group input::-moz-placeholder, main .section-faqs .container .right .wpcf7-form .line .form-group textarea::-moz-placeholder {
+    font-size: 0.75rem;
+  }
+  main .section-faqs .container .right .wpcf7-form .line .form-group input::placeholder,
+  main .section-faqs .container .right .wpcf7-form .line .form-group textarea::placeholder,
+  main .section-faqs .container .right .wpcf7-form .line .form-group .select {
+    font-size: 0.75rem;
+  }
+  main .section-faqs .container .right .wpcf7-form input[type=submit] {
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
   }
-}
-main .section-faqs .container .right form button:hover {
-  color: var(--red);
-  background: var(--white);
 }
 main .section-contact {
   display: flex;
@@ -7922,6 +7899,8 @@ footer .container .top {
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
+    height: auto;
+    padding: 1rem 0;
   }
 }
 @media only screen and (max-width: 480px) {
@@ -8014,109 +7993,125 @@ footer .container .top .left span {
     width: 16rem;
   }
 }
+footer .container .top .right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+}
 @media only screen and (max-width: 767px) {
   footer .container .top .right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: auto;
   }
+}
+footer .container .top .right .wpcf7 {
+  align-self: flex-start;
 }
 footer .container .top .right form {
-  width: inherit;
-  height: inherit;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 32.25rem;
   position: relative;
 }
-footer .container .top .right form label {
-  position: absolute;
-  top: 33%;
-  left: 1.375rem;
-}
-@media only screen and (max-width: 1060px) {
-  footer .container .top .right form label {
-    top: 35%;
-  }
-}
-@media only screen and (max-width: 480px) {
-  footer .container .top .right form label {
-    left: 1rem;
-  }
-  footer .container .top .right form label svg {
-    width: 1rem;
-    height: 1rem;
-  }
-}
-footer .container .top .right form input {
-  color: var(--black);
-  width: 34.25rem;
-  height: 3.75rem;
-  border-radius: 0.75rem;
-  padding-left: 3.125rem;
-  background: var(--white);
-  border: none;
-  font-weight: 400;
-  line-height: 150%;
-  box-sizing: border-box;
-  padding-right: 8rem;
-}
 @media only screen and (max-width: 1280px) {
-  footer .container .top .right form input {
+  footer .container .top .right form {
     width: 27rem;
   }
 }
 @media only screen and (max-width: 1060px) {
-  footer .container .top .right form input {
-    width: 20.5rem;
+  footer .container .top .right form {
+    width: 20rem;
   }
 }
-@media only screen and (max-width: 480px) {
-  footer .container .top .right form input {
-    padding-left: 2.25rem;
-    width: 16rem;
-    height: 2.75rem;
-    padding-right: 5rem;
-  }
-}
-footer .container .top .right form input::-moz-placeholder {
-  color: #8C8C8C;
-  font-size: 1rem;
-  font-weight: 400;
-}
-footer .container .top .right form input::placeholder {
-  color: #8C8C8C;
-  font-size: 1rem;
-  font-weight: 400;
+footer .container .top .right form label[for=enter-email] {
+  position: absolute;
+  left: 1rem;
+  top: 65%;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 @media only screen and (max-width: 1060px) {
-  footer .container .top .right form input::-moz-placeholder {
-    font-size: 0.75rem;
-  }
-  footer .container .top .right form input::placeholder {
-    font-size: 0.75rem;
+  footer .container .top .right form label[for=enter-email] {
+    left: 0.5rem;
   }
 }
-footer .container .top .right form button {
-  position: absolute;
-  top: 9px;
-  right: 0.375rem;
-  height: 2.75rem;
-  width: 6.75rem;
-  border: 1px solid var(--red);
-  background: var(--red);
-  color: var(--white);
+footer .container .top .right form label[for=enter-email] svg {
+  width: 20px;
+  height: 21px;
+}
+footer .container .top .right form .wpcf7-form-control-wrap {
+  flex-grow: 1;
+}
+footer .container .top .right form .wpcf7-form-control-wrap input[type=email] {
+  width: 100%;
+  padding: 1.25rem 10rem 1.25rem 2.5rem;
+  border: 1px solid #fff;
+  border-radius: 0.625rem;
   font-size: 0.875rem;
-  border-radius: 0.5rem;
+  font-weight: 400;
+  line-height: 160%;
+  box-sizing: border-box;
 }
-@media only screen and (max-width: 480px) {
-  footer .container .top .right form button {
-    top: 7px;
-    font-size: 0.75rem;
-    width: 4rem;
-    height: 1.75rem;
+footer .container .top .right form .wpcf7-form-control-wrap input[type=email]::-moz-placeholder {
+  color: #BDBDBD;
+}
+footer .container .top .right form .wpcf7-form-control-wrap input[type=email]::placeholder {
+  color: #BDBDBD;
+}
+@media only screen and (max-width: 1060px) {
+  footer .container .top .right form .wpcf7-form-control-wrap input[type=email] {
+    padding: 0.875rem 8rem 0.875rem 2rem;
   }
 }
-footer .container .top .right form button:hover {
-  color: #ED1E29;
-  background-color: var(--white);
+@media only screen and (max-width: 767px) {
+  footer .container .top .right form .wpcf7-form-control-wrap input[type=email] {
+    font-size: 0.875rem;
+    padding: 0.75rem 5rem 0.75rem 2rem;
+  }
+}
+footer .container .top .right form .wpcf7-submit {
+  position: absolute;
+  top: 30.5%;
+  right: 0.5rem;
+  padding: 0.875rem 2.25rem;
+  background: #FE3131;
+  border: 1px solid #FE3131;
+  border-radius: 0.625rem;
+  color: #FFF;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 150%;
+  margin-left: 10px;
+}
+@media only screen and (max-width: 1060px) {
+  footer .container .top .right form .wpcf7-submit {
+    padding: 0.5rem 1.5rem;
+    top: 34.5%;
+  }
+}
+footer .container .top .right form .wpcf7-submit:hover {
+  background: var(--white);
+  color: #FE3131;
+}
+@media only screen and (max-width: 767px) {
+  footer .container .top .right form .wpcf7-submit {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    top: 35.5%;
+  }
+}
+footer .container .top .right .newsletter-form .screen-reader-response,
+footer .container .top .right .newsletter-form .wpcf7-response-output {
+  display: none;
+}
+footer .container .top .right .notice {
+  align-self: flex-start;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 150%;
 }
 footer .container .bottom {
   width: 100%;
@@ -8259,7 +8254,18 @@ footer .container .bottom .col-2 {
     width: 100%;
   }
 }
-footer .container .bottom .col-2 .link h3 {
+footer .container .bottom .col-2 .link {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+@media only screen and (max-width: 767px) {
+  footer .container .bottom .col-2 .link {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+footer .container .bottom .col-2 .link .wrap h3 {
   color: var(--white);
   font-size: 1.25rem;
   font-weight: 500;
@@ -8267,19 +8273,8 @@ footer .container .bottom .col-2 .link h3 {
   margin-bottom: 1.5rem;
 }
 @media only screen and (max-width: 1060px) {
-  footer .container .bottom .col-2 .link h3 {
+  footer .container .bottom .col-2 .link .wrap h3 {
     font-size: 1.125rem;
-  }
-}
-footer .container .bottom .col-2 .link .wrap {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-}
-@media only screen and (max-width: 767px) {
-  footer .container .bottom .col-2 .link .wrap {
-    flex-direction: column;
-    gap: 1.5rem;
   }
 }
 footer .container .bottom .col-2 .link .wrap ul {
@@ -8318,7 +8313,7 @@ footer .container .bottom .col-2 .link .wrap ul {
     row-gap: 0.75rem;
   }
 }
-footer .container .bottom .col-2 .link .wrap .train {
+footer .container .bottom .col-2 .link .train {
   display: none;
   color: var(--white);
   width: 17rem;
@@ -8326,17 +8321,17 @@ footer .container .bottom .col-2 .link .wrap .train {
   display: none;
 }
 @media only screen and (max-width: 1060px) {
-  footer .container .bottom .col-2 .link .wrap .train {
+  footer .container .bottom .col-2 .link .train {
     display: block;
   }
 }
-footer .container .bottom .col-2 .link .wrap .train h3 {
+footer .container .bottom .col-2 .link .train h3 {
   font-size: 1.125rem;
   font-weight: 500;
   line-height: normal;
   margin-bottom: 1rem;
 }
-footer .container .bottom .col-2 .link .wrap .train a {
+footer .container .bottom .col-2 .link .train a {
   display: flex;
   width: 100%;
   max-height: 100%;
@@ -8344,16 +8339,16 @@ footer .container .bottom .col-2 .link .wrap .train a {
   margin-bottom: 0.5rem;
 }
 @media only screen and (max-width: 767px) {
-  footer .container .bottom .col-2 .link .wrap .train a {
+  footer .container .bottom .col-2 .link .train a {
     height: 10rem;
   }
 }
-footer .container .bottom .col-2 .link .wrap .train a img {
+footer .container .bottom .col-2 .link .train a img {
   width: 100%;
   height: 100%;
   border-radius: inherit;
 }
-footer .container .bottom .col-2 .link .wrap .train .date {
+footer .container .bottom .col-2 .link .train .date {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -8362,15 +8357,15 @@ footer .container .bottom .col-2 .link .wrap .train .date {
   line-height: 170%;
   margin-bottom: 0.5rem;
 }
-footer .container .bottom .col-2 .link .wrap .train .date .icon {
+footer .container .bottom .col-2 .link .train .date .icon {
   display: flex;
   align-items: center;
 }
-footer .container .bottom .col-2 .link .wrap .train .date .icon svg {
+footer .container .bottom .col-2 .link .train .date .icon svg {
   width: 1rem;
   height: 1rem;
 }
-footer .container .bottom .col-2 .link .wrap .train span {
+footer .container .bottom .col-2 .link .train span {
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 170%;

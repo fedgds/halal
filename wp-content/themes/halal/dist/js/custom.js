@@ -403,56 +403,40 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    const downMenu_1 = document.querySelector('#down-menu-mobile-1');
-    const dropMenu_1 = document.querySelector('#drop-menu-mobile-1');
-    const subMenu_1 = document.getElementById('sub-menu-mobile-1');
+    const menuItems = document.querySelectorAll('.menu-items > li.menu-item-has-children');
 
-    function showMenu() {
-        subMenu_1.classList.add('show');
-        downMenu_1.classList.add('show');
-        dropMenu_1.classList.add('show');
-    }
+    menuItems.forEach(item => {
+        const link = item.querySelector('a');
+        const subMenu = item.querySelector('.sub-menu');
 
-    function hideMenu() {
-        subMenu_1.classList.remove('show');
-        dropMenu_1.classList.remove('show');
-        downMenu_1.classList.remove('show');
-    }
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            if (item.classList.contains('active')) {
+                item.classList.remove('active');
+                subMenu.classList.remove('show');
+            } else {
+                // Close other open menus
+                menuItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.sub-menu').classList.remove('show');
+                    }
+                });
 
-    downMenu_1.addEventListener('click', showMenu);
-
-    dropMenu_1.addEventListener('click', hideMenu);
-
-    document.addEventListener('click', function (event) {
-        if (!subMenu_1.contains(event.target) && !downMenu_1.contains(event.target)) {
-            hideMenu();
-        }
+                item.classList.add('active');
+                subMenu.classList.add('show');
+            }
+        });
     });
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const downMenu_2 = document.querySelector('#down-menu-mobile-2');
-    const dropMenu_2 = document.querySelector('#drop-menu-mobile-2');
-    const subMenu_2 = document.getElementById('sub-menu-mobile-2');
 
-    function showMenu() {
-        subMenu_2.classList.add('show');
-        downMenu_2.classList.add('show');
-        dropMenu_2.classList.add('show');
-    }
-
-    function hideMenu() {
-        subMenu_2.classList.remove('show');
-        dropMenu_2.classList.remove('show');
-        downMenu_2.classList.remove('show');
-    }
-
-    downMenu_2.addEventListener('click', showMenu);
-
-    dropMenu_2.addEventListener('click', hideMenu);
-
+    // Close menu when clicking outside
     document.addEventListener('click', function (event) {
-        if (!subMenu_2.contains(event.target) && !downMenu_2.contains(event.target)) {
-            hideMenu();
+        if (!event.target.closest('.menu-items')) {
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.sub-menu').classList.remove('show');
+            });
         }
     });
 });

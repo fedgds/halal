@@ -483,92 +483,66 @@ function handle_faq_form_submission() {
 }
 add_action('admin_post_submit_faq_form', 'handle_faq_form_submission');
 add_action('admin_post_nopriv_submit_faq_form', 'handle_faq_form_submission');
+
+
 // Gửi form đăng ký nhận thông tin(footer)
-function email_exists_in_cf7_submissions($email, $form_id) {
-    global $wpdb;
-    $submissions_table = $wpdb->prefix . 'cf7_submissions';
-    
-    // Kiểm tra xem bảng có tồn tại không
-    if($wpdb->get_var("SHOW TABLES LIKE '$submissions_table'") != $submissions_table) {
-        return false; // Bảng không tồn tại, trả về false
-    }
 
-    $query = $wpdb->prepare(
-        "SELECT COUNT(*) FROM $submissions_table 
-        WHERE form_id = %d 
-        AND data LIKE %s",
-        $form_id,
-        '%' . $wpdb->esc_like($email) . '%'
-    );
-
-    $count = $wpdb->get_var($query);
-
-    return $count > 0;
-}
 function handle_register_form_submission() {
-    if (isset($_POST['action']) && $_POST['action'] == 'submit_register_form') {
-        if (!wp_verify_nonce($_POST['register_form_nonce'], 'submit_register_form')) {
-            wp_die('Nonce verification failed');
+    $email = sanitize_email($_POST['your-email']);
+
+    // Get the list of registered emails
+    $registered_emails = get_option('newsletter_registered_emails', array());
+
+    // Check if the email already exists
+    if (in_array($email, $registered_emails)) {
+        wp_send_json_error(array('message' => pll__('Email của bạn đã đăng ký nhận thông tin')));
+        return;
+    }
+
+    $form_id = 406; // ID of the Contact Form 7 form
+    $register_form = WPCF7_ContactForm::get_instance($form_id);
+    $submission = WPCF7_Submission::get_instance();
+
+    if ($register_form && !$submission) {
+        $submission = WPCF7_Submission::get_instance(
+            array(
+                'register_form' => $register_form,
+                'posted_data' => array(
+                    'your-email' => $email,
+                ),
+            )
+        );
+
+        $result = $register_form->submit();
+
+        if ($result['status'] == 'mail_sent') {
+            // Add email to the registered list
+            $registered_emails[] = $email;
+            update_option('newsletter_registered_emails', $registered_emails);
+
+            // Send email to the subscriber
+            $to_subscriber = $email;
+            $subject_subscriber = pll__('Đăng ký nhận tin mới thành công');
+            $message_subscriber = pll__("Cảm ơn bạn đã đăng ký nhận tin mới.");
+            wp_mail($to_subscriber, $subject_subscriber, $message_subscriber);
+
+            wp_send_json_success(array('message' => pll__('Đăng ký nhận tin mới thành công!')));
+        } else {
+            wp_send_json_error(array('message' => pll__('Có lỗi xảy ra. Vui lòng thử lại.')));
         }
-
-        $email = sanitize_email($_POST['your-email']);
-
-        // Lấy danh sách email đã đăng ký
-        $registered_emails = get_option('newsletter_registered_emails', array());
-
-        // Kiểm tra xem email đã tồn tại chưa
-        if (in_array($email, $registered_emails)) {
-            // Email đã tồn tại, set cookie để hiển thị thông báo
-            setcookie('registration_error', 'email_exists', time() + 30, '/');
-            wp_safe_redirect(wp_get_referer());
-            exit;
-        }
-
-        $form_id = 406; // ID của form Contact Form 7
-        $register_form = WPCF7_ContactForm::get_instance($form_id);
-        $submission = WPCF7_Submission::get_instance();
-
-        if ($register_form && !$submission) {
-            $submission = WPCF7_Submission::get_instance(
-                array(
-                    'register_form' => $register_form,
-                    'posted_data' => array(
-                        'your-email' => $email,
-                    ),
-                )
-            );
-
-            $result = $register_form->submit();
-
-            if ($result['status'] == 'mail_sent') {
-                // Thêm email vào danh sách đã đăng ký
-                $registered_emails[] = $email;
-                update_option('newsletter_registered_emails', $registered_emails);
-
-                // Set a cookie to indicate successful submission
-                setcookie('registration_success', 'true', time() + 30, '/');
-
-                // Gửi email cho người đăng ký
-                $to_subscriber = $email;
-                $subject_subscriber = 'Đăng ký nhận tin mới thành công';
-                $message_subscriber = "Cảm ơn bạn đã đăng ký nhận tin mới.";
-                wp_mail($to_subscriber, $subject_subscriber, $message_subscriber);
-
-            }
-        }
-
-        // Chuyển hướng trở lại trang hiện tại
-        $redirect_url = wp_get_referer();
-        wp_safe_redirect($redirect_url ? $redirect_url : home_url());
-        exit;
+    } else {
+        wp_send_json_error(array('message' => pll__('Có lỗi xảy ra. Vui lòng thử lại.')));
     }
 }
-add_action('admin_post_submit_register_form', 'handle_register_form_submission');
-add_action('admin_post_nopriv_submit_register_form', 'handle_register_form_submission');
+
+add_action('wp_ajax_submit_register_form', 'handle_register_form_submission');
+add_action('wp_ajax_nopriv_submit_register_form', 'handle_register_form_submission');
+
 function cleanup_newsletter_option() {
     delete_option('newsletter_registered_emails');
 }
 register_uninstall_hook(__FILE__, 'cleanup_newsletter_option');
+
 
 // Tăng lượt xem khi ấn vào trang trang chi tiết tin tức
 function update_news_views() {

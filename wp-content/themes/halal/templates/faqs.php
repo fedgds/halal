@@ -33,83 +33,10 @@ get_header() ?>
                     </div>
                 <?php endforeach ?>
             </div>
-            <?php if (pll_current_language() == 'en') : ?>
-                <div class="right fade-in">
-                    <h2 class="title">Ask us questions</h2>
-                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-                        <h4>Contact information</h4>
-                        <div class="line line-1">
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="email" name="your-email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Phone number</label>
-                                <input type="tel" name="your-phone" placeholder="Phone number" required>
-                            </div>
-                        </div>
-                        <h4>Need for advice</h4>
-                        <div class="line line-2">
-                            <div class="form-group">
-                                <label for="">Need</label>
-                                <select name="your-demand" id="">
-                                    <option value="">Select your consulting needs</option>
-                                    <option value="Option 1">Option 1</option>
-                                    <option value="Option 2">Option 2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="line line-3">
-                            <div class="form-group">
-                                <label for="">Content</label>
-                                <textarea name="content" id="" placeholder="Enter specific needs content"></textarea>
-                            </div>
-                        </div>
-                        <button type="submit">Submit a question</button>
-
-                        <input type="hidden" name="action" value="submit_faq_form">
-                        <?php wp_nonce_field('submit_faq_form', 'faq_form_nonce'); ?>
-                    </form>
-                </div>
-            <?php else: ?>
-                <div class="right fade-in">
-                    <h2 class="title">Đặt câu hỏi cho chúng tôi</h2>
-                    <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post">
-                        <h4>Thông tin liên hệ</h4>
-                        <div class="line line-1">
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="email" name="your-email" placeholder="Email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Số điện thoại</label>
-                                <input type="tel" name="your-phone" placeholder="Số điện thoại" required>
-                            </div>
-                        </div>
-                        <h4>Nhu cầu muốn tư vấn</h4>
-                        <div class="line line-2">
-                            <div class="form-group">
-                                <label for="">Nhu cầu</label>
-                                <select name="your-demand" id="">
-                                    <option value="">Chọn nhu cầu tư vấn</option>
-                                    <option value="Option 1">Option 1</option>
-                                    <option value="Option 2">Option 2</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="line line-3">
-                            <div class="form-group">
-                                <label for="">Nội dung</label>
-                                <textarea name="content" id="" placeholder="Nhập nội dung nhu cầu cụ thể"></textarea>
-                            </div>
-                        </div>
-                        <button type="submit">Gửi câu hỏi</button>
-
-                        <input type="hidden" name="action" value="submit_faq_form">
-                        <?php wp_nonce_field('submit_faq_form', 'faq_form_nonce'); ?>
-                    </form>
-                </div>
-            <?php endif ?>
+            <div class="right fade-in">
+                <h2 class="title">Đặt câu hỏi cho chúng tôi</h2>
+                <?php echo do_shortcode('[contact-form-7 id="823" title="Form đặt câu hỏi"]'); ?>
+            </div>
         </div>
     </div>
 </main>

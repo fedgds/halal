@@ -797,22 +797,88 @@ header {
             }
         }
 
-        .nav-menu {
+        .main-navigation {
             margin-bottom: 1.5rem;
             border-bottom: .125rem solid var(--red);
-
-            ul {
+        
+            .menu-items {
                 list-style: none;
                 display: flex;
                 flex-direction: column;
+                padding: 0;
+                margin: 0;
 
-                >li.register {
-
-                    &:last-child {
+                .icon{
+                    display: none;
+                }
+        
+                > li {
+                    position: relative;
+                    padding: .625rem .5rem;
+                    color: #136451;
+                    font-family: var(--f-body);
+                    font-size: 1.125rem;
+                    font-weight: 400;
+                    line-height: 150%;
+        
+                    &:hover {
+                        color: var(--black);
+                    }
+        
+                    &.current-menu-item > a {
+                        color: var(--red);
+                        font-weight: 600;
+                    }
+        
+                    > a {
+                        color: inherit;
+                        text-decoration: none;
+                    }
+        
+                    &.menu-item-has-children {
+                        > a:after {
+                            content: '';
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 21 20' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.22603 7.26631C4.4701 7.02224 4.86583 7.02224 5.10991 7.26631L9.9373 12.0938C10.0187 12.1751 10.1505 12.1751 10.232 12.0938L15.0594 7.26631C15.3035 7.02223 15.6991 7.02223 15.9432 7.26631C16.1873 7.51039 16.1873 7.90611 15.9432 8.1502L11.1158 12.9776C10.5463 13.5471 9.62297 13.5471 9.05347 12.9776L4.22603 8.1502C3.98195 7.90612 3.98195 7.51039 4.22603 7.26631Z' fill='%23136451'/%3E%3C/svg%3E");
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            position: absolute;
+                            right: .5rem;
+                            top: .75rem;
+                            transition: transform 0.3s ease;
+                        }
+        
+                        &.active > a:after {
+                            transform: rotate(180deg);
+                        }
+                    }
+        
+                    .sub-menu {
+                        display: none;
+                        list-style: none;
+                        padding: .5rem 0 0 .5rem;
+                        margin: 0;
+        
+                        &.show {
+                            display: block;
+                        }
+        
+                        li {
+                            font-size: 1rem;
+                            padding: .375rem 0;
+        
+                            a {
+                                color: inherit;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+        
+                    &:nth-last-child(2) {
                         margin: 1rem 0;
-                        display: flex;
-                        justify-content: start;
-
+        
                         a {
                             font-size: .875rem;
                             border-radius: .625rem;
@@ -821,94 +887,13 @@ header {
                             color: var(--white);
                             background: var(--red);
                             box-sizing: border-box;
-                        }
-                    }
-
-                    &:last-child:hover {
-                        a {
-                            color: var(--red);
-                            background: var(--white);
-                        }
-                    }
-                }
-
-                >li {
-                    position: relative;
-                    padding: .625rem .5rem;
-                    color: #136451;
-                    font-family: var(--f-body);
-                    font-size: 1.125rem;
-                    font-weight: 400;
-                    line-height: 150%;
-
-                    .active {
-                        color: var(--red);
-                        font-weight: 600;
-                    }
-
-                    .up,
-                    .down {
-                        display: flex;
-                        position: absolute;
-                        right: .5rem;
-                        top: .75rem;
-                        cursor: pointer;
-
-                        svg {
-                            path {
-                                fill: #136451;
+        
+                            &:hover {
+                                color: var(--red);
+                                background: var(--white);
                             }
                         }
                     }
-
-                    .up {
-                        opacity: 0;
-                        visibility: hidden;
-                        transition: 0.3s all ease-in-out;
-
-                        &.show {
-                            visibility: visible;
-                            opacity: 1;
-                        }
-                    }
-
-                    .down {
-                        visibility: visible;
-                        opacity: 1;
-
-                        &.show {
-                            opacity: 0;
-                            visibility: hidden;
-                            transition: 0.3s all ease-in-out;
-                        }
-                    }
-
-                    .sub-menu {
-                        overflow: hidden;
-                        display: none;
-                        transition: all 0.5s ease;
-                        opacity: 0;
-                        padding: .5rem 0 0 .5rem;
-
-                        &.show {
-                            opacity: 1;
-                            display: block;
-                            transform: translateY(0);
-                        }
-
-                        ul {
-                            list-style: none;
-                            li {
-                                font-size: 1rem;
-                                padding: .375rem 0;
-                                text-decoration: underline !important;
-                            }
-                        }
-                    }
-                }
-
-                li:hover {
-                    color: var(--black);
                 }
             }
         }
@@ -7547,38 +7532,29 @@ main {
                     }
                 }
 
-                form {
+                .wpcf7 {
                     h4 {
                         margin-bottom: 1.875rem;
                         color: #3F3F3F;
                         font-size: 1.125rem;
                         font-weight: 700;
                         line-height: 160%;
-
-                        @include Responsive(m-7) {
-                            font-size: 1rem;
-                        }
                     }
-
+                
                     .line {
                         width: 100%;
-
+                
                         .form-group {
                             position: relative;
-
+                
                             label {
                                 position: absolute;
-                                top: -.75rem;
+                                top: .5rem;
                                 left: .75rem;
                                 padding: 0 .5rem;
                                 background: var(--white);
-
-                                @include Responsive(m-7) {
-                                    font-size: .875rem;
-                                    left: .5rem;
-                                }
                             }
-
+                
                             input,
                             select,
                             textarea {
@@ -7589,55 +7565,42 @@ main {
                                 border-radius: .625rem;
                                 font-size: .875rem;
                                 font-weight: 400;
-
-                                @include Responsive(m-7) {
-                                    font-size: .875rem;
-                                    padding: .5rem .75rem;
-                                }
                             }
-
+                
                             textarea {
                                 height: 11.5rem;
-                                box-sizing: border-box;
                                 resize: none;
                             }
-
+                
                             input::placeholder,
                             textarea::placeholder {
                                 font-size: 1rem;
                                 color: #BDBDBD;
-
-                                @include Responsive(m-7) {
-                                    font-size: .75rem;
-                                }
                             }
-                            .select{
+                
+                            .select {
                                 font-size: 1rem;
                                 color: var(--black);
-
-                                @include Responsive(m-7) {
-                                    font-size: .75rem;
-                                }
                             }
                         }
                     }
-
+                
                     .line-1 {
                         margin-bottom: 1.875rem;
                         display: grid;
                         grid-template-columns: 1fr 1fr;
                         gap: 1.25rem;
                     }
-
+                
                     .line-2 {
                         margin-bottom: 2.25rem;
                     }
-
+                
                     .line-3 {
                         margin-bottom: 1.875rem;
                     }
-
-                    button {
+                
+                    input[type="submit"] {
                         padding: 1rem 2rem;
                         box-sizing: border-box;
                         border-radius: .625rem;
@@ -7646,16 +7609,44 @@ main {
                         border: 1px solid var(--red);
                         font-weight: 400;
                         line-height: 150%;
-
-                        @include Responsive(m-7) {
+                    }
+                
+                    input[type="submit"]:hover {
+                        color: var(--red);
+                        background: var(--white);
+                    }
+                }
+                
+                @media (max-width: 767px) {
+                    .wpcf7-form {
+                        h4 {
+                            font-size: 1rem;
+                        }
+                
+                        .line .form-group {
+                            label {
+                                font-size: .875rem;
+                                left: .5rem;
+                            }
+                
+                            input,
+                            select,
+                            textarea {
+                                font-size: .875rem;
+                                padding: .5rem .75rem;
+                            }
+                
+                            input::placeholder,
+                            textarea::placeholder,
+                            .select {
+                                font-size: .75rem;
+                            }
+                        }
+                
+                        input[type="submit"] {
                             padding: .5rem 1rem;
                             font-size: .875rem;
                         }
-                    }
-
-                    button:hover {
-                        color: var(--red);
-                        background: var(--white);
                     }
                 }
             }
@@ -8027,6 +8018,8 @@ footer {
                 flex-direction: column;
                 justify-content: center;
                 gap: 1rem;
+                height: auto;
+                padding: 1rem 0;
             }
 
             @include Responsive(m-4) {
@@ -8117,97 +8110,118 @@ footer {
             }
 
             .right {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: .875rem;
+
                 @include Responsive(m-7) {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                    width: auto;
                 }
-
+                .wpcf7{
+                    align-self: flex-start;
+                }
                 form {
-                    width: inherit;
-                    height: inherit;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 32.25rem;
                     position: relative;
-
-                    label {
+                    @include Responsive(m-12) {
+                        width: 27rem;
+                    }
+                    @include Responsive(m-10) {
+                        width: 20rem;
+                    }
+                
+                    label[for="enter-email"] {
                         position: absolute;
-                        top: 33%;
-                        left: 1.375rem;
+                        left: 1rem;
+                        top: 65%;
+                        transform: translateY(-50%);
+                        z-index: 1;
                         @include Responsive(m-10) {
-                            top: 35%;
+                            left: .5rem;
                         }
-
-                        @include Responsive(m-4) {
-                            left: 1rem;
-
-                            svg {
-                                width: 1rem;
-                                height: 1rem;
+                        
+                        svg {
+                            width: 20px;
+                            height: 21px;
+                        }
+                    }
+                
+                    .wpcf7-form-control-wrap {
+                        flex-grow: 1;
+                
+                        input[type="email"] {
+                            width: 100%;
+                            padding: 1.25rem 10rem 1.25rem 2.5rem;
+                            border: 1px solid #fff;
+                            border-radius: 0.625rem;
+                            font-size: 0.875rem;
+                            font-weight: 400;
+                            line-height: 160%;
+                            box-sizing: border-box;
+                
+                            &::placeholder {
+                                color: #BDBDBD;
+                            }
+                            @include Responsive(m-10) {
+                                padding: .875rem 8rem .875rem 2rem;
+                            }
+                
+                            @include Responsive(m-7) {
+                                font-size: 0.875rem;
+                                padding: 0.75rem 5rem 0.75rem 2rem;
                             }
                         }
                     }
-
-                    input {
-                        color: var(--black);
-                        width: 34.25rem;
-                        height: 3.75rem;
-                        border-radius: .75rem;
-                        padding-left: 3.125rem;
-                        background: var(--white);
-                        border: none;
-                        font-weight: 400;
-                        line-height: 150%;
-                        box-sizing: border-box;
-                        padding-right: 8rem;
-
-                        @include Responsive(m-12) {
-                            width: 27rem;
-                        }
-
-                        @include Responsive(m-10) {
-                            width: 20.5rem;
-                        }
-
-                        @include Responsive(m-4) {
-                            padding-left: 2.25rem;
-                            width: 16rem;
-                            height: 2.75rem;
-                            padding-right: 5rem;
-                        }
-                    }
-
-                    input::placeholder {
-                        color: #8C8C8C;
+                
+                    .wpcf7-submit {
+                        position: absolute;
+                        top: 30.5%;
+                        right: .5rem;
+                        padding: .875rem 2.25rem;
+                        background: #FE3131;
+                        border: 1px solid #FE3131;
+                        border-radius: 0.625rem;
+                        color: #FFF;
                         font-size: 1rem;
                         font-weight: 400;
+                        line-height: 150%;
+                        margin-left: 10px;
                         @include Responsive(m-10) {
-                            font-size: .75rem;
+                            padding: .5rem 1.5rem;
+                            top: 34.5%;
+                        }
+                
+                        &:hover {
+                            background: var(--white);
+                            color: #FE3131;
+                        }
+                
+                        @include Responsive(m-7) {
+                            padding: 0.5rem 1rem;
+                            font-size: 0.875rem;
+                            top: 35.5%;
                         }
                     }
-
-                    button {
-                        position: absolute;
-                        top: 9px;
-                        right: 0.375rem;
-                        height: 2.75rem;
-                        width: 6.75rem;
-                        border: 1px solid var(--red);
-                        background: var(--red);
-                        color: var(--white);
-                        font-size: 0.875rem;
-                        border-radius: .5rem;
-
-                        @include Responsive(m-4) {
-                            top: 7px;
-                            font-size: .75rem;
-                            width: 4rem;
-                            height: 1.75rem;
-                        }
+                }
+                
+                // Ẩn một số phần tử mặc định của Contact Form 7
+                .newsletter-form {
+                    .screen-reader-response,
+                    .wpcf7-response-output {
+                        display: none;
                     }
-
-                    button:hover {
-                        color: #ED1E29;
-                        background-color: var(--white);
-                    }
+                }
+                .notice{
+                    align-self: flex-start;
+                    font-size: .875rem;
+                    font-weight: 400;
+                    line-height: 150%;
                 }
             }
         }
@@ -8349,24 +8363,23 @@ footer {
                 }
 
                 .link {
-                    h3 {
-                        color: var(--white);
-                        font-size: 1.25rem;
-                        font-weight: 500;
-                        line-height: normal;
-                        margin-bottom: 1.5rem;
-                        @include Responsive(m-10) {
-                            font-size: 1.125rem;
-                        }
-                    }
-
-                    .wrap{
-                        display: flex;
-                        align-items: flex-start;
+                    display: flex;
+                    align-items: flex-start;
+                    gap: 1.5rem;
+                    @include Responsive(m-7) {
+                        flex-direction: column;
                         gap: 1.5rem;
-                        @include Responsive(m-7) {
-                            flex-direction: column;
-                            gap: 1.5rem;
+                    }
+                    .wrap{
+                        h3 {
+                            color: var(--white);
+                            font-size: 1.25rem;
+                            font-weight: 500;
+                            line-height: normal;
+                            margin-bottom: 1.5rem;
+                            @include Responsive(m-10) {
+                                font-size: 1.125rem;
+                            }
                         }
                         ul {
                             width: 26.5rem;
@@ -8395,70 +8408,70 @@ footer {
                                 row-gap: .75rem;
                             }
                         }
-                        .train{
-                            display: none;
-                            color: var(--white);
-                            width: 17rem;
-                            height: auto;
-                            display: none;
-                            @include Responsive(m-10) {
-                                display: block;
-                            }
-                            h3 {
-                                font-size: 1.125rem;
-                                font-weight: 500;
-                                line-height: normal;
-                                margin-bottom: 1rem;
-                            }
-            
-                            a {
-                                display: flex;
-                                width: 100%;
-                                max-height: 100%;
-                                border-radius: .625rem;
-                                margin-bottom: .5rem;
+                    }
+                    .train{
+                        display: none;
+                        color: var(--white);
+                        width: 17rem;
+                        height: auto;
+                        display: none;
+                        @include Responsive(m-10) {
+                            display: block;
+                        }
+                        h3 {
+                            font-size: 1.125rem;
+                            font-weight: 500;
+                            line-height: normal;
+                            margin-bottom: 1rem;
+                        }
         
-                                @include Responsive(m-7) {
-                                    height: 10rem;
-                                }
-            
-                                img {
-                                    width: 100%;
-                                    height: 100%;
-                                    border-radius: inherit;
-                                }
+                        a {
+                            display: flex;
+                            width: 100%;
+                            max-height: 100%;
+                            border-radius: .625rem;
+                            margin-bottom: .5rem;
+    
+                            @include Responsive(m-7) {
+                                height: 10rem;
                             }
-            
-                            .date {
+        
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                border-radius: inherit;
+                            }
+                        }
+        
+                        .date {
+                            display: flex;
+                            align-items: center;
+                            gap: .5rem;
+                            font-size: .75rem;
+                            font-weight: 300;
+                            line-height: 170%;
+                            margin-bottom: .5rem;
+    
+                            .icon{
                                 display: flex;
                                 align-items: center;
-                                gap: .5rem;
-                                font-size: .75rem;
-                                font-weight: 300;
-                                line-height: 170%;
-                                margin-bottom: .5rem;
-        
-                                .icon{
-                                    display: flex;
-                                    align-items: center;
-                                    svg{
-                                        width: 1rem;
-                                        height: 1rem;
-                                    }
+                                svg{
+                                    width: 1rem;
+                                    height: 1rem;
                                 }
                             }
-            
-                            span {
-                                font-size: .875rem;
-                                font-weight: 500;
-                                line-height: 170%;
-                                letter-spacing: .0088rem;
-                                display: -webkit-box;
-                                -webkit-box-orient: vertical;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                -webkit-line-clamp: 3;
-                            }
+                        }
+        
+                        span {
+                            font-size: .875rem;
+                            font-weight: 500;
+                            line-height: 170%;
+                            letter-spacing: .0088rem;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            -webkit-line-clamp: 3;
                         }
                     }
                 }
